@@ -1,27 +1,41 @@
 package nl.rug.arhitectural;
 
-import nl.rug.formula.Justification;
-import nl.rug.formula.LogicExpression;
+import nl.rug.formula.Formula;
 import nl.rug.parsers.ExpressionParser;
 import nl.rug.parsers.JustificationParser;
+import nl.rug.proof.Proof;
+import nl.rug.proof.ProofStep;
+import nl.rug.proof.Step;
 import nl.rug.strategies.VerifyStepStrategy;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.List;
+import java.util.HashMap;
 
 public class ArchitectureTest {
 
     @Test
     public void testArchitecture() {
+
+            // Parsers
         ExpressionParser expressionParser = Mockito.mock(ExpressionParser.class);
         JustificationParser justificationParser = Mockito.mock(JustificationParser.class);
 
-        List<String> input = Mockito.mock(List.class);
-        Mockito.when(input.get(0)).thenReturn("A");
-        Justification justification = new Justification(justificationParser, input.get(0));
-        LogicExpression logicExpression = new LogicExpression(expressionParser, input.get(0));
+        HashMap<String, String> input = Mockito.mock(HashMap.class);
 
-        VerifyStepStrategy verifyStepStrategy = Mockito.mock(VerifyStepStrategy.class);
+        Proof proof = Mockito.mock(Proof.class);
+
+        input.forEach((expression, justification) -> {
+            String parsedExpression = expressionParser.parseStringToExpression(expression);
+            String parsedJustification = justificationParser.parseStringToJustification(justification);
+
+            // Use the parsed expression and justification to create the step.
+            Step step = Mockito.mock(ProofStep.class);
+            proof.addStep(step);
+        });
+
+        // The verify method is going to call verifyStep on each step of the proof.
+        proof.verifyCorrectness();
+        Mockito.verify(proof, Mockito.times(1)).verifyCorrectness();
     }
 }

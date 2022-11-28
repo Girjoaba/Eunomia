@@ -2,6 +2,8 @@ package nl.rug.formula;
 
 import nl.rug.parsers.ExpressionParser;
 
+// TODO: Update the implementation of this class (THIS IS A STUB)
+
 /**
  * The logic expression is the part of the formula which corresponds to FOL logic.
  */

@@ -1,12 +1,8 @@
 package nl.rug.arhitectural;
 
-import nl.rug.formula.Formula;
-import nl.rug.parsers.ExpressionParser;
-import nl.rug.parsers.JustificationParser;
 import nl.rug.proof.Proof;
 import nl.rug.proof.ProofStep;
 import nl.rug.proof.Step;
-import nl.rug.strategies.VerifyStepStrategy;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

@@ -1,8 +1,5 @@
 package nl.rug.formula;
 
-import nl.rug.parsers.ExpressionParser;
-import nl.rug.parsers.JustificationParser;
-
 // TODO: Update the implementation of this class (THIS IS A STUB)
 public class Formula implements Inference {
     private LogicExpression expression;

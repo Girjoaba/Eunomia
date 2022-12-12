@@ -7,17 +7,17 @@ package nl.rug.formula;
  */
 public class Justification implements SyntacticallyConstrained{
 
-    private JustificationParser parser;
-    private String justification;
-
-    /**
-     * Constructor for Justification.
-     * @param parser the parser that we use to get the justification.
-     */
-    public Justification(JustificationParser parser, String stringJustification) {
-        this.parser = parser;
-        this.justification = parser.parseStringToJustification(stringJustification);
-    }
+//    private JustificationParser parser;
+//    private String justification;
+//
+//    /**
+//     * Constructor for Justification.
+//     * @param parser the parser that we use to get the justification.
+//     */
+//    public Justification(JustificationParser parser, String stringJustification) {
+//        this.parser = parser;
+//        this.justification = parser.parseStringToJustification(stringJustification);
+//    }
 
     @Override
     public void verifySyntax() {

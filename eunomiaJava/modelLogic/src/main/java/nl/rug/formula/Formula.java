@@ -5,9 +5,9 @@ public class Formula implements Inference {
     private LogicExpression expression;
     private Justification justification;
 
-    public Formula(String stringExpression, String stringJustification, ExpressionParser expressionParser,
-                   JustificationParser justificationParser) {
-        this.expression = new LogicExpression(expressionParser, stringExpression);
-        this.justification = new Justification(justificationParser, stringJustification);
-    }
+//    public Formula(String stringExpression, String stringJustification, ExpressionParser expressionParser,
+//                   JustificationParser justificationParser) {
+//        this.expression = new LogicExpression(expressionParser, stringExpression);
+//        this.justification = new Justification(justificationParser, stringJustification);
+//    }
 }

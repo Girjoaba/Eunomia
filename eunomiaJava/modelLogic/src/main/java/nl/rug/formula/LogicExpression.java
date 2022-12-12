@@ -7,17 +7,17 @@ package nl.rug.formula;
  */
 public class LogicExpression implements SyntacticallyConstrained{
 
-    private ExpressionParser parser;
-    private String expression;
-
-    /**
-     * Constructor for LogicExpression.
-     * @param parser the parser that we use to get the expression.
-     */
-    public LogicExpression(ExpressionParser parser, String stringExpression) {
-        this.parser = parser;
-        this.expression = parser.parseStringToExpression(stringExpression);
-    }
+//    private ExpressionParser parser;
+//    private String expression;
+//
+//    /**
+//     * Constructor for LogicExpression.
+//     * @param parser the parser that we use to get the expression.
+//     */
+//    public LogicExpression(ExpressionParser parser, String stringExpression) {
+//        this.parser = parser;
+//        this.expression = parser.parseStringToExpression(stringExpression);
+//    }
 
     @Override
     public void verifySyntax() {

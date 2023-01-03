@@ -11,6 +11,7 @@
 
     <modules>
         <module>modelLogic</module>
+        <module>antlr</module>
     </modules>
     <name>eunomiaJava</name>
 

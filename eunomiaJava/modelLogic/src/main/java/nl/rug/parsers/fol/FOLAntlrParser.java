@@ -29,7 +29,7 @@ public class FOLAntlrParser {
             CommonTokenStream commonTokenStream = new CommonTokenStream(fitchGrammarLexer);
             FitchGrammarParser fitchGrammarParser = new FitchGrammarParser(commonTokenStream);
 
-            ParseTree parseTree = fitchGrammarParser.justification();
+            ParseTree parseTree = fitchGrammarParser.sentence();
             log.info("done");
         }
     }

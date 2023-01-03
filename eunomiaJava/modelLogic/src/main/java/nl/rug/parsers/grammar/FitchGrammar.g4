@@ -1,6 +1,10 @@
 grammar FitchGrammar;
 
 sentence: (contradiction | expression) + justification;
+// inference
+
+
+// proofLine entire thing
 
 contradiction: 'perp';
 
@@ -41,6 +45,7 @@ elimination
 
 single_reference: NUMBER;
 multiple_reference: NUMBER + '-' + NUMBER;
+// reference_range
 
 IDENTITY: '==';
 NEGATION: '~';

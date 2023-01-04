@@ -68,15 +68,29 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitProofLineNum(ProofGrammarParser.ProofLineNumContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProofGrammarParser#inference}.
+	 * Enter a parse tree produced by the {@code ContradictionInfer}
+	 * labeled alternative in {@link ProofGrammarParser#inference}.
 	 * @param ctx the parse tree
 	 */
-	void enterInference(ProofGrammarParser.InferenceContext ctx);
+	void enterContradictionInfer(ProofGrammarParser.ContradictionInferContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProofGrammarParser#inference}.
+	 * Exit a parse tree produced by the {@code ContradictionInfer}
+	 * labeled alternative in {@link ProofGrammarParser#inference}.
 	 * @param ctx the parse tree
 	 */
-	void exitInference(ProofGrammarParser.InferenceContext ctx);
+	void exitContradictionInfer(ProofGrammarParser.ContradictionInferContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SentenceInfer}
+	 * labeled alternative in {@link ProofGrammarParser#inference}.
+	 * @param ctx the parse tree
+	 */
+	void enterSentenceInfer(ProofGrammarParser.SentenceInferContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SentenceInfer}
+	 * labeled alternative in {@link ProofGrammarParser#inference}.
+	 * @param ctx the parse tree
+	 */
+	void exitSentenceInfer(ProofGrammarParser.SentenceInferContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#contradiction}.
 	 * @param ctx the parse tree
@@ -88,15 +102,41 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitContradiction(ProofGrammarParser.ContradictionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProofGrammarParser#sentence}.
+	 * Enter a parse tree produced by the {@code Disjunction}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
 	 * @param ctx the parse tree
 	 */
-	void enterSentence(ProofGrammarParser.SentenceContext ctx);
+	void enterDisjunction(ProofGrammarParser.DisjunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProofGrammarParser#sentence}.
+	 * Exit a parse tree produced by the {@code Disjunction}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
 	 * @param ctx the parse tree
 	 */
-	void exitSentence(ProofGrammarParser.SentenceContext ctx);
+	void exitDisjunction(ProofGrammarParser.DisjunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Conjunction}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
+	 * @param ctx the parse tree
+	 */
+	void enterConjunction(ProofGrammarParser.ConjunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Conjunction}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
+	 * @param ctx the parse tree
+	 */
+	void exitConjunction(ProofGrammarParser.ConjunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Atomic}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
+	 * @param ctx the parse tree
+	 */
+	void enterAtomic(ProofGrammarParser.AtomicContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Atomic}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
+	 * @param ctx the parse tree
+	 */
+	void exitAtomic(ProofGrammarParser.AtomicContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#atom}.
 	 * @param ctx the parse tree
@@ -108,15 +148,53 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitAtom(ProofGrammarParser.AtomContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProofGrammarParser#justification}.
+	 * Enter a parse tree produced by the {@code PremiseJust}
+	 * labeled alternative in {@link ProofGrammarParser#justification}.
 	 * @param ctx the parse tree
 	 */
-	void enterJustification(ProofGrammarParser.JustificationContext ctx);
+	void enterPremiseJust(ProofGrammarParser.PremiseJustContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProofGrammarParser#justification}.
+	 * Exit a parse tree produced by the {@code PremiseJust}
+	 * labeled alternative in {@link ProofGrammarParser#justification}.
 	 * @param ctx the parse tree
 	 */
-	void exitJustification(ProofGrammarParser.JustificationContext ctx);
+	void exitPremiseJust(ProofGrammarParser.PremiseJustContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ReitJust}
+	 * labeled alternative in {@link ProofGrammarParser#justification}.
+	 * @param ctx the parse tree
+	 */
+	void enterReitJust(ProofGrammarParser.ReitJustContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ReitJust}
+	 * labeled alternative in {@link ProofGrammarParser#justification}.
+	 * @param ctx the parse tree
+	 */
+	void exitReitJust(ProofGrammarParser.ReitJustContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ElimJust}
+	 * labeled alternative in {@link ProofGrammarParser#justification}.
+	 * @param ctx the parse tree
+	 */
+	void enterElimJust(ProofGrammarParser.ElimJustContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ElimJust}
+	 * labeled alternative in {@link ProofGrammarParser#justification}.
+	 * @param ctx the parse tree
+	 */
+	void exitElimJust(ProofGrammarParser.ElimJustContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IntroJust}
+	 * labeled alternative in {@link ProofGrammarParser#justification}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntroJust(ProofGrammarParser.IntroJustContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IntroJust}
+	 * labeled alternative in {@link ProofGrammarParser#justification}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntroJust(ProofGrammarParser.IntroJustContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#premise}.
 	 * @param ctx the parse tree
@@ -128,23 +206,81 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitPremise(ProofGrammarParser.PremiseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProofGrammarParser#introduction}.
+	 * Enter a parse tree produced by {@link ProofGrammarParser#reiteration}.
 	 * @param ctx the parse tree
 	 */
-	void enterIntroduction(ProofGrammarParser.IntroductionContext ctx);
+	void enterReiteration(ProofGrammarParser.ReiterationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProofGrammarParser#introduction}.
+	 * Exit a parse tree produced by {@link ProofGrammarParser#reiteration}.
 	 * @param ctx the parse tree
 	 */
-	void exitIntroduction(ProofGrammarParser.IntroductionContext ctx);
+	void exitReiteration(ProofGrammarParser.ReiterationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProofGrammarParser#elimination}.
+	 * Enter a parse tree produced by the {@code ConjunctionIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
 	 * @param ctx the parse tree
 	 */
-	void enterElimination(ProofGrammarParser.EliminationContext ctx);
+	void enterConjunctionIntro(ProofGrammarParser.ConjunctionIntroContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProofGrammarParser#elimination}.
+	 * Exit a parse tree produced by the {@code ConjunctionIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
 	 * @param ctx the parse tree
 	 */
-	void exitElimination(ProofGrammarParser.EliminationContext ctx);
+	void exitConjunctionIntro(ProofGrammarParser.ConjunctionIntroContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DisjunctionIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void enterDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DisjunctionIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void exitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ConjunctionElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void enterConjunctionElim(ProofGrammarParser.ConjunctionElimContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ConjunctionElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void exitConjunctionElim(ProofGrammarParser.ConjunctionElimContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DisjunctionElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void enterDisjunctionElim(ProofGrammarParser.DisjunctionElimContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DisjunctionElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void exitDisjunctionElim(ProofGrammarParser.DisjunctionElimContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#singleReference}.
+	 * @param ctx the parse tree
+	 */
+	void enterSingleReference(ProofGrammarParser.SingleReferenceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#singleReference}.
+	 * @param ctx the parse tree
+	 */
+	void exitSingleReference(ProofGrammarParser.SingleReferenceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#rangeReference}.
+	 * @param ctx the parse tree
+	 */
+	void enterRangeReference(ProofGrammarParser.RangeReferenceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#rangeReference}.
+	 * @param ctx the parse tree
+	 */
+	void exitRangeReference(ProofGrammarParser.RangeReferenceContext ctx);
 }

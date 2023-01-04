@@ -1,0 +1,21 @@
+     THE POINTLESS DISJUNCTION
+1. A || B premise
+assume
+2. A premise
+3. A Reit: 2
+4. A || B ||Intro: 3
+qed
+assume
+5. B premise
+6. A || B ||Intro: 5
+qed
+7. A || B ||Elim: 1, 2-4, 5-6
+
+    SIMPLE CONJUNCTION INTRODUCTION
+1. A premise
+2. B premise
+3. A && B &&Intro: 1, 2
+
+    SIMPLE CONJUNCTION ELIMINATION
+1. A && B premise
+2. A &&Elim: 1

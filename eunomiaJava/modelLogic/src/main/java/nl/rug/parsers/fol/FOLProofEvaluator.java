@@ -21,5 +21,7 @@ public class FOLProofEvaluator {
         ParseTree tree = parser.proof();
         System.out.println(tree.toStringTree(parser));
 
+        ProofEvaluatorVisitor visitor = new ProofEvaluatorVisitor();
+        visitor.visit(tree);
     }
 }

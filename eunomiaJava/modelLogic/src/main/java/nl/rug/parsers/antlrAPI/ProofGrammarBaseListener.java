@@ -89,13 +89,25 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInference(ProofGrammarParser.InferenceContext ctx) { }
+	@Override public void enterContradictionInfer(ProofGrammarParser.ContradictionInferContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInference(ProofGrammarParser.InferenceContext ctx) { }
+	@Override public void exitContradictionInfer(ProofGrammarParser.ContradictionInferContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSentenceInfer(ProofGrammarParser.SentenceInferContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSentenceInfer(ProofGrammarParser.SentenceInferContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -113,13 +125,37 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSentence(ProofGrammarParser.SentenceContext ctx) { }
+	@Override public void enterDisjunction(ProofGrammarParser.DisjunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSentence(ProofGrammarParser.SentenceContext ctx) { }
+	@Override public void exitDisjunction(ProofGrammarParser.DisjunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConjunction(ProofGrammarParser.ConjunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConjunction(ProofGrammarParser.ConjunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAtomic(ProofGrammarParser.AtomicContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAtomic(ProofGrammarParser.AtomicContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -137,13 +173,49 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJustification(ProofGrammarParser.JustificationContext ctx) { }
+	@Override public void enterPremiseJust(ProofGrammarParser.PremiseJustContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitJustification(ProofGrammarParser.JustificationContext ctx) { }
+	@Override public void exitPremiseJust(ProofGrammarParser.PremiseJustContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReitJust(ProofGrammarParser.ReitJustContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReitJust(ProofGrammarParser.ReitJustContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElimJust(ProofGrammarParser.ElimJustContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElimJust(ProofGrammarParser.ElimJustContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIntroJust(ProofGrammarParser.IntroJustContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIntroJust(ProofGrammarParser.IntroJustContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -161,25 +233,85 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIntroduction(ProofGrammarParser.IntroductionContext ctx) { }
+	@Override public void enterReiteration(ProofGrammarParser.ReiterationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIntroduction(ProofGrammarParser.IntroductionContext ctx) { }
+	@Override public void exitReiteration(ProofGrammarParser.ReiterationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterElimination(ProofGrammarParser.EliminationContext ctx) { }
+	@Override public void enterConjunctionIntro(ProofGrammarParser.ConjunctionIntroContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitElimination(ProofGrammarParser.EliminationContext ctx) { }
+	@Override public void exitConjunctionIntro(ProofGrammarParser.ConjunctionIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConjunctionElim(ProofGrammarParser.ConjunctionElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConjunctionElim(ProofGrammarParser.ConjunctionElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDisjunctionElim(ProofGrammarParser.DisjunctionElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDisjunctionElim(ProofGrammarParser.DisjunctionElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSingleReference(ProofGrammarParser.SingleReferenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSingleReference(ProofGrammarParser.SingleReferenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRangeReference(ProofGrammarParser.RangeReferenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRangeReference(ProofGrammarParser.RangeReferenceContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

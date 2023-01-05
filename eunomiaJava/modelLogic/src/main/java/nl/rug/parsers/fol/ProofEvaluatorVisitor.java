@@ -16,6 +16,44 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     private final Map<Integer, String> mainConnectiveMap = new HashMap<Integer, String>();
     private final Map<Integer, ParseTree> sentenceMap = new HashMap<Integer, ParseTree>();
     private Integer currentLine = 0;
+    private final Map<Integer, Integer> levelMap = new HashMap<>();
+    private Integer currentLevel = 0;
+
+    /**
+     * When visiting subproofs we must visit all the elements of the subproof. Be them proof lines or other subproofs.
+     * @param ctx the parse tree
+     */
+    @Override
+    public Object visitSubproof(ProofGrammarParser.SubproofContext ctx) {
+        for(ParseTree tree : ctx.children) {
+            visit(tree);
+        }
+        return null;
+    }
+
+    /**
+     * In an assumption we normally visit the proof line associated with it but also increase the level.
+     * The level is a way to keep track of the subproof.
+     * For example you can not use a sentence from inside a subproof unless it is associated to a rule specifically.
+     * @param ctx the parse tree
+     */
+    @Override
+    public Object visitAssume(ProofGrammarParser.AssumeContext ctx) {
+        currentLevel++;
+        visit(ctx.proofLine());
+        return null;
+    }
+
+    /**
+     * We visit the associated proof line but also decrease the level by 1 afterwards.
+     * @param ctx the parse tree
+     */
+    @Override
+    public Object visitQed(ProofGrammarParser.QedContext ctx) {
+        visit(ctx.proofLine());
+        currentLevel--;
+        return null;
+    }
 
     /**
      * The proof line is the building block of the proof. We extract the line number and begin visiting till we make sure
@@ -43,6 +81,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     public Object visitContradictionInfer(ProofGrammarParser.ContradictionInferContext ctx) {
         String contradiction = "perp";
         sentenceMap.put(currentLine, ctx);
+        levelMap.put(currentLine, currentLevel);
         //visit(ctx.justification());
         return null;
     }
@@ -72,6 +111,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         String conjunction = "&&";
         mainConnectiveMap.put(currentLine, conjunction);
         sentenceMap.put(currentLine, ctx);
+        levelMap.put(currentLine, currentLevel);
         return null;
     }
 
@@ -84,6 +124,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         String disjunction = "||";
         mainConnectiveMap.put(currentLine, disjunction);
         sentenceMap.put(currentLine, ctx);
+        levelMap.put(currentLine, currentLevel);
         return null;
     }
 
@@ -94,6 +135,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitAtomic(ProofGrammarParser.AtomicContext ctx) {
         sentenceMap.put(currentLine, ctx);
+        levelMap.put(currentLine, currentLevel);
         return null;
     }
 
@@ -124,6 +166,11 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         if(!sentenceMap.containsKey(reference)) {
             log.warn("Referred line does not exist.");
+            return null;
+        }
+
+        if(levelMap.get(reference) > levelMap.get(currentLine)) {
+            log.warn(currentLine + ". Can't use sentence from inside subproof.");
             return null;
         }
 
@@ -161,6 +208,11 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
+        if(levelMap.get(reference1) > levelMap.get(currentLine) || levelMap.get(reference2) > levelMap.get(currentLine)) {
+            log.warn(currentLine + ". Can't use sentence from inside subproof.");
+            return null;
+        }
+
         if(!VisitorHelper.isPartOfBinaryExpression(sentenceMap.get(reference1), sentenceMap.get(currentLine)) ||
                 !VisitorHelper.isPartOfBinaryExpression(sentenceMap.get(reference2), sentenceMap.get(currentLine))) {
             log.warn("Inferred Conjunction not constructed from referred sentences at line " + currentLine + ".");
@@ -185,6 +237,11 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
+        if(levelMap.get(reference) > levelMap.get(currentLine)) {
+            log.warn(currentLine + ". Can't use sentence from inside subproof.");
+            return null;
+        }
+
         if(!VisitorHelper.isPartOfBinaryExpression(sentenceMap.get(currentLine), sentenceMap.get(reference))) {
             log.warn("Sentence " + sentenceMap.get(currentLine).getText() + " is not part of "
                     + sentenceMap.get(reference).getText() + " at line " + currentLine + ".");
@@ -201,20 +258,25 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     public Object visitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx) {
-        Integer reference1 = (Integer) visit(ctx.singleReference());
+        Integer reference = (Integer) visit(ctx.singleReference());
 
         if(!mainConnectiveMap.containsKey(currentLine) || !(mainConnectiveMap.get(currentLine).equals("||"))) {
             log.warn("Inferred sentence is not a disjunction.");
             return null;
         }
 
-        if(!sentenceMap.containsKey(reference1)) {
+        if(!sentenceMap.containsKey(reference)) {
             log.warn("Referred line does not exist.");
             return null;
         }
 
-        if(!VisitorHelper.isPartOfBinaryExpression(sentenceMap.get(reference1), sentenceMap.get(currentLine))) {
-            log.warn("Sentence " + sentenceMap.get(reference1).getText() + " is not part of "
+        if(levelMap.get(reference) > levelMap.get(currentLine)) {
+            log.warn(currentLine + ". Can't use sentence from inside subproof.");
+            return null;
+        }
+
+        if(!VisitorHelper.isPartOfBinaryExpression(sentenceMap.get(reference), sentenceMap.get(currentLine))) {
+            log.warn("Sentence " + sentenceMap.get(reference).getText() + " is not part of "
                     + sentenceMap.get(currentLine).getText() + " at line " + currentLine + ".");
             return null;
         }
@@ -223,8 +285,14 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         return null;
     }
 
+    /**
+     * In the Disjunction Elimination we need: 2 subrpoofs and a 1 initial disjunction.
+     * We are checking if the premises of the subproofs are elements of the disjunction and if the conclusions of the
+     * subproofs correspond with the inferred sentence.
+     * @param ctx the parse tree
+     */
     public Object visitDisjunctionElim(ProofGrammarParser.DisjunctionElimContext ctx) {
-        Integer reference1 = (Integer) visit(ctx.singleReference());
+        Integer reference = (Integer) visit(ctx.singleReference());
         String range1 = (String) visit(ctx.rangeReference(0));
         String range2 = (String) visit(ctx.rangeReference(1));
 
@@ -233,16 +301,39 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         Integer range2Start = Integer.parseInt(range2.split("-")[0]);
         Integer range2End = Integer.parseInt(range2.split("-")[1]);
 
-        if(VisitorHelper.isValidSingleReference(currentLine, reference1)
-                || VisitorHelper.isValidRangeReference(currentLine, range1Start, range1End)
-                || VisitorHelper.isValidRangeReference(currentLine, range2Start, range2End)) {
-            log.warn("References were not valid.");
+        if(!mainConnectiveMap.containsKey(reference) || !mainConnectiveMap.get(reference).equals("||")) {
+            log.warn("Referred line: " + reference + " is not a disjunction.");
             return null;
         }
 
-        if(!mainConnectiveMap.containsKey(reference1) || !mainConnectiveMap.get(reference1).equals("||")) {
-            log.warn("Referred line: " + reference1 + " is not a disjunction.");
+        if(!(sentenceMap.containsKey(reference) && sentenceMap.containsKey(range1Start)
+                && sentenceMap.containsKey(range1End) && sentenceMap.containsKey(range2Start)
+                && sentenceMap.containsKey(range2End))) {
+            log.warn("One of the referred sentences is not existent.");
             return null;
+        }
+
+            // Check levels
+        if((levelMap.get(currentLine) != (levelMap.get(range1End) - 1))
+                || (levelMap.get(currentLine) != (levelMap.get(range2End) - 1))
+                || (levelMap.get(currentLine) != levelMap.get(reference))
+                || (levelMap.get(currentLine) != (levelMap.get(range1Start) - 1))
+                || (levelMap.get(currentLine) != (levelMap.get(range1Start) - 1))) {
+                    log.warn("Subproofs were not created properly in Conjunction elimination.");
+                    return null;
+        }
+
+            // Check premises of the 2 subproofs
+        if(!VisitorHelper.isPartOfBinaryExpression(sentenceMap.get(range1Start), sentenceMap.get(reference))
+                || !VisitorHelper.isPartOfBinaryExpression(sentenceMap.get(range2Start), sentenceMap.get(reference))) {
+            log.warn("Wrong premises for disjunction elimination at lines: " + range1Start + " or " + range2Start);
+            return null;
+        }
+
+            // Check conclusions of the 2 subproofs
+        if(!sentenceMap.get(currentLine).getText().equals(sentenceMap.get(range1End).getText())
+                || !sentenceMap.get(currentLine).getText().equals(sentenceMap.get(range2End).getText())) {
+            log.warn("Line " + currentLine + ". The conclusions of the subproofs do not match with the inferred line.");
         }
 
         log.info("Line " + currentLine + " is applied correctly.");
@@ -267,7 +358,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @return the range as a map as a *STRING* which contains the interval, because no tuples.
      */
     @Override
-    public String visitRangeReference(ProofGrammarParser.RangeReferenceContext ctx) {
-        return ctx.getText();
+    public String visitRangeReference(ProofGrammarParser.RangeReferenceContext ctx) {return ctx.getText();
     }
 }

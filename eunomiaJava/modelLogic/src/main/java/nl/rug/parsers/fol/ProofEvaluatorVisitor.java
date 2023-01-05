@@ -61,7 +61,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     /**
-     * --------------------------------------- SPECIAL SENTENCES ---------------------------------------
+     * --------------------------------------- SPECIAL SENTENCES ---------------------------------------------
      */
 
     /**
@@ -138,6 +138,47 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     /**
+     * A conjunction introduction looks at the referred sentences applying the conjunction binary operation in
+     * between them.
+     * @param ctx the parse tree
+     */
+    @Override
+    public Object visitConjunctionIntro(ProofGrammarParser.ConjunctionIntroContext ctx) {
+        Integer reference1 = (Integer) visit(ctx.singleReference(0));
+        Integer reference2 = (Integer) visit(ctx.singleReference(1));
+
+        if(!mainConnectiveMap.containsKey(currentLine)) {
+            log.warn("Inferred sentence is not a conjunction.");
+            return null;
+        }
+
+        if(!sentenceMap.containsKey(reference1) || !sentenceMap.containsKey(reference2)) {
+            log.warn("Referred line does not exist.");
+            return null;
+        }
+
+        if(!(mainConnectiveMap.get(currentLine).equals("&&"))) {
+            log.warn("Inferred sentence is not a conjunction.");
+            return null;
+        }
+
+        if(!sentenceMap.get(currentLine).getChild(0).getText().equals(sentenceMap.get(reference1).getText()) &&
+                !sentenceMap.get(currentLine).getChild(0).getText().equals(sentenceMap.get(reference2).getText())) {
+            log.warn("First element of inferred line is not equal to either of the referred lines.");
+            return null;
+        }
+
+        if(!sentenceMap.get(currentLine).getChild(2).getText().equals(sentenceMap.get(reference1).getText()) &&
+                !sentenceMap.get(currentLine).getChild(2).getText().equals(sentenceMap.get(reference2).getText())) {
+            log.warn("Second element of inferred line is not equal to either of the referred lines.");
+            return null;
+        }
+
+        log.info("Line " + currentLine + " is applied correctly.");
+        return null;
+    }
+
+    /**
      * A conjunction elimination refers to a previous conjunction and checks if the inferred sentence is one of the
      * conjuncts.
      * @param ctx the parse tree
@@ -146,8 +187,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     public Object visitConjunctionElim(ProofGrammarParser.ConjunctionElimContext ctx) {
         Integer reference = (Integer) visit(ctx.singleReference());
 
-        if(!sentenceMap.containsKey(reference)) {
-            log.warn("Referred line does not exist.");
+        if(!mainConnectiveMap.containsKey(reference)) {
+            log.warn("Referred line is not a conjunction.");
             return null;
         }
 

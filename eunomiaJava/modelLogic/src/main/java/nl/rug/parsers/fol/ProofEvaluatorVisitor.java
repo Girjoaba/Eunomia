@@ -100,7 +100,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
 
     /*
-     * -------------------------------------- JUSTIFICATION STUFF -------------------------------
+     * -------------------------------------- JUSTIFICATION STUFF ---------------------------------------------
      */
 
     /**
@@ -200,6 +200,39 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         if(!sentenceMap.get(reference).getChild(0).getText().equals(sentenceMap.get(currentLine).getText()) &&
                 !sentenceMap.get(reference).getChild(2).getText().equals(sentenceMap.get(currentLine).getText())) {
             log.warn("The inferred sentence is not part of the conjunction.");
+            return null;
+        }
+
+        log.info("Line " + currentLine + " is applied correctly.");
+        return null;
+    }
+
+    /**
+     * A disjunction elimination looks at the referred line and checks if the sentence is equal to any element of the
+     * inferred sentence.
+     * @param ctx the parse tree
+     */
+    public Object visitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx) {
+        Integer reference1 = (Integer) visit(ctx.singleReference());
+
+        if(!mainConnectiveMap.containsKey(currentLine)) {
+            log.warn("Inferred sentence is not a disjunction.");
+            return null;
+        }
+
+        if(!sentenceMap.containsKey(reference1)) {
+            log.warn("Referred line does not exist.");
+            return null;
+        }
+
+        if(!(mainConnectiveMap.get(currentLine).equals("||"))) {
+            log.warn("Inferred sentence is not a disjunction.");
+            return null;
+        }
+
+        if(!sentenceMap.get(currentLine).getChild(0).getText().equals(sentenceMap.get(reference1).getText()) &&
+                !sentenceMap.get(currentLine).getChild(2).getText().equals(sentenceMap.get(reference1).getText())) {
+            log.warn("The referred sentence is not part of either elements of the conjunction.");
             return null;
         }
 

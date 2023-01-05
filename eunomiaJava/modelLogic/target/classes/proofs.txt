@@ -22,4 +22,4 @@ qed
 
     SIMPLE DISJUNCTION INTRODUCTION
 1. A premise
-2. A || BACADABRA ||Intro: 1
+2. A || B ||Intro: 1

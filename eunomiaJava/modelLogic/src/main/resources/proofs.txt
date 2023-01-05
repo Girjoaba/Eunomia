@@ -22,4 +22,12 @@ qed
 
     SIMPLE DISJUNCTION INTRODUCTION
 1. A premise
-2. A || BACADABRA ||Intro: 1
+2. A || B ||Intro: 1
+
+    SUBPROOF BASICS
+1. A premise
+assume
+2. B premise
+3. A && B &&Intro: 1, 2
+qed
+4. A && B Reit: 3  (must evaluate to false)

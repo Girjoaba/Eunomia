@@ -1,11 +1,12 @@
-1. A || B premise
+1. A premise
 assume
-2. A premise
-3. A Reit: 2
-4. A || B ||Intro: 3
-qed
+2. B premise
 assume
-5. B premise
-6. A || B ||Intro: 5
+3. C
+4. A && B &&Intro: 1, 2
+5. A && B && C &&Intro: 4, 1
 qed
-7. A || B ||Elim: 1, 2-4, 5-6
+6. A && B &&Intro: 1, 2
+7. A && B && C &&Intro: 4, 3
+qed
+8. A && B &&Intro: 1, 2

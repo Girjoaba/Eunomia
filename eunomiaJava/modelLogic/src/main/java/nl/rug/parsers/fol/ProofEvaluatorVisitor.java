@@ -291,6 +291,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * subproofs correspond with the inferred sentence.
      * @param ctx the parse tree
      */
+    @Override
     public Object visitDisjunctionElim(ProofGrammarParser.DisjunctionElimContext ctx) {
         Integer reference = (Integer) visit(ctx.singleReference());
         String range1 = (String) visit(ctx.rangeReference(0));

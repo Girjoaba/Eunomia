@@ -13,7 +13,7 @@ import java.io.IOException;
 @Slf4j
 public class FOLProofEvaluator {
     public static void main(String[] args) throws IOException {
-        ANTLRInputStream input = new ANTLRInputStream(StringConverter.getStringFromTXT("input.txt"));
+        ANTLRInputStream input = new ANTLRInputStream(StringConverter.getStringFromTXT("input/input.txt"));
 
         ProofGrammarLexer lexer = new ProofGrammarLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);

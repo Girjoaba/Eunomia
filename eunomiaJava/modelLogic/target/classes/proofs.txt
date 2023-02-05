@@ -1,4 +1,4 @@
-     THE POINTLESS DISJUNCTION
+     SIMPLE DISJUNCTION ELIMINATION
 1. A || B premise
 assume
 2. A premise

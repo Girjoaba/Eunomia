@@ -1,8 +1,5 @@
 package nl.rug.arhitectural;
 
-import nl.rug.proof.Proof;
-import nl.rug.proof.ProofStep;
-import nl.rug.proof.Step;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

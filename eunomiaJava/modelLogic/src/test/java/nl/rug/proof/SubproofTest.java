@@ -1,33 +1,29 @@
 package nl.rug.proof;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.rug.proof.fol.antlrAPI.ProofGrammarLexer;
-import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
-import nl.rug.proof.fol.compiler.ProofEvaluatorVisitor;
-import nl.rug.utility.StringConverter;
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
+import nl.rug.proof.fol.compiler.EunomiaCompiler;
+import nl.rug.proof.fol.compiler.ProofManager;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 public class SubproofTest {
     @Test
     public void testSubproofBasic() {
         try {
-            ANTLRInputStream input = new ANTLRInputStream(StringConverter
-                    .getStringFromTXT("testProofs/subproof/subproof_basic.txt"));
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile("testProofs/subproof/subproof_basic.txt");
 
-            ProofGrammarLexer lexer = new ProofGrammarLexer(input);
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            ProofGrammarParser parser = new ProofGrammarParser(tokens);
-            ParseTree tree = parser.proof();
-            System.out.println(tree.toStringTree(parser));
+            for(int i = 1; i <= 3; i++) {
+                assertTrue(manager.isCorrect(i));
+            }
+            assertFalse(manager.isCorrect(4));
 
-            ProofEvaluatorVisitor visitor = new ProofEvaluatorVisitor();
-            visitor.visit(tree);
         } catch (FileNotFoundException e) {
             log.error("File not found");
         }
@@ -36,17 +32,16 @@ public class SubproofTest {
     @Test
     public void testNestedSubproof() {
         try {
-            ANTLRInputStream input = new ANTLRInputStream(StringConverter
-                    .getStringFromTXT("testProofs/subproof/nested_subproof.txt"));
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile("testProofs/subproof/nested_subproof.txt");
 
-            ProofGrammarLexer lexer = new ProofGrammarLexer(input);
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            ProofGrammarParser parser = new ProofGrammarParser(tokens);
-            ParseTree tree = parser.proof();
-            System.out.println(tree.toStringTree(parser));
+            for(int i = 1; i <= 6; i++) {
+                assertTrue(manager.isCorrect(i));
+            }
+            assertFalse(manager.isCorrect(7));
+            assertFalse(manager.isCorrect(8));
 
-            ProofEvaluatorVisitor visitor = new ProofEvaluatorVisitor();
-            visitor.visit(tree);
         } catch (FileNotFoundException e) {
             log.error("File not found");
         }

@@ -5,24 +5,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 @Slf4j
 public class VisitorHelper {
-
-    public static Boolean isValidSingleReference(Integer currentLine, Integer referredLine) {
-        if(referredLine >= currentLine) {
-            return false;
-        }
-        return true;
-    }
-
-    public static Boolean isValidRangeReference(Integer currentLine, Integer rangeStart, Integer rangeEnd) {
-        if(rangeStart >= currentLine) {
-            return false;
-        }
-        if(rangeEnd >= currentLine) {
-            return false;
-        }
-        return true;
-    }
-
     public static Boolean isPartOfBinaryExpression(ParseTree ctx, ParseTree binaryExpression) {
 
         if(binaryExpression.getChildCount() != 3) {

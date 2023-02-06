@@ -1,8 +1,8 @@
 package nl.rug.proof;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.rug.proof.fol.compiler.EunomiaCompiler;
-import nl.rug.proof.fol.compiler.ProofManager;
+import nl.rug.proof.fol.EunomiaCompiler;
+import nl.rug.proof.fol.compiler.manager.ProofManager;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;

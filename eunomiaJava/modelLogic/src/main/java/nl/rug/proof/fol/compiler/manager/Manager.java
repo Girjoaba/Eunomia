@@ -1,4 +1,4 @@
-package nl.rug.proof.fol.compiler;
+package nl.rug.proof.fol.compiler.manager;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -21,4 +21,8 @@ public interface Manager {
     public ParseTree getCurrentSentence();
     public Boolean isReference(Integer reference);
     public Boolean isCorrect(Integer reference);
+    public Boolean isValidSingleReference(Integer reference);
+    public Boolean isValidRangeReference(Integer startReference, Integer endReference);
+    public Boolean isCorrectBinaryExpression(Integer reference, String operator);
+    public Boolean isCurrentCorrectBinaryExpression(String operator);
 }

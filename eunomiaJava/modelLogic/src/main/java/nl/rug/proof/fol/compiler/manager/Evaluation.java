@@ -1,4 +1,4 @@
-package nl.rug.proof.fol.compiler;
+package nl.rug.proof.fol.compiler.manager;
 
 
 public class Evaluation {

@@ -3,10 +3,8 @@ package nl.rug.proof.fol.compiler;
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarBaseVisitor;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
+import nl.rug.proof.fol.compiler.manager.Manager;
 import org.antlr.v4.runtime.tree.ParseTree;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A visitor class responsible for compiling the proof and checking the validity of each proof line.
@@ -35,7 +33,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     /**
      * In an assumption we normally visit the proof line associated with it but also increase the level.
      * The level is a way to keep track of the subproof.
-     * For example you can not use a sentence from inside a subproof unless it is associated to a rule specifically.
+     * For example, you can not use a sentence from inside a subproof unless it is associated to a rule specifically.
      * @param ctx the parse tree
      */
     @Override
@@ -158,13 +156,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     public Object visitReiteration(ProofGrammarParser.ReiterationContext ctx) {
         Integer reference = (Integer) visit(ctx.singleReference());
 
-        if(!manager.isReference(reference)) {
-            manager.setCurrentEvaluationWrong("Referred line does not exist.");
-            return null;
-        }
-
-        if(manager.getLevel(reference) > manager.getCurrentLevel()) {
-            manager.setCurrentEvaluationWrong("Can't use sentence from inside subproof.");
+        if(!manager.isValidSingleReference(reference)) {
+            manager.setCurrentEvaluationWrong("Invalid reference.");
             return null;
         }
 
@@ -185,20 +178,14 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         Integer reference1 = (Integer) visit(ctx.singleReference(0));
         Integer reference2 = (Integer) visit(ctx.singleReference(1));
 
+        if(!manager.isValidSingleReference(reference1) || !manager.isValidSingleReference(reference2)) {
+            manager.setCurrentEvaluationWrong("Invalid reference.");
+            return null;
+        }
+
         if(manager.getCurrentSentence().getChildCount() != 3
                 || !manager.getCurrentSentence().getChild(1).getText().equals("&&")) {
             manager.setCurrentEvaluationWrong("Inferred sentence is not a conjunction.");
-            return null;
-        }
-
-        if(!manager.isReference(reference1) || !manager.isReference(reference2)) {
-            manager.setCurrentEvaluationWrong("Referred line does not exist.");
-            return null;
-        }
-
-        if(manager.getLevel(reference1) > manager.getCurrentLevel()
-                || manager.getLevel(reference2) > manager.getCurrentLevel()) {
-            manager.setCurrentEvaluationWrong("Can't use sentence from inside subproof.");
             return null;
         }
 
@@ -219,13 +206,14 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     public Object visitConjunctionElim(ProofGrammarParser.ConjunctionElimContext ctx) {
         Integer reference = (Integer) visit(ctx.singleReference());
 
-        if(!manager.isReference(reference) || !manager.getSentence(reference).getChild(1).getText().equals("&&")) {
-            manager.setCurrentEvaluationWrong("Referred line is not a conjunction.");
+        if(!manager.isValidSingleReference(reference)) {
+            manager.setCurrentEvaluationWrong("Invalid reference.");
             return null;
         }
 
-        if(manager.getLevel(reference) > manager.getCurrentLevel()) {
-            manager.setCurrentEvaluationWrong("Can't use sentence from inside subproof.");
+        if(manager.getSentence(reference).getChildCount() != 3
+                || !manager.getSentence(reference).getChild(1).getText().equals("&&")) {
+            manager.setCurrentEvaluationWrong("Referred line is not a conjunction.");
             return null;
         }
 
@@ -244,19 +232,14 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     public Object visitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx) {
         Integer reference = (Integer) visit(ctx.singleReference());
 
+        if(!manager.isValidSingleReference(reference)) {
+            manager.setCurrentEvaluationWrong("Invalid reference.");
+            return null;
+        }
+
         if(manager.getCurrentSentence().getChildCount() != 3
                 || !manager.getCurrentSentence().getChild(1).getText().equals("||")) {
             manager.setCurrentEvaluationWrong("Inferred sentence is not a disjunction.");
-            return null;
-        }
-
-        if(!manager.isReference(reference)) {
-            manager.setCurrentEvaluationWrong("Referred line does not exist.");
-            return null;
-        }
-
-        if(manager.getLevel(reference) > manager.getCurrentLevel()) {
-            manager.setCurrentEvaluationWrong("Can't use sentence from inside subproof.");
             return null;
         }
 
@@ -284,25 +267,17 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         Integer range2Start = Integer.parseInt(range2.split("-")[0]);
         Integer range2End = Integer.parseInt(range2.split("-")[1]);
 
-        if(!manager.isReference(reference) || !manager.getSentence(reference).getChild(1).getText().equals("||")) {
+            // Check references
+        if(!manager.isValidSingleReference(reference) || !manager.isValidRangeReference(range1Start, range1End)
+                || !manager.isValidRangeReference(range2Start, range2End)) {
+            manager.setCurrentEvaluationWrong("Invalid reference.");
+            return null;
+        }
+
+            // Check if the referred line is a disjunction
+        if(manager.getSentence(reference).getChildCount() != 3
+                || !manager.getSentence(reference).getChild(1).getText().equals("||")) {
             manager.setCurrentEvaluationWrong("Referred line: " + reference + " is not a disjunction.");
-            return null;
-        }
-
-        if(!(manager.isReference(reference)
-                && manager.isReference(range1Start) && manager.isReference(range1End)
-                && manager.isReference(range2Start) && manager.isReference(range2End))) {
-            manager.setCurrentEvaluationWrong("One of the referred sentences is not existent.");
-            return null;
-        }
-
-            // Check levels
-        if((manager.getCurrentLevel() != (manager.getLevel(range1End) - 1))
-                || (manager.getCurrentLevel() != (manager.getLevel(range2End) - 1))
-                || (manager.getCurrentLevel() != manager.getLevel(reference))  // idk error
-                || (manager.getCurrentLevel() != (manager.getLevel(range1Start) - 1))
-                || (manager.getCurrentLevel() != (manager.getLevel(range1Start) - 1))) {
-            manager.setCurrentEvaluationWrong("Subproofs were not created properly in Conjunction elimination.");
             return null;
         }
 

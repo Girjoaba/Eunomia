@@ -1,7 +1,9 @@
-package nl.rug.proof.fol.compiler;
+package nl.rug.proof.fol;
 
 import nl.rug.proof.fol.antlrAPI.ProofGrammarLexer;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
+import nl.rug.proof.fol.compiler.manager.Manager;
+import nl.rug.proof.fol.compiler.ProofEvaluatorVisitor;
 import nl.rug.utility.StringConverter;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;

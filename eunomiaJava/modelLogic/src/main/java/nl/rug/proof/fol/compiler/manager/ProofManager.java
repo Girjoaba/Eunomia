@@ -1,4 +1,4 @@
-package nl.rug.proof.fol.compiler;
+package nl.rug.proof.fol.compiler.manager;
 
 import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -92,6 +92,24 @@ public class ProofManager implements Manager {
     @Override
     public Boolean isCorrect(Integer reference) {
         return lineMap.get(reference).isCorrect();
+    }
+
+    @Override
+    public Boolean isValidSingleReference(Integer reference) {
+        return lineMap.containsKey(reference) && (lineMap.get(reference).getLevel() <= currentLevel);
+    }
+
+    @Override
+    public Boolean isValidRangeReference(Integer startReference, Integer endReference) {
+        return  lineMap.containsKey(startReference) && lineMap.containsKey(endReference)
+                && (lineMap.get(startReference).getLevel().equals(lineMap.get(endReference).getLevel()))
+                && (lineMap.get(startReference).getLevel() - 1 == currentLevel);
+    }
+
+    @Override
+    public Boolean isCorrectBinaryExpression(String operator) {
+
+        return null;
     }
 
 }

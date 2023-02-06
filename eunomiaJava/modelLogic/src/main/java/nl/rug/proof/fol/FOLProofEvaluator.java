@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarLexer;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
 import nl.rug.proof.fol.compiler.ProofEvaluatorVisitor;
-import nl.rug.proof.fol.compiler.ProofManager;
+import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.utility.StringConverter;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;

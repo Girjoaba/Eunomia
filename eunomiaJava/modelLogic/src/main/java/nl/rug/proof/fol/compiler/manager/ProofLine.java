@@ -1,4 +1,4 @@
-package nl.rug.proof.fol.compiler;
+package nl.rug.proof.fol.compiler.manager;
 
 import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.tree.ParseTree;

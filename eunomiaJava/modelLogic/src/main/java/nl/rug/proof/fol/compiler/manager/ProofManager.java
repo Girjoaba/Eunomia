@@ -107,9 +107,56 @@ public class ProofManager implements Manager {
     }
 
     @Override
-    public Boolean isCorrectBinaryExpression(String operator) {
+    public Boolean isCorrectBinaryExpression(Integer reference, String operator) {
+        if(lineMap.get(reference).getSentenceTree().getChildCount() != 3)
+            return false;
+        return lineMap.get(reference).getSentenceTree().getChild(1).getText().equals(operator);
+    }
 
-        return null;
+    @Override
+    public Boolean isCurrentCorrectBinaryExpression(String operator) {
+        if(lineMap.get(currentLine).getSentenceTree().getChildCount() != 3)
+            return false;
+        return lineMap.get(currentLine).getSentenceTree().getChild(1).getText().equals(operator);
+    }
+
+    @Override
+    public Boolean isPartOfBinaryExpression(Integer childReference, Integer parentReference) {
+            // Return false if parent reference is not a binary expression
+        if(lineMap.get(parentReference).getSentenceTree().getChildCount() != 3)
+            return false;
+
+            // Return true if child reference is part of the binary expression
+        return lineMap.get(childReference).getSentenceTree().getText()
+                .equals(lineMap.get(parentReference).getSentenceTree().getChild(0).getText()) ||
+                lineMap.get(childReference).getSentenceTree().getText()
+                        .equals(lineMap.get(parentReference).getSentenceTree().getChild(2).getText());
+    }
+
+    @Override
+    public Boolean isCurrentPartOfBinaryExpression(Integer parentReference) {
+            // Return false if parent reference is not a binary expression
+        if(lineMap.get(parentReference).getSentenceTree().getChildCount() != 3)
+            return false;
+
+            // Return true if child reference is part of the binary expression
+        return lineMap.get(currentLine).getSentenceTree().getText()
+                .equals(lineMap.get(parentReference).getSentenceTree().getChild(0).getText()) ||
+                lineMap.get(currentLine).getSentenceTree().getText()
+                        .equals(lineMap.get(parentReference).getSentenceTree().getChild(2).getText());
+    }
+
+    @Override
+    public Boolean isPartOfCurrentBinaryExpression(Integer childReference) {
+        // Return false if parent reference is not a binary expression
+        if(lineMap.get(currentLine).getSentenceTree().getChildCount() != 3)
+            return false;
+
+        // Return true if child reference is part of the binary expression
+        return lineMap.get(childReference).getSentenceTree().getText()
+                .equals(lineMap.get(currentLine).getSentenceTree().getChild(0).getText()) ||
+                lineMap.get(childReference).getSentenceTree().getText()
+                        .equals(lineMap.get(currentLine).getSentenceTree().getChild(2).getText());
     }
 
 }

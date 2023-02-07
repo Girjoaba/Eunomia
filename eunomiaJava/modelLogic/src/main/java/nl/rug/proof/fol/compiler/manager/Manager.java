@@ -25,4 +25,7 @@ public interface Manager {
     public Boolean isValidRangeReference(Integer startReference, Integer endReference);
     public Boolean isCorrectBinaryExpression(Integer reference, String operator);
     public Boolean isCurrentCorrectBinaryExpression(String operator);
+    public Boolean isPartOfBinaryExpression(Integer childReference, Integer parentReference);
+    public Boolean isCurrentPartOfBinaryExpression(Integer parentReference);
+    public Boolean isPartOfCurrentBinaryExpression(Integer childReference);
 }

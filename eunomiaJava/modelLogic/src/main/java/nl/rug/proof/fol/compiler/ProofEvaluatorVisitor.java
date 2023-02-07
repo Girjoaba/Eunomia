@@ -183,14 +183,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(manager.getCurrentSentence().getChildCount() != 3
-                || !manager.getCurrentSentence().getChild(1).getText().equals("&&")) {
+        if(!manager.isCurrentCorrectBinaryExpression("&&")) {
             manager.setCurrentEvaluationWrong("Inferred sentence is not a conjunction.");
             return null;
         }
 
-        if(!VisitorHelper.isPartOfBinaryExpression(manager.getSentence(reference1), manager.getCurrentSentence()) ||
-                !VisitorHelper.isPartOfBinaryExpression(manager.getSentence(reference2), manager.getCurrentSentence())) {
+        if(!manager.isPartOfCurrentBinaryExpression(reference1) || !manager.isPartOfCurrentBinaryExpression(reference2)) {
             manager.setCurrentEvaluationWrong("Inferred Conjunction not constructed from referred sentences.");
             return null;
         }
@@ -211,13 +209,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(manager.getSentence(reference).getChildCount() != 3
-                || !manager.getSentence(reference).getChild(1).getText().equals("&&")) {
+        if(!manager.isCorrectBinaryExpression(reference, "&&")) {
             manager.setCurrentEvaluationWrong("Referred line is not a conjunction.");
             return null;
         }
 
-        if(!VisitorHelper.isPartOfBinaryExpression(manager.getCurrentSentence(), manager.getSentence(reference))) {
+        if(!manager.isCurrentPartOfBinaryExpression(reference)) {
             manager.setCurrentEvaluationWrong("Not part of a binary expression.");
             return null;
         }
@@ -237,13 +234,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(manager.getCurrentSentence().getChildCount() != 3
-                || !manager.getCurrentSentence().getChild(1).getText().equals("||")) {
+        if(!manager.isCurrentCorrectBinaryExpression("||")) {
             manager.setCurrentEvaluationWrong("Inferred sentence is not a disjunction.");
             return null;
         }
 
-        if(!VisitorHelper.isPartOfBinaryExpression(manager.getSentence(reference), manager.getCurrentSentence())) {
+        if(!manager.isPartOfCurrentBinaryExpression(reference)) {
             manager.setCurrentEvaluationWrong("Is not part of a binary expression.");
             return null;
         }
@@ -275,22 +271,21 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
             // Check if the referred line is a disjunction
-        if(manager.getSentence(reference).getChildCount() != 3
-                || !manager.getSentence(reference).getChild(1).getText().equals("||")) {
+        if(!manager.isCorrectBinaryExpression(reference, "||")) {
             manager.setCurrentEvaluationWrong("Referred line: " + reference + " is not a disjunction.");
             return null;
         }
 
             // Check premises of the 2 subproofs
-        if(!VisitorHelper.isPartOfBinaryExpression(manager.getSentence(range1Start), manager.getSentence(reference))
-                || !VisitorHelper.isPartOfBinaryExpression(manager.getSentence(range2Start), manager.getSentence(reference))) {
+        if(!manager.isPartOfBinaryExpression(range1Start, reference)
+                || !manager.isPartOfBinaryExpression(range2Start, reference)) {
             manager.setCurrentEvaluationWrong("Wrong premises for disjunction elimination");
             return null;
         }
 
             // Check conclusions of the 2 subproofs
         if(!manager.getCurrentSentence().getText().equals(manager.getSentence(range1End).getText())
-                || !manager.getCurrentSentence().getText().equals(manager.getSentence(range2End).getText())) {
+                || !manager.getCurrentSentence().getText().equals(manager.getSentence(range2End).getText()) ) {
             manager.setCurrentEvaluationWrong("The conclusions of the subproofs do not match with the inferred line.");
         }
         return null;
@@ -311,7 +306,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * To use a subproof we only need to be looking at those lines since the rest of the subproof is evaluated
      * to be valid on its own.
      * @param ctx the parse tree
-     * @return the range as a map as a *STRING* which contains the interval, because no tuples.
+     * @return the range as a map as a String which contains the interval, because no tuples.
      */
     @Override
     public String visitRangeReference(ProofGrammarParser.RangeReferenceContext ctx) {return ctx.getText();

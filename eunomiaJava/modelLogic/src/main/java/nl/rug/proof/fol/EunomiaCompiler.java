@@ -1,5 +1,6 @@
 package nl.rug.proof.fol;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarLexer;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
 import nl.rug.proof.fol.compiler.manager.Manager;
@@ -11,6 +12,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.FileNotFoundException;
 
+@Slf4j
 public class EunomiaCompiler {
 
     private final Manager manager;
@@ -27,7 +29,10 @@ public class EunomiaCompiler {
         ProofGrammarLexer lexer = new ProofGrammarLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ProofGrammarParser parser = new ProofGrammarParser(tokens);
+
+        log.info("TES!");
         ParseTree tree = parser.proof();
+        log.info(tree.toStringTree(parser));
 
             // Compilation
         ProofEvaluatorVisitor visitor = new ProofEvaluatorVisitor(manager);

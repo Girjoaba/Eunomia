@@ -35,17 +35,43 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitQed(ProofGrammarParser.QedContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ProofGrammarParser#premiseLine}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPremiseLine(ProofGrammarParser.PremiseLineContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#proofLine}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitProofLine(ProofGrammarParser.ProofLineContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ProofGrammarParser#conclusionLine}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConclusionLine(ProofGrammarParser.ConclusionLineContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#proofLineNum}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitProofLineNum(ProofGrammarParser.ProofLineNumContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PremiseContradictionInfer}
+	 * labeled alternative in {@link ProofGrammarParser#premiseInference}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPremiseContradictionInfer(ProofGrammarParser.PremiseContradictionInferContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PremiseSentenceInfer}
+	 * labeled alternative in {@link ProofGrammarParser#premiseInference}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPremiseSentenceInfer(ProofGrammarParser.PremiseSentenceInferContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ContradictionInfer}
 	 * labeled alternative in {@link ProofGrammarParser#inference}.
@@ -93,13 +119,6 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAtom(ProofGrammarParser.AtomContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code PremiseJust}
-	 * labeled alternative in {@link ProofGrammarParser#justification}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPremiseJust(ProofGrammarParser.PremiseJustContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ReitJust}
 	 * labeled alternative in {@link ProofGrammarParser#justification}.

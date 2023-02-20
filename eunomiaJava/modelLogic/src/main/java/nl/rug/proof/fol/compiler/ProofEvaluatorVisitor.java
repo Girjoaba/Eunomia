@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarBaseVisitor;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
 import nl.rug.proof.fol.compiler.manager.Manager;
-import nl.rug.proof.fol.compiler.manager.PremiseState;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 /**
@@ -40,7 +39,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitAssume(ProofGrammarParser.AssumeContext ctx) {
         manager.increaseLevel();
-        visit(ctx.proofLine());
+        visit(ctx.premiseLine());
         return null;
     }
 
@@ -50,8 +49,15 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      */
     @Override
     public Object visitQed(ProofGrammarParser.QedContext ctx) {
-        visit(ctx.proofLine());
+        visit(ctx.conclusionLine());
         manager.decreaseLevel();
+        return null;
+    }
+
+    @Override
+    public Object visitPremiseLine(ProofGrammarParser.PremiseLineContext ctx) {
+        manager.setCurrentLine((Integer) visit(ctx.proofLineNum()));
+        visit(ctx.premiseInference());
         return null;
     }
 
@@ -62,6 +68,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      */
     @Override
     public Object visitProofLine(ProofGrammarParser.ProofLineContext ctx) {
+        manager.setCurrentLine((Integer) visit(ctx.proofLineNum()));
+        visit(ctx.inference());
+        return null;
+    }
+
+    @Override
+    public Object visitConclusionLine(ProofGrammarParser.ConclusionLineContext ctx) {
         manager.setCurrentLine((Integer) visit(ctx.proofLineNum()));
         visit(ctx.inference());
         return null;
@@ -96,6 +109,18 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     public Object visitSentenceInfer(ProofGrammarParser.SentenceInferContext ctx) {
         visit(ctx.sentence(0));
         visit(ctx.justification());
+        return null;
+    }
+
+    @Override
+    public Object visitPremiseContradictionInfer(ProofGrammarParser.PremiseContradictionInferContext ctx) {
+        visit(ctx.contradiction(0));
+        return null;
+    }
+
+    @Override
+    public Object visitPremiseSentenceInfer(ProofGrammarParser.PremiseSentenceInferContext ctx) {
+        visit(ctx.sentence(0));
         return null;
     }
 
@@ -139,27 +164,11 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      */
 
     /**
-     * A premise is an assumption, it requires no proper justification as it is something we assume to be true.
-     * @param ctx the parse tree
-     * TODO: if the placement of the premise is correct, should be more at the beginning of a proof
-     *            or one at the beginning of a subproof
-     */
-    @Override
-    public Object visitPremise(ProofGrammarParser.PremiseContext ctx) {
-        if(manager.getPremiseState() == PremiseState.INSIDE_PROOF) {
-            manager.setCurrentEvaluationWrong("Premise is not at the beginning of a proof or subproof.");
-            return null;
-        }
-        return null;
-    }
-
-    /**
      * A reiteration justification, is just restating an antecedent sentence. We check if the sentences match.
      * @param ctx the parse tree
      */
     @Override
     public Object visitReiteration(ProofGrammarParser.ReiterationContext ctx) {
-        manager.setPremiseState(PremiseState.INSIDE_PROOF);
 
         Integer reference = (Integer) visit(ctx.singleReference());
 
@@ -182,7 +191,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      */
     @Override
     public Object visitConjunctionIntro(ProofGrammarParser.ConjunctionIntroContext ctx) {
-        manager.setPremiseState(PremiseState.INSIDE_PROOF);
 
         Integer reference1 = (Integer) visit(ctx.singleReference(0));
         Integer reference2 = (Integer) visit(ctx.singleReference(1));
@@ -211,7 +219,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      */
     @Override
     public Object visitConjunctionElim(ProofGrammarParser.ConjunctionElimContext ctx) {
-        manager.setPremiseState(PremiseState.INSIDE_PROOF);
 
         Integer reference = (Integer) visit(ctx.singleReference());
 
@@ -238,7 +245,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     public Object visitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx) {
-        manager.setPremiseState(PremiseState.INSIDE_PROOF);
 
         Integer reference = (Integer) visit(ctx.singleReference());
 
@@ -267,7 +273,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      */
     @Override
     public Object visitDisjunctionElim(ProofGrammarParser.DisjunctionElimContext ctx) {
-        manager.setPremiseState(PremiseState.INSIDE_PROOF);
 
         Integer reference = (Integer) visit(ctx.singleReference());
         String range1 = (String) visit(ctx.rangeReference(0));

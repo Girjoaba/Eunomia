@@ -65,6 +65,18 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPremiseLine(ProofGrammarParser.PremiseLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPremiseLine(ProofGrammarParser.PremiseLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterProofLine(ProofGrammarParser.ProofLineContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -77,6 +89,18 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterConclusionLine(ProofGrammarParser.ConclusionLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConclusionLine(ProofGrammarParser.ConclusionLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterProofLineNum(ProofGrammarParser.ProofLineNumContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -84,6 +108,30 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitProofLineNum(ProofGrammarParser.ProofLineNumContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPremiseContradictionInfer(ProofGrammarParser.PremiseContradictionInferContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPremiseContradictionInfer(ProofGrammarParser.PremiseContradictionInferContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPremiseSentenceInfer(ProofGrammarParser.PremiseSentenceInferContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPremiseSentenceInfer(ProofGrammarParser.PremiseSentenceInferContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -168,18 +216,6 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAtom(ProofGrammarParser.AtomContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPremiseJust(ProofGrammarParser.PremiseJustContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPremiseJust(ProofGrammarParser.PremiseJustContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

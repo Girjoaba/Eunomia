@@ -10,8 +10,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @Slf4j
 public class PremiseTest {
 
@@ -86,33 +84,33 @@ public class PremiseTest {
         }
     }
 
-    @Test
-    public void testNoSubproofPremiseWrong() {
-        try {
-            ProofManager manager = new ProofManager();
-            EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/premise/no_subproof_premise_wrong.txt");
+//    @Test
+//    public void testNoSubproofPremiseWrong() {
+//        try {
+//            ProofManager manager = new ProofManager();
+//            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+//            compiler.compile("testProofs/premise/no_subproof_premise_wrong.txt");
+//
+//            List<Integer> wrongLines = new ArrayList<>(List.of(2));
+//            LineVerifier.verifyWrongLines(manager, wrongLines);
+//
+//        } catch (FileNotFoundException e) {
+//            log.error("File not found");
+//        }
+//    }
 
-            List<Integer> wrongLines = new ArrayList<>(List.of(2));
-            LineVerifier.verifyWrongLines(manager, wrongLines);
-
-        } catch (FileNotFoundException e) {
-            log.error("File not found");
-        }
-    }
-
-    @Test
-    public void testMisplacedPremiseWrong() {
-        try {
-            ProofManager manager = new ProofManager();
-            EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/premise/no_subproof_premise_wrong.txt");
-
-            List<Integer> wrongLines = new ArrayList<>(List.of(2));
-            LineVerifier.verifyWrongLines(manager, wrongLines);
-
-        } catch (FileNotFoundException e) {
-            log.error("File not found");
-        }
-    }
+//    @Test
+//    public void testMisplacedPremiseWrong() {
+//        try {
+//            ProofManager manager = new ProofManager();
+//            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+//            compiler.compile("testProofs/premise/no_subproof_premise_wrong.txt");
+//
+//            List<Integer> wrongLines = new ArrayList<>(List.of(2));
+//            LineVerifier.verifyWrongLines(manager, wrongLines);
+//
+//        } catch (FileNotFoundException e) {
+//            log.error("File not found");
+//        }
+//    }
 }

@@ -48,6 +48,16 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitQed(ProofGrammarParser.QedContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#premiseLine}.
+	 * @param ctx the parse tree
+	 */
+	void enterPremiseLine(ProofGrammarParser.PremiseLineContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#premiseLine}.
+	 * @param ctx the parse tree
+	 */
+	void exitPremiseLine(ProofGrammarParser.PremiseLineContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#proofLine}.
 	 * @param ctx the parse tree
 	 */
@@ -58,6 +68,16 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitProofLine(ProofGrammarParser.ProofLineContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#conclusionLine}.
+	 * @param ctx the parse tree
+	 */
+	void enterConclusionLine(ProofGrammarParser.ConclusionLineContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#conclusionLine}.
+	 * @param ctx the parse tree
+	 */
+	void exitConclusionLine(ProofGrammarParser.ConclusionLineContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#proofLineNum}.
 	 * @param ctx the parse tree
 	 */
@@ -67,6 +87,30 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProofLineNum(ProofGrammarParser.ProofLineNumContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PremiseContradictionInfer}
+	 * labeled alternative in {@link ProofGrammarParser#premiseInference}.
+	 * @param ctx the parse tree
+	 */
+	void enterPremiseContradictionInfer(ProofGrammarParser.PremiseContradictionInferContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PremiseContradictionInfer}
+	 * labeled alternative in {@link ProofGrammarParser#premiseInference}.
+	 * @param ctx the parse tree
+	 */
+	void exitPremiseContradictionInfer(ProofGrammarParser.PremiseContradictionInferContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PremiseSentenceInfer}
+	 * labeled alternative in {@link ProofGrammarParser#premiseInference}.
+	 * @param ctx the parse tree
+	 */
+	void enterPremiseSentenceInfer(ProofGrammarParser.PremiseSentenceInferContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PremiseSentenceInfer}
+	 * labeled alternative in {@link ProofGrammarParser#premiseInference}.
+	 * @param ctx the parse tree
+	 */
+	void exitPremiseSentenceInfer(ProofGrammarParser.PremiseSentenceInferContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ContradictionInfer}
 	 * labeled alternative in {@link ProofGrammarParser#inference}.
@@ -147,18 +191,6 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAtom(ProofGrammarParser.AtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code PremiseJust}
-	 * labeled alternative in {@link ProofGrammarParser#justification}.
-	 * @param ctx the parse tree
-	 */
-	void enterPremiseJust(ProofGrammarParser.PremiseJustContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code PremiseJust}
-	 * labeled alternative in {@link ProofGrammarParser#justification}.
-	 * @param ctx the parse tree
-	 */
-	void exitPremiseJust(ProofGrammarParser.PremiseJustContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ReitJust}
 	 * labeled alternative in {@link ProofGrammarParser#justification}.

@@ -15,7 +15,6 @@ public class ProofManager implements Manager {
 
     private Integer currentLine = 0;
     private Integer currentLevel = 0;
-    private PremiseState premiseState = PremiseState.INITIAL;
 
     /**
      * Goes to the next line in the proof.
@@ -58,16 +57,6 @@ public class ProofManager implements Manager {
     @Override
     public Set<Integer> referenceSet() {
         return lineMap.keySet();
-    }
-
-    @Override
-    public PremiseState getPremiseState() {
-        return premiseState;
-    }
-
-    @Override
-    public void setPremiseState(PremiseState premiseState) {
-        this.premiseState = premiseState;
     }
 
     @Override

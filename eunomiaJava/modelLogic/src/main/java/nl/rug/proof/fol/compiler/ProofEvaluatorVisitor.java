@@ -271,17 +271,19 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.getSentence(reference).getChild(0).getText().equals("!")
-                || !manager.getSentence(reference).getChild(0).getChild(0).getText().equals("!")) {
+        if(manager.getSentence(reference).getChildCount() != 2
+                || manager.getSentence(reference).getChild(1).getChildCount() != 2
+                || !manager.getSentence(reference).getChild(0).getText().equals("!")
+                || !manager.getSentence(reference).getChild(1).getChild(0).getText().equals("!")) {
             manager.setCurrentEvaluationWrong("Can only apply negation elimination to double negations.");
             return null;
         }
 
-//        if(!manager.getSentence(reference).getChild(0).getChild(0).getChild(0).getText().
-//            equals(manager.getCurrentSentence().getText())) {
-//            manager.setCurrentEvaluationWrong("The inferred sentence is not the same as the double negation.");
-//            return null;
-//        }
+        if(!manager.getSentence(reference).getChild(1).getChild(1).getText()
+            .equals(manager.getCurrentSentence().getText())) {
+            manager.setCurrentEvaluationWrong("The inferred sentence is not the same as the double negation.");
+            return null;
+        }
 
         return null;
     }

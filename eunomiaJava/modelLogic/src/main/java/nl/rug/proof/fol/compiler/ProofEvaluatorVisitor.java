@@ -93,10 +93,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     // TODO: Not implemented yet
     @Override
     public Object visitContradictionInfer(ProofGrammarParser.ContradictionInferContext ctx) {
-//        String contradiction = "perp";
-//        sentenceMap.put(currentLine, ctx);
-//        levelMap.put(currentLine, currentLevel);
-        //visit(ctx.justification());
+        visit(ctx.contradiction(0));
+        visit(ctx.justification());
         return null;
     }
 
@@ -127,6 +125,27 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     /**
      * --------------------------------------- SPECIAL SENTENCES ---------------------------------------------
      */
+    @Override
+    public Object visitContradiction(ProofGrammarParser.ContradictionContext ctx) {
+        manager.addProofLine(ctx);
+        return null;
+    }
+
+    /**
+     * An atomic sentence, we just store the atomic value.
+     * @param ctx the parse tree
+     */
+    @Override
+    public Object visitAtomic(ProofGrammarParser.AtomicContext ctx) {
+        manager.addProofLine(ctx);
+        return null;
+    }
+
+    @Override
+    public Object visitNegation(ProofGrammarParser.NegationContext ctx) {
+        manager.addProofLine(ctx);
+        return null;
+    }
 
     /**
      * A conjunction, we store the main connective for easier access and the sentence as a ParseTree.
@@ -144,16 +163,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      */
     @Override
     public Object visitDisjunction(ProofGrammarParser.DisjunctionContext ctx) {
-        manager.addProofLine(ctx);
-        return null;
-    }
-
-    /**
-     * An atomic sentence, we just store the atomic value.
-     * @param ctx the parse tree
-     */
-    @Override
-    public Object visitAtomic(ProofGrammarParser.AtomicContext ctx) {
         manager.addProofLine(ctx);
         return null;
     }
@@ -181,6 +190,99 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             manager.setCurrentEvaluationWrong("Reiteration applied to different sentences.");
             return null;
         }
+        return null;
+    }
+
+    @Override
+    public Object visitContradictionIntro(ProofGrammarParser.ContradictionIntroContext ctx) {
+
+        Integer reference1 = (Integer) visit(ctx.singleReference(0));
+        Integer reference2 = (Integer) visit(ctx.singleReference(1));
+
+        if(!manager.isValidSingleReference(reference1) || !manager.isValidSingleReference(reference2)) {
+            manager.setCurrentEvaluationWrong("Invalid reference.");
+            return null;
+        }
+
+        if(!manager.getCurrentSentence().getText().equals("\\perp")) {
+            manager.setCurrentEvaluationWrong("Result not a contradiction.");
+            return null;
+        }
+
+        if(!manager.getSentence(reference2).getChild(0).getText().equals("!") ||
+                !manager.getSentence(reference1).getText().equals(manager.getSentence(reference2).getChild(1).getText())) {
+            manager.setCurrentEvaluationWrong("Contradiction does not result from the premises. (maybe justification order is wrong ?)");
+            return null;
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitContradictionElim(ProofGrammarParser.ContradictionElimContext ctx) {
+
+        Integer reference = (Integer) visit(ctx.singleReference());
+        if(!manager.isValidSingleReference(reference)) {
+            manager.setCurrentEvaluationWrong("Invalid reference.");
+            return null;
+        }
+
+        if(!manager.getSentence(reference).getText().equals("\\perp")) {
+            manager.setCurrentEvaluationWrong("Contradiction elimination not applied to a contradiction.");
+            return null;
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visitNegationIntro(ProofGrammarParser.NegationIntroContext ctx) {
+
+        String range1 = (String) visit(ctx.rangeReference());
+
+        Integer rangeStart = Integer.parseInt(range1.split("-")[0]);
+        Integer rangeEnd = Integer.parseInt(range1.split("-")[1]);
+
+        if(!manager.isValidRangeReference(rangeStart, rangeEnd)) {
+            manager.setCurrentEvaluationWrong("Invalid reference.");
+            return null;
+        }
+
+        if(!manager.getSentence(rangeStart).getText().equals(manager.getCurrentSentence().getChild(1).getText())
+                || !manager.getCurrentSentence().getChild(0).getText().equals("!")) {
+            manager.setCurrentEvaluationWrong("The premise of the subproof is not negated as the result of the negation");
+            return null;
+        }
+
+        if(!manager.getSentence(rangeEnd).getText().equals("\\perp")) {
+            manager.setCurrentEvaluationWrong("Subproofs does not end in a contradiction.");
+            return null;
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visitNegationElim(ProofGrammarParser.NegationElimContext ctx) {
+
+        Integer reference = (Integer) visit(ctx.singleReference());
+
+        if(!manager.isValidSingleReference(reference)) {
+            manager.setCurrentEvaluationWrong("Invalid reference.");
+            return null;
+        }
+
+        if(!manager.getSentence(reference).getChild(0).getText().equals("!")
+                || !manager.getSentence(reference).getChild(0).getChild(0).getText().equals("!")) {
+            manager.setCurrentEvaluationWrong("Can only apply negation elimination to double negations.");
+            return null;
+        }
+
+//        if(!manager.getSentence(reference).getChild(0).getChild(0).getChild(0).getText().
+//            equals(manager.getCurrentSentence().getText())) {
+//            manager.setCurrentEvaluationWrong("The inferred sentence is not the same as the double negation.");
+//            return null;
+//        }
+
         return null;
     }
 

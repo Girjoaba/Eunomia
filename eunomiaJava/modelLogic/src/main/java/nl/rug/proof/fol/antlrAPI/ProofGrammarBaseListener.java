@@ -185,6 +185,18 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterNegation(ProofGrammarParser.NegationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNegation(ProofGrammarParser.NegationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterConjunction(ProofGrammarParser.ConjunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -257,18 +269,6 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPremise(ProofGrammarParser.PremiseContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPremise(ProofGrammarParser.PremiseContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterReiteration(ProofGrammarParser.ReiterationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -276,6 +276,30 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReiteration(ProofGrammarParser.ReiterationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNegationIntro(ProofGrammarParser.NegationIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNegationIntro(ProofGrammarParser.NegationIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterContradictionIntro(ProofGrammarParser.ContradictionIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitContradictionIntro(ProofGrammarParser.ContradictionIntroContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -300,6 +324,30 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNegationElim(ProofGrammarParser.NegationElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNegationElim(ProofGrammarParser.NegationElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterContradictionElim(ProofGrammarParser.ContradictionElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitContradictionElim(ProofGrammarParser.ContradictionElimContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

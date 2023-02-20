@@ -158,6 +158,18 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitDisjunction(ProofGrammarParser.DisjunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code Negation}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
+	 * @param ctx the parse tree
+	 */
+	void enterNegation(ProofGrammarParser.NegationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Negation}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
+	 * @param ctx the parse tree
+	 */
+	void exitNegation(ProofGrammarParser.NegationContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code Conjunction}
 	 * labeled alternative in {@link ProofGrammarParser#sentence}.
 	 * @param ctx the parse tree
@@ -228,16 +240,6 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitIntroJust(ProofGrammarParser.IntroJustContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProofGrammarParser#premise}.
-	 * @param ctx the parse tree
-	 */
-	void enterPremise(ProofGrammarParser.PremiseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProofGrammarParser#premise}.
-	 * @param ctx the parse tree
-	 */
-	void exitPremise(ProofGrammarParser.PremiseContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#reiteration}.
 	 * @param ctx the parse tree
 	 */
@@ -247,6 +249,30 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReiteration(ProofGrammarParser.ReiterationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code NegationIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void enterNegationIntro(ProofGrammarParser.NegationIntroContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code NegationIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void exitNegationIntro(ProofGrammarParser.NegationIntroContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ContradictionIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void enterContradictionIntro(ProofGrammarParser.ContradictionIntroContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ContradictionIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void exitContradictionIntro(ProofGrammarParser.ContradictionIntroContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ConjunctionIntro}
 	 * labeled alternative in {@link ProofGrammarParser#introduction}.
@@ -271,6 +297,30 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code NegationElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void enterNegationElim(ProofGrammarParser.NegationElimContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code NegationElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void exitNegationElim(ProofGrammarParser.NegationElimContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ContradictionElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void enterContradictionElim(ProofGrammarParser.ContradictionElimContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ContradictionElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void exitContradictionElim(ProofGrammarParser.ContradictionElimContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ConjunctionElim}
 	 * labeled alternative in {@link ProofGrammarParser#elimination}.

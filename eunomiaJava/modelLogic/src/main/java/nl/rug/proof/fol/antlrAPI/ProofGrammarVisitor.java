@@ -100,6 +100,13 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDisjunction(ProofGrammarParser.DisjunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code Negation}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNegation(ProofGrammarParser.NegationContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Conjunction}
 	 * labeled alternative in {@link ProofGrammarParser#sentence}.
 	 * @param ctx the parse tree
@@ -141,17 +148,25 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIntroJust(ProofGrammarParser.IntroJustContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ProofGrammarParser#premise}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPremise(ProofGrammarParser.PremiseContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#reiteration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitReiteration(ProofGrammarParser.ReiterationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NegationIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNegationIntro(ProofGrammarParser.NegationIntroContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ContradictionIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitContradictionIntro(ProofGrammarParser.ContradictionIntroContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ConjunctionIntro}
 	 * labeled alternative in {@link ProofGrammarParser#introduction}.
@@ -166,6 +181,20 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NegationElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNegationElim(ProofGrammarParser.NegationElimContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ContradictionElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitContradictionElim(ProofGrammarParser.ContradictionElimContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ConjunctionElim}
 	 * labeled alternative in {@link ProofGrammarParser#elimination}.

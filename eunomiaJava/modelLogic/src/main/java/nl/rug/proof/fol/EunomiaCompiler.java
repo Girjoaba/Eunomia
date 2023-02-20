@@ -30,9 +30,7 @@ public class EunomiaCompiler {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ProofGrammarParser parser = new ProofGrammarParser(tokens);
 
-        log.info("TES!");
         ParseTree tree = parser.proof();
-        log.info(tree.toStringTree(parser));
 
             // Compilation
         ProofEvaluatorVisitor visitor = new ProofEvaluatorVisitor(manager);

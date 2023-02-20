@@ -33,9 +33,10 @@ inference
      * ------------------------------------------------------------- Sentence Section
      */
 
-contradiction : 'perp';
+contradiction : CONTRADICTION;
 sentence
     : atom                                        # Atomic
+    | NEGATION sentence                           # Negation
     | sentence CONJUNCTION sentence               # Conjunction
     | sentence DISJUNCTION sentence               # Disjunction
     ;
@@ -51,16 +52,19 @@ justification
     | introduction       # IntroJust
     ;
 
-premise : 'premise' ;
 reiteration : 'Reit: ' singleReference ;
 
 introduction
-    : CONJUNCTION 'Intro: ' singleReference ',' singleReference         # ConjunctionIntro
-    | DISJUNCTION 'Intro: ' singleReference                             # DisjunctionIntro
+    : NEGATION      'Intro: ' rangeReference                              # NegationIntro
+    | CONTRADICTION 'Intro: ' singleReference ',' singleReference         # ContradictionIntro
+    | CONJUNCTION   'Intro: ' singleReference ',' singleReference         # ConjunctionIntro
+    | DISJUNCTION   'Intro: ' singleReference                             # DisjunctionIntro
     ;
 
 elimination
-    : CONJUNCTION + 'Elim: ' singleReference                                            # ConjunctionElim
+    : NEGATION      'Elim: ' singleReference                                            # NegationElim
+    | CONTRADICTION 'Elim: ' singleReference                                            # ContradictionElim
+    | CONJUNCTION + 'Elim: ' singleReference                                            # ConjunctionElim
     | DISJUNCTION + 'Elim: ' singleReference ',' rangeReference ',' rangeReference      # DisjunctionElim
     ;
 
@@ -71,8 +75,10 @@ rangeReference  : INT '-' INT ;
      *  ------------------------------------------------------------------- Lexer Rules Section
      */
 
-CONJUNCTION : '&' | '&&' | '^' ;
-DISJUNCTION : '|' | '||' | 'v' ;
+NEGATION    : '!' ;
+CONTRADICTION : '\\perp' ;
+CONJUNCTION : '&&' ;
+DISJUNCTION : '||' ;
 
 ASSUME : 'assume' ;
 QED    : 'qed' ;

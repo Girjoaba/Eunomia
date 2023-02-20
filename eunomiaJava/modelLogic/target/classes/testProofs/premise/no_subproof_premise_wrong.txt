@@ -1,0 +1,5 @@
+1. A premise
+assume
+2. A Reit: 1
+3. A Reit: 2
+qed

@@ -3,6 +3,7 @@ package nl.rug.proof;
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
+import nl.rug.proof.lineVerification.LineVerifier;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -19,9 +20,7 @@ public class DisjunctionTest {
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
             compiler.compile("testProofs/disjunction/simple_disjunction_intro.txt");
 
-            for(Integer reference : manager.referenceSet()) {
-                assertTrue(manager.isCorrect(reference));
-            }
+            LineVerifier.verifyAllLinesCorrect(manager);
 
         } catch (FileNotFoundException e) {
             log.error("File not found");
@@ -35,9 +34,7 @@ public class DisjunctionTest {
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
             compiler.compile("testProofs/disjunction/simple_disjunction_elim.txt");
 
-            for(Integer reference : manager.referenceSet()) {
-                assertTrue(manager.isCorrect(reference));
-            }
+            LineVerifier.verifyAllLinesCorrect(manager);
 
         } catch (FileNotFoundException e) {
             log.error("File not found");

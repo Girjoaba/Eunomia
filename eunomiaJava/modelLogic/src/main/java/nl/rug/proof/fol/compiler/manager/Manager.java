@@ -14,6 +14,8 @@ public interface Manager {
     public void decreaseLevel();
     public void addProofLine(ParseTree sentence);
     public Set<Integer> referenceSet();
+    public PremiseState getPremiseState();
+    public void setPremiseState(PremiseState premiseState);
     public void getLineEvaluation();
     public Integer getLevel(Integer reference);
     public Integer getCurrentLevel();

@@ -10,7 +10,7 @@ import java.util.*;
  * The operations are tailored for evaluating a formal proof.
  */
 @Slf4j
-public class ProofManager implements Manager {
+public class ProofManager {
     private final Map<Integer, ProofLine> lineMap = new HashMap<>();
 
     private Integer currentLine = 0;
@@ -18,13 +18,16 @@ public class ProofManager implements Manager {
 
     /**
      * Goes to the next line in the proof.
+     * @param line the line number.
      */
-    @Override
     public void setCurrentLine(Integer line) {
         currentLine = line;
     }
 
-    @Override
+    /**
+     * Sets the current line as being incorrect.
+     * @param message the error message explaining why the line is incorrect.
+     */
     public void setCurrentEvaluationWrong(String message) {
         lineMap.get(currentLine).setWrongEvaluation(message);
     }
@@ -32,7 +35,6 @@ public class ProofManager implements Manager {
     /**
      * Marks the beginning of a subproof by increasing the level.
      */
-    @Override
     public void increaseLevel() {
         currentLevel++;
     }
@@ -40,7 +42,6 @@ public class ProofManager implements Manager {
     /**
      * Marks the ending of a subproof by decreasing the level.
      */
-    @Override
     public void decreaseLevel() {
         currentLevel--;
     }
@@ -49,108 +50,137 @@ public class ProofManager implements Manager {
      * Save a proof line.
      * @param sentence the sentence stored as a tree.
      */
-    @Override
     public void addProofLine(ParseTree sentence) {
         lineMap.put(currentLine, new ProofLine(currentLine, currentLevel, sentence));
     }
 
-    @Override
+    /**
+     * Returns the set of all the indices acting as references.
+     * @return the set of references.
+     */
     public Set<Integer> referenceSet() {
         return lineMap.keySet();
     }
 
-    @Override
-    public void getLineEvaluation() {
-        log.info("Line " + currentLine + " is applied correctly.");
-    }
-
-    @Override
-    public Integer getLevel(Integer reference) {
-        return lineMap.get(reference).getLevel();
-    }
-
-    @Override
-    public Integer getCurrentLevel() {
-        return currentLevel;
-    }
-
-    @Override
+    /**
+     * Get the sentence at a given line.
+     * @param reference the reference to that line.
+     * @return the sentence as a tree.
+     */
     public ParseTree getSentence(Integer reference) {
         return lineMap.get(reference).getSentenceTree();
     }
 
-    @Override
+    /**
+     * Get the current sentence.
+     * @return the current sentence as a tree.
+     */
     public ParseTree getCurrentSentence() {
         return lineMap.get(currentLine).getSentenceTree();
     }
 
-    @Override
-    public Boolean isReference(Integer reference) {
-        return lineMap.containsKey(reference);
-    }
-
-    @Override
+    /**
+     * Checks if a given line is correct.
+     * @param reference the reference to that line.
+     * @return correctness of the line.
+     */
     public Boolean isCorrect(Integer reference) {
         return lineMap.get(reference).isCorrect();
     }
 
-    @Override
+    /**
+     * Checks if a single reference is valid.
+     * @param reference the reference.
+     * @return validity of the reference.
+     */
     public Boolean isValidSingleReference(Integer reference) {
         return lineMap.containsKey(reference) && (lineMap.get(reference).getLevel() <= currentLevel);
     }
 
-    @Override
+    /**
+     * Checks if the range of references is valid.
+     * @param startReference the start of the range as an Integer.
+     * @param endReference the end of the range as an Integer.
+     * @return validity of the range.
+     */
     public Boolean isValidRangeReference(Integer startReference, Integer endReference) {
         return  lineMap.containsKey(startReference) && lineMap.containsKey(endReference)
                 && (lineMap.get(startReference).getLevel().equals(lineMap.get(endReference).getLevel()))
                 && (lineMap.get(startReference).getLevel() - 1 == currentLevel);
     }
 
-    @Override
+    /**
+     * Checks if a binary expression is correct.
+     * @param reference the reference to that binary expression.
+     * @param operator the operator which separates that binary expression.
+     * @return the correctness of the binary expression given by the operator and its structure.
+     */
     public Boolean isCorrectBinaryExpression(Integer reference, String operator) {
-        if(lineMap.get(reference).getSentenceTree().getChildCount() != 3)
+        if(lineMap.get(reference).getSentenceTree().getChildCount() != 3) {
             return false;
+        }
         return lineMap.get(reference).getSentenceTree().getChild(1).getText().equals(operator);
     }
 
-    @Override
+    /**
+     * Checks if the current line is a correct binary expression.
+     * @param operator the operator which separates the current binary expression.
+     * @return if the current line is a correct binary expression.
+     */
     public Boolean isCurrentCorrectBinaryExpression(String operator) {
-        if(lineMap.get(currentLine).getSentenceTree().getChildCount() != 3)
+        if(lineMap.get(currentLine).getSentenceTree().getChildCount() != 3) {
             return false;
+        }
         return lineMap.get(currentLine).getSentenceTree().getChild(1).getText().equals(operator);
     }
 
-    @Override
+    /**
+     * Checks if a specified line is part of a binary expression.
+     * @param childReference the line that is checked to be part of the binary expression.
+     * @param parentReference the expression that is checked to contain the child.
+     * @return if the child is part of the binary expression.
+     */
     public Boolean isPartOfBinaryExpression(Integer childReference, Integer parentReference) {
-            // Return false if parent reference is not a binary expression
-        if(lineMap.get(parentReference).getSentenceTree().getChildCount() != 3)
+        // Return false if parent reference is not a binary expression
+        if(lineMap.get(parentReference).getSentenceTree().getChildCount() != 3) {
             return false;
+        }
 
-            // Return true if child reference is part of the binary expression
+        // Return true if child reference is part of the binary expression
         return lineMap.get(childReference).getSentenceTree().getText()
                 .equals(lineMap.get(parentReference).getSentenceTree().getChild(0).getText()) ||
                 lineMap.get(childReference).getSentenceTree().getText()
                         .equals(lineMap.get(parentReference).getSentenceTree().getChild(2).getText());
     }
 
-    @Override
+    /**
+     * Checks if the current line is part of a binary expression.
+     * @param parentReference the expression that is checked to contain the current line.
+     * @return if the current line is part of the binary expression.
+     */
     public Boolean isCurrentPartOfBinaryExpression(Integer parentReference) {
-            // Return false if parent reference is not a binary expression
-        if(lineMap.get(parentReference).getSentenceTree().getChildCount() != 3)
+        // Return false if parent reference is not a binary expression
+        if(lineMap.get(parentReference).getSentenceTree().getChildCount() != 3) {
             return false;
+        }
 
-            // Return true if child reference is part of the binary expression
+        // Return true if child reference is part of the binary expression
         return lineMap.get(currentLine).getSentenceTree().getText()
                 .equals(lineMap.get(parentReference).getSentenceTree().getChild(0).getText()) ||
                 lineMap.get(currentLine).getSentenceTree().getText()
                         .equals(lineMap.get(parentReference).getSentenceTree().getChild(2).getText());
     }
 
-    @Override
+    /**
+     * Checks if the current line is part of a binary expression.
+     * @param childReference the line that is checked to be part of the binary expression.
+     * @return if the current line is part of the binary expression.
+     */
     public Boolean isPartOfCurrentBinaryExpression(Integer childReference) {
         // Return false if parent reference is not a binary expression
-        if(lineMap.get(currentLine).getSentenceTree().getChildCount() != 3)
+        if(lineMap.get(currentLine).getSentenceTree().getChildCount() != 3) {
             return false;
+        }
 
         // Return true if child reference is part of the binary expression
         return lineMap.get(childReference).getSentenceTree().getText()

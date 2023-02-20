@@ -1,4 +1,0 @@
-1. A premise
-2. B premise
-3. A Reit: 1
-4. B Reit: 2

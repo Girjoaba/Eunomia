@@ -3,6 +3,9 @@ package nl.rug.proof.fol.compiler.manager;
 import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+/**
+ * An object storing the information of one proof line.
+ */
 @Slf4j
 public class ProofLine {
     private Integer lineNr;
@@ -32,12 +35,20 @@ public class ProofLine {
         return sentenceTree;
     }
 
+    /**
+     * Sets a proof line as being incorrect.
+     * @param message the error message explaining why the line is incorrect.
+     */
     public void setWrongEvaluation(String message) {
         message = "Line " + lineNr + ". " + message;
         this.evaluation.setCorrect(false);
         this.evaluation.setMessage(message);
     }
 
+    /**
+     * Checks if the proof line is correct.
+     * @return true for a correct line, false for an incorrect line.
+     */
     public Boolean isCorrect() {
         log.info(evaluation.getMessage());
         return this.evaluation.isCorrect();

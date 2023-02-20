@@ -3,7 +3,9 @@ package nl.rug.proof.fol.compiler;
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarBaseVisitor;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
-import nl.rug.proof.fol.compiler.manager.Manager;
+import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
+import nl.rug.proof.fol.compiler.commonStrings.UsefulStrings;
+import nl.rug.proof.fol.compiler.manager.ProofManager;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 /**
@@ -12,9 +14,13 @@ import org.antlr.v4.runtime.tree.ParseTree;
 @Slf4j
 public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
-    private final Manager manager;
+    private final ProofManager manager;
 
-    public ProofEvaluatorVisitor(Manager manager) {
+    /**
+     * Initializes the visitor with a manager which acts as memory.
+     * @param manager has useful methods to store, retrieve and process information about the proof.
+     */
+    public ProofEvaluatorVisitor(ProofManager manager) {
         this.manager = manager;
     }
 
@@ -62,7 +68,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     /**
-     * The proof line is the building block of the proof. We extract the line number and begin visiting till we make sure
+     * The proof line is the building block of the proof.
+     * We extract the line number and begin visiting till we make sure
      * the proof line is valid.
      * @param ctx the parse tree
      */
@@ -110,12 +117,24 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         return null;
     }
 
+    /**
+     * Visits a contradiction line from a premise.
+     * This case is quite funny because it does not provide any value in an actual proof.
+     * From a contradiction you can infer anything. If this is your initial premise, then everything is valid.
+     * If it is the start of a subproof, then the subproof will not provide you any information.
+     * Regardless, it is allowed to exist.
+     * @param ctx the parse tree
+     */
     @Override
     public Object visitPremiseContradictionInfer(ProofGrammarParser.PremiseContradictionInferContext ctx) {
         visit(ctx.contradiction(0));
         return null;
     }
 
+    /**
+     * Visits a sentence line from a premise.
+     * @param ctx the parse tree
+     */
     @Override
     public Object visitPremiseSentenceInfer(ProofGrammarParser.PremiseSentenceInferContext ctx) {
         visit(ctx.sentence(0));
@@ -124,6 +143,10 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
     /**
      * --------------------------------------- SPECIAL SENTENCES ---------------------------------------------
+     *
+     * Visits a contradiction. It is separated from the other sentences because a contradiction can only be found
+     * by itself (as in just the atomic symbol).
+     * @param ctx the parse tree
      */
     @Override
     public Object visitContradiction(ProofGrammarParser.ContradictionContext ctx) {
@@ -182,7 +205,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         Integer reference = (Integer) visit(ctx.singleReference());
 
         if(!manager.isValidSingleReference(reference)) {
-            manager.setCurrentEvaluationWrong("Invalid reference.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
             return null;
         }
 
@@ -200,7 +223,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         Integer reference2 = (Integer) visit(ctx.singleReference(1));
 
         if(!manager.isValidSingleReference(reference1) || !manager.isValidSingleReference(reference2)) {
-            manager.setCurrentEvaluationWrong("Invalid reference.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
             return null;
         }
 
@@ -210,8 +233,10 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.getSentence(reference2).getChild(0).getText().equals("!") ||
-                !manager.getSentence(reference1).getText().equals(manager.getSentence(reference2).getChild(1).getText())) {
-            manager.setCurrentEvaluationWrong("Contradiction does not result from the premises. (maybe justification order is wrong ?)");
+                !manager.getSentence(reference1).getText()
+                    .equals(manager.getSentence(reference2).getChild(1).getText())) {
+            manager.setCurrentEvaluationWrong("Contradiction does not result from the premises." +
+                " (maybe justification order is wrong ?)");
             return null;
         }
         return null;
@@ -222,7 +247,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         Integer reference = (Integer) visit(ctx.singleReference());
         if(!manager.isValidSingleReference(reference)) {
-            manager.setCurrentEvaluationWrong("Invalid reference.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
             return null;
         }
 
@@ -239,17 +264,23 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         String range1 = (String) visit(ctx.rangeReference());
 
-        Integer rangeStart = Integer.parseInt(range1.split("-")[0]);
-        Integer rangeEnd = Integer.parseInt(range1.split("-")[1]);
+        Integer rangeStart = Integer.parseInt(range1.split(UsefulStrings.RANGE_SEPARATOR)[0]);
+        Integer rangeEnd = Integer.parseInt(range1.split(UsefulStrings.RANGE_SEPARATOR)[1]);
 
         if(!manager.isValidRangeReference(rangeStart, rangeEnd)) {
             manager.setCurrentEvaluationWrong("Invalid reference.");
             return null;
         }
 
+        if(manager.getCurrentSentence().getChildCount() != 2) {
+            manager.setCurrentEvaluationWrong("Inferred line is not a negation.");
+            return null;
+        }
+
         if(!manager.getSentence(rangeStart).getText().equals(manager.getCurrentSentence().getChild(1).getText())
                 || !manager.getCurrentSentence().getChild(0).getText().equals("!")) {
-            manager.setCurrentEvaluationWrong("The premise of the subproof is not negated as the result of the negation");
+            manager
+                .setCurrentEvaluationWrong("The premise of the subproof is not negated as the result of the negation");
             return null;
         }
 
@@ -300,7 +331,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         Integer reference2 = (Integer) visit(ctx.singleReference(1));
 
         if(!manager.isValidSingleReference(reference1) || !manager.isValidSingleReference(reference2)) {
-            manager.setCurrentEvaluationWrong("Invalid reference.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
             return null;
         }
 
@@ -309,7 +340,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isPartOfCurrentBinaryExpression(reference1) || !manager.isPartOfCurrentBinaryExpression(reference2)) {
+        if(!manager.isPartOfCurrentBinaryExpression(reference1)
+            || !manager.isPartOfCurrentBinaryExpression(reference2)) {
             manager.setCurrentEvaluationWrong("Inferred Conjunction not constructed from referred sentences.");
             return null;
         }
@@ -327,7 +359,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         Integer reference = (Integer) visit(ctx.singleReference());
 
         if(!manager.isValidSingleReference(reference)) {
-            manager.setCurrentEvaluationWrong("Invalid reference.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
             return null;
         }
 
@@ -347,13 +379,14 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * A disjunction elimination looks at the referred line and checks if the sentence is equal to any element of the
      * inferred sentence.
      * @param ctx the parse tree
+     * @return null
      */
     public Object visitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx) {
 
         Integer reference = (Integer) visit(ctx.singleReference());
 
         if(!manager.isValidSingleReference(reference)) {
-            manager.setCurrentEvaluationWrong("Invalid reference.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
             return null;
         }
 
@@ -382,32 +415,32 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         String range1 = (String) visit(ctx.rangeReference(0));
         String range2 = (String) visit(ctx.rangeReference(1));
 
-        Integer range1Start = Integer.parseInt(range1.split("-")[0]);
-        Integer range1End = Integer.parseInt(range1.split("-")[1]);
-        Integer range2Start = Integer.parseInt(range2.split("-")[0]);
-        Integer range2End = Integer.parseInt(range2.split("-")[1]);
+        Integer range1Start = Integer.parseInt(range1.split(UsefulStrings.RANGE_SEPARATOR)[0]);
+        Integer range1End = Integer.parseInt(range1.split(UsefulStrings.RANGE_SEPARATOR)[1]);
+        Integer range2Start = Integer.parseInt(range2.split(UsefulStrings.RANGE_SEPARATOR)[0]);
+        Integer range2End = Integer.parseInt(range2.split(UsefulStrings.RANGE_SEPARATOR)[1]);
 
-            // Check references
+        // Check references
         if(!manager.isValidSingleReference(reference) || !manager.isValidRangeReference(range1Start, range1End)
                 || !manager.isValidRangeReference(range2Start, range2End)) {
-            manager.setCurrentEvaluationWrong("Invalid reference.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
             return null;
         }
 
-            // Check if the referred line is a disjunction
+        // Check if the referred line is a disjunction
         if(!manager.isCorrectBinaryExpression(reference, "||")) {
             manager.setCurrentEvaluationWrong("Referred line: " + reference + " is not a disjunction.");
             return null;
         }
 
-            // Check premises of the 2 subproofs
+        // Check premises of the 2 subproofs
         if(!manager.isPartOfBinaryExpression(range1Start, reference)
                 || !manager.isPartOfBinaryExpression(range2Start, reference)) {
             manager.setCurrentEvaluationWrong("Wrong premises for disjunction elimination");
             return null;
         }
 
-            // Check conclusions of the 2 subproofs
+        // Check conclusions of the 2 subproofs
         if(!manager.getCurrentSentence().getText().equals(manager.getSentence(range1End).getText())
                 || !manager.getCurrentSentence().getText().equals(manager.getSentence(range2End).getText()) ) {
             manager.setCurrentEvaluationWrong("The conclusions of the subproofs do not match with the inferred line.");
@@ -433,6 +466,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @return the range as a map as a String which contains the interval, because no tuples.
      */
     @Override
-    public String visitRangeReference(ProofGrammarParser.RangeReferenceContext ctx) {return ctx.getText();
+    public String visitRangeReference(ProofGrammarParser.RangeReferenceContext ctx) {
+        return ctx.getText();
     }
 }

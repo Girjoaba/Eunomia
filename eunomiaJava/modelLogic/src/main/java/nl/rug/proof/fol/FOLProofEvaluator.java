@@ -12,8 +12,16 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.IOException;
 
+/**
+ * Acts as a main for testing.
+ */
 @Slf4j
 public class FOLProofEvaluator {
+    /**
+     * Will delete later.
+     * @param args command line arguments.
+     * @throws IOException if the file is not found.
+     */
     public static void main(String[] args) throws IOException {
         ANTLRInputStream input = new ANTLRInputStream(StringConverter.getStringFromTXT("input/input.txt"));
 

@@ -7,6 +7,8 @@ import nl.rug.proof.lineVerification.LineVerifier;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public class IdentityTest {
@@ -59,7 +61,8 @@ public class IdentityTest {
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
             compiler.compile("testProofs/identity/wrong/identity_intro_wrong.txt");
 
-            LineVerifier.verifyAllLinesCorrect(manager);
+            List<Integer> wrongLines = new ArrayList<>(List.of(1));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
 
         } catch (FileNotFoundException e) {
             log.error("File not found");
@@ -73,7 +76,8 @@ public class IdentityTest {
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
             compiler.compile("testProofs/identity/wrong/identity_elim_wrong.txt");
 
-            LineVerifier.verifyAllLinesCorrect(manager);
+            List<Integer> wrongLines = new ArrayList<>(List.of(3));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
 
         } catch (FileNotFoundException e) {
             log.error("File not found");
@@ -87,7 +91,8 @@ public class IdentityTest {
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
             compiler.compile("testProofs/identity/wrong/identity_elim_order_wrong.txt");
 
-            LineVerifier.verifyAllLinesCorrect(manager);
+            List<Integer> wrongLines = new ArrayList<>(List.of(3));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
 
         } catch (FileNotFoundException e) {
             log.error("File not found");
@@ -101,7 +106,8 @@ public class IdentityTest {
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
             compiler.compile("testProofs/identity/wrong/identity_elim_side_wrong.txt");
 
-            LineVerifier.verifyAllLinesCorrect(manager);
+            List<Integer> wrongLines = new ArrayList<>(List.of(3));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
 
         } catch (FileNotFoundException e) {
             log.error("File not found");
@@ -115,7 +121,8 @@ public class IdentityTest {
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
             compiler.compile("testProofs/identity/wrong/identity_elim_binary_wrong.txt");
 
-            LineVerifier.verifyAllLinesCorrect(manager);
+            List<Integer> wrongLines = new ArrayList<>(List.of(3));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
 
         } catch (FileNotFoundException e) {
             log.error("File not found");

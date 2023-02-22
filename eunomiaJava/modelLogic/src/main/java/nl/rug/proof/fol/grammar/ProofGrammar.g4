@@ -39,6 +39,7 @@ sentence
     | NEGATION sentence                           # Negation
     | sentence CONJUNCTION sentence               # Conjunction
     | sentence DISJUNCTION sentence               # Disjunction
+    | sentence IDENTITY sentence                  # Identity
     ;
 
 atom  : VARIABLE | CONSTANT ;
@@ -59,13 +60,15 @@ introduction
     | CONTRADICTION 'Intro: ' singleReference ',' singleReference         # ContradictionIntro
     | CONJUNCTION   'Intro: ' singleReference ',' singleReference         # ConjunctionIntro
     | DISJUNCTION   'Intro: ' singleReference                             # DisjunctionIntro
+    | IDENTITY      'Intro'                                               # IdentityIntro
     ;
 
 elimination
     : NEGATION      'Elim: ' singleReference                                            # NegationElim
     | CONTRADICTION 'Elim: ' singleReference                                            # ContradictionElim
-    | CONJUNCTION + 'Elim: ' singleReference                                            # ConjunctionElim
-    | DISJUNCTION + 'Elim: ' singleReference ',' rangeReference ',' rangeReference      # DisjunctionElim
+    | CONJUNCTION   'Elim: ' singleReference                                            # ConjunctionElim
+    | DISJUNCTION   'Elim: ' singleReference ',' rangeReference ',' rangeReference      # DisjunctionElim
+    | IDENTITY      'Elim: ' singleReference ',' singleReference                         # IdentityElim
     ;
 
 singleReference : INT ;
@@ -79,6 +82,7 @@ NEGATION    : '!' ;
 CONTRADICTION : '\\perp' ;
 CONJUNCTION : '&&' ;
 DISJUNCTION : '||' ;
+IDENTITY    : '==' ;
 
 ASSUME : 'assume' ;
 QED    : 'qed' ;

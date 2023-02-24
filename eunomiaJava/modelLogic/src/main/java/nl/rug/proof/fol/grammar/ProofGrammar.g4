@@ -35,11 +35,13 @@ inference
 
 contradiction : CONTRADICTION;
 sentence
-    : atom                                        # Atomic
-    | NEGATION sentence                           # Negation
-    | sentence CONJUNCTION sentence               # Conjunction
-    | sentence DISJUNCTION sentence               # Disjunction
-    | sentence IDENTITY sentence                  # Identity
+    : atom
+    | NEGATION sentence
+    | sentence CONJUNCTION sentence
+    | sentence DISJUNCTION sentence
+    | sentence IDENTITY sentence
+    | sentence IMPLICATION sentence
+    | sentence BICONDITIONAL sentence
     ;
 
 atom  : VARIABLE | CONSTANT ;
@@ -61,6 +63,8 @@ introduction
     | CONJUNCTION   'Intro: ' singleReference ',' singleReference         # ConjunctionIntro
     | DISJUNCTION   'Intro: ' singleReference                             # DisjunctionIntro
     | IDENTITY      'Intro'                                               # IdentityIntro
+    | IMPLICATION   'Intro: ' rangeReference                              # ImplicationIntro
+    | BICONDITIONAL 'Intro: ' rangeReference ',' rangeReference           # BiconditionalIntro
     ;
 
 elimination
@@ -68,7 +72,9 @@ elimination
     | CONTRADICTION 'Elim: ' singleReference                                            # ContradictionElim
     | CONJUNCTION   'Elim: ' singleReference                                            # ConjunctionElim
     | DISJUNCTION   'Elim: ' singleReference ',' rangeReference ',' rangeReference      # DisjunctionElim
-    | IDENTITY      'Elim: ' singleReference ',' singleReference                         # IdentityElim
+    | IDENTITY      'Elim: ' singleReference ',' singleReference                        # IdentityElim
+    | IMPLICATION   'Elim: ' singleReference ',' singleReference                        # ImplicationElim
+    | BICONDITIONAL 'Elim: ' singleReference ',' singleReference                        # BiconditionalElim
     ;
 
 singleReference : INT ;
@@ -83,6 +89,8 @@ CONTRADICTION : '\\perp' ;
 CONJUNCTION : '&&' ;
 DISJUNCTION : '||' ;
 IDENTITY    : '==' ;
+IMPLICATION : '->' ;
+BICONDITIONAL : '<->' ;
 
 ASSUME : 'assume' ;
 QED    : 'qed' ;

@@ -153,6 +153,17 @@ public class ProofManager {
                         .equals(lineMap.get(parentReference).getSentenceTree().getChild(2).getText());
     }
 
+    public Boolean isPartOfBinaryExpression(ParseTree childSentence, Integer parentReference) {
+        // Return false if parent reference is not a binary expression
+        if(lineMap.get(parentReference).getSentenceTree().getChildCount() != 3) {
+            return false;
+        }
+
+        // Return true if child reference is part of the binary expression
+        return childSentence.getText().equals(lineMap.get(parentReference).getSentenceTree().getChild(0).getText())
+            || childSentence.getText().equals(lineMap.get(parentReference).getSentenceTree().getChild(2).getText());
+    }
+
     /**
      * Checks if the current line is part of a binary expression.
      * @param parentReference the expression that is checked to contain the current line.
@@ -187,6 +198,17 @@ public class ProofManager {
                 .equals(lineMap.get(currentLine).getSentenceTree().getChild(0).getText()) ||
                 lineMap.get(childReference).getSentenceTree().getText()
                         .equals(lineMap.get(currentLine).getSentenceTree().getChild(2).getText());
+    }
+
+    public Boolean isPartOfCurrentBinaryExpression(ParseTree childTree) {
+        // Return false if parent reference is not a binary expression
+        if(lineMap.get(currentLine).getSentenceTree().getChildCount() != 3) {
+            return false;
+        }
+
+        // Return true if child reference is part of the binary expression
+        return childTree.getText().equals(lineMap.get(currentLine).getSentenceTree().getChild(0).getText())
+            || childTree.getText().equals(lineMap.get(currentLine).getSentenceTree().getChild(2).getText());
     }
 
 }

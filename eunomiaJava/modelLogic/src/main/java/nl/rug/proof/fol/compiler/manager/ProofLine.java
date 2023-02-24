@@ -8,11 +8,10 @@ import org.antlr.v4.runtime.tree.ParseTree;
  */
 @Slf4j
 public class ProofLine {
-    private Integer lineNr;
-    private Integer level;
-    private ParseTree sentenceTree;
-
-    private Evaluation evaluation;
+    private final Integer lineNr;
+    private final Integer level;
+    private final ParseTree sentenceTree;
+    private final Evaluation evaluation;
 
     /**
      * Generic constructor for a proof line.

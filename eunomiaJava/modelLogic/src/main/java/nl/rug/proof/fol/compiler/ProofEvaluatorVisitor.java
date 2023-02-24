@@ -97,7 +97,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         return Integer.parseInt(ctx.INT().getText());
     }
 
-    // TODO: Not implemented yet
     @Override
     public Object visitContradictionInfer(ProofGrammarParser.ContradictionInferContext ctx) {
         visit(ctx.contradiction(0));
@@ -159,37 +158,10 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     @Override
-    public Object visitAtomic(ProofGrammarParser.AtomicContext ctx) {
+    public Object visitSentence(ProofGrammarParser.SentenceContext ctx) {
         manager.addProofLine(ctx);
         return null;
     }
-
-    @Override
-    public Object visitNegation(ProofGrammarParser.NegationContext ctx) {
-        manager.addProofLine(ctx);
-        return null;
-    }
-
-    /**
-     * A conjunction, we store the main connective for easier access and the sentence as a ParseTree.
-     * @param ctx the parse tree
-     */
-    @Override
-    public Object visitConjunction(ProofGrammarParser.ConjunctionContext ctx) {
-        manager.addProofLine(ctx);
-        return null;
-    }
-
-    /**
-     * A disjunction, we store the main connective for easier access and the sentence as a ParseTree.
-     * @param ctx the parse tree
-     */
-    @Override
-    public Object visitDisjunction(ProofGrammarParser.DisjunctionContext ctx) {
-        manager.addProofLine(ctx);
-        return null;
-    }
-
 
     /*
      * -------------------------------------- JUSTIFICATION STUFF ---------------------------------------------
@@ -445,6 +417,86 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
                 || !manager.getCurrentSentence().getText().equals(manager.getSentence(range2End).getText()) ) {
             manager.setCurrentEvaluationWrong("The conclusions of the subproofs do not match with the inferred line.");
         }
+        return null;
+    }
+
+    @Override
+    public Object visitIdentityIntro(ProofGrammarParser.IdentityIntroContext ctx) {
+
+        if(!manager.isCurrentCorrectBinaryExpression("==")) {
+            manager.setCurrentEvaluationWrong("Inferred sentence is not an identity.");
+            return null;
+        }
+
+        if(!manager.getCurrentSentence().getChild(0).getText()
+            .equals(manager.getCurrentSentence().getChild(2).getText())) {
+            manager.setCurrentEvaluationWrong("The left and right side of the identity are not equal.");
+            return null;
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitIdentityElim(ProofGrammarParser.IdentityElimContext ctx) {
+
+        Integer reference1 = (Integer) visit(ctx.singleReference(0));
+        Integer reference2 = (Integer) visit(ctx.singleReference(1));
+
+        if(!manager.isValidSingleReference(reference1) || !manager.isValidSingleReference(reference2)) {
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
+            return null;
+        }
+
+        // Get the replacement
+        if(!manager.isCorrectBinaryExpression(reference2, "==")) {
+            manager.setCurrentEvaluationWrong("Referred line: " + reference2 + " is not an identity.");
+            return null;
+        }
+
+        ParseTree replaced = manager.getSentence(reference2).getChild(0);
+        ParseTree replacer = manager.getSentence(reference2).getChild(2);
+
+        // Check that the replaced is part of the referred line
+        if(!manager.isPartOfBinaryExpression(replaced, reference1) && !replaced.getText()
+            .equals(manager.getSentence(reference1).getText())) {
+            manager.setCurrentEvaluationWrong("The replaced element is not part of the referred line.");
+            return null;
+        }
+
+        // Count the replacer and the replaced and calculate if the element was indeed replaced
+        int countReplacedInitial = 0;
+        for(int i = 0; i < manager.getSentence(reference1).getChildCount(); i++) {
+            if(manager.getSentence(reference1).getChild(i).getText().equals(replaced.getText())) {
+                countReplacedInitial++;
+            }
+        }
+
+        int countReplacerInitial = 0;
+        for(int i = 0; i < manager.getSentence(reference1).getChildCount(); i++) {
+            if(manager.getSentence(reference1).getChild(i).getText().equals(replacer.getText())) {
+                countReplacerInitial++;
+            }
+        }
+
+        int countReplacedFinal = 0;
+        for(int i = 0; i < manager.getCurrentSentence().getChildCount(); i++) {
+            if(manager.getCurrentSentence().getChild(i).getText().equals(replaced.getText())) {
+                countReplacedFinal++;
+            }
+        }
+
+        int countReplacerFinal = 0;
+        for(int i = 0; i < manager.getCurrentSentence().getChildCount(); i++) {
+            if(manager.getCurrentSentence().getChild(i).getText().equals(replacer.getText())) {
+                countReplacerFinal++;
+            }
+        }
+
+        if(countReplacedInitial - countReplacedFinal != 1 || countReplacerFinal - countReplacerInitial != 1) {
+            manager.setCurrentEvaluationWrong("The replaced element is not replaced by the replacer element.");
+            return null;
+        }
+
         return null;
     }
 

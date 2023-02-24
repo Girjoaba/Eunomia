@@ -113,5 +113,40 @@ qed
 1. !!A premise
 2. A !Elim: 1
 
+    IDENTITY INTRO
+1. A == B ==Intro
+
+    IDENTITY INTRO (WRONG)
+1. A == B ==Intro
+
+    IDENTITY ELIM
+1. A == B premise
+2. A premise
+3. B ==Elim: 2, 1
+
+    IDENTITY ELIM (WRONG)
+1. A == B premise
+2. A premise
+3. C ==Elim: 2, 1
+
+    IDENTITY ELIM ORDER (WRONG)
+1. A == B premise
+2. A premise
+3. B ==Elim: 1, 2
+
+    IDENTITY ELIM SIDE (WRONG)
+1. B == A premise
+2. A premise
+3. B ==Elim: 1, 2
+
+    IDENTITY ELIM IN BINARY
+1. A == B premise
+2. B && C premise
+3. A && C ==Elim: 2, 1
+
+    IDENTITY ELIM IN BINARY (WRONG)
+1. A == B premise
+2. B && C premise
+3. B && A ==Elim: 2, 1
 
 

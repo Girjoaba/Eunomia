@@ -93,33 +93,11 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitContradiction(ProofGrammarParser.ContradictionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Disjunction}
-	 * labeled alternative in {@link ProofGrammarParser#sentence}.
+	 * Visit a parse tree produced by {@link ProofGrammarParser#sentence}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDisjunction(ProofGrammarParser.DisjunctionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Negation}
-	 * labeled alternative in {@link ProofGrammarParser#sentence}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNegation(ProofGrammarParser.NegationContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Conjunction}
-	 * labeled alternative in {@link ProofGrammarParser#sentence}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitConjunction(ProofGrammarParser.ConjunctionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Atomic}
-	 * labeled alternative in {@link ProofGrammarParser#sentence}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAtomic(ProofGrammarParser.AtomicContext ctx);
+	T visitSentence(ProofGrammarParser.SentenceContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#atom}.
 	 * @param ctx the parse tree
@@ -182,6 +160,13 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code IdentityIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentityIntro(ProofGrammarParser.IdentityIntroContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code NegationElim}
 	 * labeled alternative in {@link ProofGrammarParser#elimination}.
 	 * @param ctx the parse tree
@@ -209,6 +194,13 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDisjunctionElim(ProofGrammarParser.DisjunctionElimContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IdentityElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentityElim(ProofGrammarParser.IdentityElimContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#singleReference}.
 	 * @param ctx the parse tree

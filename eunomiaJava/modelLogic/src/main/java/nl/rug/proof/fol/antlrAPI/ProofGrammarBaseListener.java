@@ -173,49 +173,13 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDisjunction(ProofGrammarParser.DisjunctionContext ctx) { }
+	@Override public void enterSentence(ProofGrammarParser.SentenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDisjunction(ProofGrammarParser.DisjunctionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNegation(ProofGrammarParser.NegationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNegation(ProofGrammarParser.NegationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterConjunction(ProofGrammarParser.ConjunctionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitConjunction(ProofGrammarParser.ConjunctionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAtomic(ProofGrammarParser.AtomicContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAtomic(ProofGrammarParser.AtomicContext ctx) { }
+	@Override public void exitSentence(ProofGrammarParser.SentenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -329,6 +293,18 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterIdentityIntro(ProofGrammarParser.IdentityIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIdentityIntro(ProofGrammarParser.IdentityIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterNegationElim(ProofGrammarParser.NegationElimContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -372,6 +348,18 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDisjunctionElim(ProofGrammarParser.DisjunctionElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIdentityElim(ProofGrammarParser.IdentityElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIdentityElim(ProofGrammarParser.IdentityElimContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -272,6 +272,30 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitIdentityIntro(ProofGrammarParser.IdentityIntroContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ImplicationIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void enterImplicationIntro(ProofGrammarParser.ImplicationIntroContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ImplicationIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void exitImplicationIntro(ProofGrammarParser.ImplicationIntroContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code BiconditionalIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void enterBiconditionalIntro(ProofGrammarParser.BiconditionalIntroContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code BiconditionalIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void exitBiconditionalIntro(ProofGrammarParser.BiconditionalIntroContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code NegationElim}
 	 * labeled alternative in {@link ProofGrammarParser#elimination}.
 	 * @param ctx the parse tree
@@ -331,6 +355,30 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIdentityElim(ProofGrammarParser.IdentityElimContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ImplicationElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void enterImplicationElim(ProofGrammarParser.ImplicationElimContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ImplicationElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void exitImplicationElim(ProofGrammarParser.ImplicationElimContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code BiconditionalElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void enterBiconditionalElim(ProofGrammarParser.BiconditionalElimContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code BiconditionalElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void exitBiconditionalElim(ProofGrammarParser.BiconditionalElimContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#singleReference}.
 	 * @param ctx the parse tree

@@ -305,6 +305,30 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterImplicationIntro(ProofGrammarParser.ImplicationIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitImplicationIntro(ProofGrammarParser.ImplicationIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBiconditionalIntro(ProofGrammarParser.BiconditionalIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBiconditionalIntro(ProofGrammarParser.BiconditionalIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterNegationElim(ProofGrammarParser.NegationElimContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -360,6 +384,30 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIdentityElim(ProofGrammarParser.IdentityElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterImplicationElim(ProofGrammarParser.ImplicationElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitImplicationElim(ProofGrammarParser.ImplicationElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBiconditionalElim(ProofGrammarParser.BiconditionalElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBiconditionalElim(ProofGrammarParser.BiconditionalElimContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

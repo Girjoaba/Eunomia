@@ -167,6 +167,20 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIdentityIntro(ProofGrammarParser.IdentityIntroContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ImplicationIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImplicationIntro(ProofGrammarParser.ImplicationIntroContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code BiconditionalIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBiconditionalIntro(ProofGrammarParser.BiconditionalIntroContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code NegationElim}
 	 * labeled alternative in {@link ProofGrammarParser#elimination}.
 	 * @param ctx the parse tree
@@ -201,6 +215,20 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIdentityElim(ProofGrammarParser.IdentityElimContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ImplicationElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImplicationElim(ProofGrammarParser.ImplicationElimContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code BiconditionalElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBiconditionalElim(ProofGrammarParser.BiconditionalElimContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#singleReference}.
 	 * @param ctx the parse tree

@@ -6,7 +6,12 @@ import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
 import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
 import nl.rug.proof.fol.compiler.commonStrings.UsefulStrings;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
+import org.antlr.v4.runtime.RuleContext;
+import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
+import java.util.Stack;
 
 /**
  * A visitor class responsible for compiling the proof and checking the validity of each proof line.
@@ -158,9 +163,36 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     @Override
-    public Object visitSentence(ProofGrammarParser.SentenceContext ctx) {
+    public Object visitNormalSentence(ProofGrammarParser.NormalSentenceContext ctx) {
+        // Remove parentheses hack
+        Stack<ParseTree> stack = new Stack<>();
+        for(int i = 0; i < ctx.getChildCount(); i++) {
+            if(visit(ctx.getChild(i)) instanceof ParseTree noParenChild) {
+                for(int j = ctx.getChildCount() - 1; j > i; j--) {
+                    stack.push(ctx.getChild(j));
+                    ctx.removeLastChild();
+                }
+                ctx.removeLastChild();
+                ctx.addChild((RuleContext) noParenChild);
+                while(!stack.isEmpty()) {
+                    if(stack.peek() instanceof TerminalNode) {
+                        ctx.addChild((TerminalNode) stack.pop());
+                    } else {
+                        ctx.addChild((RuleContext) stack.pop());
+                    }
+                }
+                visit(ctx);
+            }
+        }
+
         manager.addProofLine(ctx);
         return null;
+    }
+
+    @Override
+    public Object visitParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx) {
+        visit(ctx.sentence());
+        return ctx.sentence();
     }
 
     /*

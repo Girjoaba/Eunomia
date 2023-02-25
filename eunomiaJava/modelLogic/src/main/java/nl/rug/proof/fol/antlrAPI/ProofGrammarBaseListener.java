@@ -173,25 +173,25 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSentence(ProofGrammarParser.SentenceContext ctx) { }
+	@Override public void enterNormalSentence(ProofGrammarParser.NormalSentenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSentence(ProofGrammarParser.SentenceContext ctx) { }
+	@Override public void exitNormalSentence(ProofGrammarParser.NormalSentenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAtom(ProofGrammarParser.AtomContext ctx) { }
+	@Override public void enterParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAtom(ProofGrammarParser.AtomContext ctx) { }
+	@Override public void exitParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -432,6 +432,18 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRangeReference(ProofGrammarParser.RangeReferenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction(ProofGrammarParser.FunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction(ProofGrammarParser.FunctionContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

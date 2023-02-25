@@ -35,16 +35,16 @@ inference
 
 contradiction : CONTRADICTION;
 sentence
-    : atom
-    | NEGATION sentence
-    | sentence CONJUNCTION sentence
-    | sentence DISJUNCTION sentence
-    | sentence IDENTITY sentence
-    | sentence IMPLICATION sentence
-    | sentence BICONDITIONAL sentence
+    : ATOM                              # NormalSentence
+    | function                          # NormalSentence
+    | NEGATION sentence                 # NormalSentence
+    | '(' sentence ')'                  # ParenthesesSentence
+    | sentence CONJUNCTION sentence     # NormalSentence
+    | sentence DISJUNCTION sentence     # NormalSentence
+    | sentence IDENTITY sentence        # NormalSentence
+    | sentence IMPLICATION sentence     # NormalSentence
+    | sentence BICONDITIONAL sentence   # NormalSentence
     ;
-
-atom  : VARIABLE | CONSTANT ;
 
     /*
      *  ------------------------------------------------------------- Justifications Section
@@ -84,6 +84,11 @@ rangeReference  : INT '-' INT ;
      *  ------------------------------------------------------------------- Lexer Rules Section
      */
 
+VARIABLE : [u-z] ;
+CONSTANT : [a-t] ;
+ATOM     : [A-Z][a-zA-Z0-9]* ;
+function: ATOM '(' (VARIABLE | CONSTANT) ')' ;
+
 NEGATION    : '!' ;
 CONTRADICTION : '\\perp' ;
 CONJUNCTION : '&&' ;
@@ -95,8 +100,6 @@ BICONDITIONAL : '<->' ;
 ASSUME : 'assume' ;
 QED    : 'qed' ;
 
-VARIABLE : [a-z][a-zA-Z0-9_]* ;
-CONSTANT : [A-Z][a-zA-Z0-9_]* ;
 INT      : [1-9][0-9]* ;
 NEWLINE  : '\r'? '\n' ;
 WS       : [ \t]+ -> skip ;

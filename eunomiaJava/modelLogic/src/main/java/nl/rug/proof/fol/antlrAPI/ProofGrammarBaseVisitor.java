@@ -109,14 +109,14 @@ public class ProofGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSentence(ProofGrammarParser.SentenceContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNormalSentence(ProofGrammarParser.NormalSentenceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAtom(ProofGrammarParser.AtomContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -257,4 +257,11 @@ public class ProofGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitRangeReference(ProofGrammarParser.RangeReferenceContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFunction(ProofGrammarParser.FunctionContext ctx) { return visitChildren(ctx); }
 }

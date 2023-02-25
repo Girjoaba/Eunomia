@@ -146,25 +146,29 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitContradiction(ProofGrammarParser.ContradictionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProofGrammarParser#sentence}.
+	 * Enter a parse tree produced by the {@code NormalSentence}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
 	 * @param ctx the parse tree
 	 */
-	void enterSentence(ProofGrammarParser.SentenceContext ctx);
+	void enterNormalSentence(ProofGrammarParser.NormalSentenceContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProofGrammarParser#sentence}.
+	 * Exit a parse tree produced by the {@code NormalSentence}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
 	 * @param ctx the parse tree
 	 */
-	void exitSentence(ProofGrammarParser.SentenceContext ctx);
+	void exitNormalSentence(ProofGrammarParser.NormalSentenceContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProofGrammarParser#atom}.
+	 * Enter a parse tree produced by the {@code ParenthesesSentence}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtom(ProofGrammarParser.AtomContext ctx);
+	void enterParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProofGrammarParser#atom}.
+	 * Exit a parse tree produced by the {@code ParenthesesSentence}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtom(ProofGrammarParser.AtomContext ctx);
+	void exitParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ReitJust}
 	 * labeled alternative in {@link ProofGrammarParser#justification}.
@@ -399,4 +403,14 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRangeReference(ProofGrammarParser.RangeReferenceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction(ProofGrammarParser.FunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction(ProofGrammarParser.FunctionContext ctx);
 }

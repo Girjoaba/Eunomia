@@ -93,17 +93,19 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitContradiction(ProofGrammarParser.ContradictionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ProofGrammarParser#sentence}.
+	 * Visit a parse tree produced by the {@code NormalSentence}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSentence(ProofGrammarParser.SentenceContext ctx);
+	T visitNormalSentence(ProofGrammarParser.NormalSentenceContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ProofGrammarParser#atom}.
+	 * Visit a parse tree produced by the {@code ParenthesesSentence}
+	 * labeled alternative in {@link ProofGrammarParser#sentence}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtom(ProofGrammarParser.AtomContext ctx);
+	T visitParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ReitJust}
 	 * labeled alternative in {@link ProofGrammarParser#justification}.
@@ -241,4 +243,10 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRangeReference(ProofGrammarParser.RangeReferenceContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProofGrammarParser#function}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunction(ProofGrammarParser.FunctionContext ctx);
 }

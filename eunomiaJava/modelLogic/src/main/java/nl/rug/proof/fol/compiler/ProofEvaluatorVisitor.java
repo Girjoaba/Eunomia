@@ -234,10 +234,10 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitNegationIntro(ProofGrammarParser.NegationIntroContext ctx) {
 
-        String range1 = (String) visit(ctx.rangeReference());
+        String range = (String) visit(ctx.rangeReference());
 
-        Integer rangeStart = Integer.parseInt(range1.split(UsefulStrings.RANGE_SEPARATOR)[0]);
-        Integer rangeEnd = Integer.parseInt(range1.split(UsefulStrings.RANGE_SEPARATOR)[1]);
+        Integer rangeStart = UsefulStrings.getRangeStart(range);
+        Integer rangeEnd = UsefulStrings.getRangeEnd(range);
 
         if(!manager.isValidRangeReference(rangeStart, rangeEnd)) {
             manager.setCurrentEvaluationWrong("Invalid reference.");
@@ -387,10 +387,10 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         String range1 = (String) visit(ctx.rangeReference(0));
         String range2 = (String) visit(ctx.rangeReference(1));
 
-        Integer range1Start = Integer.parseInt(range1.split(UsefulStrings.RANGE_SEPARATOR)[0]);
-        Integer range1End = Integer.parseInt(range1.split(UsefulStrings.RANGE_SEPARATOR)[1]);
-        Integer range2Start = Integer.parseInt(range2.split(UsefulStrings.RANGE_SEPARATOR)[0]);
-        Integer range2End = Integer.parseInt(range2.split(UsefulStrings.RANGE_SEPARATOR)[1]);
+        Integer range1Start = UsefulStrings.getRangeStart(range1);
+        Integer range1End = UsefulStrings.getRangeEnd(range1);
+        Integer range2Start = UsefulStrings.getRangeStart(range2);
+        Integer range2End = UsefulStrings.getRangeEnd(range2);
 
         // Check references
         if(!manager.isValidSingleReference(reference) || !manager.isValidRangeReference(range1Start, range1End)
@@ -438,7 +438,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
     @Override
     public Object visitIdentityElim(ProofGrammarParser.IdentityElimContext ctx) {
-
         Integer reference1 = (Integer) visit(ctx.singleReference(0));
         Integer reference2 = (Integer) visit(ctx.singleReference(1));
 
@@ -494,6 +493,145 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         if(countReplacedInitial - countReplacedFinal != 1 || countReplacerFinal - countReplacerInitial != 1) {
             manager.setCurrentEvaluationWrong("The replaced element is not replaced by the replacer element.");
+            return null;
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visitImplicationIntro(ProofGrammarParser .ImplicationIntroContext ctx) {
+        String range = (String) visit(ctx.rangeReference());
+        Integer rangeStart = UsefulStrings.getRangeStart(range);
+        Integer rangeEnd = UsefulStrings.getRangeEnd(range);
+
+        if(!manager.isValidRangeReference(rangeStart, rangeEnd)) {
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
+            return null;
+        }
+
+        if(!manager.isCurrentCorrectBinaryExpression("->")) {
+            manager.setCurrentEvaluationWrong("Inferred sentence is not an implication.");
+            return null;
+        }
+
+        if(!manager.getCurrentSentence().getChild(0).getText().equals(manager.getSentence(rangeStart).getText())) {
+            manager.setCurrentEvaluationWrong("The left side of the implication does not correspond " +
+                "to the premise of the subproof.");
+            return null;
+        }
+
+        if(!manager.getCurrentSentence().getChild(2).getText().equals(manager.getSentence(rangeEnd).getText())) {
+            manager.setCurrentEvaluationWrong("The right side of the implication does not correspond " +
+                "to the conclusion of the subproof.");
+            return null;
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visitImplicationElim(ProofGrammarParser .ImplicationElimContext ctx) {
+        Integer reference1 = (Integer) visit(ctx.singleReference(0));
+        Integer reference2 = (Integer) visit(ctx.singleReference(1));
+
+        if(!manager.isValidSingleReference(reference1) || !manager.isValidSingleReference(reference2)) {
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
+            return null;
+        }
+
+        if(!manager.isCorrectBinaryExpression(reference1, "->")) {
+            manager.setCurrentEvaluationWrong("Referred line: " + reference1 + " is not an implication.");
+            return null;
+        }
+
+        if(!manager.getSentence(reference2).getText().equals(manager.getSentence(reference1).getChild(0).getText())) {
+            manager.setCurrentEvaluationWrong("The second referred line does not correspond " +
+                "to the left side of the implication.");
+            return null;
+        }
+
+        if(!manager.getCurrentSentence().getText().equals(manager.getSentence(reference1).getChild(2).getText())) {
+            manager.setCurrentEvaluationWrong("The inferred line does not correspond " +
+                "to the right side of the implication.");
+            return null;
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visitBiconditionalIntro(ProofGrammarParser .BiconditionalIntroContext ctx) {
+        String range1 = (String) visit(ctx.rangeReference(0));
+        String range2 = (String) visit(ctx.rangeReference(1));
+        Integer range1Start = UsefulStrings.getRangeStart(range1);
+        Integer range1End = UsefulStrings.getRangeEnd(range1);
+        Integer range2Start = UsefulStrings.getRangeStart(range2);
+        Integer range2End = UsefulStrings.getRangeEnd(range2);
+
+        if(!manager.isValidRangeReference(range1Start, range1End)
+            || !manager.isValidRangeReference(range2Start, range2End)) {
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
+            return null;
+        }
+
+        if(!manager.isCurrentCorrectBinaryExpression("<->")) {
+            manager.setCurrentEvaluationWrong("Inferred sentence is not a biconditional.");
+            return null;
+        }
+
+        if(!manager.getSentence(range1Start).getText().equals(manager.getSentence(range2End).getText())) {
+            manager.setCurrentEvaluationWrong("The premise of the first subproof must be the same " +
+                "as the conclusion of the second subproof.");
+            return null;
+        }
+
+        if(!manager.getSentence(range1End).getText().equals(manager.getSentence(range2Start).getText())) {
+            manager.setCurrentEvaluationWrong("The conclusion of the first subproof must be the same " +
+                "as the premise of the second subproof.");
+            return null;
+        }
+
+        if(!manager.isPartOfCurrentBinaryExpression(range1Start)
+            || !manager.isPartOfCurrentBinaryExpression(range1End)) {
+            manager.setCurrentEvaluationWrong("The inferred line must be constructed from the premises " +
+                "and the conclusions of the subproofs.");
+            return null;
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visitBiconditionalElim(ProofGrammarParser .BiconditionalElimContext ctx) {
+        Integer reference1 = (Integer) visit(ctx.singleReference(0));
+        Integer reference2 = (Integer) visit(ctx.singleReference(1));
+
+        if(!manager.isValidSingleReference(reference1) || !manager.isValidSingleReference(reference2)) {
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
+            return null;
+        }
+
+        if(!manager.isCorrectBinaryExpression(reference1, "<->")) {
+            manager.setCurrentEvaluationWrong("Referred line: " + reference1 + " is not a biconditional.");
+            return null;
+        }
+
+        if(!manager.isPartOfBinaryExpression(reference2, reference1)) {
+            manager.setCurrentEvaluationWrong("The second referred line must be part of the biconditional.");
+            return null;
+        }
+
+        // Get the implied sentence depending on the referred line.
+        String impliedSentence;
+        if(manager.getSentence(reference2).getText().equals(manager.getSentence(reference1).getChild(0).getText())) {
+            impliedSentence = manager.getSentence(reference1).getChild(2).getText();
+        } else {
+            impliedSentence = manager.getSentence(reference1).getChild(0).getText();
+        }
+
+        if(!manager.getCurrentSentence().getText().equals(impliedSentence)) {
+            manager.setCurrentEvaluationWrong("The inferred line must be part of the biconditional.");
             return null;
         }
 

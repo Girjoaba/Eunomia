@@ -14,11 +14,11 @@ import java.util.List;
 public class BiconditionalTest {
 
     @Test
-    public void testSimpleDisjunctionIntroduction() {
+    public void testBiconditionalIntro() {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/disjunction/simple_disjunction_intro.txt");
+            compiler.compile("testProofs/binary/biconditional/correct/biconditional_intro.txt");
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -26,15 +26,109 @@ public class BiconditionalTest {
             log.error("File not found");
         }
     }
-
     @Test
-    public void testIdentityIntroWrong() {
+    public void testBiconditionalIntroReverse() {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/identity/wrong/identity_intro_wrong.txt");
+            compiler.compile("testProofs/binary/biconditional/correct/biconditional_intro_reverse.txt");
 
-            List<Integer> wrongLines = new ArrayList<>(List.of(1));
+            LineVerifier.verifyAllLinesCorrect(manager);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+    @Test
+    public void testBiconditionalElim() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile("testProofs/binary/biconditional/correct/biconditional_elim.txt");
+
+            LineVerifier.verifyAllLinesCorrect(manager);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+    @Test
+    public void testBiconditionalElimReverse() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile("testProofs/binary/biconditional/correct/biconditional_elim_reverse.txt");
+
+            LineVerifier.verifyAllLinesCorrect(manager);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+    @Test
+    public void testBiconditionalIntroWrongConclSub() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_concl_sub.txt");
+
+            List<Integer> wrongLines = new ArrayList<>(List.of(7));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+    @Test
+    public void testBiconditionalIntroWrongInfer() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_infer.txt");
+
+            List<Integer> wrongLines = new ArrayList<>(List.of(7));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+    @Test
+    public void testBiconditionalIntroWrongPremiseSub() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_premise_sub.txt");
+
+            List<Integer> wrongLines = new ArrayList<>(List.of(7));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+    @Test
+    public void testBiconditionalIntroWrongSameSub() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_same_sub.txt");
+
+            List<Integer> wrongLines = new ArrayList<>(List.of(7));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+    @Test
+    public void testBiconditionalElimWrongInfer() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile("testProofs/binary/biconditional/wrong/biconditional_elim_wrong_infer.txt");
+
+            List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);
 
         } catch (FileNotFoundException e) {

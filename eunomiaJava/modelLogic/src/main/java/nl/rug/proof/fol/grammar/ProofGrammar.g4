@@ -44,6 +44,8 @@ sentence
     | sentence IDENTITY sentence        # NormalSentence
     | sentence IMPLICATION sentence     # NormalSentence
     | sentence BICONDITIONAL sentence   # NormalSentence
+    | FORALL VARIABLE sentence          # NormalSentence
+    | EXISTS VARIABLE sentence          # NormalSentence
     ;
 
     /*
@@ -88,6 +90,8 @@ VARIABLE : [u-z] ;
 CONSTANT : [a-t] ;
 ATOM     : [A-Z][a-zA-Z0-9]* ;
 function: ATOM '(' (VARIABLE | CONSTANT) ')' ;
+forall : FORALL VARIABLE function ;
+exists : EXISTS VARIABLE function ;
 
 NEGATION    : '!' ;
 CONTRADICTION : '\\perp' ;
@@ -96,6 +100,8 @@ DISJUNCTION : '||' ;
 IDENTITY    : '==' ;
 IMPLICATION : '->' ;
 BICONDITIONAL : '<->' ;
+FORALL      : '\\forall' ;
+EXISTS      : '\\exists' ;
 
 ASSUME : 'assume' ;
 QED    : 'qed' ;

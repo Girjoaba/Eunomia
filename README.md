@@ -24,7 +24,7 @@ The project is structured by the Model-View-Controller (MVC) design pattern.
 
 
 ### Model
-The grammar representing the entirety of the proof is designed. Using ANTLR-v4, the parser for the corresponding grammar was generated. The input is fed into the parser, which creates a ParseTree.
+The grammar representing the entirety of the proof was designed. Using ANTLR-v4, the parser for the corresponding grammar was generated. The input is fed into the parser, which creates a ParseTree.
 
 Using the Visitor Design Pattern, the ParseTree is then traversed and the correctness of each individual line is decided and stored. In the case of identifying an incorrect line, a helpful error message is associated with the line.
 

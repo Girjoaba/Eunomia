@@ -78,6 +78,16 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitConclusionLine(ProofGrammarParser.ConclusionLineContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#constantIntroLine}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstantIntroLine(ProofGrammarParser.ConstantIntroLineContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#constantIntroLine}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstantIntroLine(ProofGrammarParser.ConstantIntroLineContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#proofLineNum}.
 	 * @param ctx the parse tree
 	 */
@@ -300,6 +310,30 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitBiconditionalIntro(ProofGrammarParser.BiconditionalIntroContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ForallIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void enterForallIntro(ProofGrammarParser.ForallIntroContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ForallIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void exitForallIntro(ProofGrammarParser.ForallIntroContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ExistsIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void enterExistsIntro(ProofGrammarParser.ExistsIntroContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ExistsIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 */
+	void exitExistsIntro(ProofGrammarParser.ExistsIntroContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code NegationElim}
 	 * labeled alternative in {@link ProofGrammarParser#elimination}.
 	 * @param ctx the parse tree
@@ -384,6 +418,30 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitBiconditionalElim(ProofGrammarParser.BiconditionalElimContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ForallElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void enterForallElim(ProofGrammarParser.ForallElimContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ForallElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void exitForallElim(ProofGrammarParser.ForallElimContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ExistsElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void enterExistsElim(ProofGrammarParser.ExistsElimContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ExistsElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 */
+	void exitExistsElim(ProofGrammarParser.ExistsElimContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#singleReference}.
 	 * @param ctx the parse tree
 	 */
@@ -403,6 +461,16 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRangeReference(ProofGrammarParser.RangeReferenceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#boxedConstant}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#boxedConstant}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#function}.
 	 * @param ctx the parse tree

@@ -670,6 +670,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         return null;
     }
 
+    @Override
+    public Object visitForallElim(ProofGrammarParser .ForallElimContext ctx) {
+        Integer reference = (Integer) visit(ctx.singleReference());
+
+        return null;
+    }
+
     /**
      * Returns the reference to a sentence that the current line is based on.
      * @param ctx the parse tree

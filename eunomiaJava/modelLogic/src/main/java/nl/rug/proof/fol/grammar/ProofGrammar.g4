@@ -4,7 +4,7 @@ import LexerProofRules;
 proof : premiseLine* (proofLine | subproof)* conclusionLine EOF ;   // The proof is the whole thing we evaluate
 subproof : assume (subproof | proofLine)* qed ;                     // It can contain different subproofs in order to prove different things
 
-assume : ASSUME NEWLINE premiseLine ;       // Each subproof starts with an assumption
+assume : ASSUME NEWLINE (premiseLine | constantIntroLine) ;       // Each subproof starts with an assumption
 qed    : conclusionLine QED NEWLINE ;                  // Each subproof ends with a QED (those we use in our larger proof)
 
     /* A proof line has the form:
@@ -15,6 +15,8 @@ qed    : conclusionLine QED NEWLINE ;                  // Each subproof ends wit
 premiseLine    : proofLineNum premiseInference NEWLINE ; // Premise lines are the lines that are assumed to be true
 proofLine      : proofLineNum inference NEWLINE ;
 conclusionLine : proofLineNum inference NEWLINE ;
+
+constantIntroLine : proofLineNum boxedConstant sentence? ' premise' NEWLINE ;
 
 proofLineNum : INT'.' ;             // The proof line number acts as a reference to our proof line
 
@@ -67,6 +69,8 @@ introduction
     | IDENTITY      'Intro'                                               # IdentityIntro
     | IMPLICATION   'Intro: ' rangeReference                              # ImplicationIntro
     | BICONDITIONAL 'Intro: ' rangeReference ',' rangeReference           # BiconditionalIntro
+    | FORALL        'Intro: ' rangeReference                              # ForallIntro
+    | EXISTS        'Intro: ' singleReference                             # ExistsIntro
     ;
 
 elimination
@@ -77,6 +81,8 @@ elimination
     | IDENTITY      'Elim: ' singleReference ',' singleReference                        # IdentityElim
     | IMPLICATION   'Elim: ' singleReference ',' singleReference                        # ImplicationElim
     | BICONDITIONAL 'Elim: ' singleReference ',' singleReference                        # BiconditionalElim
+    | FORALL        'Elim: ' singleReference                                            # ForallElim
+    | EXISTS        'Elim: ' singleReference ',' rangeReference                         # ExistsElim
     ;
 
 singleReference : INT ;
@@ -88,10 +94,10 @@ rangeReference  : INT '-' INT ;
 
 VARIABLE : [u-z] ;
 CONSTANT : [a-t] ;
+boxedConstant : '|' CONSTANT '|' ;
 ATOM     : [A-Z][a-zA-Z0-9]* ;
+
 function: ATOM '(' (VARIABLE | CONSTANT) ')' ;
-forall : FORALL VARIABLE function ;
-exists : EXISTS VARIABLE function ;
 
 NEGATION    : '!' ;
 CONTRADICTION : '\\perp' ;

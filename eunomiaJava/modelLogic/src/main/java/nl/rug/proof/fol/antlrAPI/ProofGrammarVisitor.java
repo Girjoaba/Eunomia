@@ -53,6 +53,12 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConclusionLine(ProofGrammarParser.ConclusionLineContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ProofGrammarParser#constantIntroLine}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConstantIntroLine(ProofGrammarParser.ConstantIntroLineContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#proofLineNum}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -183,6 +189,20 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBiconditionalIntro(ProofGrammarParser.BiconditionalIntroContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ForallIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForallIntro(ProofGrammarParser.ForallIntroContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ExistsIntro}
+	 * labeled alternative in {@link ProofGrammarParser#introduction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExistsIntro(ProofGrammarParser.ExistsIntroContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code NegationElim}
 	 * labeled alternative in {@link ProofGrammarParser#elimination}.
 	 * @param ctx the parse tree
@@ -232,6 +252,20 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBiconditionalElim(ProofGrammarParser.BiconditionalElimContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ForallElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForallElim(ProofGrammarParser.ForallElimContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ExistsElim}
+	 * labeled alternative in {@link ProofGrammarParser#elimination}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExistsElim(ProofGrammarParser.ExistsElimContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#singleReference}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -243,6 +277,12 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRangeReference(ProofGrammarParser.RangeReferenceContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProofGrammarParser#boxedConstant}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#function}.
 	 * @param ctx the parse tree

@@ -101,6 +101,18 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterConstantIntroLine(ProofGrammarParser.ConstantIntroLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstantIntroLine(ProofGrammarParser.ConstantIntroLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterProofLineNum(ProofGrammarParser.ProofLineNumContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -329,6 +341,30 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterForallIntro(ProofGrammarParser.ForallIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitForallIntro(ProofGrammarParser.ForallIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExistsIntro(ProofGrammarParser.ExistsIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExistsIntro(ProofGrammarParser.ExistsIntroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterNegationElim(ProofGrammarParser.NegationElimContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -413,6 +449,30 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterForallElim(ProofGrammarParser.ForallElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitForallElim(ProofGrammarParser.ForallElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExistsElim(ProofGrammarParser.ExistsElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExistsElim(ProofGrammarParser.ExistsElimContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSingleReference(ProofGrammarParser.SingleReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -432,6 +492,18 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRangeReference(ProofGrammarParser.RangeReferenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

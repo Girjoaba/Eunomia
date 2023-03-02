@@ -1,0 +1,2 @@
+1. (\forall x P(x)) && (\forall y Q(y)) premise
+2. \forall y Q(y) &&Elim: 1

@@ -38,4 +38,18 @@ public class ConjunctionTest {
             log.error("File not found");
         }
     }
+
+    @Test
+    public void testQuantifiersElim() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile("testProofs/binary/conjunction/correct/quantifiers_elim.txt");
+
+            LineVerifier.verifyAllLinesCorrect(manager);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
 }

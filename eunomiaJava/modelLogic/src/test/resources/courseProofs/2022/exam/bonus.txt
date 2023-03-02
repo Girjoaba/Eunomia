@@ -1,0 +1,31 @@
+1. !\forall x (P(x) || Q(x)) premise
+assume
+2. ! \exists x (!P(x) && !Q(x)) premise
+assume
+3. |a| premise
+assume
+4. !(P(a) || Q(a)) premise
+assume
+5. P(a) premise
+6. P(a) || Q(a) ||Intro: 5
+7. \perp \perpIntro: 6, 4
+qed
+8. !P(a) !Intro: 5-7
+assume
+9. Q(a) premise
+10. P(a) || Q(a) ||Intro: 9
+11. \perp \perpIntro: 10, 4
+qed
+12. !Q(a) !Intro: 9-11
+13. !P(a) && !Q(a) &&Intro: 8, 12
+14. \exists x (!P(x) && !Q(x)) \existsIntro: 13
+15. \perp \perpIntro: 14, 2
+qed
+16. !!(P(a) || Q(a)) !Intro: 4-15
+17. P(a) || Q(a) !Elim: 16
+qed
+18. \forall x (P(x) || Q(x)) \forallIntro: 3-17
+19. \perp \perpIntro: 18, 1
+qed
+20. !! \exists x (!P(x) && !Q(x)) !Intro: 2-19
+21. \exists x (!P(x) && !Q(x)) !Elim: 20

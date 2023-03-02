@@ -1,0 +1,2 @@
+1. \forall y (\forall x (P(x) && P(y))) && Q(x) premise
+2. \forall y (\forall x (P(x) && P(y))) && Q(x) Reit: 1

@@ -1,0 +1,3 @@
+1. B == A premise
+2. A premise
+3. B ==Elim: 1, 2

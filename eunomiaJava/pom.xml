@@ -55,7 +55,10 @@
                 <configuration>
                     <configLocation>../.checkstyle/config.xml</configLocation>
                     <suppressionsLocation>../.checkstyle/suppressions.xml</suppressionsLocation>
-                    <excludes>**/module-info.java</excludes>
+                    <excludes>
+                        **/module-info.java
+<!--                        ../nl.rug.proof.fol.antlrAPI.*-->
+                    </excludes>
                 </configuration>
                 <executions>
                     <!--
@@ -104,18 +107,6 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.antlr</groupId>
-                <artifactId>antlr4-runtime</artifactId>
-                <version>4.9.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>antlr4</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -180,7 +171,7 @@
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
-            <version>4.9.3</version>
+            <version>4.11.1</version>
         </dependency>
     </dependencies>
 

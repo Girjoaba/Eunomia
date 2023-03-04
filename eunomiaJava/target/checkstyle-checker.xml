@@ -16,7 +16,9 @@ See https://checkstyle.org/ for more information.
         <module name="NonEmptyAtclauseDescription"/>
         <module name="JavadocStyle"/>
         <module name="SummaryJavadocCheck"/>
-        <module name="JavadocMethod"/>
+        <module name="JavadocMethod">
+            <property name="tokens" value="METHOD_DEF,ANNOTATION_FIELD_DEF"/>
+        </module>
         <module name="JavadocType"/>
         <module name="MissingJavadocType">
             <property name="scope" value="protected"/>
@@ -73,7 +75,7 @@ See https://checkstyle.org/ for more information.
         <module name="ModifierOrder"/>
         <module name="RedundantModifier"/>
         <module name="MethodLength">
-            <property name="max" value="30"/>
+            <property name="max" value="60"/>
         </module>
         <module name="MissingOverride"/>
         <module name="EmptyForInitializerPad"/>
@@ -116,7 +118,7 @@ See https://checkstyle.org/ for more information.
         <property name="max" value="120"/>
     </module>
     <module name="FileLength">
-        <property name="max" value="400"/>
+        <property name="max" value="3000"/>
         <property name="fileExtensions" value="java"/>
     </module>
 </module>

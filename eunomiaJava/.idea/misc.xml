@@ -6,7 +6,17 @@
         <PerGrammarGenerationSettings>
           <option name="fileName" value="$PROJECT_DIR$/modelLogic/src/main/java/nl/rug/parsers/ExpressionGrammar.g4" />
           <option name="autoGen" value="true" />
-          <option name="outputDir" value="D:\CompSci\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\parsers" />
+          <option name="outputDir" value="D:\CompSci\Eunomia\eunomiaJava\modelLogic\src\main\java" />
+          <option name="libDir" value="" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="" />
+          <option name="language" value="Java" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/modelLogic/src/main/java/nl/rug/parsers/grammar/FitchGrammar.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="D:\CompSci\Eunomia\eunomiaJava\modelLogic\src\main\java" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
           <option name="pkg" value="" />
@@ -22,6 +32,11 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/antlr/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="corretto-17 (2)" project-jdk-type="JavaSDK">

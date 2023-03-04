@@ -1,0 +1,2 @@
+1. \perp premise
+2. C && D \perpElim: 1

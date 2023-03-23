@@ -1,16 +1,16 @@
-package nl.rug.frames;
+package nl.rug.frame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TextEditorFrame extends javax.swing.JFrame implements ActionListener {
+public class ProofEditorFrame extends javax.swing.JFrame implements ActionListener, ProofTextEditor {
 
     private final JButton verifyButton;
     private final JTextArea writeProofTextArea;
 
-    public TextEditorFrame() {
+    public ProofEditorFrame() {
         initFrame();
         verifyButton = new JButton();
         writeProofTextArea = new JTextArea();
@@ -25,6 +25,7 @@ public class TextEditorFrame extends javax.swing.JFrame implements ActionListene
     }
 
     private void initFrame() {
+        this.setTitle("Eunomia");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
         this.setSize(1400, 1000);
@@ -115,6 +116,16 @@ public class TextEditorFrame extends javax.swing.JFrame implements ActionListene
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+
+    }
+
+    @Override
+    public void getProofText() {
+
+    }
+
+    @Override
+    public void setLineError() {
 
     }
 }

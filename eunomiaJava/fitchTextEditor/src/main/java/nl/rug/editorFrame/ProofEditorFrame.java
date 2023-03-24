@@ -67,8 +67,9 @@ public class ProofEditorFrame extends javax.swing.JFrame implements ActionListen
     }
 
     @Override
-    public void addLineError(String error) {
+    public void addLineError(Integer line, String error) {
         errorPanel.addErrorLine(error);
+        writePanel.markWrongLine(line);
     }
 
     @Override

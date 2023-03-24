@@ -17,7 +17,10 @@ public class Main {
             String input = frame.getProofText();
             compiler.compile(input);
             frame.clearErrors();
-            manager.referenceSet().stream().filter(line -> !manager.isCorrect(line)).forEach((line) -> frame.addLineError(manager.getErrorMessage(line)));
+            manager.referenceSet().stream().filter(line -> !manager.isCorrect(line)).forEach((line) -> {
+                frame.addLineError(line ,manager.getErrorMessage(line));
+//                frame.get
+            });
         });
     }
 }

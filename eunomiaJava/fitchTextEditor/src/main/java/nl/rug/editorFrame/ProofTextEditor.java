@@ -6,5 +6,5 @@ public interface ProofTextEditor {
 
     public void clearErrors();
 
-    public void addLineError(String error);
+    public void addLineError(Integer line, String error);
 }

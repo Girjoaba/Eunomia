@@ -1,25 +1,28 @@
 package nl.rug.editorFrame.writePanel;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.*;
 
 public class WritePanel extends JPanel {
 
-        private final JTextArea proofTextArea;
+        private final ProofWritingPane proofTextPane;
         public WritePanel() {
             super();
-            proofTextArea = new ProofWritingArea();
+            proofTextPane = new ProofWritingPane();
             initProofWritePanel();
         }
 
         private void initProofWritePanel() {
             this.setLayout(new FlowLayout(FlowLayout.LEFT));
             this.setBackground(Color.lightGray);
-            this.add(proofTextArea);
+            this.add(proofTextPane);
+        }
+
+        public void markWrongLine(int index) {
+            proofTextPane.markWrongLine(index);
         }
 
         public String getProofText() {
-                return proofTextArea.getText();
+                return proofTextPane.getText();
             }
 }

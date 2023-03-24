@@ -12,6 +12,7 @@
     <modules>
         <module>modelLogic</module>
         <module>fitchTextEditor</module>
+        <module>controller</module>
     </modules>
     <name>eunomiaJava</name>
 

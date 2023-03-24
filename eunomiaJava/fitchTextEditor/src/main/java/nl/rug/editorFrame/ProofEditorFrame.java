@@ -52,6 +52,15 @@ public class ProofEditorFrame extends javax.swing.JFrame implements ActionListen
         this.setResizable(true);
     }
 
+    public void setVerifyAction(ActionListener actionListener) {
+        menuBar.getVerifyButton().addActionListener(actionListener);
+    }
+
+    @Override
+    public String getProofText() {
+        return writePanel.getProofText();
+    }
+
     @Override
     public void clearErrors() {
         errorPanel.clearErrorLines();

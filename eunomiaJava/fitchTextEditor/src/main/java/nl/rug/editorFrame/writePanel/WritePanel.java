@@ -19,7 +19,7 @@ public class WritePanel extends JPanel {
             this.add(proofTextArea);
         }
 
-        public String getProofTextArea() {
+        public String getProofText() {
                 return proofTextArea.getText();
             }
 }

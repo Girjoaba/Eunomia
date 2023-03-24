@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.proof.helper.LineVerifier;
+import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -17,7 +18,7 @@ public class IdentityTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/identity/correct/identity_intro.txt");
+            compiler.compile(new InputPath("testProofs/binary/identity/correct/identity_intro.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -31,7 +32,7 @@ public class IdentityTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/identity/correct/identity_elim.txt");
+            compiler.compile(new InputPath("testProofs/binary/identity/correct/identity_elim.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -45,7 +46,7 @@ public class IdentityTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/identity/correct/identity_elim_binary.txt");
+            compiler.compile(new InputPath("testProofs/binary/identity/correct/identity_elim_binary.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -59,7 +60,7 @@ public class IdentityTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/identity/wrong/identity_intro_wrong.txt");
+            compiler.compile(new InputPath("testProofs/binary/identity/wrong/identity_intro_wrong.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(1));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -74,7 +75,7 @@ public class IdentityTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/identity/wrong/identity_elim_wrong.txt");
+            compiler.compile(new InputPath("testProofs/binary/identity/wrong/identity_elim_wrong.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -89,7 +90,7 @@ public class IdentityTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/identity/wrong/identity_elim_order_wrong.txt");
+            compiler.compile(new InputPath("testProofs/binary/identity/wrong/identity_elim_order_wrong.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -104,7 +105,7 @@ public class IdentityTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/identity/wrong/identity_elim_side_wrong.txt");
+            compiler.compile(new InputPath("testProofs/binary/identity/wrong/identity_elim_side_wrong.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -119,7 +120,7 @@ public class IdentityTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/identity/wrong/identity_elim_binary_wrong.txt");
+            compiler.compile(new InputPath("testProofs/binary/identity/wrong/identity_elim_binary_wrong.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);

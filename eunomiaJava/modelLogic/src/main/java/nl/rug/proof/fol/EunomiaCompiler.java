@@ -5,6 +5,7 @@ import nl.rug.proof.fol.antlrAPI.ProofGrammarLexer;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
 import nl.rug.proof.fol.compiler.ProofEvaluatorVisitor;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
+import nl.rug.utility.InputPath;
 import nl.rug.utility.StringConverter;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -35,12 +36,27 @@ public class EunomiaCompiler {
      * First, takes the input as a string.
      * Second, the lexer creates a Parse Tree.
      * Last, the visitor evaluates the correctness of the proof by traversing the tree.
-     * @param path the path where the input is stored.
-     * @throws FileNotFoundException if the file is not found.
+     * @param input the path where the input is stored.
      */
-    public void compile(String path) throws FileNotFoundException {
+    public void compile(String input) {
         // Get input
-        ANTLRInputStream input = new ANTLRInputStream(StringConverter.getStringFromTXT(path));
+        ANTLRInputStream inputANTLR = new ANTLRInputStream(input);
+
+        // Syntax Parsing
+        ProofGrammarLexer lexer = new ProofGrammarLexer(inputANTLR);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        ProofGrammarParser parser = new ProofGrammarParser(tokens);
+
+        ParseTree tree = parser.proof();
+
+        // Compilation
+        ProofEvaluatorVisitor visitor = new ProofEvaluatorVisitor(manager);
+        visitor.visit(tree);
+    }
+
+    public void compile(InputPath path) throws FileNotFoundException {
+        // Get input
+        ANTLRInputStream input = new ANTLRInputStream(StringConverter.getStringFromTXT(path.getPath()));
 
         // Syntax Parsing
         ProofGrammarLexer lexer = new ProofGrammarLexer(input);

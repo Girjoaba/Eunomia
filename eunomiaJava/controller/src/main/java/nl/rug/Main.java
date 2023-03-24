@@ -4,6 +4,8 @@ import nl.rug.editorFrame.ProofEditorFrame;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 
+import java.io.FileNotFoundException;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -12,7 +14,9 @@ public class Main {
         EunomiaCompiler compiler = new EunomiaCompiler(manager);
 
         frame.setVerifyAction((e) -> {
-            System.out.println(frame.getProofText());
+            String input = frame.getProofText();
+            compiler.compile(input);
+
         });
     }
 }

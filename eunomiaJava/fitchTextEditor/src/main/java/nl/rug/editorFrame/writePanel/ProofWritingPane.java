@@ -6,11 +6,16 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProofWritingPane extends JTextPane {
 
+
+    private final List<Integer> wrongLines;
     public ProofWritingPane() {
         super();
+        wrongLines = new ArrayList<>();
         initProofWritingPane();
     }
 
@@ -43,6 +48,7 @@ public class ProofWritingPane extends JTextPane {
     }
 
     public void markWrongLine(int index) {
+        wrongLines.add(index);
         StyledDocument doc = this.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setForeground(center, Color.RED);
@@ -50,19 +56,38 @@ public class ProofWritingPane extends JTextPane {
         String[] lines = this.getText().split("\n");
         this.setText("");
         for (String line : lines) {
-            if (line.contains(index + ".")) {
-                try {
-                    doc.insertString(doc.getLength(), line + "\n", center);
-                } catch (BadLocationException e) {
-                    e.printStackTrace();
+            // If line contains a number from the list fo wrong lines, mark it red
+            Boolean inserted = false;
+            for (Integer wrongLine : wrongLines) {
+                if (line.contains(wrongLine + ".")) {
+                    try {
+                        doc.insertString(doc.getLength(), line + "\n", center);
+                        inserted = true;
+                    } catch (BadLocationException e) {
+                        e.printStackTrace();
+                    }
                 }
-            } else {
+            }
+            if (!inserted) {
                 try {
                     doc.insertString(doc.getLength(), line + "\n", null);
                 } catch (BadLocationException e) {
                     e.printStackTrace();
                 }
             }
+//            if (line.contains(index + ".")) {
+//                try {
+//                    doc.insertString(doc.getLength(), line + "\n", center);
+//                } catch (BadLocationException e) {
+//                    e.printStackTrace();
+//                }
+//            } else {
+//                try {
+//                    doc.insertString(doc.getLength(), line + "\n", null);
+//                } catch (BadLocationException e) {
+//                    e.printStackTrace();
+//                }
+//            }
         }
 
         this.setDocument(doc);
@@ -70,5 +95,10 @@ public class ProofWritingPane extends JTextPane {
 
     public void hello() {
         System.out.println("hello");
+    }
+
+    public void clearErrors() {
+        wrongLines.clear();
+//        this.setText(this.getText());
     }
 }

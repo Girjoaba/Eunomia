@@ -63,6 +63,7 @@ public class ProofEditorFrame extends javax.swing.JFrame implements ActionListen
 
     @Override
     public void clearErrors() {
+        writePanel.clearErrors();
         errorPanel.clearErrorLines();
     }
 

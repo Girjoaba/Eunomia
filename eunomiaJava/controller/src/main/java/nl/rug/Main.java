@@ -16,7 +16,8 @@ public class Main {
         frame.setVerifyAction((e) -> {
             String input = frame.getProofText();
             compiler.compile(input);
-
+            frame.clearErrors();
+            manager.referenceSet().stream().filter(line -> !manager.isCorrect(line)).forEach((line) -> frame.addLineError(manager.getErrorMessage(line)));
         });
     }
 }

@@ -52,4 +52,8 @@ public class ProofLine {
         log.info(evaluation.getMessage());
         return this.evaluation.isCorrect();
     }
+
+    public String getErrorMessage() {
+        return evaluation.getMessage();
+    }
 }

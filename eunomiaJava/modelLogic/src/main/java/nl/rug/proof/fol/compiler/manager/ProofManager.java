@@ -211,4 +211,7 @@ public class ProofManager {
             || childTree.getText().equals(lineMap.get(currentLine).getSentenceTree().getChild(2).getText());
     }
 
+    public String getErrorMessage(Integer i) {
+        return lineMap.get(i).getErrorMessage();
+    }
 }

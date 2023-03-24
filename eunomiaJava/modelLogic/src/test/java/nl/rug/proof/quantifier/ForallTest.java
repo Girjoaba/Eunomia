@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.proof.helper.LineVerifier;
+import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -17,7 +18,7 @@ public class ForallTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/quantifiers/forall/correct/forall_elim.txt");
+            compiler.compile(new InputPath("testProofs/quantifiers/forall/correct/forall_elim.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -31,7 +32,7 @@ public class ForallTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/quantifiers/forall/correct/forall_elim_composed.txt");
+            compiler.compile(new InputPath("testProofs/quantifiers/forall/correct/forall_elim_composed.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -45,7 +46,7 @@ public class ForallTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/quantifiers/forall/wrong/forall_elim_wrong_not_complete.txt");
+            compiler.compile(new InputPath("testProofs/quantifiers/forall/wrong/forall_elim_wrong_not_completed.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(2));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -60,7 +61,7 @@ public class ForallTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/quantifiers/forall/wrong/forall_elim_wrong_to_variable.txt");
+            compiler.compile(new InputPath("testProofs/quantifiers/forall/wrong/forall_elim_wrong_to_variable.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(2));
             LineVerifier.verifyWrongLines(manager, wrongLines);

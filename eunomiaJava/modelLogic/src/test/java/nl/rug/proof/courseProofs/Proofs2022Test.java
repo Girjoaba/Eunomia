@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.proof.helper.LineVerifier;
+import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -15,7 +16,7 @@ public class Proofs2022Test {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("courseProofs/2022/hw1/bonus.txt");
+            compiler.compile(new InputPath("testProofs/courseProofs/hw1_bonus.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 

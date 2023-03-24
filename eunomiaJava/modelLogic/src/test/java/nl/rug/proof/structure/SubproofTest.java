@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.proof.helper.LineVerifier;
+import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -17,7 +18,7 @@ public class SubproofTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/structure/subproof/subproof_basic.txt");
+            compiler.compile(new InputPath("testProofs/structure/subproof/subproof_basic.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(4));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -32,7 +33,7 @@ public class SubproofTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/structure/subproof/nested_subproof.txt");
+            compiler.compile(new InputPath("testProofs/structure/subproof/nested_subproof.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(7, 8));
             LineVerifier.verifyWrongLines(manager, wrongLines);

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.proof.helper.LineVerifier;
+import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -16,7 +17,7 @@ public class ConjunctionTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/conjunction/simple_conjunction_intro.txt");
+            compiler.compile(new InputPath("testProofs/binary/conjunction/simple_conjunction_intro.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -30,7 +31,7 @@ public class ConjunctionTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/conjunction/simple_conjunction_elim.txt");
+            compiler.compile(new InputPath("testProofs/binary/conjunction/simple_conjunction_elim.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -44,7 +45,7 @@ public class ConjunctionTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/conjunction/correct/quantifiers_elim.txt");
+            compiler.compile(new InputPath("testProofs/binary/conjunction/quantifiers_elim.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 

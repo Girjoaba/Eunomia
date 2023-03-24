@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.proof.helper.LineVerifier;
+import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -15,7 +16,7 @@ public class ParenthesesTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/structure/parentheses/correct/reit_no_paren.txt");
+            compiler.compile(new InputPath("testProofs/structure/parentheses/correct/reit_no_paren.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -28,7 +29,7 @@ public class ParenthesesTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/structure/parentheses/correct/reit_with_param.txt");
+            compiler.compile(new InputPath("testProofs/structure/parentheses/correct/reit_with_paren.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -42,7 +43,7 @@ public class ParenthesesTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/structure/parentheses/correct/binary_order.txt");
+            compiler.compile(new InputPath("testProofs/structure/parentheses/correct/binary_order.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -55,7 +56,7 @@ public class ParenthesesTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/structure/parentheses/correct/the_girji_abdou_test_proof.txt");
+            compiler.compile(new InputPath("testProofs/structure/parentheses/correct/binary_order_multiple_deep.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 

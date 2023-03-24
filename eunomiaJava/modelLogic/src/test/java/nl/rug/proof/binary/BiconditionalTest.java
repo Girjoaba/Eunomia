@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.proof.helper.LineVerifier;
+import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -18,7 +19,7 @@ public class BiconditionalTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/biconditional/correct/biconditional_intro.txt");
+            compiler.compile(new InputPath("testProofs/binary/biconditional/correct/biconditional_intro.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -31,7 +32,7 @@ public class BiconditionalTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/biconditional/correct/biconditional_intro_reverse.txt");
+            compiler.compile(new InputPath("testProofs/binary/biconditional/correct/biconditional_intro_reverse.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -44,7 +45,7 @@ public class BiconditionalTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/biconditional/correct/biconditional_elim.txt");
+            compiler.compile(new InputPath("testProofs/binary/biconditional/correct/biconditional_elim.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -57,7 +58,7 @@ public class BiconditionalTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/biconditional/correct/biconditional_elim_reverse.txt");
+            compiler.compile(new InputPath("testProofs/binary/biconditional/correct/biconditional_elim_reverse.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -70,7 +71,7 @@ public class BiconditionalTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_concl_sub.txt");
+            compiler.compile(new InputPath("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_concl_sub.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(7));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -84,7 +85,7 @@ public class BiconditionalTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_infer.txt");
+            compiler.compile(new InputPath("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_infer.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(7));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -98,7 +99,7 @@ public class BiconditionalTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_premise_sub.txt");
+            compiler.compile(new InputPath("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_premise_sub.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(7));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -112,7 +113,7 @@ public class BiconditionalTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_same_sub.txt");
+            compiler.compile(new InputPath("testProofs/binary/biconditional/wrong/biconditional_intro_wrong_same_sub.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(7));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -126,7 +127,7 @@ public class BiconditionalTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/biconditional/wrong/biconditional_elim_wrong_infer.txt");
+            compiler.compile(new InputPath("testProofs/binary/biconditional/wrong/biconditional_elim_wrong_infer.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.proof.helper.LineVerifier;
+import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -18,7 +19,7 @@ public class PremiseTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/structure/premise/single_initial_premise.txt");
+            compiler.compile(new InputPath("testProofs/structure/premise/single_initial_premise.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -32,7 +33,7 @@ public class PremiseTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/structure/premise/multiple_initial_premises.txt");
+            compiler.compile(new InputPath("testProofs/structure/premise/multiple_initial_premises.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -46,7 +47,7 @@ public class PremiseTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/structure/premise/single_subproof_premise.txt");
+            compiler.compile(new InputPath("testProofs/structure/premise/single_subproof_premise.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -60,7 +61,7 @@ public class PremiseTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/structure/premise/multiple_subproof_premises_wrong.txt");
+            compiler.compile(new InputPath("testProofs/structure/premise/multiple_subproof_premises_wrong.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -75,7 +76,7 @@ public class PremiseTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/structure/premise/no_initial_premise.txt");
+            compiler.compile(new InputPath("testProofs/structure/premise/no_initial_premise.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 

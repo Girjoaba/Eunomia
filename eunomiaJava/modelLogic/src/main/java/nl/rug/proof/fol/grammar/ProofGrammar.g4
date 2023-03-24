@@ -39,6 +39,8 @@ contradiction : CONTRADICTION;
 sentence
     : ATOM                              # NormalSentence
     | function                          # NormalSentence
+    | FORALL VARIABLE sentence          # NormalSentence
+    | EXISTS VARIABLE sentence          # NormalSentence
     | NEGATION sentence                 # NormalSentence
     | '(' sentence ')'                  # ParenthesesSentence
     | sentence CONJUNCTION sentence     # NormalSentence
@@ -46,8 +48,6 @@ sentence
     | sentence IDENTITY sentence        # NormalSentence
     | sentence IMPLICATION sentence     # NormalSentence
     | sentence BICONDITIONAL sentence   # NormalSentence
-    | FORALL VARIABLE sentence          # NormalSentence
-    | EXISTS VARIABLE sentence          # NormalSentence
     ;
 
     /*

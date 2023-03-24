@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Eunomia.iml" filepath="$PROJECT_DIR$/.idea/Eunomia.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eunomiaJava/eunomiaJava.iml" filepath="$PROJECT_DIR$/eunomiaJava/eunomiaJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eunomiaJava/modelLogic/modelLogic.iml" filepath="$PROJECT_DIR$/eunomiaJava/modelLogic/modelLogic.iml" />
+    </modules>
+  </component>
+</project>

@@ -9,7 +9,7 @@ assume
 qed
 7. !Q !Intro: 3-6
 8. P && !Q &&Intro: 1, 7
-9. (P && Q) || (P && !Q) ||Intro: 8
+9. (((P && Q) || ((P && !Q)))) ||Intro: 8
 10. \perp \perpIntro: 9, 2
 qed
 11. !!((P && Q) || (P && !Q)) !Intro: 2-10

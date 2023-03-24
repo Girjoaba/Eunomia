@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.proof.helper.LineVerifier;
+import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -18,7 +19,7 @@ public class ImplicationTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/implication/correct/implication_intro.txt");
+            compiler.compile(new InputPath("testProofs/binary/implication/correct/implication_intro.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -31,7 +32,7 @@ public class ImplicationTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/implication/correct/implication_elim.txt");
+            compiler.compile(new InputPath("testProofs/binary/implication/correct/implication_elim.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -44,7 +45,7 @@ public class ImplicationTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/implication/wrong/implication_intro_wrong_infer.txt");
+            compiler.compile(new InputPath("testProofs/binary/implication/wrong/implication_intro_wrong_infer.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(4));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -58,7 +59,7 @@ public class ImplicationTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/implication/wrong/implication_intro_wrong_infer_order.txt");
+            compiler.compile(new InputPath("testProofs/binary/implication/wrong/implication_intro_wrong_infer_order.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(4));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -72,7 +73,7 @@ public class ImplicationTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/implication/wrong/implication_elim_wrong_infer.txt");
+            compiler.compile(new InputPath("testProofs/binary/implication/wrong/implication_elim_wrong_infer.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -86,7 +87,7 @@ public class ImplicationTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/implication/wrong/implication_elim_wrong_infer_order.txt");
+            compiler.compile(new InputPath("testProofs/binary/implication/wrong/implication_elim_wrong_infer_order.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);
@@ -100,7 +101,7 @@ public class ImplicationTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile("testProofs/binary/implication/wrong/implication_elim_wrong_ref_order.txt");
+            compiler.compile(new InputPath("testProofs/binary/implication/wrong/implication_elim_wrong_ref_order.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);

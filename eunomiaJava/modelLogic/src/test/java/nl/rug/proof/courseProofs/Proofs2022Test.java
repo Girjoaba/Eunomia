@@ -16,7 +16,7 @@ public class Proofs2022Test {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/courseProofs/hw1_bonus.txt"));
+            compiler.compile(new InputPath("courseProofs/2022/hw1/bonus.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 

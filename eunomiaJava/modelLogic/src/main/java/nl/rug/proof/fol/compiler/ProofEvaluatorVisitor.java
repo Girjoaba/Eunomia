@@ -6,10 +6,7 @@ import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
 import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
 import nl.rug.proof.fol.compiler.commonStrings.UsefulStrings;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
-import org.antlr.v4.runtime.RuleContext;
-import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.Stack;
 
@@ -164,28 +161,39 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      */
     @Override
     public Object visitNormalSentence(ProofGrammarParser.NormalSentenceContext ctx) {
-        // Remove parentheses hack
-        Stack<ParseTree> stack = new Stack<>();
+
+        SentenceFormatter sentenceFormatter = new SentenceFormatter();
+        Stack<String> variableStack = new Stack<>();
+
+        boolean isBounded = true;
+
         for(int i = 0; i < ctx.getChildCount(); i++) {
-            if(visit(ctx.getChild(i)) instanceof ParseTree noParenChild) {
-                for(int j = ctx.getChildCount() - 1; j > i; j--) {
-                    stack.push(ctx.getChild(j));
-                    ctx.removeLastChild();
+            if((ctx.FORALL() != null || ctx.EXISTS() != null) && ctx.VARIABLE() != null) {
+                log.info("Variable " + ctx.VARIABLE().getText() + " is bounded.\n" + ctx.getText() + "\n");
+                variableStack.push(ctx.VARIABLE().getText());
+            } else if(ctx.function() != null && visit(ctx.function()) != null) {
+                if(!variableStack.contains((String) visit(ctx.function()))) {
+                    isBounded = false;
                 }
-                ctx.removeLastChild();
-                ctx.addChild((RuleContext) noParenChild);
-                while(!stack.isEmpty()) {
-                    if(stack.peek() instanceof TerminalNode) {
-                        ctx.addChild((TerminalNode) stack.pop());
-                    } else {
-                        ctx.addChild((RuleContext) stack.pop());
-                    }
-                }
+            }
+
+            if(visit(ctx.getChild(i)) instanceof ProofGrammarParser.NormalSentenceContext noParenChild) {
+                SentenceFormatter.removeParenthesis(ctx, noParenChild, i);
                 visit(ctx);
+            }
+
+            if((ctx.FORALL() != null || ctx.EXISTS() != null) && ctx.VARIABLE() != null) {
+                variableStack.pop();
             }
         }
 
         manager.addProofLine(ctx);
+
+        if(!isBounded) {
+            log.info("HERE !!!!");
+            manager.setCurrentEvaluationWrong("Variable is not bounded.");
+        }
+
         return null;
     }
 
@@ -673,7 +681,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitForallElim(ProofGrammarParser .ForallElimContext ctx) {
         Integer reference = (Integer) visit(ctx.singleReference());
-
         return null;
     }
 
@@ -698,4 +705,10 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     public String visitRangeReference(ProofGrammarParser.RangeReferenceContext ctx) {
         return ctx.getText();
     }
+
+    @Override
+    public String visitFunction(ProofGrammarParser.FunctionContext ctx) {
+        return ctx.VARIABLE().getText();
+    }
+
 }

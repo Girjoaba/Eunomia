@@ -29,6 +29,7 @@ public class ProofManager {
      * @param message the error message explaining why the line is incorrect.
      */
     public void setCurrentEvaluationWrong(String message) {
+        log.info("Line " + currentLine + " is incorrect: " + message);
         lineMap.get(currentLine).setWrongEvaluation(message);
     }
 
@@ -209,6 +210,14 @@ public class ProofManager {
         // Return true if child reference is part of the binary expression
         return childTree.getText().equals(lineMap.get(currentLine).getSentenceTree().getChild(0).getText())
             || childTree.getText().equals(lineMap.get(currentLine).getSentenceTree().getChild(2).getText());
+    }
+
+    public void printWrongLines() {
+        for (Map.Entry<Integer, ProofLine> entry : lineMap.entrySet()) {
+            if (!entry.getValue().isCorrect()) {
+                System.out.println(entry.getKey() + " " + entry.getValue().get);
+            }
+        }
     }
 
 }

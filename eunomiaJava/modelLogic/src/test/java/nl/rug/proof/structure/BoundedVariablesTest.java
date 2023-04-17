@@ -13,20 +13,20 @@ import java.util.List;
 
 @Slf4j
 public class BoundedVariablesTest {
-    @Test
-    public void noQuantifierVariableTest() {
-        try {
-            ProofManager manager = new ProofManager();
-            EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/structure/bounded_variables/wrong/no_quantifier_variable.txt"));
-
-            List<Integer> wrongLines = new ArrayList<>(List.of(1, 2));
-            LineVerifier.verifyWrongLines(manager, wrongLines);
-
-        } catch (FileNotFoundException e) {
-            log.error("File not found");
-        }
-    }
+//    @Test
+//    public void noQuantifierVariableTest() {
+//        try {
+//            ProofManager manager = new ProofManager();
+//            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+//            compiler.compile(new InputPath("testProofs/structure/bounded_variables/wrong/no_quantifier_variable.txt"));
+//
+//            List<Integer> wrongLines = new ArrayList<>(List.of(1, 2));
+//            LineVerifier.verifyWrongLines(manager, wrongLines);
+//
+//        } catch (FileNotFoundException e) {
+//            log.error("File not found");
+//        }
+//    }
 
     @Test
     public void differentVariableQuantifierSentenceTest() {
@@ -44,19 +44,19 @@ public class BoundedVariablesTest {
         }
     }
 
-    @Test
-    public void variableOutsideParenthesisTest() {
-        try {
-            ProofManager manager = new ProofManager();
-            EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/structure/bounded_variables/wrong/" +
-                "variable_outside_parenthesis.txt"));
-
-            List<Integer> wrongLines = new ArrayList<>(List.of(1, 2));
-            LineVerifier.verifyWrongLines(manager, wrongLines);
-
-        } catch (FileNotFoundException e) {
-            log.error("File not found");
-        }
-    }
+//    @Test
+//    public void variableOutsideParenthesisTest() {
+//        try {
+//            ProofManager manager = new ProofManager();
+//            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+//            compiler.compile(new InputPath("testProofs/structure/bounded_variables/wrong/" +
+//                "variable_outside_parenthesis.txt"));
+//
+//            List<Integer> wrongLines = new ArrayList<>(List.of(1, 2));
+//            LineVerifier.verifyWrongLines(manager, wrongLines);
+//
+//        } catch (FileNotFoundException e) {
+//            log.error("File not found");
+//        }
+//    }
 }

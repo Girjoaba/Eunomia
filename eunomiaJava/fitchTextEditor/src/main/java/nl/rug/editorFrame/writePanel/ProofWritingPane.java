@@ -75,19 +75,6 @@ public class ProofWritingPane extends JTextPane {
                     e.printStackTrace();
                 }
             }
-//            if (line.contains(index + ".")) {
-//                try {
-//                    doc.insertString(doc.getLength(), line + "\n", center);
-//                } catch (BadLocationException e) {
-//                    e.printStackTrace();
-//                }
-//            } else {
-//                try {
-//                    doc.insertString(doc.getLength(), line + "\n", null);
-//                } catch (BadLocationException e) {
-//                    e.printStackTrace();
-//                }
-//            }
         }
 
         this.setDocument(doc);
@@ -99,6 +86,15 @@ public class ProofWritingPane extends JTextPane {
 
     public void clearErrors() {
         wrongLines.clear();
-//        this.setText(this.getText());
+        StyledDocument doc = this.getStyledDocument();
+        String[] lines = this.getText().split("\n");
+        this.setText("");
+        for (String line : lines) {
+            try {
+                doc.insertString(doc.getLength(), line + "\n", null);
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

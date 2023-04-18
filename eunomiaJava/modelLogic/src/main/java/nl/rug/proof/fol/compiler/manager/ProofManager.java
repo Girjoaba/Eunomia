@@ -29,7 +29,6 @@ public class ProofManager {
      * @param message the error message explaining why the line is incorrect.
      */
     public void setCurrentEvaluationWrong(String message) {
-        log.info("Line " + currentLine + " is incorrect: " + message);
         lineMap.get(currentLine).setWrongEvaluation(message);
     }
 
@@ -52,7 +51,12 @@ public class ProofManager {
      * @param sentence the sentence stored as a tree.
      */
     public void addProofLine(ParseTree sentence) {
-        lineMap.put(currentLine, new ProofLine(currentLine, currentLevel, sentence));
+        if (!lineMap.containsKey(currentLine)) {
+            lineMap.put(currentLine, new ProofLine(currentLine, currentLevel, sentence));
+        } else {
+            lineMap.put(currentLine, new ProofLine(currentLine, currentLevel, sentence,
+                lineMap.get(currentLine).getEvaluation()));
+        }
     }
 
     /**
@@ -212,12 +216,12 @@ public class ProofManager {
             || childTree.getText().equals(lineMap.get(currentLine).getSentenceTree().getChild(2).getText());
     }
 
-    public void printWrongLines() {
-        for (Map.Entry<Integer, ProofLine> entry : lineMap.entrySet()) {
-            if (!entry.getValue().isCorrect()) {
-                System.out.println(entry.getKey() + " " + entry.getValue().get);
-            }
-        }
-    }
+//    public void printWrongLines() {
+//        for (Map.Entry<Integer, ProofLine> entry : lineMap.entrySet()) {
+//            if (!entry.getValue().isCorrect()) {
+//                System.out.println(entry.getKey() + " " + entry.getValue().get);
+//            }
+//        }
+//    }
 
 }

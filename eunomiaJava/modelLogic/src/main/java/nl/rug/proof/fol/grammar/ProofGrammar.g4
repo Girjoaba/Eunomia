@@ -16,13 +16,13 @@ premiseLine    : proofLineNum premiseInference NEWLINE ; // Premise lines are th
 proofLine      : proofLineNum inference NEWLINE ;
 conclusionLine : proofLineNum inference NEWLINE ;
 
-constantIntroLine : proofLineNum boxedConstant sentence? ' premise' NEWLINE ;
+constantIntroLine : proofLineNum boxedConstant sentence? premise NEWLINE ;
 
 proofLineNum : INT'.' ;             // The proof line number acts as a reference to our proof line
 
 premiseInference
-    : contradiction + ' premise'       # PremiseContradictionInfer
-    | sentence + ' premise'            # PremiseSentenceInfer
+    : contradiction + premise      # PremiseContradictionInfer
+    | sentence + premise        # PremiseSentenceInfer
     ;
 
 inference
@@ -53,6 +53,8 @@ sentence
     /*
      *  ------------------------------------------------------------- Justifications Section
      */
+premise : PREMISE ;
+
 justification
     : reiteration        # ReitJust
     | elimination        # ElimJust
@@ -109,6 +111,7 @@ BICONDITIONAL : '<->' ;
 FORALL      : '\\forall' ;
 EXISTS      : '\\exists' ;
 
+PREMISE : 'premise' ;
 ASSUME : 'assume' ;
 QED    : 'qed' ;
 

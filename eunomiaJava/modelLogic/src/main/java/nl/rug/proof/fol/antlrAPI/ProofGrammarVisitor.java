@@ -113,6 +113,12 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ProofGrammarParser#premise}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPremise(ProofGrammarParser.PremiseContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ReitJust}
 	 * labeled alternative in {@link ProofGrammarParser#justification}.
 	 * @param ctx the parse tree

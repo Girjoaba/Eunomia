@@ -26,6 +26,17 @@ public class ProofLine {
         this.evaluation = new Evaluation(true, "Line " + lineNr + " is applied correctly.");
     }
 
+    public ProofLine(Integer lineNr, Integer level, ParseTree sentenceTree, Evaluation evaluation) {
+        this.lineNr = lineNr;
+        this.level = level;
+        this.sentenceTree = sentenceTree;
+        this.evaluation = evaluation;
+    }
+
+    public Evaluation getEvaluation() {
+        return evaluation;
+    }
+
     public Integer getLevel() {
         return level;
     }

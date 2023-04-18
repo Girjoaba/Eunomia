@@ -180,6 +180,16 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#premise}.
+	 * @param ctx the parse tree
+	 */
+	void enterPremise(ProofGrammarParser.PremiseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#premise}.
+	 * @param ctx the parse tree
+	 */
+	void exitPremise(ProofGrammarParser.PremiseContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code ReitJust}
 	 * labeled alternative in {@link ProofGrammarParser#justification}.
 	 * @param ctx the parse tree

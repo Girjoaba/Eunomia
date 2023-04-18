@@ -18,6 +18,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
     private final ProofManager manager;
 
+
     /**
      * Initializes the visitor with a manager which acts as memory.
      * @param manager has useful methods to store, retrieve and process information about the proof.
@@ -169,7 +170,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         for(int i = 0; i < ctx.getChildCount(); i++) {
             if((ctx.FORALL() != null || ctx.EXISTS() != null) && ctx.VARIABLE() != null) {
-                log.info("Variable " + ctx.VARIABLE().getText() + " is bounded.\n" + ctx.getText() + "\n");
                 variableStack.push(ctx.VARIABLE().getText());
             } else if(ctx.function() != null && visit(ctx.function()) != null) {
                 if(!variableStack.contains((String) visit(ctx.function()))) {
@@ -190,8 +190,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         manager.addProofLine(ctx);
 
         if(!isBounded) {
-            log.info("HERE !!!!");
-            manager.setCurrentEvaluationWrong("Variable is not bounded.");
+            manager.setCurrentEvaluationWrong("Variable not bounded!");
         }
 
         return null;
@@ -206,6 +205,11 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     /*
      * -------------------------------------- JUSTIFICATION STUFF ---------------------------------------------
      */
+    @Override
+    public Object visitPremise(ProofGrammarParser.PremiseContext ctx) {
+//        manager.setCurrentEvaluationWrong("Variable not bounded!");
+        return null;
+    }
 
     /**
      * A reiteration justification, is just restating an antecedent sentence. We check if the sentences match.

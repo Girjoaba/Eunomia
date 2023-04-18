@@ -41,4 +41,17 @@ public class SentenceFormatter {
         }
     }
 
+    public static void traverseContextTree(ProofGrammarParser.NormalSentenceContext ctx) {
+        log.warn("!! Initial: " + ctx.getText() + "\n");
+
+        for(int i = 0; i < ctx.getChildCount(); i++) {
+            if(ctx.getChild(i) instanceof ProofGrammarParser.ParenthesesSentenceContext child) {
+                removeParenthesis(ctx, (ProofGrammarParser.NormalSentenceContext) child.getChild(1), i);
+                traverseContextTree(ctx);
+            } else if (ctx.getChild(i) instanceof ProofGrammarParser.NormalSentenceContext child) {
+                traverseContextTree(child);
+            }
+        }
+    }
+
 }

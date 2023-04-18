@@ -163,35 +163,18 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitNormalSentence(ProofGrammarParser.NormalSentenceContext ctx) {
 
-        SentenceFormatter sentenceFormatter = new SentenceFormatter();
-        Stack<String> variableStack = new Stack<>();
+//        for(int i = 0; i < ctx.getChildCount(); i++) {
+//
+//            if(visit(ctx.getChild(i)) instanceof ProofGrammarParser.NormalSentenceContext noParenChild) {
+//                SentenceFormatter.removeParenthesis(ctx, noParenChild, i);
+//                visit(ctx);
+//            }
+//
+//        }
 
-        boolean isBounded = true;
-
-        for(int i = 0; i < ctx.getChildCount(); i++) {
-            if((ctx.FORALL() != null || ctx.EXISTS() != null) && ctx.VARIABLE() != null) {
-                variableStack.push(ctx.VARIABLE().getText());
-            } else if(ctx.function() != null && visit(ctx.function()) != null) {
-                if(!variableStack.contains((String) visit(ctx.function()))) {
-                    isBounded = false;
-                }
-            }
-
-            if(visit(ctx.getChild(i)) instanceof ProofGrammarParser.NormalSentenceContext noParenChild) {
-                SentenceFormatter.removeParenthesis(ctx, noParenChild, i);
-                visit(ctx);
-            }
-
-            if((ctx.FORALL() != null || ctx.EXISTS() != null) && ctx.VARIABLE() != null) {
-                variableStack.pop();
-            }
-        }
+        SentenceFormatter.traverseContextTree(ctx);
 
         manager.addProofLine(ctx);
-
-        if(!isBounded) {
-            manager.setCurrentEvaluationWrong("Variable not bounded!");
-        }
 
         return null;
     }

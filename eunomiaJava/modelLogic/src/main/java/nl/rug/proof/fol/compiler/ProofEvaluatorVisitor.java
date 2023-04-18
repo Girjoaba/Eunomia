@@ -8,8 +8,6 @@ import nl.rug.proof.fol.compiler.commonStrings.UsefulStrings;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import java.util.Stack;
-
 /**
  * A visitor class responsible for compiling the proof and checking the validity of each proof line.
  */
@@ -163,16 +161,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitNormalSentence(ProofGrammarParser.NormalSentenceContext ctx) {
 
-//        for(int i = 0; i < ctx.getChildCount(); i++) {
-//
-//            if(visit(ctx.getChild(i)) instanceof ProofGrammarParser.NormalSentenceContext noParenChild) {
-//                SentenceFormatter.removeParenthesis(ctx, noParenChild, i);
-//                visit(ctx);
-//            }
-//
-//        }
-
-        SentenceFormatter.traverseContextTree(ctx);
+        SentenceTraveler.removeParentheses(ctx);
+        SentenceTraveler.checkBoundedVariables(ctx, manager);
 
         manager.addProofLine(ctx);
 

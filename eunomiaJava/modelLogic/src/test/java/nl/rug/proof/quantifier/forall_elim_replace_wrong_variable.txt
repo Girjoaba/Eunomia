@@ -1,0 +1,2 @@
+1. \forall x \forall y P(y) premise
+2. \forall y P(c) \forall Elim: 1

@@ -46,7 +46,7 @@ public class ForallTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/quantifiers/forall/wrong/forall_elim_wrong_not_completed.txt"));
+            compiler.compile(new InputPath("testProofs/quantifiers/forall/wrong/forall_elim_wrong_not_complete.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(2));
             LineVerifier.verifyWrongLines(manager, wrongLines);

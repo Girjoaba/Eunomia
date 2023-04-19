@@ -12,6 +12,10 @@ import java.util.Stack;
 @Slf4j
 public class SentenceTraveler {
 
+    private static boolean isVariable(String text) {
+        return text.matches("[u-z]");
+    }
+
     /**
      * An atomic sentence, we just store the atomic value.
      * @param ctx the parse tree
@@ -83,7 +87,7 @@ public class SentenceTraveler {
                 traverseSentence(child, manager, boundedVariables);
 
             } else if(ctx.getChild(i) instanceof ProofGrammarParser.FunctionContext child) {
-                if(!boundedVariables.contains(child.getChild(2).getText())) {
+                if(!boundedVariables.contains(child.getChild(2).getText()) && isVariable(child.getChild(2).getText())) {
                     manager.setCurrentEvaluationWrong("Variable " + child.getChild(2).getText() + " is not bounded");
                 }
             }

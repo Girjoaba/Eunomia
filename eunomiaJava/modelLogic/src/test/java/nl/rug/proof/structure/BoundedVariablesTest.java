@@ -48,8 +48,7 @@ public class BoundedVariablesTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/structure/bounded_variables/wrong/" +
-                "different_variable_quantifier_sentence.txt"));
+            compiler.compile(new InputPath("testProofs/structure/bounded_variables/wrong/different_variable_quantifier_sentence.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(1, 2));
             LineVerifier.verifyWrongLines(manager, wrongLines);

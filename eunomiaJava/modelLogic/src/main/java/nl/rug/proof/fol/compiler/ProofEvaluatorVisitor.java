@@ -161,8 +161,9 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitNormalSentence(ProofGrammarParser.NormalSentenceContext ctx) {
 
-        SentenceTraveler.removeParentheses(ctx);
-        SentenceTraveler.checkBoundedVariables(ctx, manager);
+        manager.addProofLine(ctx);
+
+        SentenceTraveler.cleanSentence(ctx, manager);
 
         manager.addProofLine(ctx);
 

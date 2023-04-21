@@ -46,7 +46,14 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitAssume(ProofGrammarParser.AssumeContext ctx) {
         manager.increaseLevel();
-        visit(ctx.premiseLine());
+        if(ctx.premiseLine() != null) {
+            visit(ctx.premiseLine());
+        }
+
+        if(ctx.constantIntroLine() != null) {
+            visit(ctx.constantIntroLine());
+        }
+
         return null;
     }
 
@@ -141,6 +148,24 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         return null;
     }
 
+    @Override
+    public Object visitConstantIntroLine(ProofGrammarParser.ConstantIntroLineContext ctx) {
+        manager.setCurrentLine((Integer) visit(ctx.proofLineNum()));
+
+        String constant = ctx.getChild(1).getChild(1).getText();
+
+        manager.addProofLine(ctx, constant);
+
+        manager.verifyConstantIntroduction(constant, ErrorMessage.CONSTANT_ALREADY_EXISTS);
+        manager.addConstantCurrentLevel(constant); // to scope
+
+        if(ctx.sentence() != null) {
+            visit(ctx.sentence());
+        }
+
+        return null;
+    }
+
     /**
      * --------------------------------------- SPECIAL SENTENCES ---------------------------------------------
      *
@@ -163,7 +188,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         manager.addProofLine(ctx);
 
-        SentenceTraveler.cleanSentence(ctx, manager);
+        SentenceTraveler.exploreSentence(ctx, manager);
 
         manager.addProofLine(ctx);
 
@@ -686,6 +711,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
     @Override
     public String visitFunction(ProofGrammarParser.FunctionContext ctx) {
+        log.info("Function: " + ctx.getText());
         return ctx.VARIABLE().getText();
     }
 

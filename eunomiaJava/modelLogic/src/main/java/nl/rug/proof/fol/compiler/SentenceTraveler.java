@@ -16,6 +16,10 @@ public class SentenceTraveler {
         return text.matches("[u-z]");
     }
 
+    private static boolean isConstant(String text) {
+        return text.matches("[a-t]");
+    }
+
     /**
      * An atomic sentence, we just store the atomic value.
      * @param ctx the parse tree
@@ -87,8 +91,12 @@ public class SentenceTraveler {
                 traverseSentence(child, manager, boundedVariables);
 
             } else if(ctx.getChild(i) instanceof ProofGrammarParser.FunctionContext child) {
-                if(!boundedVariables.contains(child.getChild(2).getText()) && isVariable(child.getChild(2).getText())) {
+                String identifier = child.getChild(2).getText();
+
+                if(isVariable(identifier) && !boundedVariables.contains(identifier)) {
                     manager.setCurrentEvaluationWrong("Variable " + child.getChild(2).getText() + " is not bounded");
+                } else if(isConstant(identifier)) {
+                    manager.addConstantCurrentLevel(identifier);
                 }
             }
         }
@@ -103,7 +111,7 @@ public class SentenceTraveler {
      * @param ctx the sentence as a tree.
      * @param manager the manager to set errors to.
      */
-    public static void cleanSentence(ProofGrammarParser.NormalSentenceContext ctx, ProofManager manager) {
+    public static void exploreSentence(ProofGrammarParser.NormalSentenceContext ctx, ProofManager manager) {
         Stack<String> boundedVariables = new Stack<>();
         traverseSentence(ctx, manager, boundedVariables);
     }

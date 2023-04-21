@@ -12,7 +12,7 @@ import java.util.*;
 @Slf4j
 public class ProofManager {
     private final Map<Integer, ProofLine> lineMap = new HashMap<>();
-
+    ConstantScope constantScope = new ConstantScope();
     private Integer currentLine = 0;
     private Integer currentLevel = 0;
 
@@ -44,6 +44,7 @@ public class ProofManager {
      */
     public void decreaseLevel() {
         currentLevel--;
+        constantScope.removeHigherLevelConstants(currentLevel);
     }
 
     /**
@@ -56,6 +57,15 @@ public class ProofManager {
         } else {
             lineMap.put(currentLine, new ProofLine(currentLine, currentLevel, sentence,
                 lineMap.get(currentLine).getEvaluation()));
+        }
+    }
+
+    public void addProofLine(ParseTree sentence, String constant) {
+        if (!lineMap.containsKey(currentLine)) {
+            lineMap.put(currentLine, new ProofLine(currentLine, currentLevel, sentence, constant));
+        } else {
+            lineMap.put(currentLine, new ProofLine(currentLine, currentLevel, sentence,
+                lineMap.get(currentLine).getEvaluation(), constant));
         }
     }
 
@@ -216,12 +226,25 @@ public class ProofManager {
             || childTree.getText().equals(lineMap.get(currentLine).getSentenceTree().getChild(2).getText());
     }
 
-//    public void printWrongLines() {
-//        for (Map.Entry<Integer, ProofLine> entry : lineMap.entrySet()) {
-//            if (!entry.getValue().isCorrect()) {
-//                System.out.println(entry.getKey() + " " + entry.getValue().get);
-//            }
-//        }
-//    }
+    public void addConstantCurrentLevel(String name) {
+        try {
+            constantScope.addConstant(name, currentLevel);
+        } catch (IllegalArgumentException e) {
+            setCurrentEvaluationWrong("Constant " + name + " typed wrong.");
+        }
+    }
 
+    public void addConstant(String name, Integer level) {
+        try {
+            constantScope.addConstant(name, level);
+        } catch (IllegalArgumentException e) {
+            setCurrentEvaluationWrong("Constant " + name + " typed wrong.");
+        }
+    }
+
+    public void verifyConstantIntroduction(String constant, String errorMessage) {
+        if(constantScope.contains(constant))  {
+            setCurrentEvaluationWrong(errorMessage);
+        }
+    }
 }

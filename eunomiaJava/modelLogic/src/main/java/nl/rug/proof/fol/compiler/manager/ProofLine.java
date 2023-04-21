@@ -12,6 +12,9 @@ public class ProofLine {
     private final Integer level;
     private final ParseTree sentenceTree;
     private final Evaluation evaluation;
+    private final String boxedConstant;
+
+    private Boolean introducedConstant = false;
 
     /**
      * Generic constructor for a proof line.
@@ -24,6 +27,7 @@ public class ProofLine {
         this.level = level;
         this.sentenceTree = sentenceTree;
         this.evaluation = new Evaluation(true, "Line " + lineNr + " is applied correctly.");
+        this.boxedConstant = null;
     }
 
     public ProofLine(Integer lineNr, Integer level, ParseTree sentenceTree, Evaluation evaluation) {
@@ -31,6 +35,25 @@ public class ProofLine {
         this.level = level;
         this.sentenceTree = sentenceTree;
         this.evaluation = evaluation;
+        this.boxedConstant = null;
+    }
+
+    public ProofLine(Integer lineNr, Integer level, ParseTree sentenceTree, String boxedConstant) {
+        this.lineNr = lineNr;
+        this.level = level;
+        this.sentenceTree = sentenceTree;
+        this.evaluation = new Evaluation(true, "Line " + lineNr + " is applied correctly.");
+        this.boxedConstant = boxedConstant;
+        introducedConstant = true;
+    }
+
+    public ProofLine(Integer lineNr, Integer level, ParseTree sentenceTree, Evaluation evaluation, String boxedConstant) {
+        this.lineNr = lineNr;
+        this.level = level;
+        this.sentenceTree = sentenceTree;
+        this.evaluation = evaluation;
+        this.boxedConstant = boxedConstant;
+        introducedConstant = true;
     }
 
     public Evaluation getEvaluation() {
@@ -43,6 +66,10 @@ public class ProofLine {
 
     public ParseTree getSentenceTree() {
         return sentenceTree;
+    }
+
+    public String getBoxedConstant() {
+        return boxedConstant;
     }
 
     /**

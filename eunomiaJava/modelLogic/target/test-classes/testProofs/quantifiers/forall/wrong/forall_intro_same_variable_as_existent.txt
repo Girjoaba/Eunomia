@@ -1,0 +1,6 @@
+1. \forall x \forall y (Q(y) && P(x)) premise
+assume
+2. |c| premise
+3. \forall y (Q(y) && P(c)) \forall Elim: 1
+qed
+4. \forall y \forall y (Q(y) && P(y)) \forall Intro: 2-3

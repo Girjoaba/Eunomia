@@ -1,0 +1,6 @@
+1. \exists x P(x) premise
+assume
+2. |c| Q(c) premise
+3. Q(c) Reit: 2
+qed
+4. Q(c) \exists Elim: 1, 2-3

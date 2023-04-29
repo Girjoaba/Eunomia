@@ -1,0 +1,2 @@
+1. P(c) && Q(b) premise
+2. \exists x (P(x) && Q(x)) \exists Intro: 1

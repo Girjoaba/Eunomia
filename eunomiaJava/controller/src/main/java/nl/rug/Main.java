@@ -19,7 +19,6 @@ public class Main {
             frame.clearErrors();
             manager.referenceSet().stream().filter(line -> !manager.isCorrect(line)).forEach((line) -> {
                 frame.addLineError(line ,manager.getErrorMessage(line));
-//                frame.get
             });
         });
     }

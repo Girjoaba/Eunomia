@@ -116,7 +116,4 @@ public class SentenceTraveler {
         traverseSentence(ctx, manager, boundedVariables);
     }
 
-//    public ProofGrammarParser.NormalSentenceContext getNormalSentenceContext(ProofGrammarParser.ParenthesesSentenceContext ctx) {
-//
-//    }
 }

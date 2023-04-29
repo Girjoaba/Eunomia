@@ -16,6 +16,10 @@ public class ProofManager {
     private Integer currentLine = 0;
     private Integer currentLevel = 0;
 
+    public Integer getCurrentLine() {
+        return currentLine;
+    }
+
     /**
      * Goes to the next line in the proof.
      * @param line the line number.
@@ -248,7 +252,51 @@ public class ProofManager {
         return lineMap.get(reference).getSentenceTree().getChild(0).getText().equals("\\forall");
     }
 
+    public boolean isEqualNoQuantifier(Integer quantifiedReference, Integer reference) {
+        String quantifiedSentence = lineMap.get(quantifiedReference).getSentenceTree().getChild(2).getText();
+        String sentence = lineMap.get(reference).getSentenceTree().getText();
+
+        quantifiedSentence = quantifiedSentence.replaceAll("\\(.*?\\)", "(Z)");
+        sentence = sentence.replaceAll("\\(.*?\\)", "(Z)");
+
+        return quantifiedSentence.equals(sentence);
+    }
+
+    public boolean isBoundedVariableCorrectlyReplaced(Integer initialReference, Integer analyzedReference, String variable) {
+        String initialSentence = lineMap.get(initialReference).getSentenceTree().getChild(2).getText();
+        String analyzedSentence = lineMap.get(analyzedReference).getSentenceTree().getText();
+
+        // Remember the indexes of all the replacements
+        List<Integer> replacementsIndexes = new ArrayList<>();
+
+        for(int i = 0; i < initialSentence.length() - 2; i++) {
+            if(initialSentence.charAt(i) == '(' && initialSentence.charAt(i + 1) == variable.charAt(0)
+                && initialSentence.charAt(i + 2) == ')') {
+                replacementsIndexes.add(i + 1);
+                initialSentence = initialSentence.substring(0, i + 1) + "Z" + initialSentence.substring(i + 2);
+            }
+        }
+
+        String variableString = "tuvwxyz";
+        char firstReplacement = analyzedSentence.charAt(replacementsIndexes.get(0));
+        for(int i = 0; i < analyzedSentence.length() - 1; i++) {
+            if(replacementsIndexes.contains(i)) {
+                if(variableString.contains(analyzedSentence.charAt(i) + "")) {
+                    return false;
+                }
+                if(firstReplacement != analyzedSentence.charAt(i)) {
+                    return false;
+                }
+
+                analyzedSentence = analyzedSentence.substring(0, i) + "Z" + analyzedSentence.substring(i + 1);
+            }
+        }
+
+        return initialSentence.equals(analyzedSentence);
+    }
+
     public boolean isExistentialQuantifier(Integer reference) {
         return lineMap.get(reference).getSentenceTree().getChild(0).getText().equals("\\exists");
     }
+
 }

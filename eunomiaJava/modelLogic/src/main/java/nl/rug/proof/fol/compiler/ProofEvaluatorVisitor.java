@@ -690,9 +690,18 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
+        if(!manager.isEqualNoQuantifier(reference, manager.getCurrentLine())) {
+            manager.setCurrentEvaluationWrong("The sentence with the quantifier is different from the sentence " +
+                "without the quantifier.");
+            return null;
+        }
 
+        if(!manager.isBoundedVariableCorrectlyReplaced(reference, manager.getCurrentLine(),
+            manager.getSentence(reference).getChild(1).getText())) {
+            manager.setCurrentEvaluationWrong("The bounded variable is replaced with something incorrect.");
+            return null;
+        }
 
-        log.error("ForallElim not implemented yet.");
         return null;
     }
 
@@ -702,7 +711,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         Integer rangeStart = UsefulStrings.getRangeStart(range);
         Integer rangeEnd = UsefulStrings.getRangeEnd(range);
 
-        log.error("ForallIntro not implemented yet.");
         return null;
     }
 

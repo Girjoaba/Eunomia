@@ -192,6 +192,10 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         manager.addProofLine(ctx);
 
+        if(!manager.isVariableBoundedTwice(manager.getCurrentLine())) {
+            manager.setCurrentEvaluationWrong(ErrorMessage.VARIABLE_BOUNDED_TWICE);
+        }
+
         return null;
     }
 
@@ -685,6 +689,11 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     public Object visitForallElim(ProofGrammarParser .ForallElimContext ctx) {
         Integer reference = (Integer) visit(ctx.singleReference());
 
+        if(!manager.isValidSingleReference(reference)) {
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
+            return null;
+        }
+
         if(!manager.isUniversalQuantifier(reference)) {
             manager.setCurrentEvaluationWrong("The referred line must not be a universal quantifier.");
             return null;
@@ -706,10 +715,32 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitForallIntro(ProofGrammarParser .ForallIntroContext ctx) {
+    public Object visitForallIntro(ProofGrammarParser.ForallIntroContext ctx) {
         String range = (String) visit(ctx.rangeReference());
         Integer rangeStart = UsefulStrings.getRangeStart(range);
         Integer rangeEnd = UsefulStrings.getRangeEnd(range);
+
+
+        if(!manager.isValidRangeReference(rangeStart, rangeEnd)) {
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
+            return null;
+        }
+
+        if(!manager.isUniversalQuantifier(manager.getCurrentLine())) {
+            manager.setCurrentEvaluationWrong("The inferred line must be a universal quantifier.");
+            return null;
+        }
+
+        if(!manager.isEqualNoQuantifier(manager.getCurrentLine(), rangeEnd)) {
+            manager.setCurrentEvaluationWrong("The sentence after the subproof does not follow from the conclusion " +
+                "of the subproof.");
+            return null;
+        }
+
+        if(!manager.isIntroducedVariableReplaced(rangeStart, rangeEnd, manager.getCurrentLine())) {
+            manager.setCurrentEvaluationWrong("The introduced constant is not replaced correctly.");
+            return null;
+        }
 
         return null;
     }
@@ -740,6 +771,11 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     public String visitFunction(ProofGrammarParser.FunctionContext ctx) {
         log.info("Function: " + ctx.getText());
         return ctx.VARIABLE().getText();
+    }
+
+    @Override
+    public String visitBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx) {
+        return ctx.CONSTANT().getText();
     }
 
 }

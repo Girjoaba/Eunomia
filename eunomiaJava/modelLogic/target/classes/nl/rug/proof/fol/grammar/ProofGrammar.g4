@@ -21,8 +21,8 @@ constantIntroLine : proofLineNum boxedConstant sentence? premise NEWLINE ;
 proofLineNum : INT'.' ;             // The proof line number acts as a reference to our proof line
 
 premiseInference
-    : contradiction + premise      # PremiseContradictionInfer
-    | sentence + premise        # PremiseSentenceInfer
+    : contradiction + premise       # PremiseContradictionInfer
+    | sentence + premise            # PremiseSentenceInfer
     ;
 
 inference

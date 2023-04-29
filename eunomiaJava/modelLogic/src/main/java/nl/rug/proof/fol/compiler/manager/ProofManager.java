@@ -291,8 +291,40 @@ public class ProofManager {
                 analyzedSentence = analyzedSentence.substring(0, i) + "Z" + analyzedSentence.substring(i + 1);
             }
         }
-
         return initialSentence.equals(analyzedSentence);
+    }
+
+    public boolean isVariableBoundedTwice(Integer reference) {
+        String sentence = lineMap.get(reference).getSentenceTree().getText();
+
+        List<String> boundedVariables = new ArrayList<>();
+        sentence = sentence.replaceAll("(\\forall | \\exists)", "@");
+        for(int i = 0; i < sentence.length() - 1; i++) {
+            if(sentence.charAt(i) == '@') {
+                if(boundedVariables.contains(sentence.charAt(i + 1) + "")) {
+                    return false;
+                }
+                boundedVariables.add(sentence.charAt(i + 1) + "");
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isIntroducedVariableReplaced(Integer introductionReference, Integer initialReference, Integer changedReference) {
+        String initialSentence = lineMap.get(initialReference).getSentenceTree().getText();
+        String introducedConstant = lineMap.get(introductionReference).getBoxedConstant();
+        String introducedVariable = lineMap.get(changedReference).getSentenceTree().getChild(1).getText();
+
+        for(int i = 0; i < initialSentence.length() - 2; i++) {
+            if(initialSentence.charAt(i) == '(' && initialSentence.charAt(i + 1) == introducedConstant.charAt(0)
+                && initialSentence.charAt(i + 2) == ')') {
+                initialSentence = initialSentence.substring(0, i + 1) + introducedVariable
+                    + initialSentence.substring(i + 2);
+            }
+        }
+
+        return lineMap.get(changedReference).getSentenceTree().getChild(2).getText().equals(initialSentence);
     }
 
     public boolean isExistentialQuantifier(Integer reference) {

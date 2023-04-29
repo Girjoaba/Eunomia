@@ -4112,39 +4112,58 @@
 <error line="297" column="9" severity="error" message="&apos;method def modifier&apos; has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
 <file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\proof\fol\compiler\commonStrings\ErrorMessage.java">
+<error line="11" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="12" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
 </file>
 <file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\proof\fol\compiler\commonStrings\UsefulStrings.java">
 <error line="17" column="12" severity="error" message="&apos;public&apos; modifier out of order with the JLS suggestions." source="com.puppycrawl.tools.checkstyle.checks.modifier.ModifierOrderCheck"/>
 <error line="26" column="12" severity="error" message="&apos;public&apos; modifier out of order with the JLS suggestions." source="com.puppycrawl.tools.checkstyle.checks.modifier.ModifierOrderCheck"/>
 </file>
-<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\proof\fol\compiler\manager\Evaluation.java">
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\proof\fol\compiler\manager\ConstantScope.java">
+<error line="6" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="10" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="14" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="18" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="22" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
 </file>
 <file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\proof\fol\compiler\manager\ProofLine.java">
-<error line="29" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="33" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="41" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="50" severity="error" message="Line is longer than 120 characters (found 122)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="50" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
 </file>
 <file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\proof\fol\compiler\manager\ProofManager.java">
-<error line="161" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
-<error line="208" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
-<error line="225" column="1" severity="error" message="Comment has incorrect indentation level 0, expected is 4, indentation should be the same level as line 208." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
+<error line="15" column="19" severity="error" message="Variable &apos;constantScope&apos; must be private and have accessor methods." source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
+<error line="67" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="175" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="222" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="233" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="241" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="251" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="255" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="265" severity="error" message="Line is longer than 120 characters (found 125)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="265" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="297" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="314" severity="error" message="Line is longer than 120 characters (found 132)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="314" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="330" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
 </file>
 <file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\proof\fol\compiler\ProofEvaluatorVisitor.java">
-<error line="11" column="8" severity="error" message="Unused import - java.util.Stack." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
-<error line="22" column="5" severity="error" message="&apos;/*&apos; has more than 1 empty lines before." source="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck"/>
-<error line="173" column="1" severity="error" message="Comment has incorrect indentation level 0, expected is 8, indentation should be the same level as line 175." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
-<error line="193" column="1" severity="error" message="Comment has incorrect indentation level 0, expected is 8, indentation should be the same level as line 194." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
-<error line="466" column="5" severity="error" message="Method visitIdentityElim length is 61 lines (max allowed is 60)." source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck"/>
+<error line="20" column="5" severity="error" message="&apos;/*&apos; has more than 1 empty lines before." source="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck"/>
+<error line="213" column="1" severity="error" message="Comment has incorrect indentation level 0, expected is 8, indentation should be the same level as line 214." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
+<error line="486" column="5" severity="error" message="Method visitIdentityElim length is 61 lines (max allowed is 60)." source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck"/>
+<error line="721" column="60" severity="error" message="There is more than 1 empty line after this line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck"/>
 </file>
-<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\proof\fol\compiler\SentenceFormatter.java">
-<error line="4" column="8" severity="error" message="Unused import - nl.rug.proof.fol.antlrAPI.ProofGrammarBaseVisitor." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
-<error line="12" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
-<error line="20" column="83" severity="error" message="Expected @param tag for &apos;childWithNoParenthesis&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
-<error line="21" column="46" severity="error" message="Expected @param tag for &apos;posChildInTree&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
-<error line="44" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\proof\fol\compiler\SentenceTraveler.java">
+<error line="10" column="8" severity="error" message="Unused import - java.util.ArrayList." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="11" column="8" severity="error" message="Unused import - java.util.List." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="14" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="30" column="86" severity="error" message="Expected @param tag for &apos;childWithNoParenthesis&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="31" column="49" severity="error" message="Expected @param tag for &apos;posChildInTree&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="60" severity="error" message="Line is longer than 120 characters (found 137)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
 </file>
 <file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\proof\fol\EunomiaCompiler.java">
 <error line="57" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
-</file>
-<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\proof\fol\FOLProofEvaluator.java">
 </file>
 <file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\modelLogic\src\main\java\nl\rug\utility\InputPath.java">
 <error line="3" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>

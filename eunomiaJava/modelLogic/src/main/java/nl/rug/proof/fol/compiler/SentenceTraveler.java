@@ -115,4 +115,8 @@ public class SentenceTraveler {
         Stack<String> boundedVariables = new Stack<>();
         traverseSentence(ctx, manager, boundedVariables);
     }
+
+//    public ProofGrammarParser.NormalSentenceContext getNormalSentenceContext(ProofGrammarParser.ParenthesesSentenceContext ctx) {
+//
+//    }
 }

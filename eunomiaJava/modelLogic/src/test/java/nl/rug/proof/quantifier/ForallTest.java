@@ -236,7 +236,6 @@ public class ForallTest {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
             compiler.compile(new InputPath("testProofs/quantifiers/forall/wrong/forall_intro_not_matching_constant.txt"));
-
             List<Integer> wrongLines = new ArrayList<>(List.of(4));
             LineVerifier.verifyWrongLines(manager, wrongLines);
 

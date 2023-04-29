@@ -684,6 +684,25 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitForallElim(ProofGrammarParser .ForallElimContext ctx) {
         Integer reference = (Integer) visit(ctx.singleReference());
+
+        if(!manager.isUniversalQuantifier(reference)) {
+            manager.setCurrentEvaluationWrong("The referred line must not be a universal quantifier.");
+            return null;
+        }
+
+
+
+        log.error("ForallElim not implemented yet.");
+        return null;
+    }
+
+    @Override
+    public Object visitForallIntro(ProofGrammarParser .ForallIntroContext ctx) {
+        String range = (String) visit(ctx.rangeReference());
+        Integer rangeStart = UsefulStrings.getRangeStart(range);
+        Integer rangeEnd = UsefulStrings.getRangeEnd(range);
+
+        log.error("ForallIntro not implemented yet.");
         return null;
     }
 

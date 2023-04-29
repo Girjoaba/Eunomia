@@ -234,17 +234,21 @@ public class ProofManager {
         }
     }
 
-    public void addConstant(String name, Integer level) {
-        try {
-            constantScope.addConstant(name, level);
-        } catch (IllegalArgumentException e) {
-            setCurrentEvaluationWrong("Constant " + name + " typed wrong.");
-        }
-    }
-
     public void verifyConstantIntroduction(String constant, String errorMessage) {
         if(constantScope.contains(constant))  {
             setCurrentEvaluationWrong(errorMessage);
         }
+    }
+
+    /* --------------------------------------------------------------------------------------|
+     * ------------------------------------- Quantifiers ------------------------------------|
+     * -------------------------------------------------------------------------------------*/
+
+    public boolean isUniversalQuantifier(Integer reference) {
+        return lineMap.get(reference).getSentenceTree().getChild(0).getText().equals("\\forall");
+    }
+
+    public boolean isExistentialQuantifier(Integer reference) {
+        return lineMap.get(reference).getSentenceTree().getChild(0).getText().equals("\\exists");
     }
 }

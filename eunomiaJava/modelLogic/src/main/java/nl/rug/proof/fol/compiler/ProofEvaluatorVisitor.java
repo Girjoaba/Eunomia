@@ -686,6 +686,37 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
+    public Object visitForallIntro(ProofGrammarParser.ForallIntroContext ctx) {
+        String range = (String) visit(ctx.rangeReference());
+        Integer rangeStart = UsefulStrings.getRangeStart(range);
+        Integer rangeEnd = UsefulStrings.getRangeEnd(range);
+
+
+        if(!manager.isValidRangeReference(rangeStart, rangeEnd)) {
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
+            return null;
+        }
+
+        if(!manager.isUniversalQuantifier(manager.getCurrentLine())) {
+            manager.setCurrentEvaluationWrong("The inferred line must be a universal quantifier.");
+            return null;
+        }
+
+        if(!manager.isEqualNoQuantifier(manager.getCurrentLine(), rangeEnd)) {
+            manager.setCurrentEvaluationWrong("The sentence after the subproof does not follow from the conclusion " +
+                    "of the subproof.");
+            return null;
+        }
+
+        if(!manager.isIntroducedVariableReplaced(rangeStart, rangeEnd, manager.getCurrentLine())) {
+            manager.setCurrentEvaluationWrong("The introduced constant is not replaced correctly.");
+            return null;
+        }
+
+        return null;
+    }
+
+    @Override
     public Object visitForallElim(ProofGrammarParser .ForallElimContext ctx) {
         Integer reference = (Integer) visit(ctx.singleReference());
 
@@ -715,32 +746,63 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitForallIntro(ProofGrammarParser.ForallIntroContext ctx) {
-        String range = (String) visit(ctx.rangeReference());
-        Integer rangeStart = UsefulStrings.getRangeStart(range);
-        Integer rangeEnd = UsefulStrings.getRangeEnd(range);
+    public Object visitExistsIntro(ProofGrammarParser .ExistsIntroContext ctx) {
 
+        Integer reference = (Integer) visit(ctx.singleReference());
 
-        if(!manager.isValidRangeReference(rangeStart, rangeEnd)) {
+        if(!manager.isValidSingleReference(reference)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
             return null;
         }
 
-        if(!manager.isUniversalQuantifier(manager.getCurrentLine())) {
-            manager.setCurrentEvaluationWrong("The inferred line must be a universal quantifier.");
+        if(!manager.isExistentialQuantifier(manager.getCurrentLine())) {
+            manager.setCurrentEvaluationWrong("The inferred line must be an existential quantifier.");
             return null;
         }
 
-        if(!manager.isEqualNoQuantifier(manager.getCurrentLine(), rangeEnd)) {
+        if(!manager.isOnlyOneConstantReplaced(reference, manager.getCurrentLine())) {
+            manager.setCurrentEvaluationWrong("More constants were replaced by existential introduction.");
+            return null;
+        }
+
+        if(!manager.isEqualNoQuantifier(manager.getCurrentLine(), reference)) {
+            manager.setCurrentEvaluationWrong("The existential sentence does not follow from the reference.");
+            return null;
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visitExistsElim(ProofGrammarParser.ExistsElimContext ctx) {
+        Integer reference = (Integer) visit(ctx.singleReference());
+        String range = (String) visit(ctx.rangeReference());
+        Integer rangeStart = UsefulStrings.getRangeStart(range);
+        Integer rangeEnd = UsefulStrings.getRangeEnd(range);
+
+        if(!manager.isValidSingleReference(reference) || !manager.isValidRangeReference(rangeStart, rangeEnd)) {
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
+            return null;
+        }
+
+        if(!manager.isExistentialQuantifier(reference)) {
+            manager.setCurrentEvaluationWrong("Must be an existential quantifier.");
+            return null;
+        }
+
+        if(!manager.isEqualNoQuantifier(reference, rangeStart)) {
             manager.setCurrentEvaluationWrong("The sentence after the subproof does not follow from the conclusion " +
-                "of the subproof.");
+                    "of the subproof.");
             return null;
         }
 
-        if(!manager.isIntroducedVariableReplaced(rangeStart, rangeEnd, manager.getCurrentLine())) {
-            manager.setCurrentEvaluationWrong("The introduced constant is not replaced correctly.");
+        if(!manager.getSentence(rangeEnd).getText().equals(manager.getCurrentSentence().getText())) {
+            manager.setCurrentEvaluationWrong("The inferred line is not equal to the conclusion of the subproof.");
             return null;
         }
+
+        manager.isIntroducedConstantReplacingCorrectly(reference, rangeStart);
+
 
         return null;
     }

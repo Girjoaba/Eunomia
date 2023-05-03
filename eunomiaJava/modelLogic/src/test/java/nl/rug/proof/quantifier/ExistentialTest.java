@@ -166,7 +166,7 @@ public class ExistentialTest {
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
             compiler.compile(new InputPath("testProofs/quantifiers/existential/wrong/exists_elim_not_matching_constants.txt"));
 
-            List<Integer> wrongLines = new ArrayList<>(List.of(4));
+            List<Integer> wrongLines = new ArrayList<>(List.of(2));
             LineVerifier.verifyWrongLines(manager, wrongLines);
 
         } catch (FileNotFoundException e) {

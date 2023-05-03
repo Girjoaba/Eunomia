@@ -16,6 +16,8 @@ public class ProofManager {
     private Integer currentLine = 0;
     private Integer currentLevel = 0;
 
+    private final String VARIABLE_STRING = "tuvwxyz";
+
     public Integer getCurrentLine() {
         return currentLine;
     }
@@ -59,8 +61,14 @@ public class ProofManager {
         if (!lineMap.containsKey(currentLine)) {
             lineMap.put(currentLine, new ProofLine(currentLine, currentLevel, sentence));
         } else {
-            lineMap.put(currentLine, new ProofLine(currentLine, currentLevel, sentence,
-                lineMap.get(currentLine).getEvaluation()));
+            if(lineMap.get(currentLine).getBoxedConstant() != null) {
+                lineMap.put(currentLine, new ProofLine(currentLine, currentLevel, sentence,
+                        lineMap.get(currentLine).getEvaluation(), lineMap.get(currentLine).getBoxedConstant()));
+            } else {
+                lineMap.put(currentLine, new ProofLine(currentLine, currentLevel, sentence,
+                        lineMap.get(currentLine).getEvaluation()));
+            }
+
         }
     }
 
@@ -277,11 +285,10 @@ public class ProofManager {
             }
         }
 
-        String variableString = "tuvwxyz";
         char firstReplacement = analyzedSentence.charAt(replacementsIndexes.get(0));
         for(int i = 0; i < analyzedSentence.length() - 1; i++) {
             if(replacementsIndexes.contains(i)) {
-                if(variableString.contains(analyzedSentence.charAt(i) + "")) {
+                if(VARIABLE_STRING.contains(analyzedSentence.charAt(i) + "")) {
                     return false;
                 }
                 if(firstReplacement != analyzedSentence.charAt(i)) {
@@ -329,6 +336,46 @@ public class ProofManager {
 
     public boolean isExistentialQuantifier(Integer reference) {
         return lineMap.get(reference).getSentenceTree().getChild(0).getText().equals("\\exists");
+    }
+
+    public boolean isOnlyOneConstantReplaced(Integer initialReference, Integer changedReference) {
+        String initialSentence = lineMap.get(initialReference).getSentenceTree().getText();
+        String changedSentence = lineMap.get(changedReference).getSentenceTree().getChild(2).getText();
+
+        Set<Character> initialConstants = createConstantSet(initialSentence);
+        Set<Character> changedConstants = createConstantSet(changedSentence);
+
+        return initialConstants.size() - 1 == changedConstants.size();
+    }
+
+    private Set<Character> createConstantSet(String changedSentence) {
+        Set<Character> changedConstants = new HashSet<>();
+        for(int i = 0; i < changedSentence.length() - 2; i++) {
+            if(changedSentence.charAt(i) == '(' && !VARIABLE_STRING.contains(changedSentence.charAt(i + 1) + "")
+                    && changedSentence.charAt(i + 2) == ')') {
+                changedConstants.add(changedSentence.charAt(i + 1));
+            }
+        }
+        return changedConstants;
+    }
+
+    public void isIntroducedConstantReplacingCorrectly(Integer initialReference, Integer introductionReference) {
+        String quantifiedVariable = lineMap.get(initialReference).getSentenceTree().getChild(1).getText();
+        String initialSentence = lineMap.get(initialReference).getSentenceTree().getChild(2).getText();
+        String introducedConstant = lineMap.get(introductionReference).getBoxedConstant();
+
+        for(int i = 0; i < initialSentence.length() - 2; i++) {
+            if(initialSentence.charAt(i) == '(' && initialSentence.charAt(i + 1) == quantifiedVariable.charAt(0)
+                    && initialSentence.charAt(i + 2) == ')') {
+                initialSentence = initialSentence.substring(0, i + 1) + introducedConstant
+                        + initialSentence.substring(i + 2);
+            }
+        }
+
+        if(!lineMap.get(introductionReference).getSentenceTree().getText().equals(initialSentence)) {
+            lineMap.get(introductionReference)
+                    .setWrongEvaluation("The introduced constant is not replacing correctly the variable.");
+        }
     }
 
 }

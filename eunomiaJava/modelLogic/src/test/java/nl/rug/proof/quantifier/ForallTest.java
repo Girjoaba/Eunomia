@@ -258,4 +258,19 @@ public class ForallTest {
             log.error("File not found");
         }
     }
+
+    @Test
+    public void ForallIntroMultipleConstantsReplacedTest() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile(new InputPath("testProofs/quantifiers/forall/wrong/forall_intro_multiple_constants_replaced.txt"));
+
+            List<Integer> wrongLines = new ArrayList<>(List.of(4));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
 }

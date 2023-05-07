@@ -15,6 +15,20 @@ import org.jetbrains.annotations.NotNull;
 @Slf4j
 public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
+    public static final String REITERATION_APPLIED_TO_DIFFERENT_SENTENCES = "Reiteration applied to different sentences.";
+    public static final String RESULT_NOT_A_CONTRADICTION = "Result not a contradiction.";
+    public static final String CONTRADICTION_WRONG_INTRODUCTION = "Contradiction does not result from the premises." +
+            " (maybe justification order is wrong ?)";
+    public static final String NOT_APPLIED_TO_A_CONTRADICTION = "Contradiction elimination not applied to a contradiction.";
+    public static final String LINE_IS_NOT_A_NEGATION = "Inferred line is not a negation.";
+    public static final String SUBPROOF_NOT_NEGATED = "The premise of the subproof is not negated as the result of the negation";
+    public static final String DOES_NOT_END_IN_A_CONTRADICTION = "Subproofs does not end in a contradiction.";
+    public static final String APPLY_NEGATION_ELIMINATION_TO_DOUBLE_NEGATIONS = "Can only apply negation elimination to double negations.";
+    public static final String SENTENCES_DO_NOT_MATCH = "The inferred sentence is not the same as the double negation.";
+    public static final String IS_NOT_A_CONJUNCTION = "Inferred sentence is not a conjunction.";
+    public static final String CONJUCTION_CONSTRUCTED_FROM_DIFFERNET_SENTENCES = "Inferred Conjunction not constructed from referred sentences.";
+    public static final String REFERRED_LINE_IS_NOT_A_CONJUNCTION = "Referred line is not a conjunction.";
+    public static final String NOT_PART_OF_A_BINARY_EXPRESSION = "Not part of a binary expression.";
     private final ProofManager manager;
 
     /**
@@ -258,7 +272,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.getSentence(reference).getText().equals(manager.getCurrentSentence().getText())) {
-            manager.setCurrentEvaluationWrong("Reiteration applied to different sentences.");
+            manager.setCurrentEvaluationWrong(REITERATION_APPLIED_TO_DIFFERENT_SENTENCES);
             return null;
         }
         return null;
@@ -276,15 +290,14 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.getCurrentSentence().getText().equals("\\perp")) {
-            manager.setCurrentEvaluationWrong("Result not a contradiction.");
+            manager.setCurrentEvaluationWrong(RESULT_NOT_A_CONTRADICTION);
             return null;
         }
 
         if(!manager.getSentence(reference2).getChild(0).getText().equals("!") ||
                 !manager.getSentence(reference1).getText()
                     .equals(manager.getSentence(reference2).getChild(1).getText())) {
-            manager.setCurrentEvaluationWrong("Contradiction does not result from the premises." +
-                " (maybe justification order is wrong ?)");
+            manager.setCurrentEvaluationWrong(CONTRADICTION_WRONG_INTRODUCTION);
             return null;
         }
         return null;
@@ -300,7 +313,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.getSentence(reference).getText().equals("\\perp")) {
-            manager.setCurrentEvaluationWrong("Contradiction elimination not applied to a contradiction.");
+            manager.setCurrentEvaluationWrong(NOT_APPLIED_TO_A_CONTRADICTION);
             return null;
         }
 
@@ -316,24 +329,24 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         Integer rangeEnd = UsefulStrings.getRangeEnd(range);
 
         if(!manager.isValidRangeReference(rangeStart, rangeEnd)) {
-            manager.setCurrentEvaluationWrong("Invalid reference.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
             return null;
         }
 
         if(manager.getCurrentSentence().getChildCount() != 2) {
-            manager.setCurrentEvaluationWrong("Inferred line is not a negation.");
+            manager.setCurrentEvaluationWrong(LINE_IS_NOT_A_NEGATION);
             return null;
         }
 
         if(!manager.getSentence(rangeStart).getText().equals(manager.getCurrentSentence().getChild(1).getText())
                 || !manager.getCurrentSentence().getChild(0).getText().equals("!")) {
             manager
-                .setCurrentEvaluationWrong("The premise of the subproof is not negated as the result of the negation");
+                .setCurrentEvaluationWrong(SUBPROOF_NOT_NEGATED);
             return null;
         }
 
         if(!manager.getSentence(rangeEnd).getText().equals("\\perp")) {
-            manager.setCurrentEvaluationWrong("Subproofs does not end in a contradiction.");
+            manager.setCurrentEvaluationWrong(DOES_NOT_END_IN_A_CONTRADICTION);
             return null;
         }
 
@@ -346,7 +359,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         Integer reference = (Integer) visit(ctx.singleReference());
 
         if(!manager.isValidSingleReference(reference)) {
-            manager.setCurrentEvaluationWrong("Invalid reference.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);
             return null;
         }
 
@@ -354,13 +367,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
                 || manager.getSentence(reference).getChild(1).getChildCount() != 2
                 || !manager.getSentence(reference).getChild(0).getText().equals("!")
                 || !manager.getSentence(reference).getChild(1).getChild(0).getText().equals("!")) {
-            manager.setCurrentEvaluationWrong("Can only apply negation elimination to double negations.");
+            manager.setCurrentEvaluationWrong(APPLY_NEGATION_ELIMINATION_TO_DOUBLE_NEGATIONS);
             return null;
         }
 
         if(!manager.getSentence(reference).getChild(1).getChild(1).getText()
             .equals(manager.getCurrentSentence().getText())) {
-            manager.setCurrentEvaluationWrong("The inferred sentence is not the same as the double negation.");
+            manager.setCurrentEvaluationWrong(SENTENCES_DO_NOT_MATCH);
             return null;
         }
 
@@ -384,13 +397,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCurrentCorrectBinaryExpression("&&")) {
-            manager.setCurrentEvaluationWrong("Inferred sentence is not a conjunction.");
+            manager.setCurrentEvaluationWrong(IS_NOT_A_CONJUNCTION);
             return null;
         }
 
         if(!manager.isPartOfCurrentBinaryExpression(reference1)
             || !manager.isPartOfCurrentBinaryExpression(reference2)) {
-            manager.setCurrentEvaluationWrong("Inferred Conjunction not constructed from referred sentences.");
+            manager.setCurrentEvaluationWrong(CONJUCTION_CONSTRUCTED_FROM_DIFFERNET_SENTENCES);
             return null;
         }
         return null;
@@ -412,12 +425,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCorrectBinaryExpression(reference, "&&")) {
-            manager.setCurrentEvaluationWrong("Referred line is not a conjunction.");
+            manager.setCurrentEvaluationWrong(REFERRED_LINE_IS_NOT_A_CONJUNCTION);
             return null;
         }
 
         if(!manager.isCurrentPartOfBinaryExpression(reference)) {
-            manager.setCurrentEvaluationWrong("Not part of a binary expression.");
+            manager.setCurrentEvaluationWrong(NOT_PART_OF_A_BINARY_EXPRESSION);
             return null;
         }
         return null;

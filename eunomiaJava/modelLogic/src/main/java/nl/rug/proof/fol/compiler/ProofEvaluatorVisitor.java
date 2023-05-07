@@ -801,6 +801,11 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
+        if(!manager.removedIntroducedConstatn(rangeStart, manager.getCurrentLine())) {
+            manager.setCurrentEvaluationWrong("The introduced constant was not removed.");
+            return null;
+        }
+
         manager.isIntroducedConstantReplacingCorrectly(reference, rangeStart);
 
 

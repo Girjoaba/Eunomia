@@ -378,4 +378,17 @@ public class ProofManager {
         }
     }
 
+    public boolean removedIntroducedConstatn(Integer introducingReference, Integer finalReference) {
+        String introducedConstant = lineMap.get(introducingReference).getBoxedConstant();
+        String finalSentence = lineMap.get(finalReference).getSentenceTree().getText();
+
+        for(int i = 0; i < finalSentence.length() - 2; i++) {
+            if(finalSentence.charAt(i) == '(' && finalSentence.charAt(i + 1) == introducedConstant.charAt(0)
+                    && finalSentence.charAt(i + 2) == ')') {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

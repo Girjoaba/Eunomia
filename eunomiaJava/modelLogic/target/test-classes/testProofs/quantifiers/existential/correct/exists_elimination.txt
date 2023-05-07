@@ -2,5 +2,6 @@
 assume
 2. |c| P(c) premise
 3. P(c) Reit: 2
+4. \exists y P(y) \exists Intro: 3
 qed
-4. P(c) \exists Elim: 1, 2-3
+5. \exists y P(y) \exists Elim: 1, 2-4

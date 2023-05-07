@@ -189,5 +189,20 @@ public class ExistentialTest {
         }
     }
 
+    @Test
+    public void testExistsElimConstantRestriction() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile(new InputPath("testProofs/quantifiers/existential/wrong/exists_elim_constant_restriction.txt"));
+
+            List<Integer> wrongLines = new ArrayList<>(List.of(6));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+
 }
 

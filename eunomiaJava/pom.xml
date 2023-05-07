@@ -59,7 +59,10 @@
                     <suppressionsLocation>../.checkstyle/suppressions.xml</suppressionsLocation>
                     <excludes>
                         **/module-info.java
-<!--                        ../nl.rug.proof.fol.antlrAPI.*-->
+<!--                        src/main/java/nl/rug/proof/fol/antlrAPI/ProofGrammarBaseListener.java-->
+                    </excludes>
+                    <excludes>
+                        **/antlrAPI/*
                     </excludes>
                 </configuration>
                 <executions>

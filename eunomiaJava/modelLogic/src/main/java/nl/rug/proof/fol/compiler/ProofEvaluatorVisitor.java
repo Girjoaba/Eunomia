@@ -697,12 +697,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isUniversalQuantifier(manager.getCurrentLine())) {
+        if(manager.isNotUniversalQuantifier(manager.getCurrentLine())) {
             manager.setCurrentEvaluationWrong("The inferred line must be a universal quantifier.");
             return null;
         }
 
-        if(!manager.isEqualNoQuantifier(manager.getCurrentLine(), rangeEnd)) {
+        if(manager.isNotEqualNoQuantifier(manager.getCurrentLine(), rangeEnd)) {
             manager.setCurrentEvaluationWrong("The sentence after the subproof does not follow from the conclusion " +
                     "of the subproof.");
             return null;
@@ -725,12 +725,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isUniversalQuantifier(reference)) {
+        if(manager.isNotUniversalQuantifier(reference)) {
             manager.setCurrentEvaluationWrong("The referred line must not be a universal quantifier.");
             return null;
         }
 
-        if(!manager.isEqualNoQuantifier(reference, manager.getCurrentLine())) {
+        if(manager.isNotEqualNoQuantifier(reference, manager.getCurrentLine())) {
             manager.setCurrentEvaluationWrong("The sentence with the quantifier is different from the sentence " +
                 "without the quantifier.");
             return null;
@@ -755,7 +755,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isExistentialQuantifier(manager.getCurrentLine())) {
+        if(manager.isNotExistentialQuantifier(manager.getCurrentLine())) {
             manager.setCurrentEvaluationWrong("The inferred line must be an existential quantifier.");
             return null;
         }
@@ -765,7 +765,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isEqualNoQuantifier(manager.getCurrentLine(), reference)) {
+        if(manager.isNotEqualNoQuantifier(manager.getCurrentLine(), reference)) {
             manager.setCurrentEvaluationWrong("The existential sentence does not follow from the reference.");
             return null;
         }
@@ -785,12 +785,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isExistentialQuantifier(reference)) {
+        if(manager.isNotExistentialQuantifier(reference)) {
             manager.setCurrentEvaluationWrong("Must be an existential quantifier.");
             return null;
         }
 
-        if(!manager.isEqualNoQuantifier(reference, rangeStart)) {
+        if(manager.isNotEqualNoQuantifier(reference, rangeStart)) {
             manager.setCurrentEvaluationWrong("The sentence after the subproof does not follow from the conclusion " +
                     "of the subproof.");
             return null;
@@ -801,13 +801,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.removedIntroducedConstatn(rangeStart, manager.getCurrentLine())) {
+        if(!manager.removedIntroducedConstants(rangeStart, manager.getCurrentLine())) {
             manager.setCurrentEvaluationWrong("The introduced constant was not removed.");
             return null;
         }
 
         manager.isIntroducedConstantReplacingCorrectly(reference, rangeStart);
-
 
         return null;
     }

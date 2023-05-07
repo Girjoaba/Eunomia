@@ -7,6 +7,7 @@ import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
 import nl.rug.proof.fol.compiler.commonStrings.UsefulStrings;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A visitor class responsible for compiling the proof and checking the validity of each proof line.
@@ -15,7 +16,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
     private final ProofManager manager;
-
 
     /**
      * Initializes the visitor with a manager which acts as memory.
@@ -30,7 +30,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     @Override
-    public Object visitSubproof(ProofGrammarParser.SubproofContext ctx) {
+    public Object visitSubproof(ProofGrammarParser.@NotNull SubproofContext ctx) {
         for(ParseTree tree : ctx.children) {
             visit(tree);
         }
@@ -44,7 +44,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     @Override
-    public Object visitAssume(ProofGrammarParser.AssumeContext ctx) {
+    public Object visitAssume(ProofGrammarParser.@NotNull AssumeContext ctx) {
         manager.increaseLevel();
         if(ctx.premiseLine() != null) {
             visit(ctx.premiseLine());
@@ -62,14 +62,19 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     @Override
-    public Object visitQed(ProofGrammarParser.QedContext ctx) {
+    public Object visitQed(ProofGrammarParser.@NotNull QedContext ctx) {
         visit(ctx.conclusionLine());
         manager.decreaseLevel();
         return null;
     }
 
+    /**
+     * Visit a normal premise line of a subproof.
+     * @param ctx the parse tree.
+     * @return null.
+     */
     @Override
-    public Object visitPremiseLine(ProofGrammarParser.PremiseLineContext ctx) {
+    public Object visitPremiseLine(ProofGrammarParser.@NotNull PremiseLineContext ctx) {
         manager.setCurrentLine((Integer) visit(ctx.proofLineNum()));
         visit(ctx.premiseInference());
         return null;
@@ -77,19 +82,23 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
     /**
      * The proof line is the building block of the proof.
-     * We extract the line number and begin visiting till we make sure
-     * the proof line is valid.
-     * @param ctx the parse tree
+     * We extract the line number and begin visiting till we make sure the proof line is valid.
+     * @param ctx the parse tree.
      */
     @Override
-    public Object visitProofLine(ProofGrammarParser.ProofLineContext ctx) {
+    public Object visitProofLine(ProofGrammarParser.@NotNull ProofLineContext ctx) {
         manager.setCurrentLine((Integer) visit(ctx.proofLineNum()));
         visit(ctx.inference());
         return null;
     }
 
+    /**
+     * Visits the last line of a subproof. It exists to guarantee that its subproof has a conclusion.
+     * @param ctx the parse tree
+     * @return null.
+     */
     @Override
-    public Object visitConclusionLine(ProofGrammarParser.ConclusionLineContext ctx) {
+    public Object visitConclusionLine(ProofGrammarParser.@NotNull ConclusionLineContext ctx) {
         manager.setCurrentLine((Integer) visit(ctx.proofLineNum()));
         visit(ctx.inference());
         return null;
@@ -101,12 +110,18 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @return The proof line number as Integer
      */
     @Override
-    public Integer visitProofLineNum(ProofGrammarParser.ProofLineNumContext ctx) {
+    public Integer visitProofLineNum(ProofGrammarParser.@NotNull ProofLineNumContext ctx) {
         return Integer.parseInt(ctx.INT().getText());
     }
 
+    /**
+     * A contradiction inference is different from a normal sentence inference because it can only contain the
+     * contradiciton symbol.
+     * @param ctx the parse tree.
+     * @return null.
+     */
     @Override
-    public Object visitContradictionInfer(ProofGrammarParser.ContradictionInferContext ctx) {
+    public Object visitContradictionInfer(ProofGrammarParser.@NotNull ContradictionInferContext ctx) {
         visit(ctx.contradiction(0));
         visit(ctx.justification());
         return null;
@@ -115,10 +130,10 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     /**
      * To make sure an inference is valid we need to check if it follows from the previous sentences. To do that we
      * use the justification to get previous sentences and check if this line is valid.
-     * @param ctx the parse tree
+     * @param ctx the parse tree.
      */
     @Override
-    public Object visitSentenceInfer(ProofGrammarParser.SentenceInferContext ctx) {
+    public Object visitSentenceInfer(ProofGrammarParser.@NotNull SentenceInferContext ctx) {
         visit(ctx.sentence(0));
         visit(ctx.justification());
         return null;
@@ -130,10 +145,10 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * From a contradiction you can infer anything. If this is your initial premise, then everything is valid.
      * If it is the start of a subproof, then the subproof will not provide you any information.
      * Regardless, it is allowed to exist.
-     * @param ctx the parse tree
+     * @param ctx the parse tree.
      */
     @Override
-    public Object visitPremiseContradictionInfer(ProofGrammarParser.PremiseContradictionInferContext ctx) {
+    public Object visitPremiseContradictionInfer(ProofGrammarParser.@NotNull PremiseContradictionInferContext ctx) {
         visit(ctx.contradiction(0));
         return null;
     }
@@ -143,13 +158,19 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     @Override
-    public Object visitPremiseSentenceInfer(ProofGrammarParser.PremiseSentenceInferContext ctx) {
+    public Object visitPremiseSentenceInfer(ProofGrammarParser.@NotNull PremiseSentenceInferContext ctx) {
         visit(ctx.sentence(0));
         return null;
     }
 
+    /**
+     * Visits a subproof premise line which introduces a constant.
+     * It must add the constant to the scope while also verifying that scoping level is correct.
+     * @param ctx the parse tree.
+     * @return null.
+     */
     @Override
-    public Object visitConstantIntroLine(ProofGrammarParser.ConstantIntroLineContext ctx) {
+    public Object visitConstantIntroLine(ProofGrammarParser.@NotNull ConstantIntroLineContext ctx) {
         manager.setCurrentLine((Integer) visit(ctx.proofLineNum()));
 
         String constant = ctx.getChild(1).getChild(1).getText();
@@ -180,7 +201,9 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     /**
-     * An atomic sentence, we just store the atomic value.
+     * Visits a sentence and saves it in the proof manager. It also uses the traveler to format the sentence
+     * it a manageable form. In the case in which the traveler finds an error, it will set the current evaluation wrong
+     * with the appropriate error message.
      * @param ctx the parse tree
      */
     @Override
@@ -199,18 +222,24 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         return null;
     }
 
+    /**
+     * Visits a sentence in parentheses.
+     * @param ctx the parse tree.
+     * @return the sentence from within parentheses.
+     */
     @Override
-    public Object visitParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx) {
+    public Object visitParenthesesSentence(ProofGrammarParser.@NotNull ParenthesesSentenceContext ctx) {
         visit(ctx.sentence());
         return ctx.sentence();
     }
 
-    /*
-     * -------------------------------------- JUSTIFICATION STUFF ---------------------------------------------
+    /**
+     * -------------------------------------- JUSTIFICATION STUFF ---------------------------------------------.
+     * @param ctx the parse tree.
+     * @return null.
      */
     @Override
     public Object visitPremise(ProofGrammarParser.PremiseContext ctx) {
-//        manager.setCurrentEvaluationWrong("Variable not bounded!");
         return null;
     }
 
@@ -493,7 +522,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        // Get the replacement
         if(!manager.isCorrectBinaryExpression(reference2, "==")) {
             manager.setCurrentEvaluationWrong("Referred line: " + reference2 + " is not an identity.");
             return null;
@@ -690,7 +718,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         String range = (String) visit(ctx.rangeReference());
         Integer rangeStart = UsefulStrings.getRangeStart(range);
         Integer rangeEnd = UsefulStrings.getRangeEnd(range);
-
 
         if(!manager.isValidRangeReference(rangeStart, rangeEnd)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.INVALID_REFERENCE);

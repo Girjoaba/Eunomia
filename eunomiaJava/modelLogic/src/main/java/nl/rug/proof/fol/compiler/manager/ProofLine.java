@@ -14,8 +14,6 @@ public class ProofLine {
     private final Evaluation evaluation;
     private final String boxedConstant;
 
-    private Boolean introducedConstant = false;
-
     /**
      * Generic constructor for a proof line.
      * @param lineNr the location of the line in the proof.
@@ -30,6 +28,13 @@ public class ProofLine {
         this.boxedConstant = null;
     }
 
+    /**
+     * Constructor for a proof line with an evaluation.
+     * @param lineNr the location of the line in the proof.
+     * @param level the level on which the line is placed. Keeping track of subproofs.
+     * @param sentenceTree the sentence stored as a tree.
+     * @param evaluation the evaluation of the proof line.
+     */
     public ProofLine(Integer lineNr, Integer level, ParseTree sentenceTree, Evaluation evaluation) {
         this.lineNr = lineNr;
         this.level = level;
@@ -38,22 +43,36 @@ public class ProofLine {
         this.boxedConstant = null;
     }
 
+    /**
+     * Constructor for a proof line with a constant associated.
+     * @param lineNr the location of the line in the proof.
+     * @param level the level on which the line is placed. Keeping track of subproofs.
+     * @param sentenceTree the sentence stored as a tree.
+     * @param boxedConstant the constant associated with the proof line.
+     */
     public ProofLine(Integer lineNr, Integer level, ParseTree sentenceTree, String boxedConstant) {
         this.lineNr = lineNr;
         this.level = level;
         this.sentenceTree = sentenceTree;
         this.evaluation = new Evaluation(true, "Line " + lineNr + " is applied correctly.");
         this.boxedConstant = boxedConstant;
-        introducedConstant = true;
     }
 
-    public ProofLine(Integer lineNr, Integer level, ParseTree sentenceTree, Evaluation evaluation, String boxedConstant) {
+    /**
+     * Constructor for a proof line with a constant associated and an evaluation.
+     * @param lineNr the location of the line in the proof.
+     * @param level the level on which the line is placed. Keeping track of subproofs.
+     * @param sentenceTree the sentence stored as a tree.
+     * @param evaluation the evaluation of the proof line.
+     * @param boxedConstant the constant associated with the proof line.
+     */
+    public ProofLine(Integer lineNr, Integer level, ParseTree sentenceTree, Evaluation evaluation,
+                     String boxedConstant) {
         this.lineNr = lineNr;
         this.level = level;
         this.sentenceTree = sentenceTree;
         this.evaluation = evaluation;
         this.boxedConstant = boxedConstant;
-        introducedConstant = true;
     }
 
     public Evaluation getEvaluation() {

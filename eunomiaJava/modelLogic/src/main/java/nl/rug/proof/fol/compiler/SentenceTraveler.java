@@ -6,29 +6,34 @@ import nl.rug.proof.fol.compiler.manager.ProofManager;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
+/**
+ * A class for traversing the sentence subtree of our proof tree.
+ * This class also changes the sentence tree in multiple ways.
+ */
 @Slf4j
 public class SentenceTraveler {
 
-    private static boolean isVariable(String text) {
+    private static boolean isVariable(@NotNull String text) {
         return text.matches("[u-z]");
     }
 
-    private static boolean isConstant(String text) {
+    private static boolean isConstant(@NotNull String text) {
         return text.matches("[a-t]");
     }
 
     /**
-     * An atomic sentence, we just store the atomic value.
-     * @param ctx the parse tree
+     * Replaces the node with parentheses with an equivalent node without parentheses.
+     * @param ctx the root of the sentence tree.
+     * @param childWithNoParenthesis the node without parentheses.
+     * @param posChildInTree the position of the node with parentheses in the tree.
      */
-    private static void replaceParaenthesis(ProofGrammarParser.NormalSentenceContext ctx,
-                                            ProofGrammarParser.NormalSentenceContext childWithNoParenthesis,
-                                            int posChildInTree) {
+    private static void replaceParenthesis(ProofGrammarParser.@NotNull NormalSentenceContext ctx,
+                                           ProofGrammarParser.NormalSentenceContext childWithNoParenthesis,
+                                           int posChildInTree) {
         Stack<ParseTree> sentenceStack = new Stack<>();
 
         // Remove and save all the children after the child with no parenthesis
@@ -39,7 +44,7 @@ public class SentenceTraveler {
 
         // Make the replacement: With parenthesis -> No parenthesis
         ctx.removeLastChild();
-        ctx.addChild((RuleContext) childWithNoParenthesis);
+        ctx.addChild(childWithNoParenthesis);
 
         // Add back the children that were removed
         while(!sentenceStack.isEmpty()) {
@@ -57,7 +62,8 @@ public class SentenceTraveler {
      * @param ctx the sentence as a tree.
      * @return the sentence without the parenthesis.
      */
-    private static ProofGrammarParser.NormalSentenceContext getNormalSentenceContext(ProofGrammarParser.ParenthesesSentenceContext ctx) {
+    private static ProofGrammarParser.NormalSentenceContext getNormalSentenceContext(
+            ProofGrammarParser.@NotNull ParenthesesSentenceContext ctx) {
         if(ctx.getChild(1) instanceof ProofGrammarParser.ParenthesesSentenceContext child) {
             return getNormalSentenceContext(child);
         } else {
@@ -74,7 +80,7 @@ public class SentenceTraveler {
      * @param manager the manager to set the error.
      * @param boundedVariables a stack to keep track of what variables are bounded.
      */
-    public static void traverseSentence(ProofGrammarParser.NormalSentenceContext ctx, ProofManager manager,
+    public static void traverseSentence(ProofGrammarParser.@NotNull NormalSentenceContext ctx, ProofManager manager,
                                         Stack<String> boundedVariables) {
 
         boolean pushed = false;
@@ -86,7 +92,7 @@ public class SentenceTraveler {
 
         for(int i = 0; i < ctx.getChildCount(); i++) {
             if(ctx.getChild(i) instanceof ProofGrammarParser.ParenthesesSentenceContext child) {
-                replaceParaenthesis(ctx, getNormalSentenceContext(child), i);
+                replaceParenthesis(ctx, getNormalSentenceContext(child), i);
                 traverseSentence(ctx, manager, boundedVariables);
 
             } else if(ctx.getChild(i) instanceof ProofGrammarParser.NormalSentenceContext child) {

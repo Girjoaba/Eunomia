@@ -15,20 +15,6 @@ import org.jetbrains.annotations.NotNull;
 @Slf4j
 public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
-    public static final String REITERATION_APPLIED_TO_DIFFERENT_SENTENCES = "Reiteration applied to different sentences.";
-    public static final String RESULT_NOT_A_CONTRADICTION = "Result not a contradiction.";
-    public static final String CONTRADICTION_WRONG_INTRODUCTION = "Contradiction does not result from the premises." +
-            " (maybe justification order is wrong ?)";
-    public static final String NOT_APPLIED_TO_A_CONTRADICTION = "Contradiction elimination not applied to a contradiction.";
-    public static final String LINE_IS_NOT_A_NEGATION = "Inferred line is not a negation.";
-    public static final String SUBPROOF_NOT_NEGATED = "The premise of the subproof is not negated as the result of the negation";
-    public static final String DOES_NOT_END_IN_A_CONTRADICTION = "Subproofs does not end in a contradiction.";
-    public static final String APPLY_NEGATION_ELIMINATION_TO_DOUBLE_NEGATIONS = "Can only apply negation elimination to double negations.";
-    public static final String SENTENCES_DO_NOT_MATCH = "The inferred sentence is not the same as the double negation.";
-    public static final String IS_NOT_A_CONJUNCTION = "Inferred sentence is not a conjunction.";
-    public static final String CONJUCTION_CONSTRUCTED_FROM_DIFFERNET_SENTENCES = "Inferred Conjunction not constructed from referred sentences.";
-    public static final String REFERRED_LINE_IS_NOT_A_CONJUNCTION = "Referred line is not a conjunction.";
-    public static final String NOT_PART_OF_A_BINARY_EXPRESSION = "Not part of a binary expression.";
     private final ProofManager manager;
 
     /**
@@ -272,7 +258,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.getSentence(reference).getText().equals(manager.getCurrentSentence().getText())) {
-            manager.setCurrentEvaluationWrong(REITERATION_APPLIED_TO_DIFFERENT_SENTENCES);
+            manager.setCurrentEvaluationWrong(ErrorMessage.REITERATION_APPLIED_TO_DIFFERENT_SENTENCES);
             return null;
         }
         return null;
@@ -290,14 +276,14 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.getCurrentSentence().getText().equals("\\perp")) {
-            manager.setCurrentEvaluationWrong(RESULT_NOT_A_CONTRADICTION);
+            manager.setCurrentEvaluationWrong(ErrorMessage.RESULT_NOT_A_CONTRADICTION);
             return null;
         }
 
         if(!manager.getSentence(reference2).getChild(0).getText().equals("!") ||
                 !manager.getSentence(reference1).getText()
                     .equals(manager.getSentence(reference2).getChild(1).getText())) {
-            manager.setCurrentEvaluationWrong(CONTRADICTION_WRONG_INTRODUCTION);
+            manager.setCurrentEvaluationWrong(ErrorMessage.CONTRADICTION_WRONG_INTRODUCTION);
             return null;
         }
         return null;
@@ -313,7 +299,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.getSentence(reference).getText().equals("\\perp")) {
-            manager.setCurrentEvaluationWrong(NOT_APPLIED_TO_A_CONTRADICTION);
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_APPLIED_TO_A_CONTRADICTION);
             return null;
         }
 
@@ -334,19 +320,19 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(manager.getCurrentSentence().getChildCount() != 2) {
-            manager.setCurrentEvaluationWrong(LINE_IS_NOT_A_NEGATION);
+            manager.setCurrentEvaluationWrong(ErrorMessage.LINE_IS_NOT_A_NEGATION);
             return null;
         }
 
         if(!manager.getSentence(rangeStart).getText().equals(manager.getCurrentSentence().getChild(1).getText())
                 || !manager.getCurrentSentence().getChild(0).getText().equals("!")) {
             manager
-                .setCurrentEvaluationWrong(SUBPROOF_NOT_NEGATED);
+                .setCurrentEvaluationWrong(ErrorMessage.SUBPROOF_NOT_NEGATED);
             return null;
         }
 
         if(!manager.getSentence(rangeEnd).getText().equals("\\perp")) {
-            manager.setCurrentEvaluationWrong(DOES_NOT_END_IN_A_CONTRADICTION);
+            manager.setCurrentEvaluationWrong(ErrorMessage.DOES_NOT_END_IN_A_CONTRADICTION);
             return null;
         }
 
@@ -367,13 +353,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
                 || manager.getSentence(reference).getChild(1).getChildCount() != 2
                 || !manager.getSentence(reference).getChild(0).getText().equals("!")
                 || !manager.getSentence(reference).getChild(1).getChild(0).getText().equals("!")) {
-            manager.setCurrentEvaluationWrong(APPLY_NEGATION_ELIMINATION_TO_DOUBLE_NEGATIONS);
+            manager.setCurrentEvaluationWrong(ErrorMessage.APPLY_NEGATION_ELIMINATION_TO_DOUBLE_NEGATIONS);
             return null;
         }
 
         if(!manager.getSentence(reference).getChild(1).getChild(1).getText()
             .equals(manager.getCurrentSentence().getText())) {
-            manager.setCurrentEvaluationWrong(SENTENCES_DO_NOT_MATCH);
+            manager.setCurrentEvaluationWrong(ErrorMessage.SENTENCES_DO_NOT_MATCH);
             return null;
         }
 
@@ -397,13 +383,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCurrentCorrectBinaryExpression("&&")) {
-            manager.setCurrentEvaluationWrong(IS_NOT_A_CONJUNCTION);
+            manager.setCurrentEvaluationWrong(ErrorMessage.IS_NOT_A_CONJUNCTION);
             return null;
         }
 
         if(!manager.isPartOfCurrentBinaryExpression(reference1)
             || !manager.isPartOfCurrentBinaryExpression(reference2)) {
-            manager.setCurrentEvaluationWrong(CONJUCTION_CONSTRUCTED_FROM_DIFFERNET_SENTENCES);
+            manager.setCurrentEvaluationWrong(ErrorMessage.CONJUCTION_CONSTRUCTED_FROM_DIFFERNET_SENTENCES);
             return null;
         }
         return null;
@@ -425,12 +411,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCorrectBinaryExpression(reference, "&&")) {
-            manager.setCurrentEvaluationWrong(REFERRED_LINE_IS_NOT_A_CONJUNCTION);
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_CONJUNCTION);
             return null;
         }
 
         if(!manager.isCurrentPartOfBinaryExpression(reference)) {
-            manager.setCurrentEvaluationWrong(NOT_PART_OF_A_BINARY_EXPRESSION);
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_PART_OF_A_BINARY_EXPRESSION);
             return null;
         }
         return null;
@@ -452,12 +438,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCurrentCorrectBinaryExpression("||")) {
-            manager.setCurrentEvaluationWrong("Inferred sentence is not a disjunction.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_DISJUNCTION);
             return null;
         }
 
         if(!manager.isPartOfCurrentBinaryExpression(reference)) {
-            manager.setCurrentEvaluationWrong("Is not part of a binary expression.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_PART_OF_A_BINARY_EXPRESSION);
             return null;
         }
         return null;
@@ -490,21 +476,21 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         // Check if the referred line is a disjunction
         if(!manager.isCorrectBinaryExpression(reference, "||")) {
-            manager.setCurrentEvaluationWrong("Referred line: " + reference + " is not a disjunction.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_DISJUNCTION);
             return null;
         }
 
         // Check premises of the 2 subproofs
         if(!manager.isPartOfBinaryExpression(range1Start, reference)
                 || !manager.isPartOfBinaryExpression(range2Start, reference)) {
-            manager.setCurrentEvaluationWrong("Wrong premises for disjunction elimination");
+            manager.setCurrentEvaluationWrong(ErrorMessage.PREMISES_DO_NOT_MATCH_ROOT_LINE);
             return null;
         }
 
         // Check conclusions of the 2 subproofs
         if(!manager.getCurrentSentence().getText().equals(manager.getSentence(range1End).getText())
                 || !manager.getCurrentSentence().getText().equals(manager.getSentence(range2End).getText()) ) {
-            manager.setCurrentEvaluationWrong("The conclusions of the subproofs do not match with the inferred line.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.CONCLUSIONS_DO_NOT_MATCH_INFERRED_LINE);
         }
         return null;
     }
@@ -513,13 +499,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     public Object visitIdentityIntro(ProofGrammarParser.IdentityIntroContext ctx) {
 
         if(!manager.isCurrentCorrectBinaryExpression("==")) {
-            manager.setCurrentEvaluationWrong("Inferred sentence is not an identity.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IDENTITY);
             return null;
         }
 
         if(!manager.getCurrentSentence().getChild(0).getText()
             .equals(manager.getCurrentSentence().getChild(2).getText())) {
-            manager.setCurrentEvaluationWrong("The left and right side of the identity are not equal.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_EQUAL_LEFT_RIGH_SIDES);
             return null;
         }
         return null;
@@ -536,7 +522,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCorrectBinaryExpression(reference2, "==")) {
-            manager.setCurrentEvaluationWrong("Referred line: " + reference2 + " is not an identity.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IDENTITY);
             return null;
         }
 
@@ -546,7 +532,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         // Check that the replaced is part of the referred line
         if(!manager.isPartOfBinaryExpression(replaced, reference1) && !replaced.getText()
             .equals(manager.getSentence(reference1).getText())) {
-            manager.setCurrentEvaluationWrong("The replaced element is not part of the referred line.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.REPLACED_NOT_IN_CORE);
             return null;
         }
 
@@ -580,7 +566,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(countReplacedInitial - countReplacedFinal != 1 || countReplacerFinal - countReplacerInitial != 1) {
-            manager.setCurrentEvaluationWrong("The replaced element is not replaced by the replacer element.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INCORRECT_REPLACEMENT);
             return null;
         }
 
@@ -599,19 +585,17 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCurrentCorrectBinaryExpression("->")) {
-            manager.setCurrentEvaluationWrong("Inferred sentence is not an implication.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IMPLICATION);
             return null;
         }
 
         if(!manager.getCurrentSentence().getChild(0).getText().equals(manager.getSentence(rangeStart).getText())) {
-            manager.setCurrentEvaluationWrong("The left side of the implication does not correspond " +
-                "to the premise of the subproof.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.PREMISE_DOES_NOT_MATCH_IMPLICATION);
             return null;
         }
 
         if(!manager.getCurrentSentence().getChild(2).getText().equals(manager.getSentence(rangeEnd).getText())) {
-            manager.setCurrentEvaluationWrong("The right side of the implication does not correspond " +
-                "to the conclusion of the subproof.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.CONCLUSION_DOES_NOT_MATCH_IMPLICATION);
             return null;
         }
 
@@ -629,19 +613,17 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCorrectBinaryExpression(reference1, "->")) {
-            manager.setCurrentEvaluationWrong("Referred line: " + reference1 + " is not an implication.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IMPLICATION);
             return null;
         }
 
         if(!manager.getSentence(reference2).getText().equals(manager.getSentence(reference1).getChild(0).getText())) {
-            manager.setCurrentEvaluationWrong("The second referred line does not correspond " +
-                "to the left side of the implication.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.REFERENCE_DOES_NOT_MATCH_LEFT_IMPLICATION);
             return null;
         }
 
         if(!manager.getCurrentSentence().getText().equals(manager.getSentence(reference1).getChild(2).getText())) {
-            manager.setCurrentEvaluationWrong("The inferred line does not correspond " +
-                "to the right side of the implication.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.REFERENCE_DOES_NOT_MATCH_RIGHT_IMPLICATION);
             return null;
         }
 
@@ -664,26 +646,23 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCurrentCorrectBinaryExpression("<->")) {
-            manager.setCurrentEvaluationWrong("Inferred sentence is not a biconditional.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_BICONDITIONAL);
             return null;
         }
 
         if(!manager.getSentence(range1Start).getText().equals(manager.getSentence(range2End).getText())) {
-            manager.setCurrentEvaluationWrong("The premise of the first subproof must be the same " +
-                "as the conclusion of the second subproof.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.FIRST_PREMISE_DOES_NOT_MATCH_SECOND_CONCLUSION);
             return null;
         }
 
         if(!manager.getSentence(range1End).getText().equals(manager.getSentence(range2Start).getText())) {
-            manager.setCurrentEvaluationWrong("The conclusion of the first subproof must be the same " +
-                "as the premise of the second subproof.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.FIRST_CONCLUSION_DOES_NOT_MATCH_SECOND_PREMISE);
             return null;
         }
 
         if(!manager.isPartOfCurrentBinaryExpression(range1Start)
             || !manager.isPartOfCurrentBinaryExpression(range1End)) {
-            manager.setCurrentEvaluationWrong("The inferred line must be constructed from the premises " +
-                "and the conclusions of the subproofs.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.MUST_BE_CONSTRUCTED_FROM_PREMISES_AND_CONCLUSIONS);
             return null;
         }
 
@@ -701,12 +680,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCorrectBinaryExpression(reference1, "<->")) {
-            manager.setCurrentEvaluationWrong("Referred line: " + reference1 + " is not a biconditional.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.MISSING_BICONDITIONAL);
             return null;
         }
 
         if(!manager.isPartOfBinaryExpression(reference2, reference1)) {
-            manager.setCurrentEvaluationWrong("The second referred line must be part of the biconditional.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.REFERENCE_MUST_BE_PART_OF_A_BICONDITIONAL);
             return null;
         }
 
@@ -719,7 +698,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.getCurrentSentence().getText().equals(impliedSentence)) {
-            manager.setCurrentEvaluationWrong("The inferred line must be part of the biconditional.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INFERRED_LINE_MUST_BE_PART_OF_THE_BICONDITIONAL);
             return null;
         }
 
@@ -738,18 +717,17 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(manager.isNotUniversalQuantifier(manager.getCurrentLine())) {
-            manager.setCurrentEvaluationWrong("The inferred line must be a universal quantifier.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_UNIVERSAL_QUANTIFIER);
             return null;
         }
 
         if(manager.isNotEqualNoQuantifier(manager.getCurrentLine(), rangeEnd)) {
-            manager.setCurrentEvaluationWrong("The sentence after the subproof does not follow from the conclusion " +
-                    "of the subproof.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.DOES_NOT_FOLLOW_FROM_CONCLUSION);
             return null;
         }
 
         if(!manager.isIntroducedVariableReplaced(rangeStart, rangeEnd, manager.getCurrentLine())) {
-            manager.setCurrentEvaluationWrong("The introduced constant is not replaced correctly.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.CONSTANT_IS_NOT_REPLACED_CORRECTLY);
             return null;
         }
 
@@ -766,19 +744,18 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(manager.isNotUniversalQuantifier(reference)) {
-            manager.setCurrentEvaluationWrong("The referred line must not be a universal quantifier.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_UNIVERSAL_QUANTIFIER);
             return null;
         }
 
         if(manager.isNotEqualNoQuantifier(reference, manager.getCurrentLine())) {
-            manager.setCurrentEvaluationWrong("The sentence with the quantifier is different from the sentence " +
-                "without the quantifier.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INCORRECT_QUANTIFIER_REMOVAL);
             return null;
         }
 
         if(!manager.isBoundedVariableCorrectlyReplaced(reference, manager.getCurrentLine(),
             manager.getSentence(reference).getChild(1).getText())) {
-            manager.setCurrentEvaluationWrong("The bounded variable is replaced with something incorrect.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.WRONG_VARIABLE_REPLACEMENT);
             return null;
         }
 
@@ -796,17 +773,17 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(manager.isNotExistentialQuantifier(manager.getCurrentLine())) {
-            manager.setCurrentEvaluationWrong("The inferred line must be an existential quantifier.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_EXISTENTIAL_QUANTIFIER);
             return null;
         }
 
         if(!manager.isOnlyOneConstantReplaced(reference, manager.getCurrentLine())) {
-            manager.setCurrentEvaluationWrong("More constants were replaced by existential introduction.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.MULTIPLE_REPALCED_CONSTANTS);
             return null;
         }
 
         if(manager.isNotEqualNoQuantifier(manager.getCurrentLine(), reference)) {
-            manager.setCurrentEvaluationWrong("The existential sentence does not follow from the reference.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.DOES_NOT_FOLLOW_EXISTENTIAL);
             return null;
         }
 
@@ -826,23 +803,22 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(manager.isNotExistentialQuantifier(reference)) {
-            manager.setCurrentEvaluationWrong("Must be an existential quantifier.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_EXISTENTIAL_QUANTIFIER);
             return null;
         }
 
         if(manager.isNotEqualNoQuantifier(reference, rangeStart)) {
-            manager.setCurrentEvaluationWrong("The sentence after the subproof does not follow from the conclusion " +
-                    "of the subproof.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.DOES_NOT_FOLLOW_FROM_CONCLUSION);
             return null;
         }
 
         if(!manager.getSentence(rangeEnd).getText().equals(manager.getCurrentSentence().getText())) {
-            manager.setCurrentEvaluationWrong("The inferred line is not equal to the conclusion of the subproof.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.INFERENCE_DOES_NOT_MATCH_SUBPROOF_CONCLUSION);
             return null;
         }
 
         if(!manager.removedIntroducedConstants(rangeStart, manager.getCurrentLine())) {
-            manager.setCurrentEvaluationWrong("The introduced constant was not removed.");
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_REMOVED_INTRODUCED_CONSTANT);
             return null;
         }
 

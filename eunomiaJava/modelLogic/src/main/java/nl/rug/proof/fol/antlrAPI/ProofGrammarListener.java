@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * This interface defines a complete listener for a parse tree produced by
  * {@link ProofGrammarParser}.
  */
+@SuppressWarnings("CheckStyle")
 public interface ProofGrammarListener extends ParseTreeListener {
 	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#proof}.

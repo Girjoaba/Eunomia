@@ -6,6 +6,7 @@ import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
 import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
 import nl.rug.proof.fol.compiler.commonStrings.UsefulStrings;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
+import nl.rug.proof.fol.grammar.GrammarNotations;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.jetbrains.annotations.NotNull;
 
@@ -275,12 +276,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.getCurrentSentence().getText().equals("\\perp")) {
+        if(!manager.getCurrentSentence().getText().equals(GrammarNotations.CONTRADICTION_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.RESULT_NOT_A_CONTRADICTION);
             return null;
         }
 
-        if(!manager.getSentence(reference2).getChild(0).getText().equals("!") ||
+        if(!manager.getSentence(reference2).getChild(0).getText().equals(GrammarNotations.NEGATION_SYMBOL) ||
                 !manager.getSentence(reference1).getText()
                     .equals(manager.getSentence(reference2).getChild(1).getText())) {
             manager.setCurrentEvaluationWrong(ErrorMessage.CONTRADICTION_WRONG_INTRODUCTION);
@@ -298,7 +299,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.getSentence(reference).getText().equals("\\perp")) {
+        if(!manager.getSentence(reference).getText().equals(GrammarNotations.CONTRADICTION_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_APPLIED_TO_A_CONTRADICTION);
             return null;
         }
@@ -325,13 +326,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.getSentence(rangeStart).getText().equals(manager.getCurrentSentence().getChild(1).getText())
-                || !manager.getCurrentSentence().getChild(0).getText().equals("!")) {
+                || !manager.getCurrentSentence().getChild(0).getText().equals(GrammarNotations.NEGATION_SYMBOL)) {
             manager
                 .setCurrentEvaluationWrong(ErrorMessage.SUBPROOF_NOT_NEGATED);
             return null;
         }
 
-        if(!manager.getSentence(rangeEnd).getText().equals("\\perp")) {
+        if(!manager.getSentence(rangeEnd).getText().equals(GrammarNotations.CONTRADICTION_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.DOES_NOT_END_IN_A_CONTRADICTION);
             return null;
         }
@@ -351,8 +352,9 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         if(manager.getSentence(reference).getChildCount() != 2
                 || manager.getSentence(reference).getChild(1).getChildCount() != 2
-                || !manager.getSentence(reference).getChild(0).getText().equals("!")
-                || !manager.getSentence(reference).getChild(1).getChild(0).getText().equals("!")) {
+                || !manager.getSentence(reference).getChild(0).getText().equals(GrammarNotations.NEGATION_SYMBOL)
+                || !manager.getSentence(reference).getChild(1).getChild(0).getText()
+                .equals(GrammarNotations.NEGATION_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.APPLY_NEGATION_ELIMINATION_TO_DOUBLE_NEGATIONS);
             return null;
         }
@@ -382,7 +384,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isCurrentCorrectBinaryExpression("&&")) {
+        if(!manager.isCurrentCorrectBinaryExpression(GrammarNotations.CONJUNCTION_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.IS_NOT_A_CONJUNCTION);
             return null;
         }
@@ -410,7 +412,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isCorrectBinaryExpression(reference, "&&")) {
+        if(!manager.isCorrectBinaryExpression(reference, GrammarNotations.CONJUNCTION_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_CONJUNCTION);
             return null;
         }
@@ -437,7 +439,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isCurrentCorrectBinaryExpression("||")) {
+        if(!manager.isCurrentCorrectBinaryExpression(GrammarNotations.DISJUNCTION_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_DISJUNCTION);
             return null;
         }
@@ -475,7 +477,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         // Check if the referred line is a disjunction
-        if(!manager.isCorrectBinaryExpression(reference, "||")) {
+        if(!manager.isCorrectBinaryExpression(reference, GrammarNotations.DISJUNCTION_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_DISJUNCTION);
             return null;
         }
@@ -498,7 +500,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitIdentityIntro(ProofGrammarParser.IdentityIntroContext ctx) {
 
-        if(!manager.isCurrentCorrectBinaryExpression("==")) {
+        if(!manager.isCurrentCorrectBinaryExpression(GrammarNotations.IDENTITY_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IDENTITY);
             return null;
         }
@@ -521,7 +523,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isCorrectBinaryExpression(reference2, "==")) {
+        if(!manager.isCorrectBinaryExpression(reference2, GrammarNotations.IDENTITY_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IDENTITY);
             return null;
         }
@@ -584,7 +586,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isCurrentCorrectBinaryExpression("->")) {
+        if(!manager.isCurrentCorrectBinaryExpression(GrammarNotations.IMPLICATION_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IMPLICATION);
             return null;
         }
@@ -612,7 +614,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isCorrectBinaryExpression(reference1, "->")) {
+        if(!manager.isCorrectBinaryExpression(reference1, GrammarNotations.IMPLICATION_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IMPLICATION);
             return null;
         }
@@ -645,7 +647,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isCurrentCorrectBinaryExpression("<->")) {
+        if(!manager.isCurrentCorrectBinaryExpression(GrammarNotations.BICONDITIONAL_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_BICONDITIONAL);
             return null;
         }
@@ -679,7 +681,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isCorrectBinaryExpression(reference1, "<->")) {
+        if(!manager.isCorrectBinaryExpression(reference1, GrammarNotations.BICONDITIONAL_SYMBOL)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.MISSING_BICONDITIONAL);
             return null;
         }
@@ -851,7 +853,6 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
     @Override
     public String visitFunction(ProofGrammarParser.FunctionContext ctx) {
-        log.info("Function: " + ctx.getText());
         return ctx.VARIABLE().getText();
     }
 

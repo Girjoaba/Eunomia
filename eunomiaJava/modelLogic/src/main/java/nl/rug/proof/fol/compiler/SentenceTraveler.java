@@ -2,7 +2,9 @@ package nl.rug.proof.fol.compiler;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
+import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
+import nl.rug.proof.fol.grammar.GrammarNotations;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -16,14 +18,6 @@ import java.util.Stack;
  */
 @Slf4j
 public class SentenceTraveler {
-
-    private static boolean isVariable(@NotNull String text) {
-        return text.matches("[u-z]");
-    }
-
-    private static boolean isConstant(@NotNull String text) {
-        return text.matches("[a-t]");
-    }
 
     /**
      * Replaces the node with parentheses with an equivalent node without parentheses.
@@ -85,7 +79,8 @@ public class SentenceTraveler {
 
         boolean pushed = false;
 
-        if(ctx.getChild(0).getText().equals("\\forall") || ctx.getChild(0).getText().equals("\\exists")) {
+        if(ctx.getChild(0).getText().equals(GrammarNotations.UNIVERSAL_QUANTIFIER)
+                | ctx.getChild(0).getText().equals(GrammarNotations.EXISTENTIAL_QUANTIFIER)) {
             boundedVariables.push(ctx.getChild(1).getText());
             pushed = true;
         }
@@ -101,9 +96,9 @@ public class SentenceTraveler {
             } else if(ctx.getChild(i) instanceof ProofGrammarParser.FunctionContext child) {
                 String identifier = child.getChild(2).getText();
 
-                if(isVariable(identifier) && !boundedVariables.contains(identifier)) {
-                    manager.setCurrentEvaluationWrong("Variable " + child.getChild(2).getText() + " is not bounded");
-                } else if(isConstant(identifier)) {
+                if(GrammarNotations.VARIABLES.contains(identifier) && !boundedVariables.contains(identifier)) {
+                    manager.setCurrentEvaluationWrong(ErrorMessage.getErrorVariableNotBounded(identifier));
+                } else if(GrammarNotations.CONSTANTS.contains(identifier)) {
                     manager.addConstantCurrentLevel(identifier);
                 }
             }

@@ -1,6 +1,8 @@
 package nl.rug.proof.fol.compiler.manager;
 
 import lombok.extern.slf4j.Slf4j;
+import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
+import nl.rug.proof.fol.grammar.GrammarNotations;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.*;
@@ -15,8 +17,6 @@ public class ProofManager {
     private final ConstantScope constantScope = new ConstantScope();
     private Integer currentLine = 0;
     private Integer currentLevel = 0;
-
-    private final String VARIABLE_STRING = "tuvwxyz";
 
     public Integer getCurrentLine() {
         return currentLine;
@@ -251,7 +251,7 @@ public class ProofManager {
         try {
             constantScope.addConstant(name, currentLevel);
         } catch (IllegalArgumentException e) {
-            setCurrentEvaluationWrong("Constant " + name + " typed wrong.");
+            setCurrentEvaluationWrong(ErrorMessage.getErrorConstantDefinedWrong(name));
         }
     }
 
@@ -277,7 +277,8 @@ public class ProofManager {
      * @return if the line is a universal quantifier.
      */
     public boolean isNotUniversalQuantifier(Integer reference) {
-        return !lineMap.get(reference).getSentenceTree().getChild(0).getText().equals("\\forall");
+        return !lineMap.get(reference).getSentenceTree().getChild(0).getText()
+                .equals(GrammarNotations.UNIVERSAL_QUANTIFIER);
     }
 
     /**
@@ -322,7 +323,7 @@ public class ProofManager {
         char firstReplacement = analyzedSentence.charAt(replacementsIndexes.get(0));
         for(int i = 0; i < analyzedSentence.length() - 1; i++) {
             if(replacementsIndexes.contains(i)) {
-                if(VARIABLE_STRING.contains(analyzedSentence.charAt(i) + "")) {
+                if(GrammarNotations.VARIABLES.contains(analyzedSentence.charAt(i) + "")) {
                     return false;
                 }
                 if(firstReplacement != analyzedSentence.charAt(i)) {
@@ -344,7 +345,8 @@ public class ProofManager {
         String sentence = lineMap.get(reference).getSentenceTree().getText();
 
         List<String> boundedVariables = new ArrayList<>();
-        sentence = sentence.replaceAll("(\\forall | \\exists)", "@");
+        sentence = sentence.replaceAll("(" + GrammarNotations.UNIVERSAL_QUANTIFIER
+                + "|" +  GrammarNotations.EXISTENTIAL_QUANTIFIER + ")", "@");
         for(int i = 0; i < sentence.length() - 1; i++) {
             if(sentence.charAt(i) == '@') {
                 if(boundedVariables.contains(sentence.charAt(i + 1) + "")) {
@@ -402,7 +404,8 @@ public class ProofManager {
      * @return if the line is an existentially quantified sentence.
      */
     public boolean isNotExistentialQuantifier(Integer reference) {
-        return !lineMap.get(reference).getSentenceTree().getChild(0).getText().equals("\\exists");
+        return !lineMap.get(reference).getSentenceTree().getChild(0).getText()
+                .equals(GrammarNotations.EXISTENTIAL_QUANTIFIER);
     }
 
     /**
@@ -424,7 +427,8 @@ public class ProofManager {
     private Set<Character> createConstantSet(String changedSentence) {
         Set<Character> changedConstants = new HashSet<>();
         for(int i = 0; i < changedSentence.length() - 2; i++) {
-            if(changedSentence.charAt(i) == '(' && !VARIABLE_STRING.contains(changedSentence.charAt(i + 1) + "")
+            if(changedSentence.charAt(i) == '('
+                    && !GrammarNotations.VARIABLES.contains(changedSentence.charAt(i + 1) + "")
                     && changedSentence.charAt(i + 2) == ')') {
                 changedConstants.add(changedSentence.charAt(i + 1));
             }
@@ -447,7 +451,7 @@ public class ProofManager {
 
         if(!lineMap.get(introductionReference).getSentenceTree().getText().equals(initialSentence)) {
             lineMap.get(introductionReference)
-                    .setWrongEvaluation("The introduced constant is not replacing correctly the variable.");
+                    .setWrongEvaluation(ErrorMessage.CONSTANT_DOES_NOT_REPLACE_CORRECTLY_VARIABLE);
         }
     }
 

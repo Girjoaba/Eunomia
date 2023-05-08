@@ -96,4 +96,15 @@ public class ErrorMessage {
             = "The inferred line is not equal to the conclusion of the subproof.";
     public static final String NOT_REMOVED_INTRODUCED_CONSTANT
             = "The introduced constant was not removed.";
+
+    public static String getErrorVariableNotBounded(String variable) {
+        return "Variable " + variable + " is not bounded.";
+    }
+
+    public static final String CONSTANT_DOES_NOT_REPLACE_CORRECTLY_VARIABLE
+            = "The introduced constant is not replacing correctly the variable.";
+
+    public static String getErrorConstantDefinedWrong(String constant) {
+        return "Constant " + constant + " is defined wrong.";
+    }
 }

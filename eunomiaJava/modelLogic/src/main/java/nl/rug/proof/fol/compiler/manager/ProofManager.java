@@ -5,6 +5,8 @@ import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
 import nl.rug.proof.fol.grammar.GrammarNotations;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import static nl.rug.proof.fol.grammar.TreeIndexes.*;
+
 import java.util.*;
 
 /**
@@ -155,7 +157,7 @@ public class ProofManager {
         if(lineMap.get(reference).getSentenceTree().getChildCount() != 3) {
             return false;
         }
-        return lineMap.get(reference).getSentenceTree().getChild(1).getText().equals(operator);
+        return lineMap.get(reference).getSentenceTree().getChild(BINARY_OPERATOR).getText().equals(operator);
     }
 
     /**
@@ -167,7 +169,7 @@ public class ProofManager {
         if(lineMap.get(currentLine).getSentenceTree().getChildCount() != 3) {
             return false;
         }
-        return lineMap.get(currentLine).getSentenceTree().getChild(1).getText().equals(operator);
+        return lineMap.get(currentLine).getSentenceTree().getChild(BINARY_OPERATOR).getText().equals(operator);
     }
 
     /**
@@ -184,9 +186,9 @@ public class ProofManager {
 
         // Return true if child reference is part of the binary expression
         return lineMap.get(childReference).getSentenceTree().getText()
-                .equals(lineMap.get(parentReference).getSentenceTree().getChild(0).getText()) ||
+                .equals(lineMap.get(parentReference).getSentenceTree().getChild(LEFT_SENTENCE).getText()) ||
                 lineMap.get(childReference).getSentenceTree().getText()
-                        .equals(lineMap.get(parentReference).getSentenceTree().getChild(2).getText());
+                        .equals(lineMap.get(parentReference).getSentenceTree().getChild(RIGHT_SENTENCE).getText());
     }
 
     /**
@@ -202,8 +204,10 @@ public class ProofManager {
         }
 
         // Return true if child reference is part of the binary expression
-        return childSentence.getText().equals(lineMap.get(parentReference).getSentenceTree().getChild(0).getText())
-            || childSentence.getText().equals(lineMap.get(parentReference).getSentenceTree().getChild(2).getText());
+        return childSentence.getText().equals(lineMap.get(parentReference)
+                .getSentenceTree().getChild(LEFT_SENTENCE).getText())
+            || childSentence.getText().equals(lineMap.get(parentReference)
+                .getSentenceTree().getChild(RIGHT_SENTENCE).getText());
     }
 
     /**
@@ -219,9 +223,9 @@ public class ProofManager {
 
         // Return true if child reference is part of the binary expression
         return lineMap.get(currentLine).getSentenceTree().getText()
-                .equals(lineMap.get(parentReference).getSentenceTree().getChild(0).getText()) ||
+                .equals(lineMap.get(parentReference).getSentenceTree().getChild(LEFT_SENTENCE).getText()) ||
                 lineMap.get(currentLine).getSentenceTree().getText()
-                        .equals(lineMap.get(parentReference).getSentenceTree().getChild(2).getText());
+                        .equals(lineMap.get(parentReference).getSentenceTree().getChild(RIGHT_SENTENCE).getText());
     }
 
     /**
@@ -237,9 +241,9 @@ public class ProofManager {
 
         // Return true if child reference is part of the binary expression
         return lineMap.get(childReference).getSentenceTree().getText()
-                .equals(lineMap.get(currentLine).getSentenceTree().getChild(0).getText()) ||
+                .equals(lineMap.get(currentLine).getSentenceTree().getChild(LEFT_SENTENCE).getText()) ||
                 lineMap.get(childReference).getSentenceTree().getText()
-                        .equals(lineMap.get(currentLine).getSentenceTree().getChild(2).getText());
+                        .equals(lineMap.get(currentLine).getSentenceTree().getChild(RIGHT_SENTENCE).getText());
     }
 
     /**
@@ -277,7 +281,7 @@ public class ProofManager {
      * @return if the line is a universal quantifier.
      */
     public boolean isNotUniversalQuantifier(Integer reference) {
-        return !lineMap.get(reference).getSentenceTree().getChild(0).getText()
+        return !lineMap.get(reference).getSentenceTree().getChild(QUANTIFIER).getText()
                 .equals(GrammarNotations.UNIVERSAL_QUANTIFIER);
     }
 
@@ -288,7 +292,8 @@ public class ProofManager {
      * @return if the sentences are equal.
      */
     public boolean isNotEqualNoQuantifier(Integer quantifiedReference, Integer reference) {
-        String quantifiedSentence = lineMap.get(quantifiedReference).getSentenceTree().getChild(2).getText();
+        String quantifiedSentence = lineMap.get(quantifiedReference)
+                .getSentenceTree().getChild(QUANTIFIED_SENTENCE).getText();
         String sentence = lineMap.get(reference).getSentenceTree().getText();
 
         quantifiedSentence = quantifiedSentence.replaceAll("\\(.*?\\)", "(Z)");
@@ -307,7 +312,8 @@ public class ProofManager {
      */
     public boolean isBoundedVariableCorrectlyReplaced(Integer initialReference, Integer analyzedReference,
                                                       String variable) {
-        String initialSentence = lineMap.get(initialReference).getSentenceTree().getChild(2).getText();
+        String initialSentence = lineMap.get(initialReference)
+                .getSentenceTree().getChild(QUANTIFIED_SENTENCE).getText();
         String analyzedSentence = lineMap.get(analyzedReference).getSentenceTree().getText();
 
         List<Integer> replacementsIndexes = new ArrayList<>();
@@ -372,11 +378,13 @@ public class ProofManager {
                                                 Integer changedReference) {
         String initialSentence = lineMap.get(initialReference).getSentenceTree().getText();
         String introducedConstant = lineMap.get(introductionReference).getBoxedConstant();
-        String introducedVariable = lineMap.get(changedReference).getSentenceTree().getChild(1).getText();
+        String introducedVariable = lineMap.get(changedReference)
+                .getSentenceTree().getChild(BOUNDED_VARIABLE).getText();
 
         initialSentence = replacesConstantsWithVariables(initialSentence, introducedConstant, introducedVariable);
 
-        return lineMap.get(changedReference).getSentenceTree().getChild(2).getText().equals(initialSentence);
+        return lineMap.get(changedReference)
+                .getSentenceTree().getChild(QUANTIFIED_SENTENCE).getText().equals(initialSentence);
     }
 
     /**
@@ -404,7 +412,7 @@ public class ProofManager {
      * @return if the line is an existentially quantified sentence.
      */
     public boolean isNotExistentialQuantifier(Integer reference) {
-        return !lineMap.get(reference).getSentenceTree().getChild(0).getText()
+        return !lineMap.get(reference).getSentenceTree().getChild(QUANTIFIER).getText()
                 .equals(GrammarNotations.EXISTENTIAL_QUANTIFIER);
     }
 
@@ -416,7 +424,7 @@ public class ProofManager {
      */
     public boolean isOnlyOneConstantReplaced(Integer initialReference, Integer changedReference) {
         String initialSentence = lineMap.get(initialReference).getSentenceTree().getText();
-        String changedSentence = lineMap.get(changedReference).getSentenceTree().getChild(2).getText();
+        String changedSentence = lineMap.get(changedReference).getSentenceTree().getChild(QUANTIFIED_SENTENCE).getText();
 
         Set<Character> initialConstants = createConstantSet(initialSentence);
         Set<Character> changedConstants = createConstantSet(changedSentence);
@@ -443,8 +451,10 @@ public class ProofManager {
      * @param introductionReference the reference to the sentence which introduces the constant.
      */
     public void isIntroducedConstantReplacingCorrectly(Integer initialReference, Integer introductionReference) {
-        String quantifiedVariable = lineMap.get(initialReference).getSentenceTree().getChild(1).getText();
-        String initialSentence = lineMap.get(initialReference).getSentenceTree().getChild(2).getText();
+        String quantifiedVariable = lineMap.get(initialReference)
+                .getSentenceTree().getChild(BOUNDED_VARIABLE).getText();
+        String initialSentence = lineMap.get(initialReference)
+                .getSentenceTree().getChild(QUANTIFIED_SENTENCE).getText();
         String introducedConstant = lineMap.get(introductionReference).getBoxedConstant();
 
         initialSentence = replacesConstantsWithVariables(initialSentence, quantifiedVariable, introducedConstant);

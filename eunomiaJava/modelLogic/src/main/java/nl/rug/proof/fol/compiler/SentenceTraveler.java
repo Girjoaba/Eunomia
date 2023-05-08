@@ -5,6 +5,7 @@ import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
 import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.proof.fol.grammar.GrammarNotations;
+import nl.rug.proof.fol.grammar.TreeIndexes;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -58,10 +59,11 @@ public class SentenceTraveler {
      */
     private static ProofGrammarParser.NormalSentenceContext getNormalSentenceContext(
             ProofGrammarParser.@NotNull ParenthesesSentenceContext ctx) {
-        if(ctx.getChild(1) instanceof ProofGrammarParser.ParenthesesSentenceContext child) {
+        if(ctx.getChild(TreeIndexes.SENTENCE_WITHIN_PARENTHESIS)
+                instanceof ProofGrammarParser.ParenthesesSentenceContext child) {
             return getNormalSentenceContext(child);
         } else {
-            return (ProofGrammarParser.NormalSentenceContext) ctx.getChild(1);
+            return (ProofGrammarParser.NormalSentenceContext) ctx.getChild(TreeIndexes.SENTENCE_WITHIN_PARENTHESIS);
         }
     }
 
@@ -79,9 +81,9 @@ public class SentenceTraveler {
 
         boolean pushed = false;
 
-        if(ctx.getChild(0).getText().equals(GrammarNotations.UNIVERSAL_QUANTIFIER)
-                | ctx.getChild(0).getText().equals(GrammarNotations.EXISTENTIAL_QUANTIFIER)) {
-            boundedVariables.push(ctx.getChild(1).getText());
+        if(ctx.getChild(TreeIndexes.QUANTIFIER).getText().equals(GrammarNotations.UNIVERSAL_QUANTIFIER)
+                | ctx.getChild(TreeIndexes.QUANTIFIER).getText().equals(GrammarNotations.EXISTENTIAL_QUANTIFIER)) {
+            boundedVariables.push(ctx.getChild(TreeIndexes.BOUNDED_VARIABLE).getText());
             pushed = true;
         }
 
@@ -94,12 +96,12 @@ public class SentenceTraveler {
                 traverseSentence(child, manager, boundedVariables);
 
             } else if(ctx.getChild(i) instanceof ProofGrammarParser.FunctionContext child) {
-                String identifier = child.getChild(2).getText();
+                String argument = child.getChild(TreeIndexes.FUNCTION_ARGUMENT).getText();
 
-                if(GrammarNotations.VARIABLES.contains(identifier) && !boundedVariables.contains(identifier)) {
-                    manager.setCurrentEvaluationWrong(ErrorMessage.getErrorVariableNotBounded(identifier));
-                } else if(GrammarNotations.CONSTANTS.contains(identifier)) {
-                    manager.addConstantCurrentLevel(identifier);
+                if(GrammarNotations.VARIABLES.contains(argument) && !boundedVariables.contains(argument)) {
+                    manager.setCurrentEvaluationWrong(ErrorMessage.getErrorVariableNotBounded(argument));
+                } else if(GrammarNotations.CONSTANTS.contains(argument)) {
+                    manager.addConstantCurrentLevel(argument);
                 }
             }
         }

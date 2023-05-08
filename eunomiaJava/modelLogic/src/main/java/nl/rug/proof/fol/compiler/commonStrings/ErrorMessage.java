@@ -16,8 +16,7 @@ public class ErrorMessage {
     public static final String RESULT_NOT_A_CONTRADICTION
             = "Result not a contradiction.";
     public static final String CONTRADICTION_WRONG_INTRODUCTION
-            = "Contradiction does not result from the premises." +
-            " (maybe justification order is wrong ?)";
+            = "Contradiction does not result from the premises. (maybe justification order is wrong ?)";
     public static final String NOT_APPLIED_TO_A_CONTRADICTION
             = "Contradiction elimination not applied to a contradiction.";
     public static final String LINE_IS_NOT_A_NEGATION
@@ -97,12 +96,12 @@ public class ErrorMessage {
     public static final String NOT_REMOVED_INTRODUCED_CONSTANT
             = "The introduced constant was not removed.";
 
+    public static final String CONSTANT_DOES_NOT_REPLACE_CORRECTLY_VARIABLE
+            = "The introduced constant is not replacing correctly the variable.";
+
     public static String getErrorVariableNotBounded(String variable) {
         return "Variable " + variable + " is not bounded.";
     }
-
-    public static final String CONSTANT_DOES_NOT_REPLACE_CORRECTLY_VARIABLE
-            = "The introduced constant is not replacing correctly the variable.";
 
     public static String getErrorConstantDefinedWrong(String constant) {
         return "Constant " + constant + " is defined wrong.";

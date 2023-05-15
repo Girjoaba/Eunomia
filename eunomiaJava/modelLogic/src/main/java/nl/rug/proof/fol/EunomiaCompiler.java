@@ -74,4 +74,8 @@ public class EunomiaCompiler {
         ProofEvaluatorVisitor visitor = new ProofEvaluatorVisitor(manager);
         visitor.visit(tree);
     }
+
+    public void clear() {
+        manager.clear();
+    }
 }

@@ -486,4 +486,15 @@ public class ProofManager {
 
         return true;
     }
+
+    public String getErrorMessage(Integer line) {
+        return lineMap.get(line).getErrorMessage();
+    }
+
+    public void clear() {
+        lineMap.clear();
+        constantScope.clear();
+        currentLine = 0;
+        currentLevel = 0;
+    }
 }

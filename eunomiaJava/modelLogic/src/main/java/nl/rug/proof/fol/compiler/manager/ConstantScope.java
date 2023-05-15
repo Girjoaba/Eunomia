@@ -36,6 +36,10 @@ public class ConstantScope {
         constants.removeIf(c -> c.level > level);
     }
 
+    public void clear() {
+        constants.clear();
+    }
+
     /**
      * A record for storing the name and the level of a constant.
      * @param name the name of the constant.

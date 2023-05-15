@@ -54,6 +54,11 @@ public class EunomiaCompiler {
         visitor.visit(tree);
     }
 
+    /**
+     * Compiles the proof from the path of a file.
+     * @param path the path where the file is at.
+     * @throws FileNotFoundException if the file is not found.
+     */
     public void compile(InputPath path) throws FileNotFoundException {
         // Get input
         ANTLRInputStream input = new ANTLRInputStream(StringConverter.getStringFromTXT(path.getPath()));

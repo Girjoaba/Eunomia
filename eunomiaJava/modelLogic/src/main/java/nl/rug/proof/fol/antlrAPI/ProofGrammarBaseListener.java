@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-@SuppressWarnings("CheckReturnValue")
+@SuppressWarnings({"CheckReturnValue", "CheckStyle"})
 public class ProofGrammarBaseListener implements ProofGrammarListener {
 	/**
 	 * {@inheritDoc}
@@ -204,6 +204,18 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPremise(ProofGrammarParser.PremiseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPremise(ProofGrammarParser.PremiseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

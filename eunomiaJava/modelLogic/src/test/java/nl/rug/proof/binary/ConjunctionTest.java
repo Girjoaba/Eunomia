@@ -17,7 +17,7 @@ public class ConjunctionTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/binary/conjunction/simple_conjunction_intro.txt"));
+            compiler.compile(new InputPath("testProofs/binary/conjunction/correct/simple_conjunction_intro.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -31,7 +31,7 @@ public class ConjunctionTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/binary/conjunction/simple_conjunction_elim.txt"));
+            compiler.compile(new InputPath("testProofs/binary/conjunction/correct/simple_conjunction_elim.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -45,7 +45,7 @@ public class ConjunctionTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/binary/conjunction/quantifiers_elim.txt"));
+            compiler.compile(new InputPath("testProofs/binary/conjunction/correct/quantifiers_elim.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 

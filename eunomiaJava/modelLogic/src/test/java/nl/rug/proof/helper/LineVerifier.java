@@ -1,11 +1,13 @@
 package nl.rug.proof.helper;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Slf4j
 public class LineVerifier {
 
     static public void verifyAllLinesCorrect(ProofManager manager) {

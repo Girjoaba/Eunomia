@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
+@SuppressWarnings("CheckStyle")
 public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#proof}.
@@ -112,6 +113,12 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProofGrammarParser#premise}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPremise(ProofGrammarParser.PremiseContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ReitJust}
 	 * labeled alternative in {@link ProofGrammarParser#justification}.

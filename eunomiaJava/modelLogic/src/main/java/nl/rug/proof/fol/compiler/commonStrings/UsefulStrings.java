@@ -14,7 +14,7 @@ public class UsefulStrings {
      * @param range the range reference as a string.
      * @return the number which points to the start of the range.
      */
-    static public Integer getRangeStart(String range) {
+    public static Integer getRangeStart(String range) {
         return Integer.parseInt(range.split(RANGE_SEPARATOR)[0]);
     }
 
@@ -23,7 +23,7 @@ public class UsefulStrings {
      * @param range the range reference as a string.
      * @return the number which points to the end of the range.
      */
-    static public Integer getRangeEnd(String range) {
+    public static Integer getRangeEnd(String range) {
         return Integer.parseInt(range.split(RANGE_SEPARATOR)[1]);
     }
 }

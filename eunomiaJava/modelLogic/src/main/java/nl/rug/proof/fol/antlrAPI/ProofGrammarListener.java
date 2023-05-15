@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * This interface defines a complete listener for a parse tree produced by
  * {@link ProofGrammarParser}.
  */
+@SuppressWarnings("CheckStyle")
 public interface ProofGrammarListener extends ParseTreeListener {
 	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#proof}.
@@ -179,6 +180,16 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitParenthesesSentence(ProofGrammarParser.ParenthesesSentenceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#premise}.
+	 * @param ctx the parse tree
+	 */
+	void enterPremise(ProofGrammarParser.PremiseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#premise}.
+	 * @param ctx the parse tree
+	 */
+	void exitPremise(ProofGrammarParser.PremiseContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ReitJust}
 	 * labeled alternative in {@link ProofGrammarParser#justification}.

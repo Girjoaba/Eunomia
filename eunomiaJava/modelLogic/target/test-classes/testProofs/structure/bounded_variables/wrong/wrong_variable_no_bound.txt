@@ -1,2 +1,0 @@
-1. P(x) premise
-2. P(x) Reit: 1

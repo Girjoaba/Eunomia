@@ -29,7 +29,7 @@ public class ParenthesesTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/structure/parentheses/correct/reit_with_paren.txt"));
+            compiler.compile(new InputPath("testProofs/structure/parentheses/correct/reit_with_param.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 
@@ -56,7 +56,7 @@ public class ParenthesesTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/structure/parentheses/correct/binary_order_multiple_deep.txt"));
+            compiler.compile(new InputPath("testProofs/structure/parentheses/correct/the_girji_abdou_test_proof.txt"));
 
             LineVerifier.verifyAllLinesCorrect(manager);
 

@@ -47,7 +47,7 @@ public class ContradictionTest {
         try {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/atomic/contradiction/contra_intro.txt"));
+            compiler.compile(new InputPath("testProofs/atomic/contradiction/contra_intro_justification_order_wrong.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);

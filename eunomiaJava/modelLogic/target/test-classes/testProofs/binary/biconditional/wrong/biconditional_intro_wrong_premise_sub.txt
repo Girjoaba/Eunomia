@@ -8,4 +8,4 @@ assume
 5. B premise
 6. A Reit: 1
 qed
-7. B <-> A <->Intro: 3-4, 5-6
+7. B ↔ A ↔Intro: 3-4, 5-6

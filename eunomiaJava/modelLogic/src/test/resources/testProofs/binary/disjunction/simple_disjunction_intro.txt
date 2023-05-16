@@ -1,2 +1,2 @@
 1. A premise
-2. A || B ||Intro: 1
+2. A ∨ B ∨Intro: 1

@@ -1,2 +1,2 @@
 1. P(c) premise
-2. \exists x Q(x) \exists Intro: 1
+2. ∃ x Q(x) ∃ Intro: 1

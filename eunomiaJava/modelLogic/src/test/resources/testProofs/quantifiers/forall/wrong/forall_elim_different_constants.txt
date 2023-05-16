@@ -1,2 +1,2 @@
-1. \forall x (P(x) && Q(x)) premise
-2. P(a) && Q(b) \forall Elim: 1
+1. ∀ x (P(x) ∧ Q(x)) premise
+2. P(a) ∧ Q(b) ∀ Elim: 1

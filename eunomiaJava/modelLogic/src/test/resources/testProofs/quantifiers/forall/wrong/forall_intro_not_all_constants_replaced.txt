@@ -1,6 +1,6 @@
-1. \forall x (P(x) && Q(x)) premise
+1. ∀ x (P(x) ∧ Q(x)) premise
 assume
 2. |c| premise
-3. P(c) && Q(c) \forall Elim: 1
+3. P(c) ∧ Q(c) ∀ Elim: 1
 qed
-4. \forall y (P(c) && Q(x)) \forall Intro: 2-3
+4. ∀ y (P(c) ∧ Q(x)) ∀ Intro: 2-3

@@ -3,4 +3,4 @@ assume
 2. B premise
 3. A Reit: 1
 qed
-4. B -> C ->Intro: 2-3
+4. B → C →Intro: 2-3

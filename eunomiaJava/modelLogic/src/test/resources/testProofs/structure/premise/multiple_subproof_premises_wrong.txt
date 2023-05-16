@@ -2,5 +2,5 @@
 assume
 2. B premise
 3. C premise
-4. B && C &&Intro: 2, 3
+4. B ∧ C ∧Intro: 2, 3
 qed

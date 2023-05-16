@@ -1,7 +1,7 @@
-1. \exists x P(x) premise
+1. ∃ x P(x) premise
 assume
 2. |c| P(c) premise
 3. P(c) Reit: 2
-4. \exists y P(y) \exists Intro: 3
+4. ∃ y P(y) ∃ Intro: 3
 qed
-5. \exists y P(y) \exists Elim: 1, 2-4
+5. ∃ y P(y) ∃ Elim: 1, 2-4

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suppressions PUBLIC
+    "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+    "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+<!--
+This document contains a list of suppression filters that can be used to
+suppress checks imposed by the standard config.xml. For more information
+about how to configure suppressions, see here: https://checkstyle.sourceforge.io/config_filters.html#SuppressionFilter
+-->
+<suppressions>
+</suppressions>

@@ -1,4 +1,4 @@
-// Generated from java-escape by ANTLR 4.11.1
+// Generated from D:/CompSci/JavaCode/Eunomia/eunomiaJava/modelLogic/src/main/java/nl/rug/proof/fol/grammar\ProofGrammar.g4 by ANTLR 4.12.0
 package nl.rug.proof.fol.antlrAPI;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -6,7 +6,6 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * This interface defines a complete listener for a parse tree produced by
  * {@link ProofGrammarParser}.
  */
-@SuppressWarnings("CheckStyle")
 public interface ProofGrammarListener extends ParseTreeListener {
 	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#proof}.

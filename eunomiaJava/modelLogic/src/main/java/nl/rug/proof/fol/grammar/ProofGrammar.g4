@@ -101,15 +101,15 @@ ATOM     : [A-Z][a-zA-Z0-9]* ;
 
 function: ATOM '(' (VARIABLE | CONSTANT) ')' ;
 
-NEGATION    : '!' ;
-CONTRADICTION : '\\perp' ;
-CONJUNCTION : '&&' ;
-DISJUNCTION : '||' ;
+NEGATION    : '¬' ;
+CONTRADICTION : '⟂' ;
+CONJUNCTION : '∧' ;
+DISJUNCTION : '∨' ;
 IDENTITY    : '==' ;
-IMPLICATION : '->' ;
-BICONDITIONAL : '<->' ;
-FORALL      : '\\forall' ;
-EXISTS      : '\\exists' ;
+IMPLICATION : '→' ;
+BICONDITIONAL : '↔' ;
+FORALL      : '∀' ;
+EXISTS      : '∃' ;
 
 PREMISE : 'premise' ;
 ASSUME : 'assume' ;

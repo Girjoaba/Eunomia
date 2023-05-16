@@ -1,4 +1,4 @@
-// Generated from java-escape by ANTLR 4.11.1
+// Generated from D:/CompSci/JavaCode/Eunomia/eunomiaJava/modelLogic/src/main/java/nl/rug/proof/fol/grammar\ProofGrammar.g4 by ANTLR 4.12.0
 package nl.rug.proof.fol.antlrAPI;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class ProofGrammarParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.11.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.12.0", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -44,9 +44,10 @@ public class ProofGrammarParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'.'", "'('", "')'", "'Reit: '", "'Intro: '", "','", "'Intro'", 
-			"'Elim: '", "'-'", "'|'", null, null, null, "'!'", "'\\perp'", "'&&'", 
-			"'||'", "'=='", "'->'", "'<->'", "'\\forall'", "'\\exists'", "'premise'", 
-			"'assume'", "'qed'"
+			"'Elim: '", "'-'", "'|'", null, null, null, "'\\u00C2\\u00AC'", "'\\u00E2\\u0178\\u201A'", 
+			"'\\u00E2\\u02C6\\u00A7'", "'\\u00E2\\u02C6\\u00A8'", "'=='", "'\\u00E2\\u2020\\u2019'", 
+			"'\\u00E2\\u2020\\u201D'", "'\\u00E2\\u02C6\\u20AC'", "'\\u00E2\\u02C6\\u0192'", 
+			"'premise'", "'assume'", "'qed'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -93,7 +94,7 @@ public class ProofGrammarParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "java-escape"; }
+	public String getGrammarFileName() { return "ProofGrammar.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -641,7 +642,7 @@ public class ProofGrammarParser extends Parser {
 			setState(95);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((_la) & ~0x3f) == 0 && ((1L << _la) & 6316036L) != 0) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 6316036L) != 0)) {
 				{
 				setState(94);
 				sentence(0);
@@ -826,7 +827,7 @@ public class ProofGrammarParser extends Parser {
 					setState(113); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
-				} while ( ((_la) & ~0x3f) == 0 && ((1L << _la) & 6316036L) != 0 );
+				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 6316036L) != 0) );
 				setState(115);
 				premise();
 				}

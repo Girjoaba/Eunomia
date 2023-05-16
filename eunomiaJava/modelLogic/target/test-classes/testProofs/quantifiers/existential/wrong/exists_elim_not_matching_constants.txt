@@ -1,6 +1,6 @@
-1. \exists x P(x) premise
+1. ∃ x P(x) premise
 assume
 2. |b| P(c) premise
 3. P(c) Reit: 2
 qed
-4. P(c) \exists Elim: 1, 2-3
+4. P(c) ∃ Elim: 1, 2-3

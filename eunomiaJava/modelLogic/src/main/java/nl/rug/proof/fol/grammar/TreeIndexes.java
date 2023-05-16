@@ -23,7 +23,7 @@ public class TreeIndexes {
     public static final Integer LEFT_IDENTITY = 0;
     public static final Integer RIGHT_IDENTITY = 2;
     public static final Integer LEFT_IMPLICATION = 0;
-    public static final Integer RIGHT_IMPLICATION = 1;
+    public static final Integer RIGHT_IMPLICATION = 2;
     public static final Integer LEFT_BICONDITIONAL = 0;
     public static final Integer RIGHT_BICONDITIONAL = 2;
     public static final Integer BINARY_OPERATOR = 1;

@@ -604,6 +604,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         if(!manager.getCurrentSentence().getChild(RIGHT_IMPLICATION).getText()
                 .equals(manager.getSentence(rangeEnd).getText())) {
+            log.error(manager.getCurrentSentence().getChild(RIGHT_IMPLICATION).getText());
+            log.error(manager.getSentence(rangeEnd).getText());
             manager.setCurrentEvaluationWrong(ErrorMessage.CONCLUSION_DOES_NOT_MATCH_IMPLICATION);
             return null;
         }

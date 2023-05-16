@@ -1,2 +1,2 @@
-1. \forall y P(x) premise
-2. \forall y P(x) Reit: 1
+1. ∀ y P(x) premise
+2. ∀ y P(x) Reit: 1

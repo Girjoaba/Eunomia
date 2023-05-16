@@ -1,12 +1,12 @@
-1. \forall x \exists y (P(x) && Q(y)) premise
+1. ∀ x ∃ y (P(x) ∧ Q(y)) premise
 assume
 2. |c| premise
-3. \exists y (P(c) && Q(y)) \forall Elim: 1
+3. ∃ y (P(c) ∧ Q(y)) ∀ Elim: 1
 assume
-4. |d| P(c) && Q(d) premise
-5. P(c) && Q(d) Reit: 4
+4. |d| P(c) ∧ Q(d) premise
+5. P(c) ∧ Q(d) Reit: 4
 qed
-6. P(c) && Q(d) \exists Elim: 3, 4-5
+6. P(c) ∧ Q(d) ∃ Elim: 3, 4-5
 qed
-7. \forall x (P(x) && Q(d)) \forall Intro: 2-6
-8. \exists y \forall x (P(x) && Q(y)) \exists Intro: 7
+7. ∀ x (P(x) ∧ Q(d)) ∀ Intro: 2-6
+8. ∃ y ∀ x (P(x) ∧ Q(y)) ∃ Intro: 7

@@ -1,5 +1,5 @@
 1. A premise
 assume
 2. B premise
-3. A && B &&Intro: 1, 2
+3. A ∧ B ∧Intro: 1, 2
 qed

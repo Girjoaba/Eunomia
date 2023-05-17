@@ -1,5 +1,7 @@
 package nl.rug.editorFrame.errorPanel;
 
+import nl.rug.editorFrame.EunomiaColors;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,7 +15,8 @@ public class ErrorText extends JTextArea {
     private void initErrorText() {
         this.setPreferredSize(new Dimension(300, 200));
         // set a gray background
-        this.setBackground(new Color(40, 40, 40));
+        this.setBackground(Color.decode(EunomiaColors.BACKGROUND_MAIN));
+        this.setForeground(Color.decode(EunomiaColors.FOREGROUND_MAIN));
 
         this.setForeground(Color.WHITE);
         this.setEditable(false);

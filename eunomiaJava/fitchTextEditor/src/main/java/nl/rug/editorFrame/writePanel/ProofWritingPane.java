@@ -1,10 +1,9 @@
 package nl.rug.editorFrame.writePanel;
 
+import nl.rug.editorFrame.EunomiaColors;
+
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
+import javax.swing.text.*;
 import java.awt.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -20,10 +19,12 @@ public class ProofWritingPane extends JTextPane {
     }
 
     private void initProofWritingPane() {
-        this.setBackground(Color.lightGray);
-        this.setPreferredSize(new Dimension(1500, 900));
+        this.setPreferredSize(new Dimension(1100, 600));
         this.setContentType("text/plain; charset=UTF-8");
         this.setFont(new Font("Arial", Font.PLAIN, 15));
+
+        this.setBackground(Color.decode(EunomiaColors.BACKGROUND_MAIN));
+        this.setForeground(Color.decode(EunomiaColors.FOREGROUND_MAIN));
 
 
         String notEncodedExampleProof =
@@ -57,18 +58,19 @@ public class ProofWritingPane extends JTextPane {
     public void markWrongLine(int index) {
         wrongLines.add(index);
         StyledDocument doc = this.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setForeground(center, Color.RED);
+        SimpleAttributeSet errorStyle = new SimpleAttributeSet();
+        StyleConstants.setForeground(errorStyle, EunomiaColors.ERROR);
+//        StyleConstants.setUnderline(errorStyle, true);
 
         String[] lines = this.getText().split("\n");
         this.setText("");
         for (String line : lines) {
             // If line contains a number from the list fo wrong lines, mark it red
-            Boolean inserted = false;
+            boolean inserted = false;
             for (Integer wrongLine : wrongLines) {
                 if (line.contains(wrongLine + ".")) {
                     try {
-                        doc.insertString(doc.getLength(), line + "\n", center);
+                        doc.insertString(doc.getLength(), line + "\n", errorStyle);
                         inserted = true;
                     } catch (BadLocationException e) {
                         e.printStackTrace();
@@ -85,10 +87,6 @@ public class ProofWritingPane extends JTextPane {
         }
 
         this.setDocument(doc);
-    }
-
-    public void hello() {
-        System.out.println("hello");
     }
 
     public void clearErrors() {

@@ -1,5 +1,7 @@
 package nl.rug.editorFrame.writePanel;
 
+import nl.rug.editorFrame.EunomiaColors;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,7 +16,7 @@ public class WritePanel extends JPanel {
 
     private void initProofWritePanel() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        this.setBackground(Color.lightGray);
+        this.setBackground(Color.decode(EunomiaColors.BACKGROUND_MAIN));
         this.add(proofTextPane);
     }
 

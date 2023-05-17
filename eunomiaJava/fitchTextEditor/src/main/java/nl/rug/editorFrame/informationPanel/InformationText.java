@@ -1,5 +1,7 @@
 package nl.rug.editorFrame.informationPanel;
 
+import nl.rug.editorFrame.EunomiaColors;
+
 import javax.swing.*;
 import java.awt.*;
 import java.nio.charset.StandardCharsets;
@@ -12,8 +14,8 @@ public class InformationText extends JTextPane {
     }
 
     private void initInformationText() {
-        this.setBackground(Color.DARK_GRAY);
-        this.setForeground(Color.white);
+        this.setBackground(Color.decode(EunomiaColors.BACKGROUND_SECOND));
+        this.setForeground(Color.decode(EunomiaColors.FOREGROUND_MAIN));
         this.setEditable(false);
         this.setContentType("text/html; charset=UTF-8");
         this.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -22,7 +24,6 @@ public class InformationText extends JTextPane {
 
         this.setText(new String(
             """
-                <font size="+1">
                 Syntax: <br> <br>
 
                 Negation: ¬ <br>
@@ -37,7 +38,6 @@ public class InformationText extends JTextPane {
 
                 Subproof start: assume <br>
                 Subproof end: qed
-                </font>
 
                 """.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8)
         );

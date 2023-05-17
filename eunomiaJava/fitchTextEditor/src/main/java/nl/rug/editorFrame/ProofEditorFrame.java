@@ -30,7 +30,7 @@ public class ProofEditorFrame extends javax.swing.JFrame implements ActionListen
         this.setTitle("Eunomia");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
-        this.setSize(1400, 1000);
+        this.setSize(1500, 1000);
         this.setLocationRelativeTo(null);
 
         this.setJMenuBar(menuBar);
@@ -48,6 +48,8 @@ public class ProofEditorFrame extends javax.swing.JFrame implements ActionListen
         horizontalSplit.setContinuousLayout(true);
         horizontalSplit.setResizeWeight(1.0);
         proofPanel.add(horizontalSplit, BorderLayout.CENTER);
+
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         this.setResizable(true);
     }

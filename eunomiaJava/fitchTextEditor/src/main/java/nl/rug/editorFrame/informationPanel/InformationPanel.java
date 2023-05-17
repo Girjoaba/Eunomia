@@ -12,7 +12,7 @@ public class InformationPanel extends JPanel {
 
         private void initProofInformationPanel() {
             this.setLayout(new FlowLayout(FlowLayout.LEFT));
-            this.setMinimumSize(new Dimension(0, 0));
+            this.setPreferredSize(new Dimension(300, 600));
             this.setBackground(Color.DARK_GRAY);
             this.add(new InformationText());
         }

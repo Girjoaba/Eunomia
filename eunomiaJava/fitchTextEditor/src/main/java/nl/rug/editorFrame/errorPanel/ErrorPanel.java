@@ -15,9 +15,10 @@ public class ErrorPanel extends JPanel {
 
     private void initErrorPanel() {
         this.setBackground(Color.getHSBColor(40, 40, 40));
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(300, 200));
-        this.add(errorText);
+        JScrollPane scrollErrorPanel = new JScrollPane(errorText);
+        this.add(scrollErrorPanel, BorderLayout.CENTER);
     }
 
     public void addErrorLine(String error) {

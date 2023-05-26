@@ -3,6 +3,8 @@ package nl.rug.editorFrame.writePanel;
 import nl.rug.editorFrame.EunomiaColors;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.*;
 import java.awt.*;
 import java.nio.charset.StandardCharsets;
@@ -53,6 +55,7 @@ public class ProofWritingPane extends JTextPane {
         System.out.println(encodedExampleProofString);
 
         this.setText(encodedExampleProofString);
+//        this.addDocumentListener();
     }
 
     public void markWrongLine(int index) {
@@ -101,5 +104,10 @@ public class ProofWritingPane extends JTextPane {
                 e.printStackTrace();
             }
         }
+    }
+
+    // FInd how many lines are in the document
+    public int getLineCount() {
+        return this.getText().split("\n").length;
     }
 }

@@ -55,7 +55,6 @@ public class ProofWritingPane extends JTextPane {
         System.out.println(encodedExampleProofString);
 
         this.setText(encodedExampleProofString);
-//        this.addDocumentListener();
     }
 
     public void markWrongLine(int index) {
@@ -73,7 +72,10 @@ public class ProofWritingPane extends JTextPane {
             for (Integer wrongLine : wrongLines) {
                 if (line.contains(wrongLine + ".")) {
                     try {
-                        doc.insertString(doc.getLength(), line + "\n", errorStyle);
+                        String updateLine = line + "\n";
+                        byte[] encodedLine = updateLine.getBytes(StandardCharsets.UTF_8);
+                        String encodedLineString = new String(encodedLine, StandardCharsets.UTF_8);
+                        doc.insertString(doc.getLength(), encodedLineString, errorStyle);
                         inserted = true;
                     } catch (BadLocationException e) {
                         e.printStackTrace();
@@ -82,7 +84,10 @@ public class ProofWritingPane extends JTextPane {
             }
             if (!inserted) {
                 try {
-                    doc.insertString(doc.getLength(), line + "\n", null);
+                    String updateLine = line + "\n";
+                    byte[] encodedLine = updateLine.getBytes(StandardCharsets.UTF_8);
+                    String encodedLineString = new String(encodedLine, StandardCharsets.UTF_8);
+                    doc.insertString(doc.getLength(), encodedLineString, null);
                 } catch (BadLocationException e) {
                     e.printStackTrace();
                 }
@@ -99,15 +104,13 @@ public class ProofWritingPane extends JTextPane {
         this.setText("");
         for (String line : lines) {
             try {
-                doc.insertString(doc.getLength(), line + "\n", null);
+                String updateLine = line + "\n";
+                byte[] encodedLine = updateLine.getBytes(StandardCharsets.UTF_8);
+                String encodedLineString = new String(encodedLine, StandardCharsets.UTF_8);
+                doc.insertString(doc.getLength(), encodedLineString, null);
             } catch (BadLocationException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    // FInd how many lines are in the document
-    public int getLineCount() {
-        return this.getText().split("\n").length;
     }
 }

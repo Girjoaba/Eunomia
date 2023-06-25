@@ -73,7 +73,7 @@ public class TextLineNumber extends JPanel
     {
         this.component = component;
 
-        setFont( component.getFont() );
+//        setFont( component.getFont() ); // This breaks UTF-8 characters from the proof panel.
 
         setBorderGap( 5 );
         setCurrentLineForeground(EunomiaColors.ACCENT_MAIN);

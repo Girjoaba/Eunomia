@@ -30,24 +30,23 @@ public class ProofWritingPane extends JTextPane {
 
 
         String notEncodedExampleProof =
-                """
-                1. P premise
-                assume
+            """
+            1. P premise
+            assume
                 2. ¬((P ∧ Q) ∨ (P ∧ ¬Q)) premise
-                    assume
-                3. Q premise
-                4. P ∧ Q ∧Intro: 1, 3
-                5. (P ∧ Q) ∨ (P ∧ ¬Q) ∨Intro: 4
-                6. ⟂ ⟂Intro: 5, 2
+                assume
+                    3. Q premise
+                    4. P ∧ Q ∧Intro: 1, 3
+                    5. (P ∧ Q) ∨ (P ∧ ¬Q) ∨Intro: 4
+                    6. ⟂ ⟂Intro: 5, 2
                 qed
                 7. ¬Q ¬Intro: 3-6
                 8. P ∧ ¬Q ∧Intro: 1, 7
                 9. (((P ∧ Q) ∨ ((P ∧ ¬Q)))) ∨Intro: 8
                 10. ⟂ ⟂Intro: 9, 2
-                qed
-                11. ¬¬((P ∧ Q) ∨ (P ∧ ¬Q)) ¬Intro: 2-10
-                12. (P ∧ Q) ∨ (P ∧ ¬Q) ¬Elim: 11
-            """;
+            qed
+            11. ¬¬((P ∧ Q) ∨ (P ∧ ¬Q)) ¬Intro: 2-10
+            12. (P ∧ Q) ∨ (P ∧ ¬Q) ¬Elim: 11""";
 
         byte[] encodedExampleProof = notEncodedExampleProof.getBytes(StandardCharsets.UTF_8);
         String encodedExampleProofString = new String(encodedExampleProof, StandardCharsets.UTF_8);

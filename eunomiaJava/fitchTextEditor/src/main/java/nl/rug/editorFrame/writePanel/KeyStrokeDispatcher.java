@@ -41,10 +41,8 @@ public class KeyStrokeDispatcher {
         };
     }
 
-    private static void undoRedoAction(ProofWritingPane proofWritingPane) {
-        UndoManager undoManager;
+    private static void undoRedoAction(ProofWritingPane proofWritingPane, UndoManager undoManager) {
 
-        undoManager = new UndoManager();
         Document doc = proofWritingPane.getDocument();
         doc.addUndoableEditListener(new UndoableEditListener() {
             @Override
@@ -88,7 +86,7 @@ public class KeyStrokeDispatcher {
         });
     }
 
-    public static void addKeyStrokeActions(ProofWritingPane proofWritingPane) {
+    public static void addKeyStrokeActions(ProofWritingPane proofWritingPane, UndoManager undoManager) {
         proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED)
                 .put(KeyStroke.getKeyStroke("control N"), NEGATION_TAG);
         proofWritingPane.getActionMap()
@@ -129,6 +127,6 @@ public class KeyStrokeDispatcher {
         proofWritingPane.getActionMap()
                 .put(UNIVERSAL_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.UNIVERSAL_QUANTIFIER));
 
-        undoRedoAction(proofWritingPane);
+        undoRedoAction(proofWritingPane, undoManager);
     }
 }

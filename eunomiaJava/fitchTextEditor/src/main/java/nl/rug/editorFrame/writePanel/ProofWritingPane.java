@@ -1,15 +1,19 @@
 package nl.rug.editorFrame.writePanel;
 
 import nl.rug.editorFrame.EunomiaColors;
+import nl.rug.editorFrame.ProofSyntax;
 
 import javax.swing.*;
 import javax.swing.text.*;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProofWritingPane extends JTextPane {
+
+    private final UndoManager undoManager;
 
     private static final String withoutNumbers =
             """
@@ -33,10 +37,11 @@ public class ProofWritingPane extends JTextPane {
     private final List<Integer> wrongLines;
     public ProofWritingPane() {
         super();
+        undoManager = new UndoManager();
         wrongLines = new ArrayList<>();
         initProofWritingPane();
 
-        KeyStrokeDispatcher.addKeyStrokeActions(this);
+        KeyStrokeDispatcher.addKeyStrokeActions(this, undoManager);
     }
 
     private void initProofWritingPane() {
@@ -69,9 +74,10 @@ public class ProofWritingPane extends JTextPane {
         String[] lines = this.getText().split("\n");
         this.setText("");
         for (String line : lines) {
-            if(!line.contains("qed") && !line.contains("assume")) {
+            if(!line.contains(ProofSyntax.SUBPROOF_START) && !line.contains(ProofSyntax.SUBPROOF_END)) {
                 lineNumber++;
             }
+
             // If line contains a number from the list fo wrong lines, mark it red
             boolean inserted = false;
             for (Integer wrongLine : wrongLines) {
@@ -98,8 +104,8 @@ public class ProofWritingPane extends JTextPane {
                 }
             }
         }
-
         this.setDocument(doc);
+        undoManager.discardAllEdits();
     }
 
     public void clearErrors() {

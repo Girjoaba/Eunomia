@@ -1,21 +1,34 @@
 package nl.rug.editorFrame.writePanel;
 
 import nl.rug.editorFrame.EunomiaColors;
-import nl.rug.editorFrame.ProofSyntax;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.text.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProofWritingPane extends JTextPane {
+
+    private static final String withoutNumbers =
+            """
+            P premise
+            assume
+                ¬((P ∧ Q) ∨ (P ∧ ¬Q)) premise
+                assume
+                    Q premise
+                    P ∧ Q ∧Intro: 1, 3
+                    (P ∧ Q) ∨ (P ∧ ¬Q) ∨Intro: 4
+                    ⟂ ⟂Intro: 5, 2
+                qed
+                ¬Q ¬Intro: 3-6
+                P ∧ ¬Q ∧Intro: 1, 7
+                (((P ∧ Q) ∨ ((P ∧ ¬Q)))) ∨Intro: 8
+                ⟂ ⟂Intro: 9, 2
+            qed
+            ¬¬((P ∧ Q) ∨ (P ∧ ¬Q)) ¬Intro: 2-10
+            (P ∧ Q) ∨ (P ∧ ¬Q) ¬Elim: 11""";
 
     private final List<Integer> wrongLines;
     public ProofWritingPane() {
@@ -35,24 +48,7 @@ public class ProofWritingPane extends JTextPane {
         this.setForeground(Color.decode(EunomiaColors.FOREGROUND_MAIN));
 
 
-        String notEncodedExampleProof =
-            """
-            1. P premise
-            assume
-                2. ¬((P ∧ Q) ∨ (P ∧ ¬Q)) premise
-                assume
-                    3. Q premise
-                    4. P ∧ Q ∧Intro: 1, 3
-                    5. (P ∧ Q) ∨ (P ∧ ¬Q) ∨Intro: 4
-                    6. ⟂ ⟂Intro: 5, 2
-                qed
-                7. ¬Q ¬Intro: 3-6
-                8. P ∧ ¬Q ∧Intro: 1, 7
-                9. (((P ∧ Q) ∨ ((P ∧ ¬Q)))) ∨Intro: 8
-                10. ⟂ ⟂Intro: 9, 2
-            qed
-            11. ¬¬((P ∧ Q) ∨ (P ∧ ¬Q)) ¬Intro: 2-10
-            12. (P ∧ Q) ∨ (P ∧ ¬Q) ¬Elim: 11""";
+        String notEncodedExampleProof = withoutNumbers;
 
         byte[] encodedExampleProof = notEncodedExampleProof.getBytes(StandardCharsets.UTF_8);
         String encodedExampleProofString = new String(encodedExampleProof, StandardCharsets.UTF_8);
@@ -63,6 +59,8 @@ public class ProofWritingPane extends JTextPane {
     }
 
     public void markWrongLine(int index) {
+        int lineNumber = 0;
+
         wrongLines.add(index);
         StyledDocument doc = this.getStyledDocument();
         SimpleAttributeSet errorStyle = new SimpleAttributeSet();
@@ -71,10 +69,13 @@ public class ProofWritingPane extends JTextPane {
         String[] lines = this.getText().split("\n");
         this.setText("");
         for (String line : lines) {
+            if(!line.contains("qed") && !line.contains("assume")) {
+                lineNumber++;
+            }
             // If line contains a number from the list fo wrong lines, mark it red
             boolean inserted = false;
             for (Integer wrongLine : wrongLines) {
-                if (line.contains(wrongLine + ".")) {
+                if (lineNumber == wrongLine) {
                     try {
                         String updateLine = line + "\n";
                         byte[] encodedLine = updateLine.getBytes(StandardCharsets.UTF_8);

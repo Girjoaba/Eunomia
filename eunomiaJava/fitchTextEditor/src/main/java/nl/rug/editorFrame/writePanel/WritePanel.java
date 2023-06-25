@@ -30,8 +30,8 @@ public class WritePanel extends JPanel {
     }
 
     public String getProofText() {
-            return proofTextPane.getText();
-            }
+        return proofTextPane.getText();
+    }
 
     public void clearErrors() {
         proofTextPane.clearErrors();

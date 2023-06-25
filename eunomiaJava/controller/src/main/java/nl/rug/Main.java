@@ -22,6 +22,7 @@ public class Main {
             compiler.clear();
 
             String input = frame.getProofText();
+            input = ProofFormatter.format(input);
             compiler.compile(input);
             frame.clearErrors();
             manager.referenceSet().stream().filter(line -> !manager.isCorrect(line)).forEach((line) -> {

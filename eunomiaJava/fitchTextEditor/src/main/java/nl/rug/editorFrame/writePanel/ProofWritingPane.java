@@ -1,12 +1,16 @@
 package nl.rug.editorFrame.writePanel;
 
 import nl.rug.editorFrame.EunomiaColors;
+import nl.rug.editorFrame.ProofSyntax;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +22,8 @@ public class ProofWritingPane extends JTextPane {
         super();
         wrongLines = new ArrayList<>();
         initProofWritingPane();
+
+        KeyStrokeDispatcher.addKeyStrokeActions(this);
     }
 
     private void initProofWritingPane() {
@@ -61,7 +67,6 @@ public class ProofWritingPane extends JTextPane {
         StyledDocument doc = this.getStyledDocument();
         SimpleAttributeSet errorStyle = new SimpleAttributeSet();
         StyleConstants.setForeground(errorStyle, EunomiaColors.ERROR);
-//        StyleConstants.setUnderline(errorStyle, true);
 
         String[] lines = this.getText().split("\n");
         this.setText("");

@@ -26,15 +26,15 @@ public class InformationText extends JTextPane {
             """
                 Syntax: <br> <br>
 
-                Negation: ¬ <br>
+                Negation: ¬ (CTRL + N) <br>
                 Identity: == <br>
-                Conjunction: ∧ <br>
-                Disjunction: ∨ <br>
-                Implication: → <br>
-                Biconditional: ↔ <br>
-                Contradiction: ⟂ <br>
-                Universal Quantifier: ∀ <br>
-                Existential Quantifier: ∃ <br> <br>
+                Conjunction: ∧ (CTRL + W) <br>
+                Disjunction: ∨ (CTRL + V) <br>
+                Implication: → (CTRL + I) <br>
+                Biconditional: ↔ (CTRL + B) <br>
+                Contradiction: ⟂ (CTRL + T) <br>
+                Universal Quantifier: ∀ (CTRL + U) <br>
+                Existential Quantifier: ∃ (CTRL + E) <br> <br>
 
                 Subproof start: assume <br>
                 Subproof end: qed

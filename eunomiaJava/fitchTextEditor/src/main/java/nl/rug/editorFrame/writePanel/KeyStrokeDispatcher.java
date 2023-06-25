@@ -47,7 +47,6 @@ public class KeyStrokeDispatcher {
         doc.addUndoableEditListener(new UndoableEditListener() {
             @Override
             public void undoableEditHappened(UndoableEditEvent e) {
-                System.out.println("Add edit");
                 undoManager.addEdit(e.getEdit());
             }
         });

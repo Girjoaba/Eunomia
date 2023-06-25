@@ -12,7 +12,6 @@ public class TreeIndexes {
     public static final Integer BOUNDED_VARIABLE = 1;
     public static final Integer QUANTIFIED_SENTENCE = 2;
     public static final Integer FUNCTION_ARGUMENT = 2;
-    // Sometimes used when an index is required, but it does not make sense ??
     public static final Integer FIRST_ELEMENT = 0;
     public static final Integer BOXED_CONSTANT = 1;
     public static final Integer CONSTANT_WITHIN_BOX = 1;

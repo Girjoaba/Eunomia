@@ -75,6 +75,9 @@ public class EunomiaCompiler {
         visitor.visit(tree);
     }
 
+    /**
+     * Resets the manager to its initial state.
+     */
     public void clear() {
         manager.clear();
     }

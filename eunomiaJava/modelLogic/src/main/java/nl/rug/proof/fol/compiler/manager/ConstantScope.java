@@ -36,6 +36,9 @@ public class ConstantScope {
         constants.removeIf(c -> c.level > level);
     }
 
+    /**
+     * Removes all the constants from the scope.
+     */
     public void clear() {
         constants.clear();
     }

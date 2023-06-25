@@ -424,7 +424,8 @@ public class ProofManager {
      */
     public boolean isOnlyOneConstantReplaced(Integer initialReference, Integer changedReference) {
         String initialSentence = lineMap.get(initialReference).getSentenceTree().getText();
-        String changedSentence = lineMap.get(changedReference).getSentenceTree().getChild(QUANTIFIED_SENTENCE).getText();
+        String changedSentence = lineMap.get(changedReference).getSentenceTree()
+                .getChild(QUANTIFIED_SENTENCE).getText();
 
         Set<Character> initialConstants = createConstantSet(initialSentence);
         Set<Character> changedConstants = createConstantSet(changedSentence);
@@ -487,10 +488,18 @@ public class ProofManager {
         return true;
     }
 
+    /**
+     * Get the error messages associated with a line.
+     * @param line the line in the proof of the error message.
+     * @return the error message as a string.
+     */
     public String getErrorMessage(Integer line) {
         return lineMap.get(line).getErrorMessage();
     }
 
+    /**
+     * Resets the proof to its initial state.
+     */
     public void clear() {
         lineMap.clear();
         constantScope.clear();

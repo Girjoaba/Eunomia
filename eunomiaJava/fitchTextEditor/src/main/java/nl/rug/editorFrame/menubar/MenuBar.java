@@ -2,10 +2,16 @@ package nl.rug.editorFrame.menubar;
 
 import javax.swing.*;
 
+/**
+ * Menu bar component for the main editor frame.
+ */
 public class MenuBar extends JMenuBar {
 
-    JButton verifyButton;
+    private final JButton verifyButton;
 
+    /**
+     * Initializes the menu bar and adds the Verify Button.
+     */
     public MenuBar() {
         verifyButton = new VerifyButton();
         initMenuBar();

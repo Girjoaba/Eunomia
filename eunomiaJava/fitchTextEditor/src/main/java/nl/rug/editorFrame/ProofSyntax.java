@@ -1,8 +1,11 @@
 package nl.rug.editorFrame;
 
+/**
+ * A file containing the defined syntax of the proof.
+ */
 public class ProofSyntax {
-    static public String SUBPROOF_START = "assume";
-    static public String SUBPROOF_END = "qed";
+    public static final String SUBPROOF_START = "assume";
+    public static final String SUBPROOF_END = "qed";
     public static final String NEGATION_SYMBOL = "¬";
     public static final String CONTRADICTION_SYMBOL = "⟂";
     public static final String CONJUNCTION_SYMBOL = "∧";

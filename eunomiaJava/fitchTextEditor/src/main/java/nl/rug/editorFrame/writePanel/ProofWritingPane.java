@@ -11,11 +11,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The text panel where the proof is being written in.
+ */
 public class ProofWritingPane extends JTextPane {
 
     private final UndoManager undoManager;
 
-    private static final String withoutNumbers =
+    private static final String EXAMPLE_PROOF =
             """
             P premise
             assume
@@ -35,8 +38,11 @@ public class ProofWritingPane extends JTextPane {
             (P ∧ Q) ∨ (P ∧ ¬Q) ¬Elim: 11""";
 
     private final List<Integer> wrongLines;
+
+    /**
+     * Initializes the proof writing pane and adds the keystroke listeners.
+     */
     public ProofWritingPane() {
-        super();
         undoManager = new UndoManager();
         wrongLines = new ArrayList<>();
         initProofWritingPane();
@@ -49,13 +55,10 @@ public class ProofWritingPane extends JTextPane {
         this.setContentType("text/plain; charset=UTF-8");
         this.setFont(new Font("Arial", Font.PLAIN, 15));
 
-        this.setBackground(Color.decode(EunomiaColors.BACKGROUND_MAIN));
-        this.setForeground(Color.decode(EunomiaColors.FOREGROUND_MAIN));
+        this.setBackground(EunomiaColors.BACKGROUND_MAIN);
+        this.setForeground(EunomiaColors.FOREGROUND_MAIN);
 
-
-        String notEncodedExampleProof = withoutNumbers;
-
-        byte[] encodedExampleProof = notEncodedExampleProof.getBytes(StandardCharsets.UTF_8);
+        byte[] encodedExampleProof = EXAMPLE_PROOF.getBytes(StandardCharsets.UTF_8);
         String encodedExampleProofString = new String(encodedExampleProof, StandardCharsets.UTF_8);
 
         System.out.println(encodedExampleProofString);
@@ -63,14 +66,20 @@ public class ProofWritingPane extends JTextPane {
         this.setText(encodedExampleProofString);
     }
 
+    /**
+     * Changes the display of the wrong line in the proof.
+     * @param index the index of the line to be marked as incorrect.
+     */
     public void markWrongLine(int index) {
         int lineNumber = 0;
 
         wrongLines.add(index);
+        // Sets Wrong Style
         StyledDocument doc = this.getStyledDocument();
         SimpleAttributeSet errorStyle = new SimpleAttributeSet();
         StyleConstants.setForeground(errorStyle, EunomiaColors.ERROR);
 
+        // Gets the stylized document and changes the wrong line to red.
         String[] lines = this.getText().split("\n");
         this.setText("");
         for (String line : lines) {
@@ -105,9 +114,12 @@ public class ProofWritingPane extends JTextPane {
             }
         }
         this.setDocument(doc);
-        undoManager.discardAllEdits();
+        undoManager.discardAllEdits(); // When the proof is rewritten, avoid undoing the rewrite.
     }
 
+    /**
+     * Make all lines of the proof display as correct again.
+     */
     public void clearErrors() {
         wrongLines.clear();
         StyledDocument doc = this.getStyledDocument();

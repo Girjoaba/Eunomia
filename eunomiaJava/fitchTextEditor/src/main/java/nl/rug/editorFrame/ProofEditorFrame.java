@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The main frame which represents a text editor for the user to write a proof in Fitch Style and get feedback on it.
+ */
 public class ProofEditorFrame extends javax.swing.JFrame implements ActionListener, ProofTextEditor {
 
     private final InformationPanel informationPanel;
@@ -17,6 +20,12 @@ public class ProofEditorFrame extends javax.swing.JFrame implements ActionListen
     private final ErrorPanel errorPanel;
     private final MenuBar menuBar;
 
+    /**
+     * Initializes the Proof Editor Frame and adds all the sub-panels.
+     * 1. Error Panel
+     * 2. Write Panel
+     * 3. Information Panel
+     */
     public ProofEditorFrame() {
         informationPanel = new InformationPanel();
         writePanel = new WritePanel();
@@ -54,6 +63,10 @@ public class ProofEditorFrame extends javax.swing.JFrame implements ActionListen
         this.setResizable(true);
     }
 
+    /**
+     * Sets the action listener for the verify button.
+     * @param actionListener the provided action defined in the controller.
+     */
     public void setVerifyAction(ActionListener actionListener) {
         menuBar.getVerifyButton().addActionListener(actionListener);
     }

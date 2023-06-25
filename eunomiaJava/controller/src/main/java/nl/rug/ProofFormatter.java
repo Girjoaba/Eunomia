@@ -1,7 +1,6 @@
 package nl.rug;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.rug.editorFrame.ProofSyntax;
 
 /**
  * Responsible for formatting the proof.
@@ -19,7 +18,8 @@ public class ProofFormatter {
         String[] lines = proof.split("\n");
         StringBuilder sb = new StringBuilder();
         for (String line : lines) {
-            if (!line.contains(ProofSyntax.SUBPROOF_START) && !line.contains(ProofSyntax.SUBPROOF_END)) {
+            // Skips subproof syntax.
+            if (!line.contains("assume") && !line.contains("qed")) {
                 sb.append(lineNum++).append(". ").append(line).append("\n");
             } else {
                 sb.append(line).append("\n");

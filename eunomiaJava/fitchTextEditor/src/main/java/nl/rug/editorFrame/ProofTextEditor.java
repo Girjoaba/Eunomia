@@ -1,10 +1,26 @@
 package nl.rug.editorFrame;
 
+/**
+ * Main Interface to make the View-Controller Connection.
+ * The Controller must only use the methods of this interface to communicate with the View.
+ */
 public interface ProofTextEditor {
 
-    public String getProofText();
+    /**
+     * Gets the proof in a string format.
+     * @return the proof in a string format.
+     */
+    String getProofText();
 
-    public void clearErrors();
+    /**
+     * A call to clear all the errors in the View.
+     */
+    void clearErrors();
 
-    public void addLineError(Integer line, String error);
+    /**
+     * A call to add one line number and an error message associated with it.
+     * @param line the line number.
+     * @param error the error message.
+     */
+    void addLineError(Integer line, String error);
 }

@@ -6,16 +6,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * The component containing the text of the information messages.
+ */
 public class InformationText extends JTextPane {
 
+    /**
+     * Initializes the text to be displayed as information.
+     */
     public InformationText() {
-        super();
         initInformationText();
     }
 
     private void initInformationText() {
-        this.setBackground(Color.decode(EunomiaColors.BACKGROUND_SECOND));
-        this.setForeground(Color.decode(EunomiaColors.FOREGROUND_MAIN));
+        this.setBackground(EunomiaColors.BACKGROUND_SECOND);
+        this.setForeground(EunomiaColors.FOREGROUND_MAIN);
         this.setEditable(false);
         this.setContentType("text/html; charset=UTF-8");
         this.setFont(new Font("Arial", Font.PLAIN, 15));

@@ -16,6 +16,9 @@ import java.awt.event.KeyEvent;
 import static nl.rug.editorFrame.ProofSyntax.CONJUNCTION_SYMBOL;
 import static nl.rug.editorFrame.ProofSyntax.NEGATION_SYMBOL;
 
+/**
+ * Adds all the keystrokes listeners and actions to the ProofWritingPane.
+ */
 public class KeyStrokeDispatcher {
 
     private static final String NEGATION_TAG = "insertNegationSymbol";
@@ -85,6 +88,11 @@ public class KeyStrokeDispatcher {
         });
     }
 
+    /**
+     * Adds all the keystroke listeners and actions to the ProofWritingPane.
+     * @param proofWritingPane the ProofWritingPane to add the keystroke listeners and actions to.
+     * @param undoManager the UndoManager to resolve undo and redo events.
+     */
     public static void addKeyStrokeActions(ProofWritingPane proofWritingPane, UndoManager undoManager) {
         proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED)
                 .put(KeyStroke.getKeyStroke("control N"), NEGATION_TAG);

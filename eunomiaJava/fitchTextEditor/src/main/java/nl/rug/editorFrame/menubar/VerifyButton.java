@@ -5,14 +5,18 @@ import nl.rug.editorFrame.EunomiaColors;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The verify button component which sends the written proof through the Controller to the Model.
+ */
 public class VerifyButton extends JButton {
 
-        public VerifyButton() {
-            super();
-            this.setText("Verify");
-            this.setFocusable(false);
-            this.setBackground(EunomiaColors.ACCENT_MAIN);
-            this.setForeground(Color.BLACK);
-//            this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        }
+    /**
+     * Initializes the verify button.
+     */
+    public VerifyButton() {
+        this.setText("Verify");
+        this.setFocusable(false);
+        this.setBackground(EunomiaColors.ACCENT_MAIN);
+        this.setForeground(Color.BLACK);
+    }
 }

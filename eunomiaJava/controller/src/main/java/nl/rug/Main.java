@@ -1,16 +1,19 @@
 package nl.rug;
 
-
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import nl.rug.editorFrame.ProofEditorFrame;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 
-import java.io.FileNotFoundException;
-
+/**
+ * The entry class of the application.
+ */
 public class Main {
 
+    /**
+     * The main method of the application.
+     * @param args arguments passed to the application.
+     */
     public static void main(String[] args) {
         FlatDarkLaf.setup();
 

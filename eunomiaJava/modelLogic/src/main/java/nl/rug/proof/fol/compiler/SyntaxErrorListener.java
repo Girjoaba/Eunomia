@@ -24,8 +24,7 @@ public class SyntaxErrorListener extends BaseErrorListener {
         List<String> stack = ((Parser)recognizer).getRuleInvocationStack();
         Collections.reverse(stack);
         System.err.println("rule stack: "+stack);
-        System.err.println("line "+line+":"+charPositionInLine+" at "+
-                offendingSymbol+": "+msg);
-        manager.getSyntaxErorrs().addError(line, "Syntax Error");
+        System.err.println("line "+line+":"+charPositionInLine+" at "+ offendingSymbol+": "+msg);
+        manager.getSyntaxErorrs().addError(line, msg);
     }
 }

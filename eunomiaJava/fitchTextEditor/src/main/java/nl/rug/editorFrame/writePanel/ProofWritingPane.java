@@ -70,7 +70,7 @@ public class ProofWritingPane extends JTextPane {
      * Changes the display of the wrong line in the proof.
      * @param index the index of the line to be marked as incorrect.
      */
-    public void markWrongLine(int index) {
+    public void markWrongProofLine(int index) {
         int lineNumber = 0;
 
         wrongLines.add(index);
@@ -118,6 +118,50 @@ public class ProofWritingPane extends JTextPane {
     }
 
     /**
+     * Mark the index of the lines in the original text editor as wrong.
+     * @param index the index of the line to be marked as incorrect.
+     */
+    public void markWrongOriginalLine(int index) {
+        wrongLines.add(index);
+        // Sets Wrong Style
+        StyledDocument doc = this.getStyledDocument();
+        SimpleAttributeSet errorStyle = new SimpleAttributeSet();
+        StyleConstants.setForeground(errorStyle, EunomiaColors.ERROR);
+
+        // Gets the stylized document and changes the wrong line to red.
+        String[] lines = this.getText().split("\n");
+        this.setText("");
+        for (int lineNr = 0; lineNr < lines.length; lineNr++) {
+
+            // If line contains a number from the list fo wrong lines, mark it red
+            boolean inserted = false;
+            if (wrongLines.contains(lineNr + 1)) {
+                try {
+                    String updateLine = lines[lineNr] + "\n";
+                    byte[] encodedLine = updateLine.getBytes(StandardCharsets.UTF_8);
+                    String encodedLineString = new String(encodedLine, StandardCharsets.UTF_8);
+                    doc.insertString(doc.getLength(), encodedLineString, errorStyle);
+                    inserted = true;
+                } catch (BadLocationException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (!inserted) {
+                try {
+                    String updateLine = lines[lineNr] + "\n";
+                    byte[] encodedLine = updateLine.getBytes(StandardCharsets.UTF_8);
+                    String encodedLineString = new String(encodedLine, StandardCharsets.UTF_8);
+                    doc.insertString(doc.getLength(), encodedLineString, null);
+                } catch (BadLocationException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        this.setDocument(doc);
+        undoManager.discardAllEdits(); // When the proof is rewritten, avoid undoing the rewrite.
+    }
+
+    /**
      * Make all lines of the proof display as correct again.
      */
     public void clearErrors() {
@@ -136,4 +180,5 @@ public class ProofWritingPane extends JTextPane {
             }
         }
     }
+
 }

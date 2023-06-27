@@ -1,6 +1,7 @@
 package nl.rug;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import lombok.extern.slf4j.Slf4j;
 import nl.rug.editorFrame.ProofEditorFrame;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
@@ -8,6 +9,7 @@ import nl.rug.proof.fol.compiler.manager.ProofManager;
 /**
  * The entry class of the application.
  */
+@Slf4j
 public class Main {
 
     /**
@@ -28,9 +30,17 @@ public class Main {
             input = ProofFormatter.format(input);
             compiler.compile(input);
             frame.clearErrors();
-            manager.referenceSet().stream().filter(line -> !manager.isCorrect(line)).forEach((line) -> {
-                frame.addLineError(line, manager.getErrorMessage(line));
-            });
+
+            // Return Syntax Errors
+            if (!manager.getSyntaxErorrs().isEmpty()) {
+                manager.getSyntaxErorrs().lineSet().forEach((line) -> {
+                    frame.addLineError(line, manager.getSyntaxErorrs().getErrorMessage(line), false);
+                });
+            } else { // Return Evaluation Errors
+                manager.referenceSet().stream().filter(line -> !manager.isCorrect(line)).forEach((line) -> {
+                    frame.addLineError(line, manager.getErrorMessage(line), true);
+                });
+            }
         });
     }
 }

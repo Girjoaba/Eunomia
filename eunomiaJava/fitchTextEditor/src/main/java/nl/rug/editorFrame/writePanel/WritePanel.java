@@ -31,10 +31,16 @@ public class WritePanel extends JPanel {
 
     /**
      * Marks the line at the given index as wrong.
-     * @param index the index of the line to be marked.
+     *
+     * @param index       the index of the line to be marked.
+     * @param isProofLine if the original index of the proof must be updated or the proof line index.
      */
-    public void markWrongLine(int index) {
-        proofTextPane.markWrongLine(index);
+    public void markWrongLine(int index, boolean isProofLine) {
+        if (isProofLine) {
+            proofTextPane.markWrongProofLine(index);
+        } else {
+            proofTextPane.markWrongOriginalLine(index);
+        }
     }
 
     public String getProofText() {

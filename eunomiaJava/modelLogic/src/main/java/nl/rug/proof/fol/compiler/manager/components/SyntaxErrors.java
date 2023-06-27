@@ -8,6 +8,8 @@ import java.util.Set;
  * Manages the syntax errors of the proof.
  */
 public class SyntaxErrors {
+
+    private static final String SYNTAX_ERROR_MESSAGE = "SYNTAX ERROR at text editor line ";
     private final Map<Integer, String> syntaxErrors;
 
     /**
@@ -28,10 +30,9 @@ public class SyntaxErrors {
     /**
      * Adds a syntax error.
      * @param line the line at which the error occurred.
-     * @param message the message of the error.
      */
-    public void addError(Integer line, String message) {
-        syntaxErrors.put(line, message);
+    public void addError(Integer line, String info) {
+        syntaxErrors.put(line, SYNTAX_ERROR_MESSAGE + line + ":  " + info);
     }
 
     /**
@@ -47,5 +48,14 @@ public class SyntaxErrors {
      */
     public boolean isEmpty() {
         return syntaxErrors.isEmpty();
+    }
+
+    /**
+     * Returns the error message of a line.
+     * @param line the line.
+     * @return the error message.
+     */
+    public String getErrorMessage(Integer line) {
+        return syntaxErrors.get(line);
     }
 }

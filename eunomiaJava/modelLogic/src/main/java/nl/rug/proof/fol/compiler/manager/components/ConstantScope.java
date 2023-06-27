@@ -1,4 +1,4 @@
-package nl.rug.proof.fol.compiler.manager;
+package nl.rug.proof.fol.compiler.manager.components;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarLexer;
 import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
 import nl.rug.proof.fol.compiler.ProofEvaluatorVisitor;
+import nl.rug.proof.fol.compiler.SyntaxErrorListener;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
 import nl.rug.utility.InputPath;
 import nl.rug.utility.StringConverter;
@@ -46,6 +47,8 @@ public class EunomiaCompiler {
         ProofGrammarLexer lexer = new ProofGrammarLexer(inputANTLR);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ProofGrammarParser parser = new ProofGrammarParser(tokens);
+        parser.removeErrorListeners();
+        parser.addErrorListener(new SyntaxErrorListener(manager));
 
         ParseTree tree = parser.proof();
 
@@ -67,12 +70,15 @@ public class EunomiaCompiler {
         ProofGrammarLexer lexer = new ProofGrammarLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ProofGrammarParser parser = new ProofGrammarParser(tokens);
+        parser.removeErrorListeners();
+        parser.addErrorListener(new SyntaxErrorListener(manager));
 
         ParseTree tree = parser.proof();
-
-        // Compilation
-        ProofEvaluatorVisitor visitor = new ProofEvaluatorVisitor(manager);
-        visitor.visit(tree);
+        if(manager.getSyntaxErorrs().isEmpty()) {
+            // Compilation
+            ProofEvaluatorVisitor visitor = new ProofEvaluatorVisitor(manager);
+            visitor.visit(tree);
+        }
     }
 
     /**

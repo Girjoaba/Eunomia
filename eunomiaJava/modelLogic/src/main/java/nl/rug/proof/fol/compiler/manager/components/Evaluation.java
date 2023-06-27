@@ -1,4 +1,4 @@
-package nl.rug.proof.fol.compiler.manager;
+package nl.rug.proof.fol.compiler.manager.components;
 
 /**
  * Represents the evaluation of a proof line.

@@ -2,6 +2,9 @@ package nl.rug.proof.fol.compiler.manager;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
+import nl.rug.proof.fol.compiler.manager.components.ConstantScope;
+import nl.rug.proof.fol.compiler.manager.components.ProofLine;
+import nl.rug.proof.fol.compiler.manager.components.SyntaxErrors;
 import nl.rug.proof.fol.grammar.GrammarNotations;
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -15,10 +18,19 @@ import java.util.*;
  */
 @Slf4j
 public class ProofManager {
-    private final Map<Integer, ProofLine> lineMap = new HashMap<>();
-    private final ConstantScope constantScope = new ConstantScope();
-    private Integer currentLine = 0;
-    private Integer currentLevel = 0;
+    private final Map<Integer, ProofLine> lineMap;
+    private final ConstantScope constantScope;
+    private Integer currentLine;
+    private Integer currentLevel;
+    private final SyntaxErrors syntaxErrors;
+
+    public ProofManager() {
+        syntaxErrors = new SyntaxErrors();
+        currentLevel = 0;
+        currentLine = 0;
+        lineMap = new HashMap<>();
+        constantScope =  new ConstantScope();
+    }
 
     public Integer getCurrentLine() {
         return currentLine;
@@ -38,6 +50,15 @@ public class ProofManager {
      */
     public void setCurrentEvaluationWrong(String message) {
         lineMap.get(currentLine).setWrongEvaluation(message);
+    }
+
+    /**
+     * Sets the provided line as being wrong.
+     * @param line the line number.
+     * @param message the error message explaining why the line is incorrect.
+     */
+    public void setEvaluationWrong(Integer line, String message) {
+        lineMap.get(line).setWrongEvaluation(message);
     }
 
     /**
@@ -497,6 +518,10 @@ public class ProofManager {
         return lineMap.get(line).getErrorMessage();
     }
 
+    public SyntaxErrors getSyntaxErorrs() {
+        return syntaxErrors;
+    }
+
     /**
      * Resets the proof to its initial state.
      */
@@ -505,5 +530,6 @@ public class ProofManager {
         constantScope.clear();
         currentLine = 0;
         currentLevel = 0;
+        syntaxErrors.clear();
     }
 }

@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.text.*;
 import javax.swing.undo.UndoManager;
 import java.awt.*;
+import java.awt.font.FontRenderContext;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,19 +22,15 @@ public class ProofWritingPane extends JTextPane {
     private static final String EXAMPLE_PROOF =
             """
             P premise
-            assume
                 ¬((P ∧ Q) ∨ (P ∧ ¬Q)) premise
-                assume
                     Q premise
                     P ∧ Q ∧Intro: 1, 3
                     (P ∧ Q) ∨ (P ∧ ¬Q) ∨Intro: 4
                     ⟂ ⟂Intro: 5, 2
-                qed
                 ¬Q ¬Intro: 3-6
                 P ∧ ¬Q ∧Intro: 1, 7
                 (((P ∧ Q) ∨ ((P ∧ ¬Q)))) ∨Intro: 8
                 ⟂ ⟂Intro: 9, 2
-            qed
             ¬¬((P ∧ Q) ∨ (P ∧ ¬Q)) ¬Intro: 2-10
             (P ∧ Q) ∨ (P ∧ ¬Q) ¬Elim: 11""";
 
@@ -53,7 +50,7 @@ public class ProofWritingPane extends JTextPane {
     private void initProofWritingPane() {
         this.setPreferredSize(new Dimension(1100, 600));
         this.setContentType("text/plain; charset=UTF-8");
-        this.setFont(new Font("Arial", Font.PLAIN, 15));
+        this.setFont(new Font("Arial", Font.PLAIN, 16));
 
         this.setBackground(EunomiaColors.BACKGROUND_MAIN);
         this.setForeground(EunomiaColors.FOREGROUND_MAIN);
@@ -63,7 +60,27 @@ public class ProofWritingPane extends JTextPane {
 
         System.out.println(encodedExampleProofString);
 
-        this.setText(encodedExampleProofString);
+        setTabSize(4);
+
+        setText(encodedExampleProofString);
+    }
+
+    private void setTabSize(int charactersPerTab) {
+
+        TabStop[] tabs = new TabStop[40]; // Set the number of tabs you need
+        for (int i = 0; i < tabs.length; i++) {
+            tabs[i] = new TabStop((i + 1) * (int)new Font("Arial", Font.PLAIN, 16)
+                    .getStringBounds(" ", new FontRenderContext(null, true, true))
+                    .getWidth() * charactersPerTab);
+        }
+
+        TabSet tabSet = new TabSet(tabs);
+        SimpleAttributeSet attributes = new SimpleAttributeSet();
+        StyleConstants.setTabSet(attributes, tabSet);
+
+        StyledDocument doc = this.getStyledDocument();
+        int length = doc.getLength();
+        doc.setParagraphAttributes(0, length, attributes, false);
     }
 
     /**

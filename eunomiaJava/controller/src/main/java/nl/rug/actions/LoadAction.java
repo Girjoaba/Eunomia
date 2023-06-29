@@ -41,7 +41,6 @@ public class LoadAction implements ActionListener {
                 frame.setProofText(proof);
             } catch (IOException er) {
                 er.printStackTrace();
-                // Handle the exception according to your requirements
             }
         }
     }

@@ -1,5 +1,7 @@
 package nl.rug.editorFrame;
 
+import nl.rug.editorFrame.communication.ActionInjector;
+
 /**
  * Main Interface to make the View-Controller Connection.
  * The Controller must only use the methods of this interface to communicate with the View.
@@ -24,4 +26,11 @@ public interface ProofTextEditor {
      * @param isProofLine if the error is affecting the original line of the text or the proof lines.
      */
     void addLineError(Integer line, String error, boolean isProofLine);
+
+    /**
+     * Imports the action injector from the Controller.
+     * @param actionInjector the action injector containing all the actions required by the View and created in the
+     *                       Controller.
+     */
+    void importActionPackage(ActionInjector actionInjector);
 }

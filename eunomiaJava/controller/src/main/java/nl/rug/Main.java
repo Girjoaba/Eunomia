@@ -2,9 +2,16 @@ package nl.rug;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import lombok.extern.slf4j.Slf4j;
+import nl.rug.actions.SaveAction;
+import nl.rug.actions.VerifyAction;
 import nl.rug.editorFrame.ProofEditorFrame;
+import nl.rug.editorFrame.ProofTextEditor;
+import nl.rug.editorFrame.communication.ActionID;
+import nl.rug.editorFrame.communication.ActionInjector;
+import nl.rug.editorFrame.communication.ActionPackage;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The entry class of the application.
@@ -18,29 +25,24 @@ public class Main {
      */
     public static void main(String[] args) {
         FlatDarkLaf.setup();
+        ActionInjector actionInjector = new ActionPackage();
 
-        ProofEditorFrame frame = new ProofEditorFrame();
+        ProofTextEditor frame = new ProofEditorFrame();
         ProofManager manager = new ProofManager();
         EunomiaCompiler compiler = new EunomiaCompiler(manager);
 
-        frame.setVerifyAction((e) -> {
-            compiler.clear();
+        addMainVerifyActionListener(actionInjector, frame, manager, compiler);
+        addCommonActionListeners(actionInjector);
 
-            String input = frame.getProofText();
-            input = ProofFormatter.format(input);
-            compiler.compile(input);
-            frame.clearErrors();
+        frame.importActionPackage(actionInjector);
+    }
 
-            // Return Syntax Errors
-            if (!manager.getSyntaxErorrs().isEmpty()) {
-                manager.getSyntaxErorrs().lineSet().forEach((line) -> {
-                    frame.addLineError(line, manager.getSyntaxErorrs().getErrorMessage(line), false);
-                });
-            } else { // Return Evaluation Errors
-                manager.referenceSet().stream().filter(line -> !manager.isCorrect(line)).forEach((line) -> {
-                    frame.addLineError(line, manager.getErrorMessage(line), true);
-                });
-            }
-        });
+    private static void addMainVerifyActionListener(@NotNull ActionInjector actionInjector, ProofTextEditor frame,
+                                                    ProofManager manager, EunomiaCompiler compiler) {
+        actionInjector.addAction(ActionID.VERIFY_ACTION, new VerifyAction(frame, manager, compiler));
+    }
+
+    static void addCommonActionListeners(@NotNull ActionInjector actionInjector) {
+        actionInjector.addAction(ActionID.SAVE_ACTION, new SaveAction());
     }
 }

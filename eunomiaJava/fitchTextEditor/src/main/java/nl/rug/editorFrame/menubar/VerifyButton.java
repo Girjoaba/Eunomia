@@ -1,6 +1,6 @@
 package nl.rug.editorFrame.menubar;
 
-import nl.rug.editorFrame.EunomiaColors;
+import nl.rug.editorFrame.communication.EunomiaColors;
 
 import javax.swing.*;
 import java.awt.*;

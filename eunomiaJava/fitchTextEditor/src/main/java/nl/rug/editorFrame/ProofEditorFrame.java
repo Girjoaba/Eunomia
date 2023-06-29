@@ -1,5 +1,7 @@
 package nl.rug.editorFrame;
 
+import nl.rug.editorFrame.communication.ActionInjector;
+import nl.rug.editorFrame.communication.ActionPackage;
 import nl.rug.editorFrame.errorPanel.ErrorPanel;
 import nl.rug.editorFrame.informationPanel.InformationPanel;
 import nl.rug.editorFrame.menubar.MenuBar;
@@ -7,13 +9,11 @@ import nl.rug.editorFrame.writePanel.WritePanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * The main frame which represents a text editor for the user to write a proof in Fitch Style and get feedback on it.
  */
-public class ProofEditorFrame extends javax.swing.JFrame implements ActionListener, ProofTextEditor {
+public class ProofEditorFrame extends javax.swing.JFrame implements ProofTextEditor {
 
     private final InformationPanel informationPanel;
     private final WritePanel writePanel;
@@ -63,14 +63,6 @@ public class ProofEditorFrame extends javax.swing.JFrame implements ActionListen
         this.setResizable(true);
     }
 
-    /**
-     * Sets the action listener for the verify button.
-     * @param actionListener the provided action defined in the controller.
-     */
-    public void setVerifyAction(ActionListener actionListener) {
-        menuBar.getVerifyButton().addActionListener(actionListener);
-    }
-
     @Override
     public String getProofText() {
         return writePanel.getProofText();
@@ -89,7 +81,8 @@ public class ProofEditorFrame extends javax.swing.JFrame implements ActionListen
     }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-
+    public void importActionPackage(ActionInjector actionInjector) {
+        menuBar.setActions((ActionPackage) actionInjector);
     }
+
 }

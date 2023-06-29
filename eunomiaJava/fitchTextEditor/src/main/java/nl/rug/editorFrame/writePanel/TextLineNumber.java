@@ -1,7 +1,7 @@
 package nl.rug.editorFrame.writePanel;
 
-import nl.rug.editorFrame.EunomiaColors;
-import nl.rug.editorFrame.ProofSyntax;
+import nl.rug.editorFrame.communication.EunomiaColors;
+import nl.rug.editorFrame.communication.ProofSyntax;
 
 import javax.swing.*;
 import javax.swing.border.Border;

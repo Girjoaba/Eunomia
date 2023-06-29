@@ -1,4 +1,4 @@
-package nl.rug.editorFrame;
+package nl.rug.editorFrame.communication;
 
 import java.awt.*;
 

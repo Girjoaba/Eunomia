@@ -1,4 +1,4 @@
-package nl.rug.editorFrame;
+package nl.rug.editorFrame.communication;
 
 /**
  * A file containing the defined syntax of the proof.

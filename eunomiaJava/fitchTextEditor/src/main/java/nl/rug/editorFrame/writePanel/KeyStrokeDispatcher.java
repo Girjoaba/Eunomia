@@ -1,6 +1,6 @@
 package nl.rug.editorFrame.writePanel;
 
-import nl.rug.editorFrame.ProofSyntax;
+import nl.rug.editorFrame.communication.ProofSyntax;
 
 import javax.swing.*;
 import javax.swing.event.UndoableEditEvent;
@@ -13,8 +13,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-import static nl.rug.editorFrame.ProofSyntax.CONJUNCTION_SYMBOL;
-import static nl.rug.editorFrame.ProofSyntax.NEGATION_SYMBOL;
+import static nl.rug.editorFrame.communication.ProofSyntax.CONJUNCTION_SYMBOL;
+import static nl.rug.editorFrame.communication.ProofSyntax.NEGATION_SYMBOL;
 
 /**
  * Adds all the keystrokes listeners and actions to the ProofWritingPane.

@@ -85,4 +85,9 @@ public class ProofEditorFrame extends javax.swing.JFrame implements ProofTextEdi
         menuBar.setActions((ActionPackage) actionInjector);
     }
 
+    @Override
+    public void setProofText(String proofText) {
+        writePanel.setProofText(proofText);
+    }
+
 }

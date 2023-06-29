@@ -33,4 +33,6 @@ public interface ProofTextEditor {
      *                       Controller.
      */
     void importActionPackage(ActionInjector actionInjector);
+
+    void setProofText(String proofText);
 }

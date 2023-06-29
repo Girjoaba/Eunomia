@@ -2,6 +2,7 @@ package nl.rug;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import lombok.extern.slf4j.Slf4j;
+import nl.rug.actions.LoadAction;
 import nl.rug.actions.SaveAction;
 import nl.rug.actions.VerifyAction;
 import nl.rug.editorFrame.ProofEditorFrame;
@@ -32,7 +33,7 @@ public class Main {
         EunomiaCompiler compiler = new EunomiaCompiler(manager);
 
         addMainVerifyActionListener(actionInjector, frame, manager, compiler);
-        addCommonActionListeners(actionInjector);
+        addCommonActionListeners(actionInjector, frame);
 
         frame.importActionPackage(actionInjector);
     }
@@ -42,7 +43,8 @@ public class Main {
         actionInjector.addAction(ActionID.VERIFY_ACTION, new VerifyAction(frame, manager, compiler));
     }
 
-    static void addCommonActionListeners(@NotNull ActionInjector actionInjector) {
-        actionInjector.addAction(ActionID.SAVE_ACTION, new SaveAction());
+    static void addCommonActionListeners(@NotNull ActionInjector actionInjector, ProofTextEditor frame) {
+        actionInjector.addAction(ActionID.SAVE_ACTION, new SaveAction(frame));
+        actionInjector.addAction(ActionID.LOAD_ACTION, new LoadAction(frame));
     }
 }

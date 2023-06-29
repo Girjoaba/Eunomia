@@ -1,1 +1,1 @@
-1. A == B ==Intro
+1. a == b ==Intro

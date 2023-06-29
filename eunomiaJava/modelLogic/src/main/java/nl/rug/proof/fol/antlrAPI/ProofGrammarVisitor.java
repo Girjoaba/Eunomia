@@ -290,6 +290,33 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code PropositionAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPropositionAtom(ProofGrammarParser.PropositionAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IdentityAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentityAtom(ProofGrammarParser.IdentityAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IdentitifierAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentitifierAtom(ProofGrammarParser.IdentitifierAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProofGrammarParser#identifierAtom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifierAtom(ProofGrammarParser.IdentifierAtomContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#function}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

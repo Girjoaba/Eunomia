@@ -28,4 +28,6 @@ public class TreeIndexes {
     public static final Integer BINARY_OPERATOR = 1;
     public static final Integer LEFT_SENTENCE = 0;
     public static final Integer RIGHT_SENTENCE = 2;
+
+    public static final Integer ATOM_LEVEL = 0;
 }

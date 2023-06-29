@@ -505,16 +505,17 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitIdentityIntro(ProofGrammarParser.IdentityIntroContext ctx) {
 
-        if(!manager.isCurrentCorrectBinaryExpression(GrammarNotations.IDENTITY_SYMBOL)) {
+        if(manager.isCurrentNotIdentity()) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IDENTITY);
             return null;
         }
 
-        if(!manager.getCurrentSentence().getChild(LEFT_IDENTITY).getText()
-            .equals(manager.getCurrentSentence().getChild(RIGHT_IDENTITY).getText())) {
+        if(!manager.getCurrentSentence().getChild(ATOM_LEVEL).getChild(LEFT_IDENTITY).getText()
+                .equals(manager.getCurrentSentence().getChild(ATOM_LEVEL).getChild(RIGHT_IDENTITY).getText())) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_EQUAL_LEFT_RIGH_SIDES);
             return null;
         }
+
         return null;
     }
 
@@ -528,13 +529,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        if(!manager.isCorrectBinaryExpression(reference2, GrammarNotations.IDENTITY_SYMBOL)) {
+        if(manager.isNotIdentity(reference2)) {
             manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IDENTITY);
             return null;
         }
 
-        ParseTree replaced = manager.getSentence(reference2).getChild(LEFT_IDENTITY);
-        ParseTree replacer = manager.getSentence(reference2).getChild(RIGHT_IDENTITY);
+        ParseTree replaced = manager.getSentence(reference2).getChild(ATOM_LEVEL).getChild(LEFT_IDENTITY);
+        ParseTree replacer = manager.getSentence(reference2).getChild(ATOM_LEVEL).getChild(RIGHT_IDENTITY);
 
         // Check that the replaced is part of the referred line
         if(!manager.isPartOfBinaryExpression(replaced, reference1) && !replaced.getText()

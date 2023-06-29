@@ -1,6 +1,7 @@
 package nl.rug.proof.fol.compiler.manager;
 
 import lombok.extern.slf4j.Slf4j;
+import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
 import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
 import nl.rug.proof.fol.compiler.manager.components.ConstantScope;
 import nl.rug.proof.fol.compiler.manager.components.ProofLine;
@@ -531,5 +532,42 @@ public class ProofManager {
         currentLine = 0;
         currentLevel = 0;
         syntaxErrors.clear();
+    }
+
+    /**
+     * Checks if the current line is not an identity.
+     * @return if the current line is not an identity.
+     */
+    public boolean isCurrentNotIdentity() {
+
+        if(lineMap.get(currentLine).getSentenceTree().getChild(ATOM_LEVEL)
+                instanceof ProofGrammarParser.IdentityAtomContext identity) {
+
+            if(identity.getChildCount() != 3) {
+                return false;
+            }
+            return !identity.getChild(BINARY_OPERATOR).getText().equals(GrammarNotations.IDENTITY_SYMBOL);
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if the line is not an identity.
+     * @param line the line to check.
+     * @return if the line is not an identity.
+     */
+    public boolean isNotIdentity(Integer line) {
+
+        if(lineMap.get(line).getSentenceTree().getChild(ATOM_LEVEL)
+                instanceof ProofGrammarParser.IdentityAtomContext identity) {
+
+            if(identity.getChildCount() != 3) {
+                return false;
+            }
+            return !identity.getChild(BINARY_OPERATOR).getText().equals(GrammarNotations.IDENTITY_SYMBOL);
+        }
+
+        return true;
     }
 }

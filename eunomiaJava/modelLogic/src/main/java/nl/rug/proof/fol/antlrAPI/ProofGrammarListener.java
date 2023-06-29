@@ -482,6 +482,52 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code PropositionAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterPropositionAtom(ProofGrammarParser.PropositionAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PropositionAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitPropositionAtom(ProofGrammarParser.PropositionAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IdentityAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentityAtom(ProofGrammarParser.IdentityAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IdentityAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentityAtom(ProofGrammarParser.IdentityAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IdentitifierAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentitifierAtom(ProofGrammarParser.IdentitifierAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IdentitifierAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentitifierAtom(ProofGrammarParser.IdentitifierAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#identifierAtom}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifierAtom(ProofGrammarParser.IdentifierAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#identifierAtom}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifierAtom(ProofGrammarParser.IdentifierAtomContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#function}.
 	 * @param ctx the parse tree
 	 */

@@ -26,8 +26,8 @@ premiseInference
     ;
 
 inference
-    : contradiction + justification  # ContradictionInfer
-    | sentence + justification       # SentenceInfer
+    : contradiction + justification     # ContradictionInfer
+    | sentence + justification          # SentenceInfer
     ;
 
 
@@ -37,7 +37,7 @@ inference
 
 contradiction : CONTRADICTION;
 sentence
-    : ATOM                              # NormalSentence
+    : atom                              # NormalSentence
     | function                          # NormalSentence
     | FORALL VARIABLE sentence          # NormalSentence
     | EXISTS VARIABLE sentence          # NormalSentence
@@ -45,7 +45,6 @@ sentence
     | '(' sentence ')'                  # ParenthesesSentence
     | sentence CONJUNCTION sentence     # NormalSentence
     | sentence DISJUNCTION sentence     # NormalSentence
-    | sentence IDENTITY sentence        # NormalSentence
     | sentence IMPLICATION sentence     # NormalSentence
     | sentence BICONDITIONAL sentence   # NormalSentence
     ;
@@ -96,8 +95,15 @@ rangeReference  : INT '-' INT ;
 
 VARIABLE : [u-z] ;
 CONSTANT : [a-t] ;
+
+PROPOSITION : [A-Z][a-zA-Z0-9]* ;
 boxedConstant : '|' CONSTANT '|' ;
-ATOM     : [A-Z][a-zA-Z0-9]* ;
+atom
+    : PROPOSITION                                                   # PropositionAtom
+    | identifierAtom IDENTITY identifierAtom                        # IdentityAtom
+    | identifierAtom                                                # IdentitifierAtom
+    ;
+identifierAtom : CONSTANT | VARIABLE ;
 
 function: ATOM '(' (VARIABLE | CONSTANT) ')' ;
 

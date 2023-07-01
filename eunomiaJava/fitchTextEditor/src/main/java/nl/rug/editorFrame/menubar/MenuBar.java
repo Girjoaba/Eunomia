@@ -24,8 +24,7 @@ public class MenuBar extends JMenuBar {
 
     private void createMenuItems(@NotNull ActionPackage actionPackage) {
         JMenu fileMenu = new JMenu("File");
-        JMenu editMenu = new JMenu("Edit");
-        JMenu helpMenu = new JMenu("Help");
+
         JMenuItem newMenuItem = new JMenuItem("New");
         newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
                 KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK));
@@ -44,25 +43,12 @@ public class MenuBar extends JMenuBar {
                 KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK));
         saveAsMenuItem.addActionListener(actionPackage.getAction(ActionID.SAVE_ACTION));
 
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-        JMenuItem cutMenuItem = new JMenuItem("Cut");
-        JMenuItem copyMenuItem = new JMenuItem("Copy");
-        JMenuItem pasteMenuItem = new JMenuItem("Paste");
-        JMenuItem aboutMenuItem = new JMenuItem("About");
-
         fileMenu.add(newMenuItem);
         fileMenu.add(openMenuItem);
         fileMenu.add(saveMenuItem);
         fileMenu.add(saveAsMenuItem);
-        fileMenu.add(exitMenuItem);
-        editMenu.add(cutMenuItem);
-        editMenu.add(copyMenuItem);
-        editMenu.add(pasteMenuItem);
-        helpMenu.add(aboutMenuItem);
 
         this.add(fileMenu);
-        this.add(editMenu);
-        this.add(helpMenu);
 
         this.add(Box.createHorizontalGlue());
         this.add(verifyButton);

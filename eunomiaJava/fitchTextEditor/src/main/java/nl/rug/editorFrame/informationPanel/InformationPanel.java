@@ -31,19 +31,20 @@ public class InformationPanel extends JPanel {
         addTabbedPane();
     }
 
-    private void addIconAtIndex(@NotNull JTabbedPane tabbedPane, int index) {
+    private void addIconAtIndex(@NotNull JTabbedPane tabbedPane, String resourcePath, int index) {
+        final int size = 35;
         // Icon
-        URL iconURL = this.getClass().getResource("/" + "icons/shortcut_icon.png");
+        URL iconURL = this.getClass().getResource("/" + resourcePath);
         assert iconURL != null;
         ImageIcon shortcutIcon = new ImageIcon(iconURL);
         Image image = shortcutIcon.getImage(); // transform it
-        Image newimg = image.getScaledInstance(40, 40,  java.awt.Image.SCALE_SMOOTH);
+        Image newimg = image.getScaledInstance(size, size,  java.awt.Image.SCALE_SMOOTH);
         shortcutIcon.setImage(newimg);
 
         // Label
         JLabel iconLabel = new JLabel();
         iconLabel.setIcon(shortcutIcon);
-        iconLabel.setPreferredSize(new Dimension(40, 40));
+        iconLabel.setPreferredSize(new Dimension(size, size));
 
         tabbedPane.setTabComponentAt(index, iconLabel);  // tab index, jLabel
     }
@@ -59,7 +60,9 @@ public class InformationPanel extends JPanel {
         tabbedPane.addTab("", new ProofSelectionPanel());
         tabbedPane.addTab("", new HelpPanel());
 
-        addIconAtIndex(tabbedPane, 0);
+        addIconAtIndex(tabbedPane, "icons/keyboard2_icon.png", 0);
+        addIconAtIndex(tabbedPane, "icons/book_icon.png", 1);
+        addIconAtIndex(tabbedPane, "icons/pencil_icon.png", 2);
 
         add(tabbedPane);
     }

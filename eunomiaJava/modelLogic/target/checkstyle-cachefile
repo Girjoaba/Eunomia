@@ -1,4 +1,11 @@
-#Sat Jul 01 15:31:04 CEST 2023
-configuration*?=54310D0C5DAF09F1751B69CB8D013D5E8980B87C
-module-resource*?\:checkstyle-xpath-suppressions.xml=E1C8BEAAEF854BF3C5846549B6B372C97EF115DB
-module-resource*?\:checkstyle-suppressions.xml=100B6478DF64E2DA27C04494D600A1EB9B9986E0
+#Sat Jul 01 16:32:07 CEST 2023
+configuration*?=52796491AFD85C9168F770E70BC070D69B0286ED
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\FOLProofEvaluator.java=1681839875188
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\manager\\components\\ProofLine.java=1687856898907
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\commonStrings\\UsefulStrings.java=1684169688140
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\EunomiaCompiler.java=1687858115222
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\utility\\StringConverter.java=1687703386443
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\ProofEvaluatorVisitor.java=1688217566256
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\manager\\components\\Evaluation.java=1687856899030
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\utility\\InputPath.java=1687703309210
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\manager\\components\\ConstantScope.java=1687856898954

@@ -1,4 +1,4 @@
-package nl.rug.editorFrame.informationPanel;
+package nl.rug.editorFrame.informationPanel.tabs;
 
 import nl.rug.editorFrame.communication.EunomiaColors;
 
@@ -9,12 +9,12 @@ import java.nio.charset.StandardCharsets;
 /**
  * The component containing the text of the information messages.
  */
-public class InformationText extends JTextPane {
+public class KeybindingsText extends JTextPane {
 
     /**
      * Initializes the text to be displayed as information.
      */
-    public InformationText() {
+    public KeybindingsText() {
         initInformationText();
     }
 
@@ -23,26 +23,22 @@ public class InformationText extends JTextPane {
         this.setForeground(EunomiaColors.FOREGROUND_MAIN);
         this.setEditable(false);
         this.setContentType("text/html; charset=UTF-8");
-        this.setFont(new Font("Arial", Font.PLAIN, 15));
+        this.setFont(new Font("Arial", Font.PLAIN, 18));
 
         this.setPreferredSize(new Dimension(300, 600));
 
         this.setText(new String(
             """
-                Syntax: <br> <br>
+                Keyboard Keybindings: <br> <br>
 
-                Negation: ¬ (CTRL + N) <br>
-                Identity: == <br>
-                Conjunction: ∧ (CTRL + W) <br>
-                Disjunction: ∨ (CTRL + V) <br>
-                Implication: → (CTRL + I) <br>
-                Biconditional: ↔ (CTRL + B) <br>
-                Contradiction: ⟂ (CTRL + T) <br>
-                Universal Quantifier: ∀ (CTRL + U) <br>
-                Existential Quantifier: ∃ (CTRL + E) <br> <br>
-
-                Subproof start: assume <br>
-                Subproof end: qed
+                ¬   &nbsp    ctrl + N <br>
+                ∧   &nbsp    ctrl + W <br>
+                ∨   &nbsp    ctrl + V <br>
+                →   &nbsp    ctrl + I <br>
+                ↔   &nbsp   ctrl + B <br>
+                ⟂  &nbsp    ctrl + T <br>
+                ∀   &nbsp    ctrl + U <br>
+                ∃   &nbsp    ctrl + E <br> <br>
 
                 """.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8)
         );

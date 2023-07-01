@@ -37,16 +37,16 @@ inference
 
 contradiction : CONTRADICTION;
 sentence
-    : atom                              # NormalSentence
-    | function                          # NormalSentence
-    | FORALL VARIABLE sentence          # NormalSentence
+    : FORALL VARIABLE sentence          # NormalSentence
     | EXISTS VARIABLE sentence          # NormalSentence
     | NEGATION sentence                 # NormalSentence
+    | function                          # NormalSentence
     | '(' sentence ')'                  # ParenthesesSentence
     | sentence CONJUNCTION sentence     # NormalSentence
     | sentence DISJUNCTION sentence     # NormalSentence
     | sentence IMPLICATION sentence     # NormalSentence
     | sentence BICONDITIONAL sentence   # NormalSentence
+    | atom                              # NormalSentence
     ;
 
     /*
@@ -103,9 +103,10 @@ atom
     | identifierAtom IDENTITY identifierAtom                        # IdentityAtom
     | identifierAtom                                                # IdentitifierAtom
     ;
+
 identifierAtom : CONSTANT | VARIABLE ;
 
-function: ATOM '(' (VARIABLE | CONSTANT) ')' ;
+function: PROPOSITION '(' (VARIABLE | CONSTANT) ')' ;
 
 NEGATION    : '¬' ;
 CONTRADICTION : '⟂' ;

@@ -88,20 +88,6 @@ public class KeyStrokeDispatcher {
         });
     }
 
-    private static Action changeTabAction(ProofWritingPane proofWritingPane) {
-        return new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    proofWritingPane.getDocument().insertString(proofWritingPane.getCaretPosition(),
-                            "", null);
-                } catch (BadLocationException badLocationException) {
-                    badLocationException.printStackTrace();
-                }
-            }
-        };
-    }
-
     /**
      * Adds all the keystroke listeners and actions to the ProofWritingPane.
      * @param proofWritingPane the ProofWritingPane to add the keystroke listeners and actions to.

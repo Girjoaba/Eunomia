@@ -1,0 +1,2 @@
+1. ⟂						premise
+2. P ∨ Q ∧ R 	⟂Elim: 1

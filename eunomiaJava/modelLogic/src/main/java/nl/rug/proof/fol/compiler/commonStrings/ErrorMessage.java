@@ -106,4 +106,10 @@ public class ErrorMessage {
     public static String getErrorConstantDefinedWrong(String constant) {
         return "Constant " + constant + " is defined wrong.";
     }
+
+    public static String getAmbiguousError(String sentence, int startPos, int endPos) {
+        String ambiguous = sentence.substring(startPos, endPos);
+        return "Ambiguous order of operations: " + ambiguous;
+    }
+
 }

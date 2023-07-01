@@ -212,11 +212,11 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     @Override
     public Object visitNormalSentence(ProofGrammarParser.NormalSentenceContext ctx) {
 
-        manager.addProofLine(ctx);
+        manager.addProofLine(ctx);  // add the sentence to the proof manager to register a possible error
 
-        SentenceTraveler.exploreSentence(ctx, manager);
+        SentenceTraveler.exploreSentence(ctx, manager); // explores the sentence, changing it in the process
 
-        manager.addProofLine(ctx);
+        manager.addProofLine(ctx); // adds the changed sentence again to the proof manager
 
         if(!manager.isVariableBoundedTwice(manager.getCurrentLine())) {
             manager.setCurrentEvaluationWrong(ErrorMessage.VARIABLE_BOUNDED_TWICE);

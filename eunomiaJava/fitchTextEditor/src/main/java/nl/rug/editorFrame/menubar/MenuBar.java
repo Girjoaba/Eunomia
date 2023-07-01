@@ -27,6 +27,11 @@ public class MenuBar extends JMenuBar {
         JMenu editMenu = new JMenu("Edit");
         JMenu helpMenu = new JMenu("Help");
         JMenuItem newMenuItem = new JMenuItem("New");
+        newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
+                KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK));
+        newMenuItem.addActionListener(actionPackage.getAction(ActionID.NEW_ACTION));
+
+
         JMenuItem openMenuItem = new JMenuItem("Load");
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,
                 KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK));
@@ -61,6 +66,10 @@ public class MenuBar extends JMenuBar {
 
         this.add(Box.createHorizontalGlue());
         this.add(verifyButton);
+
+        // Set shortcut Shift + Enter for verify button
+        verifyButton.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK), "verify");
     }
 
     /**

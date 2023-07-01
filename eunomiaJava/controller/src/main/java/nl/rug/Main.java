@@ -3,6 +3,7 @@ package nl.rug;
 import com.formdev.flatlaf.FlatDarkLaf;
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.actions.LoadAction;
+import nl.rug.actions.NewProofAction;
 import nl.rug.actions.SaveAction;
 import nl.rug.actions.VerifyAction;
 import nl.rug.editorFrame.ProofEditorFrame;
@@ -46,5 +47,6 @@ public class Main {
     static void addCommonActionListeners(@NotNull ActionInjector actionInjector, ProofTextEditor frame) {
         actionInjector.addAction(ActionID.SAVE_ACTION, new SaveAction(frame));
         actionInjector.addAction(ActionID.LOAD_ACTION, new LoadAction(frame));
+        actionInjector.addAction(ActionID.NEW_ACTION, new NewProofAction(frame));
     }
 }

@@ -45,7 +45,7 @@ public class ProofGrammarParser extends Parser {
 		return new String[] {
 			null, "'.'", "'('", "')'", "'Reit: '", "'Intro: '", "','", "'Intro'", 
 			"'Elim: '", "'-'", "'|'", null, null, null, "'\\u00AC'", "'\\u27C2'", 
-			"'\\u2227'", "'\\u2228'", "'=='", "'\\u2192'", "'\\u2194'", "'\\u2200'", 
+			"'\\u2227'", "'\\u2228'", "'='", "'\\u2192'", "'\\u2194'", "'\\u2200'", 
 			"'\\u2203'", "'premise'", "'assume'", "'qed'"
 		};
 	}

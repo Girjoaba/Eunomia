@@ -112,7 +112,7 @@ NEGATION    : '¬' ;
 CONTRADICTION : '⟂' ;
 CONJUNCTION : '∧' ;
 DISJUNCTION : '∨' ;
-IDENTITY    : '==' ;
+IDENTITY    : '=' ;
 IMPLICATION : '→' ;
 BICONDITIONAL : '↔' ;
 FORALL      : '∀' ;

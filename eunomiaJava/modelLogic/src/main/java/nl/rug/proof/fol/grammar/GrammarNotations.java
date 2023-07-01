@@ -11,7 +11,7 @@ public class GrammarNotations {
     public static final String CONTRADICTION_SYMBOL = "⟂";
     public static final String CONJUNCTION_SYMBOL = "∧";
     public static final String DISJUNCTION_SYMBOL = "∨";
-    public static final String IDENTITY_SYMBOL = "==";
+    public static final String IDENTITY_SYMBOL = "=";
     public static final String IMPLICATION_SYMBOL = "→";
     public static final String BICONDITIONAL_SYMBOL = "↔";
     public static final String UNIVERSAL_QUANTIFIER = "∀";

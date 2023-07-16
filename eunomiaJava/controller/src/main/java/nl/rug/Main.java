@@ -6,7 +6,7 @@ import nl.rug.actions.LoadAction;
 import nl.rug.actions.NewProofAction;
 import nl.rug.actions.SaveAction;
 import nl.rug.actions.VerifyAction;
-import nl.rug.editorFrame.ProofEditorFrame;
+import nl.rug.editorFrame.EditorFrame;
 import nl.rug.editorFrame.ProofTextEditor;
 import nl.rug.editorFrame.communication.ActionID;
 import nl.rug.editorFrame.communication.ActionInjector;
@@ -29,7 +29,7 @@ public class Main {
         FlatDarkLaf.setup();
         ActionInjector actionInjector = new ActionPackage();
 
-        ProofTextEditor frame = new ProofEditorFrame();
+        ProofTextEditor frame = new EditorFrame();
         ProofManager manager = new ProofManager();
         EunomiaCompiler compiler = new EunomiaCompiler(manager);
 

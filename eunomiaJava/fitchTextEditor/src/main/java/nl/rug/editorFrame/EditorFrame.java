@@ -13,7 +13,7 @@ import java.awt.*;
 /**
  * The main frame which represents a text editor for the user to write a proof in Fitch Style and get feedback on it.
  */
-public class ProofEditorFrame extends javax.swing.JFrame implements ProofTextEditor {
+public class EditorFrame extends javax.swing.JFrame implements ProofTextEditor {
 
     private final InformationPanel informationPanel;
     private final WritePanel writePanel;
@@ -26,7 +26,7 @@ public class ProofEditorFrame extends javax.swing.JFrame implements ProofTextEdi
      * 2. Write Panel
      * 3. Information Panel
      */
-    public ProofEditorFrame() {
+    public EditorFrame() {
         informationPanel = new InformationPanel();
         writePanel = new WritePanel();
         errorPanel = new ErrorPanel();

@@ -4,6 +4,7 @@ import nl.rug.editorFrame.communication.EunomiaColors;
 import nl.rug.editorFrame.informationPanel.tabs.HelpPanel;
 import nl.rug.editorFrame.informationPanel.tabs.KeybindingsText;
 import nl.rug.editorFrame.informationPanel.tabs.ProofSelectionPanel;
+import nl.rug.editorFrame.informationPanel.ui.InformationTabbedUI;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -32,7 +33,7 @@ public class InformationPanel extends JPanel {
     }
 
     private void addIconAtIndex(@NotNull JTabbedPane tabbedPane, String resourcePath, int index) {
-        final int size = 35;
+        final int size = 30;
         // Icon
         URL iconURL = this.getClass().getResource("/" + resourcePath);
         assert iconURL != null;
@@ -51,53 +52,23 @@ public class InformationPanel extends JPanel {
 
     private void addTabbedPane() {
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
-        tabbedPane.setPreferredSize(new Dimension(getMaximumSize()));
+
+        tabbedPane.setPreferredSize(new Dimension(2000, 1000));
         tabbedPane.setBackground(EunomiaColors.ACCENT_MAIN);
         tabbedPane.setForeground(Color.BLACK);
         tabbedPane.setUI(new InformationTabbedUI());
 
         tabbedPane.addTab("", new KeybindingsText());
-        tabbedPane.addTab("", new ProofSelectionPanel());
         tabbedPane.addTab("", new HelpPanel());
+        tabbedPane.addTab("", new ProofSelectionPanel());
 
         addIconAtIndex(tabbedPane, "icons/keyboard2_icon.png", 0);
         addIconAtIndex(tabbedPane, "icons/book_icon.png", 1);
         addIconAtIndex(tabbedPane, "icons/pencil_icon.png", 2);
 
         add(tabbedPane);
-    }
 
-    public static class InformationTabbedUI extends BasicTabbedPaneUI {
-
-        @Override
-        protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex,
-                                           Rectangle iconRect, Rectangle textRect, boolean isSelected) {
-            focus = Color.BLACK;
-            super.paintFocusIndicator(g, tabPlacement, rects, tabIndex, iconRect, textRect, isSelected);
-        }
-
-        @Override
-        protected LayoutManager createLayoutManager() {
-
-            return new BasicTabbedPaneUI.TabbedPaneLayout()
-            {
-                @Override
-                protected void calculateTabRects(int tabPlacement, int tabCount)
-                {
-                    final int spacer = 2; // should be non-negative
-                    final int indent = 4;
-
-                    super.calculateTabRects(tabPlacement,tabCount);
-
-                    for (int i = 0; i < rects.length; i++) {
-                        rects[i].y += i * spacer + indent;
-
-                    }
-                }
-
-            };
-        }
-
+        tabbedPane.setSelectedIndex(0);
     }
 
 }

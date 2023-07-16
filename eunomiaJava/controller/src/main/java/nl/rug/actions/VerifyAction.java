@@ -1,7 +1,6 @@
 package nl.rug.actions;
 
 import nl.rug.ProofFormatter;
-import nl.rug.editorFrame.ProofEditorFrame;
 import nl.rug.editorFrame.ProofTextEditor;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;

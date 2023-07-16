@@ -1,23 +1,14 @@
 package nl.rug.editorFrame.informationPanel.ui;
 
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import java.awt.*;
 
+/**
+ * Describes the look of the tabs in the information panel.
+ */
 public class InformationTabbedUI extends BasicTabbedPaneUI {
     private static final int TAB_SELECTED_OFFSET = 10;
     private static Boolean WAS_OFFSET = false;
-
-//    @Override
-//    protected void paintIcon(Graphics g, int tabPlacement,
-//                             int tabIndex, Icon icon, Rectangle iconRect,
-//                             boolean isSelected ) {
-//        if (isSelected && !WAS_OFFSET) {
-//            iconRect.x -= TAB_SELECTED_OFFSET;
-//        }
-//        super.paintIcon(g, tabPlacement, tabIndex, icon, iconRect, isSelected);
-//    }
 
     @Override
     protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex,
@@ -43,16 +34,12 @@ public class InformationTabbedUI extends BasicTabbedPaneUI {
         super.paintTabBackground(g, tabPlacement, tabIndex, x, y, w, h, isSelected);
     }
 
-
-
     @Override
     protected LayoutManager createLayoutManager() {
 
-        return new BasicTabbedPaneUI.TabbedPaneLayout()
-        {
+        return new BasicTabbedPaneUI.TabbedPaneLayout() {
             @Override
-            protected void calculateTabRects(int tabPlacement, int tabCount)
-            {
+            protected void calculateTabRects(int tabPlacement, int tabCount) {
                 final int spacer = 2; // should be non-negative
                 final int indent = 4;
 

@@ -8,7 +8,6 @@ import nl.rug.editorFrame.informationPanel.ui.InformationTabbedUI;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import java.awt.*;
 import java.net.URL;
 

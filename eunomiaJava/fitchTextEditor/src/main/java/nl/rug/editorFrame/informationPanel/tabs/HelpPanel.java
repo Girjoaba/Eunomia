@@ -9,10 +9,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A panel containing the description of all the proof rules.
+ */
 public class HelpPanel extends JPanel {
 
     private static final double SCALING_FACTOR = 0.4;
 
+    /**
+     * Initializes the help panel.
+     */
     public HelpPanel() {
         initHelpPanel();
     }
@@ -29,8 +35,9 @@ public class HelpPanel extends JPanel {
     private void addProofTutorials() {
 
         JTabbedPane introElimPanel = new JTabbedPane(JTabbedPane.TOP);
-        introElimPanel.addTab("Introduction", createIntroductionList());
-        introElimPanel.addTab("Elimination", createIntroductionList());
+        introElimPanel.addTab("Introduction", createIntroductionTutorial());
+        introElimPanel.addTab("Elimination", createEliminationTutorial());
+        introElimPanel.addTab("Quantifier", createQuantifierTutorial());
         add(introElimPanel);
     }
 
@@ -49,11 +56,44 @@ public class HelpPanel extends JPanel {
         return proofIcon;
     }
 
-    private JScrollPane createIntroductionList() {
+    private JScrollPane createIntroductionTutorial() {
         List<ImageIcon> images = new ArrayList<>();
         images.add(prepareImage(SCALING_FACTOR, "info_proofs/IdentityIntro.png"));
-        images.add(prepareImage(SCALING_FACTOR, "info_proofs/IdentityIntro.png"));
-        images.add(prepareImage(SCALING_FACTOR, "info_proofs/IdentityIntro.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/ContrIntro.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/NegIntro.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/ConjIntro.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/DisjIntro.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/ImplIntro.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/BiconIntro.png"));
+
+        JList<ImageIcon> list = new JList<>(images.toArray(new ImageIcon[0]));
+        list.setBackground(EunomiaColors.BACKGROUND_SECOND);
+
+        return new JScrollPane(list);
+    }
+
+    private JScrollPane createEliminationTutorial() {
+        List<ImageIcon> images = new ArrayList<>();
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/IdentityElim.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/ContrElim.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/NegElim.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/ConjElim.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/DisjElim.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/ImpliElim.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/BicondElim.png"));
+
+        JList<ImageIcon> list = new JList<>(images.toArray(new ImageIcon[0]));
+        list.setBackground(EunomiaColors.BACKGROUND_SECOND);
+
+        return new JScrollPane(list);
+    }
+
+    private JScrollPane createQuantifierTutorial() {
+        List<ImageIcon> images = new ArrayList<>();
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/UnivIntro.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/UnivElim.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/ExistIntro.png"));
+        images.add(prepareImage(SCALING_FACTOR, "info_proofs/ExistElim.png"));
 
         JList<ImageIcon> list = new JList<>(images.toArray(new ImageIcon[0]));
         list.setBackground(EunomiaColors.BACKGROUND_SECOND);

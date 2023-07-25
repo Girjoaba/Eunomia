@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class HelpPanel extends JPanel {
 
-    private static final double SCALING_FACTOR = 0.4;
+    private static final double SCALING_FACTOR = 0.35;
 
     /**
      * Initializes the help panel.

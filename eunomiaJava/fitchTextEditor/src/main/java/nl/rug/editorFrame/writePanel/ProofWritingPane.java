@@ -17,22 +17,14 @@ import java.util.List;
  */
 public class ProofWritingPane extends JTextPane {
 
+    private Integer indentationLevel = 1;
     private final UndoManager undoManager;
 
     private static final String EXAMPLE_PROOF =
             """
-            P premise
-                ¬((P ∧ Q) ∨ (P ∧ ¬Q)) premise
-                    Q premise
-                    P ∧ Q ∧Intro: 1, 3
-                    (P ∧ Q) ∨ (P ∧ ¬Q) ∨Intro: 4
-                    ⟂ ⟂Intro: 5, 2
-                ¬Q ¬Intro: 3-6
-                P ∧ ¬Q ∧Intro: 1, 7
-                (((P ∧ Q) ∨ ((P ∧ ¬Q)))) ∨Intro: 8
-                ⟂ ⟂Intro: 9, 2
-            ¬¬((P ∧ Q) ∨ (P ∧ ¬Q)) ¬Intro: 2-10
-            (P ∧ Q) ∨ (P ∧ ¬Q) ¬Elim: 11""";
+            |\t
+            |----
+            |\t""";
 
     private final List<Integer> wrongLines;
 
@@ -44,7 +36,7 @@ public class ProofWritingPane extends JTextPane {
         wrongLines = new ArrayList<>();
         initProofWritingPane();
 
-        KeyStrokeDispatcher.addKeyStrokeActions(this, undoManager);
+        KeyStrokeDispatcher.addKeyStrokeActions(this, undoManager, indentationLevel);
     }
 
     private void initProofWritingPane() {
@@ -198,4 +190,11 @@ public class ProofWritingPane extends JTextPane {
         }
     }
 
+    public Integer getIndentationLevel() {
+        return indentationLevel;
+    }
+
+    public void incrementIndentation() {
+        indentationLevel++;
+    }
 }

@@ -53,7 +53,7 @@ public class MenuBar extends JMenuBar {
         this.add(Box.createHorizontalGlue());
         this.add(verifyButton);
 
-        // Set shortcut Shift + Enter for verify button
+        // Set shortcut Shift + Enter for verify button TODO: make this work
         verifyButton.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK), "verify");
     }

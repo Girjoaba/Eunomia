@@ -1,6 +1,10 @@
 package nl.rug.editorFrame.writePanel;
 
 import nl.rug.editorFrame.communication.ProofSyntax;
+import nl.rug.editorFrame.writePanel.subproof.actions.ContinueFitchBarAction;
+import nl.rug.editorFrame.writePanel.subproof.actions.CreateSubproofAction;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.event.UndoableEditEvent;
@@ -30,7 +34,11 @@ public class KeyStrokeDispatcher {
     private static final String EXISTENTIAL_TAG = "insertExistentialSymbol";
     private static final String UNIVERSAL_TAG = "insertUniversalSymbol";
 
-    private static Action insertSymbolAction(ProofWritingPane proofWritingPane, String symbol) {
+    private static final String CREATE_SUBPROOF_TAG = "createSubProof";
+    private static final String CONTINUE_FITCH_BAR_TAG = "continueFitchBar";
+
+    @Contract(value = "_, _ -> new", pure = true)
+    private static @NotNull Action insertSymbolAction(ProofWritingPane proofWritingPane, String symbol) {
         return new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,7 +52,66 @@ public class KeyStrokeDispatcher {
         };
     }
 
-    private static void undoRedoAction(ProofWritingPane proofWritingPane, UndoManager undoManager) {
+    /**
+     * Adds all the keystroke listeners and actions to the ProofWritingPane.
+     * @param proofWritingPane the ProofWritingPane to add the keystroke listeners and actions to.
+     * @param undoManager the UndoManager to resolve undo and redo events.
+     */
+    public static void addKeyStrokeActions(@NotNull ProofWritingPane proofWritingPane, UndoManager undoManager,
+                                           int indentationLevel) {
+
+        InputMap im = proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED);
+        ActionMap am = proofWritingPane.getActionMap();
+
+        createSubProofAction(proofWritingPane, indentationLevel);
+        continueFitchBarAction(proofWritingPane, indentationLevel);
+
+        im.put(KeyStroke.getKeyStroke("control N"), NEGATION_TAG);
+        am.put(NEGATION_TAG, insertSymbolAction(proofWritingPane, NEGATION_SYMBOL));
+
+        im.put(KeyStroke.getKeyStroke("control W"), CONJUNCTION_TAG);
+        am.put(CONJUNCTION_TAG, insertSymbolAction(proofWritingPane, CONJUNCTION_SYMBOL));
+
+        im.put(KeyStroke.getKeyStroke("control V"), DISJUNCTION_TAG);
+        am.put(DISJUNCTION_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.DISJUNCTION_SYMBOL));
+
+        im.put(KeyStroke.getKeyStroke("control I"), IMPLICATION_TAG);
+        am.put(IMPLICATION_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.IMPLICATION_SYMBOL));
+
+        im.put(KeyStroke.getKeyStroke("control B"), BICONDITIONAL_TAG);
+        am.put(BICONDITIONAL_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.BICONDITIONAL_SYMBOL));
+
+        im.put(KeyStroke.getKeyStroke("control T"), CONTRADICTION_TAG);
+        am.put(CONTRADICTION_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.CONTRADICTION_SYMBOL));
+
+        im.put(KeyStroke.getKeyStroke("control E"), EXISTENTIAL_TAG);
+        am.put(EXISTENTIAL_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.EXISTENTIAL_QUANTIFIER));
+
+        im.put(KeyStroke.getKeyStroke("control U"), UNIVERSAL_TAG);
+        am.put(UNIVERSAL_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.UNIVERSAL_QUANTIFIER));
+
+        undoRedoAction(proofWritingPane, undoManager);
+    }
+
+
+    private static void createSubProofAction(@NotNull ProofWritingPane proofWritingPane, int indentationLevel) {
+
+        InputMap im = proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED);
+        ActionMap am = proofWritingPane.getActionMap();
+
+        im.put(KeyStroke.getKeyStroke("TAB"), CREATE_SUBPROOF_TAG);
+        am.put(CREATE_SUBPROOF_TAG, new CreateSubproofAction(proofWritingPane));
+    }
+
+    private static void continueFitchBarAction(@NotNull ProofWritingPane proofWritingPane, int indentationLevel) {
+        InputMap im = proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED);
+        ActionMap am = proofWritingPane.getActionMap();
+
+        im.put(KeyStroke.getKeyStroke("ENTER"), CONTINUE_FITCH_BAR_TAG);
+        am.put(CONTINUE_FITCH_BAR_TAG, new ContinueFitchBarAction(proofWritingPane));
+    }
+
+    private static void undoRedoAction(@NotNull ProofWritingPane proofWritingPane, UndoManager undoManager) {
 
         Document doc = proofWritingPane.getDocument();
         doc.addUndoableEditListener(new UndoableEditListener() {
@@ -86,54 +153,5 @@ public class KeyStrokeDispatcher {
                 }
             }
         });
-    }
-
-    /**
-     * Adds all the keystroke listeners and actions to the ProofWritingPane.
-     * @param proofWritingPane the ProofWritingPane to add the keystroke listeners and actions to.
-     * @param undoManager the UndoManager to resolve undo and redo events.
-     */
-    public static void addKeyStrokeActions(ProofWritingPane proofWritingPane, UndoManager undoManager) {
-        proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED)
-                .put(KeyStroke.getKeyStroke("control N"), NEGATION_TAG);
-        proofWritingPane.getActionMap()
-                .put(NEGATION_TAG, insertSymbolAction(proofWritingPane, NEGATION_SYMBOL));
-
-        proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED)
-                .put(KeyStroke.getKeyStroke("control W"), CONJUNCTION_TAG);
-        proofWritingPane.getActionMap()
-                .put(CONJUNCTION_TAG, insertSymbolAction(proofWritingPane, CONJUNCTION_SYMBOL));
-
-        proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED)
-                .put(KeyStroke.getKeyStroke("control V"), DISJUNCTION_TAG);
-        proofWritingPane.getActionMap()
-                .put(DISJUNCTION_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.DISJUNCTION_SYMBOL));
-
-        proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED)
-                .put(KeyStroke.getKeyStroke("control I"), IMPLICATION_TAG);
-        proofWritingPane.getActionMap()
-                .put(IMPLICATION_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.IMPLICATION_SYMBOL));
-
-        proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED)
-                .put(KeyStroke.getKeyStroke("control B"), BICONDITIONAL_TAG);
-        proofWritingPane.getActionMap()
-                .put(BICONDITIONAL_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.BICONDITIONAL_SYMBOL));
-
-        proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED)
-                .put(KeyStroke.getKeyStroke("control T"), CONTRADICTION_TAG);
-        proofWritingPane.getActionMap()
-                .put(CONTRADICTION_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.CONTRADICTION_SYMBOL));
-
-        proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED)
-                .put(KeyStroke.getKeyStroke("control E"), EXISTENTIAL_TAG);
-        proofWritingPane.getActionMap()
-                .put(EXISTENTIAL_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.EXISTENTIAL_QUANTIFIER));
-
-        proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED)
-                .put(KeyStroke.getKeyStroke("control U"), UNIVERSAL_TAG);
-        proofWritingPane.getActionMap()
-                .put(UNIVERSAL_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.UNIVERSAL_QUANTIFIER));
-
-        undoRedoAction(proofWritingPane, undoManager);
     }
 }

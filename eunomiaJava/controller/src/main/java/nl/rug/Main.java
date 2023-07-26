@@ -2,10 +2,7 @@ package nl.rug;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import lombok.extern.slf4j.Slf4j;
-import nl.rug.actions.LoadAction;
-import nl.rug.actions.NewProofAction;
-import nl.rug.actions.SaveAction;
-import nl.rug.actions.VerifyAction;
+import nl.rug.actions.*;
 import nl.rug.editorFrame.EditorFrame;
 import nl.rug.editorFrame.ProofTextEditor;
 import nl.rug.editorFrame.communication.ActionID;

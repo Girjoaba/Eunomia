@@ -1,5 +1,6 @@
 package nl.rug.editorFrame.writePanel;
 
+import nl.rug.editorFrame.communication.ActionPackage;
 import nl.rug.editorFrame.communication.EunomiaColors;
 
 import javax.swing.*;
@@ -56,5 +57,9 @@ public class WritePanel extends JPanel {
 
     public void setProofText(String proofText) {
         proofTextPane.setText(proofText);
+    }
+
+    public JTextPane getProofWritingPane() {
+        return proofTextPane;
     }
 }

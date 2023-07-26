@@ -212,6 +212,8 @@ public class ProofWritingPane extends JTextPane {
             return lines[getLineOfOffset(this, dot)];
         } catch (BadLocationException e) {
             throw new RuntimeException(e);
+        } catch (RuntimeException re) {
+            return "";
         }
     }
 

@@ -20,7 +20,6 @@ public class CreateSubproofAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            log.error(proofWritingPane.getLineAtCarat());
             proofWritingPane.getDocument().insertString(proofWritingPane.getCaretPosition(),
                     createSubproof(), null);
         } catch (BadLocationException badLocationException) {

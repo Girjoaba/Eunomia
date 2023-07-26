@@ -19,7 +19,7 @@ public class ContinueFitchBarAction extends AbstractAction {
 
     private @NotNull String createFitchBars() {
         return "\n" +
-                "|\t".repeat(Math.max(0, proofWritingPane.getIndentationLevel()));
+                "|\t".repeat(Math.max(1, proofWritingPane.getIndentationLevel()));
     }
 
     @Override

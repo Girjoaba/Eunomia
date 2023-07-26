@@ -1,8 +1,8 @@
 package nl.rug.editorFrame.writePanel;
 
-import nl.rug.editorFrame.communication.ProofSyntax;
-import nl.rug.editorFrame.writePanel.subproof.actions.ContinueFitchBarAction;
-import nl.rug.editorFrame.writePanel.subproof.actions.CreateSubproofAction;
+import nl.rug.editorFrame.writePanel.proofStructure.FitchProofDisplayUtils;
+import nl.rug.editorFrame.writePanel.proofStructure.actions.ContinueFitchBarAction;
+import nl.rug.editorFrame.writePanel.proofStructure.actions.CreateSubproofAction;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,8 +17,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-import static nl.rug.editorFrame.communication.ProofSyntax.CONJUNCTION_SYMBOL;
-import static nl.rug.editorFrame.communication.ProofSyntax.NEGATION_SYMBOL;
 
 /**
  * Adds all the keystrokes listeners and actions to the ProofWritingPane.
@@ -66,28 +64,28 @@ public class KeyStrokeDispatcher {
         continueFitchBarAction(proofWritingPane);
 
         im.put(KeyStroke.getKeyStroke("control N"), NEGATION_TAG);
-        am.put(NEGATION_TAG, insertSymbolAction(proofWritingPane, NEGATION_SYMBOL));
+        am.put(NEGATION_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.NEGATION_SYMBOL));
 
         im.put(KeyStroke.getKeyStroke("control W"), CONJUNCTION_TAG);
-        am.put(CONJUNCTION_TAG, insertSymbolAction(proofWritingPane, CONJUNCTION_SYMBOL));
+        am.put(CONJUNCTION_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.CONJUNCTION_SYMBOL));
 
         im.put(KeyStroke.getKeyStroke("control V"), DISJUNCTION_TAG);
-        am.put(DISJUNCTION_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.DISJUNCTION_SYMBOL));
+        am.put(DISJUNCTION_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.DISJUNCTION_SYMBOL));
 
         im.put(KeyStroke.getKeyStroke("control I"), IMPLICATION_TAG);
-        am.put(IMPLICATION_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.IMPLICATION_SYMBOL));
+        am.put(IMPLICATION_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.IMPLICATION_SYMBOL));
 
         im.put(KeyStroke.getKeyStroke("control B"), BICONDITIONAL_TAG);
-        am.put(BICONDITIONAL_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.BICONDITIONAL_SYMBOL));
+        am.put(BICONDITIONAL_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.BICONDITIONAL_SYMBOL));
 
         im.put(KeyStroke.getKeyStroke("control T"), CONTRADICTION_TAG);
-        am.put(CONTRADICTION_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.CONTRADICTION_SYMBOL));
+        am.put(CONTRADICTION_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.CONTRADICTION_SYMBOL));
 
         im.put(KeyStroke.getKeyStroke("control E"), EXISTENTIAL_TAG);
-        am.put(EXISTENTIAL_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.EXISTENTIAL_QUANTIFIER));
+        am.put(EXISTENTIAL_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.EXISTENTIAL_QUANTIFIER));
 
         im.put(KeyStroke.getKeyStroke("control U"), UNIVERSAL_TAG);
-        am.put(UNIVERSAL_TAG, insertSymbolAction(proofWritingPane, ProofSyntax.UNIVERSAL_QUANTIFIER));
+        am.put(UNIVERSAL_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.UNIVERSAL_QUANTIFIER));
 
         undoRedoAction(proofWritingPane, undoManager);
     }
@@ -98,7 +96,7 @@ public class KeyStrokeDispatcher {
         InputMap im = proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED);
         ActionMap am = proofWritingPane.getActionMap();
 
-        im.put(KeyStroke.getKeyStroke("TAB"), CREATE_SUBPROOF_TAG);
+        im.put(KeyStroke.getKeyStroke("control P"), CREATE_SUBPROOF_TAG);
         am.put(CREATE_SUBPROOF_TAG, new CreateSubproofAction(proofWritingPane));
     }
 

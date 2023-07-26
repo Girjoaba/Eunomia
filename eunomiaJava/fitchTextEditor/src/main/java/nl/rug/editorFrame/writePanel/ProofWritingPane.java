@@ -2,11 +2,10 @@ package nl.rug.editorFrame.writePanel;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.editorFrame.communication.EunomiaColors;
-import nl.rug.editorFrame.communication.ProofSyntax;
+import nl.rug.editorFrame.writePanel.proofStructure.FitchProofDisplayUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import javax.swing.event.CaretEvent;
 import javax.swing.text.*;
 import javax.swing.undo.UndoManager;
 import java.awt.*;
@@ -25,9 +24,13 @@ public class ProofWritingPane extends JTextPane {
 
     private static final String EXAMPLE_PROOF =
             """
-            |\t
+            |\tB
             |----
-            |\t""";
+            |\t|\tA
+            |\t|----
+            |\t|\tB Reit: 1
+            |\tA→B →Intro: 2-3
+            """;
 
     private final List<Integer> wrongLines;
 
@@ -82,47 +85,32 @@ public class ProofWritingPane extends JTextPane {
      * Changes the display of the wrong line in the proof.
      * @param index the index of the line to be marked as incorrect.
      */
-    public void markWrongProofLine(int index) {
+    public void markLogicalError(int index) {
         int lineNumber = 0;
 
         wrongLines.add(index);
-        // Sets Wrong Style
-        StyledDocument doc = this.getStyledDocument();
-        SimpleAttributeSet errorStyle = new SimpleAttributeSet();
-        StyleConstants.setForeground(errorStyle, EunomiaColors.ERROR);
 
-        // Gets the stylized document and changes the wrong line to red.
+        StyledDocument doc = this.getStyledDocument();
+        ErrorStyle errorStyle = new ErrorStyle();
+
         String[] lines = this.getText().split("\n");
         this.setText("");
         for (String line : lines) {
-            if(!line.contains(ProofSyntax.SUBPROOF_START) && !line.contains(ProofSyntax.SUBPROOF_END)) {
-                lineNumber++;
+
+            if (FitchProofDisplayUtils.canSkipLine(line)) {
+                writeLine(doc, line, null);
+                continue;
+            }
+            lineNumber++;
+
+            boolean inserted = false;
+            if (wrongLines.contains(lineNumber)) {          // Guarantee that all wrong lines are painted
+                writeLine(doc, line, errorStyle);
+                inserted = true;
             }
 
-            // If line contains a number from the list fo wrong lines, mark it red
-            boolean inserted = false;
-            for (Integer wrongLine : wrongLines) {
-                if (lineNumber == wrongLine) {
-                    try {
-                        String updateLine = line + "\n";
-                        byte[] encodedLine = updateLine.getBytes(StandardCharsets.UTF_8);
-                        String encodedLineString = new String(encodedLine, StandardCharsets.UTF_8);
-                        doc.insertString(doc.getLength(), encodedLineString, errorStyle);
-                        inserted = true;
-                    } catch (BadLocationException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
             if (!inserted) {
-                try {
-                    String updateLine = line + "\n";
-                    byte[] encodedLine = updateLine.getBytes(StandardCharsets.UTF_8);
-                    String encodedLineString = new String(encodedLine, StandardCharsets.UTF_8);
-                    doc.insertString(doc.getLength(), encodedLineString, null);
-                } catch (BadLocationException e) {
-                    e.printStackTrace();
-                }
+                writeLine(doc, line, null);
             }
         }
         this.setDocument(doc);
@@ -133,44 +121,45 @@ public class ProofWritingPane extends JTextPane {
      * Mark the index of the lines in the original text editor as wrong.
      * @param index the index of the line to be marked as incorrect.
      */
-    public void markWrongOriginalLine(int index) {
-        wrongLines.add(index);
-        // Sets Wrong Style
-        StyledDocument doc = this.getStyledDocument();
-        SimpleAttributeSet errorStyle = new SimpleAttributeSet();
-        StyleConstants.setForeground(errorStyle, EunomiaColors.ERROR);
+    public void markSyntaxError(int index) {
+        int lineNumber = 0;
 
-        // Gets the stylized document and changes the wrong line to red.
+        wrongLines.add(index);
+
+        StyledDocument doc = this.getStyledDocument();
+        ErrorStyle errorStyle = new ErrorStyle();
+
         String[] lines = this.getText().split("\n");
         this.setText("");
-        for (int lineNr = 0; lineNr < lines.length; lineNr++) {
+        for (String line : lines) {
 
-            // If line contains a number from the list fo wrong lines, mark it red
+            if (FitchProofDisplayUtils.removeFitchBars(line).isBlank()) {
+                writeLine(doc, line, null);
+                continue;
+            }
+            lineNumber++;
+
             boolean inserted = false;
-            if (wrongLines.contains(lineNr + 1)) {
-                try {
-                    String updateLine = lines[lineNr] + "\n";
-                    byte[] encodedLine = updateLine.getBytes(StandardCharsets.UTF_8);
-                    String encodedLineString = new String(encodedLine, StandardCharsets.UTF_8);
-                    doc.insertString(doc.getLength(), encodedLineString, errorStyle);
-                    inserted = true;
-                } catch (BadLocationException e) {
-                    e.printStackTrace();
-                }
+            if (wrongLines.contains(lineNumber)) {
+                writeLine(doc, line, errorStyle);
+                inserted = true;
             }
             if (!inserted) {
-                try {
-                    String updateLine = lines[lineNr] + "\n";
-                    byte[] encodedLine = updateLine.getBytes(StandardCharsets.UTF_8);
-                    String encodedLineString = new String(encodedLine, StandardCharsets.UTF_8);
-                    doc.insertString(doc.getLength(), encodedLineString, null);
-                } catch (BadLocationException e) {
-                    e.printStackTrace();
-                }
+                writeLine(doc, line, null);
             }
         }
+
         this.setDocument(doc);
         undoManager.discardAllEdits(); // When the proof is rewritten, avoid undoing the rewrite.
+    }
+
+    private static void writeLine(@NotNull StyledDocument doc, String line, SimpleAttributeSet style) {
+        try {
+            line = line + "\n";
+            doc.insertString(doc.getLength(), line, style);
+        } catch (BadLocationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -191,6 +180,7 @@ public class ProofWritingPane extends JTextPane {
                 e.printStackTrace();
             }
         }
+        undoManager.discardAllEdits(); // When the proof is rewritten, avoid undoing the rewrite.
     }
 
     public int getIndentationLevel() {

@@ -1,7 +1,7 @@
 package nl.rug.editorFrame.writePanel;
 
 import nl.rug.editorFrame.communication.EunomiaColors;
-import nl.rug.editorFrame.communication.ProofSyntax;
+import nl.rug.editorFrame.writePanel.proofStructure.FitchProofDisplayUtils;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -26,11 +26,8 @@ import java.util.Map;
  *  line in the text component.
  *  This class was designed to be used as a component added to the row header
  *  of a JScrollPane.
- *
- * @author <a href="https://github.com/HUSACCT/HUSACCT/blob/master/src/husacct/control/presentation/codeviewer
- * /TextLineNumber.java">...</a>
  */
-public class TextLineNumber extends JPanel
+public class ProofLineNumbers extends JPanel
         implements CaretListener, DocumentListener, PropertyChangeListener {
     public static final float LEFT = 0.0f;
     public static final float CENTER = 0.5f;
@@ -68,7 +65,7 @@ public class TextLineNumber extends JPanel
      *
      *  @param component  the related text component
      */
-    public TextLineNumber(JTextComponent component) {
+    public ProofLineNumbers(JTextComponent component) {
         this(component, 3);
     }
 
@@ -79,7 +76,7 @@ public class TextLineNumber extends JPanel
      *  @param minimumDisplayDigits  the number of digits used to calculate
      *                               the minimum width of the component
      */
-    public TextLineNumber(JTextComponent component, int minimumDisplayDigits) {
+    public ProofLineNumbers(JTextComponent component, int minimumDisplayDigits) {
         this.component = component;
 
 //        setFont( new Font("Arial", Font.PLAIN, 16));
@@ -298,7 +295,7 @@ public class TextLineNumber extends JPanel
         try {
             String line_text = line.getDocument().
                     getText(line.getStartOffset(), line.getEndOffset() - line.getStartOffset());
-            if (line_text.contains(ProofSyntax.SUBPROOF_START) || line_text.contains(ProofSyntax.SUBPROOF_END)) {
+            if (FitchProofDisplayUtils.canSkipLine(line_text)) {
                 subproof_lines++;
                 return "";
             } else if (line.getStartOffset() == rowStartOffset) {

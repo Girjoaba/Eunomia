@@ -23,9 +23,9 @@ public interface ProofTextEditor {
      * A call to add one line number and an error message associated with it.
      * @param line the line number.
      * @param error the error message.
-     * @param isProofLine if the error is affecting the original line of the text or the proof lines.
+     * @param isSyntaxError if the error is affecting the original line of the text or the proof lines.
      */
-    void addLineError(Integer line, String error, boolean isProofLine);
+    void addLineError(Integer line, String error, boolean isSyntaxError);
 
     /**
      * Imports the action injector from the Controller.

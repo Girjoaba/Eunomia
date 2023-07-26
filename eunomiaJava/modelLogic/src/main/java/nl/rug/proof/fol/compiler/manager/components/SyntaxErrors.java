@@ -9,7 +9,8 @@ import java.util.Set;
  */
 public class SyntaxErrors {
 
-    private static final String SYNTAX_ERROR_MESSAGE = "SYNTAX ERROR at text editor line ";
+    private static final String SYNTAX_ERROR_MESSAGE = "Syntax Error!" +
+            " Make sure the proof is written in the correct syntax.";
     private final Map<Integer, String> syntaxErrors;
 
     /**
@@ -32,7 +33,7 @@ public class SyntaxErrors {
      * @param line the line at which the error occurred.
      */
     public void addError(Integer line, String info) {
-        syntaxErrors.put(line, SYNTAX_ERROR_MESSAGE + line + ":  " + info);
+        syntaxErrors.put(line, "Parsed text line: " + line + ":  " + info + "\n" + SYNTAX_ERROR_MESSAGE);
     }
 
     /**

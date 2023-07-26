@@ -1,4 +1,4 @@
-package nl.rug.editorFrame.writePanel.subproof.actions;
+package nl.rug.editorFrame.writePanel.proofStructure.actions;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.editorFrame.writePanel.ProofWritingPane;

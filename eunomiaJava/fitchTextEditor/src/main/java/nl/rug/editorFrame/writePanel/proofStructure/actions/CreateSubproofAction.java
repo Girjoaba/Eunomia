@@ -1,4 +1,4 @@
-package nl.rug.editorFrame.writePanel.subproof.actions;
+package nl.rug.editorFrame.writePanel.proofStructure.actions;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.editorFrame.writePanel.ProofWritingPane;
@@ -30,16 +30,14 @@ public class CreateSubproofAction extends AbstractAction {
     private @NotNull String createSubproof() {
         int indentationLevel = proofWritingPane.getIndentationLevel();
 
-        return "\n" +
-
-                "|\t".repeat(Math.max(0, indentationLevel)) +   // Premise Place
-                "|\t\n" +
+        return "|\t\n" +
 
                 "|\t".repeat(Math.max(0, indentationLevel)) + // Separation part
                 "|----\n" +
 
                 "|\t".repeat(Math.max(0, indentationLevel)) + // Conclusion part
                 "|\t\n" +
-                "|\t".repeat(Math.max(0, indentationLevel));
+                "|\t".repeat(Math.max(0, indentationLevel)) +
+                "|\t".repeat(Math.max(0, indentationLevel - 1));
     }
 }

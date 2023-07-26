@@ -75,9 +75,9 @@ public class EditorFrame extends javax.swing.JFrame implements ProofTextEditor {
     }
 
     @Override
-    public void addLineError(Integer line, String error, boolean isProofLine) {
+    public void addLineError(Integer line, String error, boolean isSyntaxError) {
         errorPanel.addErrorLine(error);
-        writePanel.markWrongLine(line, isProofLine);
+        writePanel.markWrongLine(line, isSyntaxError);
     }
 
     @Override

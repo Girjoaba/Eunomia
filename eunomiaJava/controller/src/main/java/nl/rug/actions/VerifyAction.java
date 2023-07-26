@@ -1,6 +1,6 @@
 package nl.rug.actions;
 
-import nl.rug.ProofFormatter;
+import nl.rug.ProofTranslator;
 import nl.rug.editorFrame.ProofTextEditor;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
@@ -25,7 +25,7 @@ public class VerifyAction implements ActionListener {
         compiler.clear();
 
         String input = frame.getProofText();
-        input = ProofFormatter.format(input);
+        input = ProofTranslator.translate(input);
         compiler.compile(input);
         frame.clearErrors();
 

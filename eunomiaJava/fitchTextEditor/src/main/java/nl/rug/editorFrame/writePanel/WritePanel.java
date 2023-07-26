@@ -1,6 +1,5 @@
 package nl.rug.editorFrame.writePanel;
 
-import nl.rug.editorFrame.communication.ActionPackage;
 import nl.rug.editorFrame.communication.EunomiaColors;
 
 import javax.swing.*;
@@ -25,7 +24,7 @@ public class WritePanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.setBackground(EunomiaColors.BACKGROUND_MAIN);
         JScrollPane scrollWritePanel = new JScrollPane(proofTextPane);
-        TextLineNumber tln = new TextLineNumber(proofTextPane);
+        ProofLineNumbers tln = new ProofLineNumbers(proofTextPane);
         scrollWritePanel.setRowHeaderView(tln);
         this.add(scrollWritePanel, BorderLayout.CENTER);
     }
@@ -34,13 +33,13 @@ public class WritePanel extends JPanel {
      * Marks the line at the given index as wrong.
      *
      * @param index       the index of the line to be marked.
-     * @param isProofLine if the original index of the proof must be updated or the proof line index.
+     * @param isSyntaxError if the original index of the proof must be updated or the proof line index.
      */
-    public void markWrongLine(int index, boolean isProofLine) {
-        if (isProofLine) {
-            proofTextPane.markWrongProofLine(index);
+    public void markWrongLine(int index, boolean isSyntaxError) {
+        if (isSyntaxError) {
+            proofTextPane.markLogicalError(index);
         } else {
-            proofTextPane.markWrongOriginalLine(index);
+            proofTextPane.markSyntaxError(index);
         }
     }
 

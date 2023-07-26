@@ -58,8 +58,4 @@ public class WritePanel extends JPanel {
     public void setProofText(String proofText) {
         proofTextPane.setText(proofText);
     }
-
-    public JTextPane getProofWritingPane() {
-        return proofTextPane;
-    }
 }

@@ -1,9 +1,12 @@
 package nl.rug.editorFrame.writePanel;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.rug.editorFrame.communication.EunomiaColors;
 import nl.rug.editorFrame.communication.ProofSyntax;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import javax.swing.event.CaretEvent;
 import javax.swing.text.*;
 import javax.swing.undo.UndoManager;
 import java.awt.*;
@@ -15,6 +18,7 @@ import java.util.List;
 /**
  * The text panel where the proof is being written in.
  */
+@Slf4j
 public class ProofWritingPane extends JTextPane {
 
     private Integer indentationLevel = 1;
@@ -190,11 +194,37 @@ public class ProofWritingPane extends JTextPane {
         }
     }
 
-    public Integer getIndentationLevel() {
-        return indentationLevel;
+    public int getIndentationLevel() {
+        String line = getLineAtCarat();
+        int count = 0;
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == '|') {
+                count++;
+            }
+        }
+        return count;
     }
 
-    public void incrementIndentation() {
-        indentationLevel++;
+    public String getLineAtCarat() {
+        String[] lines = this.getText().split("\n");
+
+        int dot = getCaretPosition();
+        try {
+            return lines[getLineOfOffset(this, dot)];
+        } catch (BadLocationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static int getLineOfOffset(@NotNull JTextComponent comp, int offset) throws BadLocationException {
+        Document doc = comp.getDocument();
+        if (offset < 0) {
+            throw new BadLocationException("Can't translate offset to line", -1);
+        } else if (offset > doc.getLength()) {
+            throw new BadLocationException("Can't translate offset to line", doc.getLength() + 1);
+        } else {
+            Element map = doc.getDefaultRootElement();
+            return map.getElementIndex(offset);
+        }
     }
 }

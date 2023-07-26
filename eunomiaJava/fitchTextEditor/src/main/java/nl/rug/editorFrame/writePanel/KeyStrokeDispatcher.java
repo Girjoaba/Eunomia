@@ -57,14 +57,13 @@ public class KeyStrokeDispatcher {
      * @param proofWritingPane the ProofWritingPane to add the keystroke listeners and actions to.
      * @param undoManager the UndoManager to resolve undo and redo events.
      */
-    public static void addKeyStrokeActions(@NotNull ProofWritingPane proofWritingPane, UndoManager undoManager,
-                                           int indentationLevel) {
+    public static void addKeyStrokeActions(@NotNull ProofWritingPane proofWritingPane, UndoManager undoManager) {
 
         InputMap im = proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED);
         ActionMap am = proofWritingPane.getActionMap();
 
-        createSubProofAction(proofWritingPane, indentationLevel);
-        continueFitchBarAction(proofWritingPane, indentationLevel);
+        createSubProofAction(proofWritingPane);
+        continueFitchBarAction(proofWritingPane);
 
         im.put(KeyStroke.getKeyStroke("control N"), NEGATION_TAG);
         am.put(NEGATION_TAG, insertSymbolAction(proofWritingPane, NEGATION_SYMBOL));
@@ -94,7 +93,7 @@ public class KeyStrokeDispatcher {
     }
 
 
-    private static void createSubProofAction(@NotNull ProofWritingPane proofWritingPane, int indentationLevel) {
+    private static void createSubProofAction(@NotNull ProofWritingPane proofWritingPane) {
 
         InputMap im = proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED);
         ActionMap am = proofWritingPane.getActionMap();
@@ -103,7 +102,7 @@ public class KeyStrokeDispatcher {
         am.put(CREATE_SUBPROOF_TAG, new CreateSubproofAction(proofWritingPane));
     }
 
-    private static void continueFitchBarAction(@NotNull ProofWritingPane proofWritingPane, int indentationLevel) {
+    private static void continueFitchBarAction(@NotNull ProofWritingPane proofWritingPane) {
         InputMap im = proofWritingPane.getInputMap(JComponent.WHEN_FOCUSED);
         ActionMap am = proofWritingPane.getActionMap();
 

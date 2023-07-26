@@ -31,10 +31,14 @@ public class CreateSubproofAction extends AbstractAction {
     private @NotNull String createSubproof() {
         int indentationLevel = proofWritingPane.getIndentationLevel();
 
-        return "|\t\n" + // Premise Place
+        return "\n" +
+
+                "|\t".repeat(Math.max(0, indentationLevel)) +   // Premise Place
+                "|\t\n" +
 
                 "|\t".repeat(Math.max(0, indentationLevel)) + // Separation part
                 "|----\n" +
+
                 "|\t".repeat(Math.max(0, indentationLevel)) + // Conclusion part
                 "|\t\n" +
                 "|\t".repeat(Math.max(0, indentationLevel));

@@ -21,7 +21,6 @@ import java.util.List;
 @Slf4j
 public class ProofWritingPane extends JTextPane {
 
-    private Integer indentationLevel = 1;
     private final UndoManager undoManager;
 
     private static final String EXAMPLE_PROOF =
@@ -40,7 +39,7 @@ public class ProofWritingPane extends JTextPane {
         wrongLines = new ArrayList<>();
         initProofWritingPane();
 
-        KeyStrokeDispatcher.addKeyStrokeActions(this, undoManager, indentationLevel);
+        KeyStrokeDispatcher.addKeyStrokeActions(this, undoManager);
     }
 
     private void initProofWritingPane() {

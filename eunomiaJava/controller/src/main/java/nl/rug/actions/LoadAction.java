@@ -22,7 +22,7 @@ public class LoadAction implements ActionListener {
         JFileChooser fileChooser = new JFileChooser();
 
         // Set the file filter to only show .txt files
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files (*.txt)", "txt"));
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files (*.eun)", "eun"));
 
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {

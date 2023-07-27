@@ -1,5 +1,6 @@
 package nl.rug.actions;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.rug.editorFrame.ProofTextEditor;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileStore;
 
+@Slf4j
 public class SaveAction implements ActionListener {
 
     ProofTextEditor frame;
@@ -27,10 +29,11 @@ public class SaveAction implements ActionListener {
         JFileChooser fileChooser = new JFileChooser();
 
         // Set the default file name and extension filter
-        fileChooser.setSelectedFile(new File("file.txt"));
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files (*.txt)", "txt"));
+        fileChooser.setSelectedFile(new File("file.eun"));
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files (*.eun)", "eun"));
 
         int result = fileChooser.showSaveDialog(null);
+
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
 

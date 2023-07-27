@@ -32,11 +32,16 @@ public class VerifyAction implements ActionListener {
         // Return Syntax Errors
         if (!manager.getSyntaxErorrs().isEmpty()) {
             manager.getSyntaxErorrs().lineSet().forEach((line) -> {
-                frame.addLineError(line, manager.getSyntaxErorrs().getErrorMessage(line), false);
+                frame.addLineError(line, manager.getSyntaxErorrs().getErrorMessage(line), true);
             });
         } else { // Return Evaluation Errors
+            // If there are no errors return code -1
+            if (manager.referenceSet().stream().allMatch(manager::isCorrect)) {
+                frame.addLineError(-1, "The proof is correct!", false);
+            }
+
             manager.referenceSet().stream().filter(line -> !manager.isCorrect(line)).forEach((line) -> {
-                frame.addLineError(line, manager.getErrorMessage(line), true);
+                frame.addLineError(line, manager.getErrorMessage(line), false);
             });
         }
     }

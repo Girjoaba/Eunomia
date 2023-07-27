@@ -3,12 +3,17 @@ package nl.rug.editorFrame.errorPanel;
 import nl.rug.editorFrame.communication.EunomiaColors;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
+import java.awt.font.FontRenderContext;
 
 /**
  * The component containing the text of the error messages.
  */
-public class ErrorText extends JTextArea {
+public class ErrorText extends JTextPane {
 
     /**
      * Initializes the error text component.
@@ -18,15 +23,15 @@ public class ErrorText extends JTextArea {
     }
 
     private void initErrorText() {
-        this.setPreferredSize(new Dimension(300, 200));
+        setPreferredSize(new Dimension(300, 200));
 
-        this.setBackground(EunomiaColors.BACKGROUND_MAIN);
-        this.setForeground(Color.WHITE);
+        setBackground(EunomiaColors.BACKGROUND_MAIN);
+        setFont(new Font("Arial", Font.PLAIN, 14));
+        setForeground(Color.WHITE);
 
-        this.setEditable(false);
-        this.setLineWrap(true);
-        this.setWrapStyleWord(true);
-        this.setText("No errors found");
+        setEditable(false);
+//        setLineWrap(true);
+//        setWrapStyleWord(true);
     }
 
     /**
@@ -34,7 +39,14 @@ public class ErrorText extends JTextArea {
      * @param error the error to be added.
      */
     public void addErrorLine(String error) {
-        this.setText(this.getText() + "\n" + error);
+        StyledDocument doc = this.getStyledDocument();
+        SimpleAttributeSet correct = new SimpleAttributeSet();
+        StyleConstants.setForeground(correct, EunomiaColors.ERROR);
+        try {
+            doc.insertString(doc.getLength(), error + "\n", correct);
+        } catch (BadLocationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -42,5 +54,16 @@ public class ErrorText extends JTextArea {
      */
     public void clearErrorLines() {
         this.setText("");
+    }
+
+    public void setCorrect(String message) {
+        StyledDocument doc = this.getStyledDocument();
+        SimpleAttributeSet correct = new SimpleAttributeSet();
+        StyleConstants.setForeground(correct, EunomiaColors.CORRECT);
+        try {
+            doc.insertString(doc.getLength(), message, correct);
+        } catch (BadLocationException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

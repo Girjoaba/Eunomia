@@ -11,7 +11,8 @@ import java.util.Set;
 public class SyntaxErrors {
 
     private static final String SYNTAX_ERROR_MESSAGE = "Syntax Error!" +
-            " Make sure the proof is written in the correct syntax.";
+            "\tMake sure the proof is written in the correct syntax. \n" +
+            "\t\tA formula might not be well formed.";
     private final Map<Integer, String> syntaxErrors;
 
     /**

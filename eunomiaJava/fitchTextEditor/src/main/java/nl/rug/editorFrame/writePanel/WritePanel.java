@@ -37,9 +37,9 @@ public class WritePanel extends JPanel {
      */
     public void markWrongLine(int index, boolean isSyntaxError) {
         if (isSyntaxError) {
-            proofTextPane.markLogicalError(index);
-        } else {
             proofTextPane.markSyntaxError(index);
+        } else {
+            proofTextPane.markLogicalError(index);
         }
     }
 

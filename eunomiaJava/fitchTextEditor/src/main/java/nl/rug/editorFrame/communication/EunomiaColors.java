@@ -12,6 +12,7 @@ public class EunomiaColors {
     public static final Color ACCENT_MAIN = Color.decode("#fccd7c");
     public static final Color ACCENT_DILUTED = Color.decode("#FDF4BF");
     public static final Color ACCENT_SELECTED = Color.decode("#E5C365");
-    public static final Color ERROR = Color.decode("#E51400");
+    public static final Color ERROR = Color.decode("#F44747");
 
+    public static final Color CORRECT = Color.decode("#89d185");;
 }

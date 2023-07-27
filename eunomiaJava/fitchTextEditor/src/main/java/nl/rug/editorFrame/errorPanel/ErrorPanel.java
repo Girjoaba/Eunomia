@@ -45,4 +45,8 @@ public class ErrorPanel extends JPanel {
     public void clearErrorLines() {
         errorText.clearErrorLines();
     }
+
+    public void setCorrect(String error) {
+        errorText.setCorrect(error);
+    }
 }

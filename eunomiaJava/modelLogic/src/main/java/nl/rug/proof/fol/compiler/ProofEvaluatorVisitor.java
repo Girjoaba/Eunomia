@@ -251,7 +251,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     @Override
-    public Object visitReiteration(ProofGrammarParser.ReiterationContext ctx) {
+    public Object visitReiteration(ProofGrammarParser.@NotNull ReiterationContext ctx) {
 
         Integer reference = (Integer) visit(ctx.singleReference());
 
@@ -268,7 +268,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitContradictionIntro(ProofGrammarParser.ContradictionIntroContext ctx) {
+    public Object visitContradictionIntro(ProofGrammarParser.@NotNull ContradictionIntroContext ctx) {
 
         Integer reference1 = (Integer) visit(ctx.singleReference(FIRST_REFERENCE));
         Integer reference2 = (Integer) visit(ctx.singleReference(SECOND_REFERENCE));
@@ -293,7 +293,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitContradictionElim(ProofGrammarParser.ContradictionElimContext ctx) {
+    public Object visitContradictionElim(ProofGrammarParser.@NotNull ContradictionElimContext ctx) {
 
         Integer reference = (Integer) visit(ctx.singleReference());
         if(!manager.isValidSingleReference(reference)) {
@@ -310,7 +310,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitNegationIntro(ProofGrammarParser.NegationIntroContext ctx) {
+    public Object visitNegationIntro(ProofGrammarParser.@NotNull NegationIntroContext ctx) {
 
         String range = (String) visit(ctx.rangeReference());
 
@@ -345,7 +345,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitNegationElim(ProofGrammarParser.NegationElimContext ctx) {
+    public Object visitNegationElim(ProofGrammarParser.@NotNull NegationElimContext ctx) {
 
         Integer reference = (Integer) visit(ctx.singleReference());
 
@@ -379,7 +379,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     @Override
-    public Object visitConjunctionIntro(ProofGrammarParser.ConjunctionIntroContext ctx) {
+    public Object visitConjunctionIntro(ProofGrammarParser.@NotNull ConjunctionIntroContext ctx) {
 
         Integer reference1 = (Integer) visit(ctx.singleReference(FIRST_REFERENCE));
         Integer reference2 = (Integer) visit(ctx.singleReference(SECOND_REFERENCE));
@@ -408,7 +408,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     @Override
-    public Object visitConjunctionElim(ProofGrammarParser.ConjunctionElimContext ctx) {
+    public Object visitConjunctionElim(ProofGrammarParser.@NotNull ConjunctionElimContext ctx) {
 
         Integer reference = (Integer) visit(ctx.singleReference());
 
@@ -435,7 +435,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      * @return null
      */
-    public Object visitDisjunctionIntro(ProofGrammarParser.DisjunctionIntroContext ctx) {
+    public Object visitDisjunctionIntro(ProofGrammarParser.@NotNull DisjunctionIntroContext ctx) {
 
         Integer reference = (Integer) visit(ctx.singleReference());
 
@@ -463,7 +463,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @param ctx the parse tree
      */
     @Override
-    public Object visitDisjunctionElim(ProofGrammarParser.DisjunctionElimContext ctx) {
+    public Object visitDisjunctionElim(ProofGrammarParser.@NotNull DisjunctionElimContext ctx) {
 
         Integer reference = (Integer) visit(ctx.singleReference());
         String range1 = (String) visit(ctx.rangeReference(FIRST_REFERENCE));

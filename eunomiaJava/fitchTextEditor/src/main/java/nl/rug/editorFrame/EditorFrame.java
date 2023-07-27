@@ -50,7 +50,7 @@ public class EditorFrame extends javax.swing.JFrame implements ProofTextEditor {
 
         JSplitPane verticalSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, informationPanel, proofPanel);
         verticalSplit.setContinuousLayout(true);
-        verticalSplit.setResizeWeight(1.0);
+        verticalSplit.setResizeWeight(0.7);
         this.add(verticalSplit, BorderLayout.CENTER);
 
         JSplitPane horizontalSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT, writePanel, errorPanel);

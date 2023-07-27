@@ -2,7 +2,7 @@ package nl.rug.editorFrame.informationPanel;
 
 import nl.rug.editorFrame.communication.EunomiaColors;
 import nl.rug.editorFrame.informationPanel.tabs.HelpPanel;
-import nl.rug.editorFrame.informationPanel.tabs.KeybindingsText;
+import nl.rug.editorFrame.informationPanel.tabs.UserManual;
 import nl.rug.editorFrame.informationPanel.tabs.ProofSelectionPanel;
 import nl.rug.editorFrame.informationPanel.ui.InformationTabbedUI;
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +57,7 @@ public class InformationPanel extends JPanel {
         tabbedPane.setForeground(Color.BLACK);
         tabbedPane.setUI(new InformationTabbedUI());
 
-        tabbedPane.addTab("", new KeybindingsText());
+        tabbedPane.addTab("", new UserManual());
         tabbedPane.addTab("", new HelpPanel());
         tabbedPane.addTab("", new ProofSelectionPanel());
 

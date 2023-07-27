@@ -32,15 +32,13 @@ public class MenuBar extends JMenuBar {
 
 
         JMenuItem openMenuItem = new JMenuItem("Load");
-        openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,
-                KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK));
+        openMenuItem.setAccelerator(KeyStroke.getKeyStroke("control O"));
         openMenuItem.addActionListener(actionPackage.getAction(ActionID.LOAD_ACTION));
 
         JMenuItem saveMenuItem = new JMenuItem("Save");
 
         JMenuItem saveAsMenuItem = new JMenuItem("Save As");
-        saveAsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-                KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK));
+        saveAsMenuItem.setAccelerator(KeyStroke.getKeyStroke("control S"));
         saveAsMenuItem.addActionListener(actionPackage.getAction(ActionID.SAVE_ACTION));
 
         fileMenu.add(newMenuItem);

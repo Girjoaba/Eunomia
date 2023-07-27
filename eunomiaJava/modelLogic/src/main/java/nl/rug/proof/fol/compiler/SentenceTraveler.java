@@ -99,7 +99,7 @@ public class SentenceTraveler {
                 String argument = child.getChild(TreeIndexes.FUNCTION_ARGUMENT).getText();
 
                 if(GrammarNotations.VARIABLES.contains(argument) && !boundedVariables.contains(argument)) {
-                    manager.setCurrentEvaluationWrong(ErrorMessage.getErrorVariableNotBounded(argument));
+                    manager.setCurrentEvaluationWrong(ErrorMessage.GET_ERROR_VARIABLE_BOUNDED(argument));
                 } else if(GrammarNotations.CONSTANTS.contains(argument)) {
                     manager.addConstantCurrentLevel(argument);
                 }
@@ -140,7 +140,7 @@ public class SentenceTraveler {
                     }
                 }
                 manager.setCurrentEvaluationWrong(ErrorMessage
-                        .getAmbiguousError(sentence, segmentStart, segmentEnd + 1));
+                        .GET_AMBIGUOUS_ERROR(sentence, segmentStart, segmentEnd + 1));
                 break;
             }
 

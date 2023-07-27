@@ -331,8 +331,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
                 .getChild(NEGATED_SENTENCE).getText())
                 || !manager.getCurrentSentence().getChild(NEGATION_SYMBOL).getText()
                 .equals(GrammarNotations.NEGATION_SYMBOL)) {
-            manager
-                .setCurrentEvaluationWrong(ErrorMessage.SUBPROOF_NOT_NEGATED);
+
+            manager.setCurrentEvaluationWrong(ErrorMessage.SUBPROOF_NOT_NEGATED);
             return null;
         }
 
@@ -360,6 +360,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
                 .getText().equals(GrammarNotations.NEGATION_SYMBOL)
                 || !manager.getSentence(reference).getChild(NEGATED_SENTENCE)
                 .getChild(NEGATION_SYMBOL).getText().equals(GrammarNotations.NEGATION_SYMBOL)) {
+
             manager.setCurrentEvaluationWrong(ErrorMessage.APPLY_NEGATION_ELIMINATION_TO_DOUBLE_NEGATIONS);
             return null;
         }
@@ -396,7 +397,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         if(!manager.isPartOfCurrentBinaryExpression(reference1)
             || !manager.isPartOfCurrentBinaryExpression(reference2)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.CONJUCTION_CONSTRUCTED_FROM_DIFFERNET_SENTENCES);
+            manager.setCurrentEvaluationWrong(ErrorMessage.CONJUNCTION_CONSTRUCTED_FROM_DIFFERENT_SENTENCES);
             return null;
         }
         return null;
@@ -450,7 +451,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isPartOfCurrentBinaryExpression(reference)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_PART_OF_A_BINARY_EXPRESSION);
+            manager.setCurrentEvaluationWrong(ErrorMessage.REFERENCE_NOT_PRESENT_IN_DISJUNCTION);
             return null;
         }
         return null;
@@ -530,19 +531,19 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(manager.isNotIdentity(reference2)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IDENTITY);
+            manager.setCurrentEvaluationWrong(ErrorMessage.GET_NOT_AN_IDENTITY_REFERENCE(String.valueOf(reference2)));
             return null;
         }
 
         String leftIdentity = manager.getSentence(reference2).getChild(ATOM_LEVEL).getChild(LEFT_IDENTITY).getText();
         String rightIdentity = manager.getSentence(reference2).getChild(ATOM_LEVEL).getChild(RIGHT_IDENTITY).getText();
 
-        int countInitialLeft = 0, countInitialRight = 0;
+        int countInitialLeft, countInitialRight;
         String initialSentence = manager.getSentence(reference1).getText();
         countInitialLeft = countAppearancesOfAtom(leftIdentity, initialSentence);
         countInitialRight = countAppearancesOfAtom(rightIdentity, initialSentence);
 
-        int countFinalLeft = 0, countFinalRight = 0;
+        int countFinalLeft, countFinalRight;
         String finalSentence = manager.getCurrentSentence().getText();
         countFinalLeft = countAppearancesOfAtom(leftIdentity, finalSentence);
         countFinalRight = countAppearancesOfAtom(rightIdentity, finalSentence);
@@ -612,7 +613,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCorrectBinaryExpression(reference1, GrammarNotations.IMPLICATION_SYMBOL)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IMPLICATION);
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IMPLICATION_REFERENCE(String.valueOf(reference1)));
             return null;
         }
 
@@ -681,12 +682,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCorrectBinaryExpression(reference1, GrammarNotations.BICONDITIONAL_SYMBOL)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.MISSING_BICONDITIONAL);
+            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_BICONDITIONAL_REFERENCE(String.valueOf(reference1)));
             return null;
         }
 
         if(!manager.isPartOfBinaryExpression(reference2, reference1)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.REFERENCE_MUST_BE_PART_OF_A_BICONDITIONAL);
+            manager.setCurrentEvaluationWrong
+                    (ErrorMessage.MUST_BE_PART_OF_THE_BICONDITIONAL_REFERENCE(String.valueOf(reference1)));
             return null;
         }
 
@@ -746,7 +748,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(manager.isNotUniversalQuantifier(reference)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_UNIVERSAL_QUANTIFIER);
+            manager.setCurrentEvaluationWrong
+                    (ErrorMessage.NOT_A_UNIVERSAL_QUANTIFIER_REFERENCE(String.valueOf(reference)));
             return null;
         }
 
@@ -805,12 +808,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(manager.isNotExistentialQuantifier(reference)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_EXISTENTIAL_QUANTIFIER);
+            manager.setCurrentEvaluationWrong
+                    (ErrorMessage.NOT_AN_EXISTENTIAL_QUANTIFIER_REFERENCE(String.valueOf(reference)));
             return null;
         }
 
         if(manager.isNotEqualNoQuantifier(reference, rangeStart)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.DOES_NOT_FOLLOW_FROM_CONCLUSION);
+            manager.setCurrentEvaluationWrong(ErrorMessage.THE_PREMISE_DOES_NOT_FOLLOW_FROM_EXISTENTIAL);
             return null;
         }
 

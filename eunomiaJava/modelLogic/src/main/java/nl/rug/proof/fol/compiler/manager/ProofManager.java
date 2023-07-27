@@ -277,7 +277,7 @@ public class ProofManager {
         try {
             constantScope.addConstant(name, currentLevel);
         } catch (IllegalArgumentException e) {
-            setCurrentEvaluationWrong(ErrorMessage.getErrorConstantDefinedWrong(name));
+            setCurrentEvaluationWrong(ErrorMessage.GET_ERROR_CONSTANT_DEFINED_WRONG(name));
         }
     }
 

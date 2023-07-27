@@ -4,3 +4,4 @@ assume
 3. C premise
 4. B ∧ C ∧Intro: 2, 3
 qed
+5. A Reit: 1

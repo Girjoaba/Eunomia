@@ -233,49 +233,96 @@ public class ErrorMessage {
     public static final String THE_PREMISE_DOES_NOT_FOLLOW_FROM_EXISTENTIAL
             = "The premise does not follow from the existential!";
 
+    /**
+     * A way to reference an error message for easy access. Introduces a reference to a line.
+     * @param reference the reference to the line.
+     * @return the error message.
+     */
     @Contract(pure = true)
-    public static @NotNull String GET_NOT_AN_IDENTITY_REFERENCE(String reference) {
-            return "Reference " + reference + " is not an identity!";
+    public static @NotNull String errorNotAnIdentity(String reference) {
+        return "Reference " + reference + " is not an identity!";
     }
 
+    /**
+     * A way to reference an error message for easy access. Introduces a variable in the message.
+     * @param variable the variable to be introduced.
+     * @return the error message.
+     */
     @Contract(pure = true)
-    public static @NotNull String GET_ERROR_VARIABLE_BOUNDED(String variable) {
+    public static @NotNull String errorVariableBounded(String variable) {
         return "Variable " + variable + " is not bounded.";
     }
 
+    /**
+     * A way to reference an error message for easy access. Introduces a constant in the message.
+     * @param constant the constant to be introduced.
+     * @return the error message.
+     */
     @Contract(pure = true)
-    public static @NotNull String GET_ERROR_CONSTANT_DEFINED_WRONG(String constant) {
+    public static @NotNull String errorConstantDefinedWrong(String constant) {
         return "Constant " + constant + " is defined wrong.";
     }
 
+    /**
+     * A way to reference an error message for easy access. Displays the part that is ambiguous.
+     * @param sentence the entire sentence.
+     * @param startPos the start position of the ambiguous part.
+     * @param endPos the end position of the ambiguous part.
+     * @return the error message.
+     */
     @Contract(pure = true)
-    public static @NotNull String GET_AMBIGUOUS_ERROR(@NotNull String sentence, int startPos, int endPos) {
+    public static @NotNull String errorAmbiguous(@NotNull String sentence, int startPos, int endPos) {
         String ambiguous = sentence.substring(startPos, endPos);
         return "Ambiguous order of operations: " + ambiguous;
     }
 
+    /**
+     * A way to reference an error message for easy access. Introduces a reference to a line.
+     * @param reference the reference to the line.
+     * @return the error message.
+     */
     @Contract(pure = true)
-    public static @NotNull String NOT_AN_IMPLICATION_REFERENCE(String reference) {
+    public static @NotNull String errorNotAnImplicationReference(String reference) {
         return "Reference " + reference + " is not an implication!";
     }
 
+    /**
+     * A way to reference an error message for easy access. Introduces a reference to a line.
+     * @param reference the reference to the line.
+     * @return the error message.
+     */
     @Contract(pure = true)
-    public static @NotNull String NOT_A_BICONDITIONAL_REFERENCE(String reference) {
+    public static @NotNull String errorNotABiconditionalReference(String reference) {
         return "Reference " + reference + " is not a biconditional!";
     }
 
+    /**
+     * A way to reference an error message for easy access. Introduces a reference to a line.
+     * @param reference the reference to the line.
+     * @return the error message.
+     */
     @Contract(pure = true)
-    public static @NotNull String MUST_BE_PART_OF_THE_BICONDITIONAL_REFERENCE(String reference) {
+    public static @NotNull String errorMustBePartOfTheBiconditionalReference(String reference) {
         return "The reference " + reference + " must be part of the biconditional!";
     }
 
+    /**
+     * A way to reference an error message for easy access. Introduces a reference to a line.
+     * @param reference the reference to the line.
+     * @return the error message.
+     */
     @Contract(pure = true)
-    public static @NotNull String NOT_A_UNIVERSAL_QUANTIFIER_REFERENCE(String reference) {
+    public static @NotNull String errorNotAUniversalQuantifierReference(String reference) {
         return "Reference " + reference + " is not a universal quantifier!";
     }
 
+    /**
+     * A way to reference an error message for easy access. Introduces a reference to a line.
+     * @param reference the reference to the line.
+     * @return the error message.
+     */
     @Contract(pure = true)
-    public static @NotNull String NOT_AN_EXISTENTIAL_QUANTIFIER_REFERENCE(String reference) {
+    public static @NotNull String errorNotAnExistentialQuantifierReference(String reference) {
         return "Reference " + reference + " is not an existential quantifier!";
     }
 }

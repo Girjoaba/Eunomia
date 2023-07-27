@@ -531,7 +531,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(manager.isNotIdentity(reference2)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.GET_NOT_AN_IDENTITY_REFERENCE(String.valueOf(reference2)));
+            manager.setCurrentEvaluationWrong(ErrorMessage.errorNotAnIdentity(String.valueOf(reference2)));
             return null;
         }
 
@@ -613,7 +613,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCorrectBinaryExpression(reference1, GrammarNotations.IMPLICATION_SYMBOL)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_AN_IMPLICATION_REFERENCE(String.valueOf(reference1)));
+            manager.setCurrentEvaluationWrong(ErrorMessage.errorNotAnImplicationReference(String.valueOf(reference1)));
             return null;
         }
 
@@ -682,13 +682,13 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isCorrectBinaryExpression(reference1, GrammarNotations.BICONDITIONAL_SYMBOL)) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.NOT_A_BICONDITIONAL_REFERENCE(String.valueOf(reference1)));
+            manager.setCurrentEvaluationWrong(ErrorMessage.errorNotABiconditionalReference(String.valueOf(reference1)));
             return null;
         }
 
         if(!manager.isPartOfBinaryExpression(reference2, reference1)) {
             manager.setCurrentEvaluationWrong
-                    (ErrorMessage.MUST_BE_PART_OF_THE_BICONDITIONAL_REFERENCE(String.valueOf(reference1)));
+                    (ErrorMessage.errorMustBePartOfTheBiconditionalReference(String.valueOf(reference1)));
             return null;
         }
 
@@ -749,7 +749,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         if(manager.isNotUniversalQuantifier(reference)) {
             manager.setCurrentEvaluationWrong
-                    (ErrorMessage.NOT_A_UNIVERSAL_QUANTIFIER_REFERENCE(String.valueOf(reference)));
+                    (ErrorMessage.errorNotAUniversalQuantifierReference(String.valueOf(reference)));
             return null;
         }
 
@@ -809,7 +809,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
         if(manager.isNotExistentialQuantifier(reference)) {
             manager.setCurrentEvaluationWrong
-                    (ErrorMessage.NOT_AN_EXISTENTIAL_QUANTIFIER_REFERENCE(String.valueOf(reference)));
+                    (ErrorMessage.errorNotAnExistentialQuantifierReference(String.valueOf(reference)));
             return null;
         }
 

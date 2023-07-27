@@ -3,7 +3,7 @@ package nl.rug.proof.quantifier;
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
-import nl.rug.proof.helper.LineVerifier;
+import nl.rug.proof.checkingTools.LineVerifier;
 import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +14,9 @@ import java.util.List;
 @Slf4j
 public class UniversalTest {
 
-    /*  ----------------------------------------------------------------------------------------------------------------
-        ------------------------------------------------- Forall Elimination -------------------------------------------
-        ----------------------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------------------------------|
+     * --------------------------------- Verify Correctness ------------------------------------|
+     * -----------------------------------------------------------------------------------------|
      */
 
     @Test
@@ -46,6 +46,39 @@ public class UniversalTest {
             log.error("File not found");
         }
     }
+
+    @Test
+    public void forallIntroCorrectSimpleTest() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile(new InputPath("testProofs/quantifiers/forall/correct/forall_intro_correct_simple.txt"));
+
+            LineVerifier.verifyAllLinesCorrect(manager);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+
+    @Test
+    public void forallIntroScopeInOut() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile(new InputPath("testProofs/quantifiers/forall/correct/forall_intro_scope_in_out.txt"));
+
+            LineVerifier.verifyAllLinesCorrect(manager);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+
+    /* -----------------------------------------------------------------------------------------|
+     * ---------------------------------- Verify Mistakes --------------------------------------|
+     * -----------------------------------------------------------------------------------------|
+     */
 
     @Test
     public void forallElimDifferentConstantsTest() {
@@ -131,39 +164,6 @@ public class UniversalTest {
 
             List<Integer> wrongLines = new ArrayList<>(List.of(2));
             LineVerifier.verifyWrongLines(manager, wrongLines);
-
-        } catch (FileNotFoundException e) {
-            log.error("File not found");
-        }
-    }
-
-    /*  ----------------------------------------------------------------------------------------------------------------
-        ------------------------------------------------- Forall Introduction ------------------------------------------
-        ----------------------------------------------------------------------------------------------------------------
-     */
-
-    @Test
-    public void forallIntroCorrectSimpleTest() {
-        try {
-            ProofManager manager = new ProofManager();
-            EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/quantifiers/forall/correct/forall_intro_correct_simple.txt"));
-
-            LineVerifier.verifyAllLinesCorrect(manager);
-
-        } catch (FileNotFoundException e) {
-            log.error("File not found");
-        }
-    }
-
-    @Test
-    public void forallIntroScopeInOut() {
-        try {
-            ProofManager manager = new ProofManager();
-            EunomiaCompiler compiler = new EunomiaCompiler(manager);
-            compiler.compile(new InputPath("testProofs/quantifiers/forall/correct/forall_intro_scope_in_out.txt"));
-
-            LineVerifier.verifyAllLinesCorrect(manager);
 
         } catch (FileNotFoundException e) {
             log.error("File not found");

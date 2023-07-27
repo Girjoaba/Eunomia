@@ -1,4 +1,4 @@
-package nl.rug.proof.helper;
+package nl.rug.proof.checkingTools;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.compiler.manager.ProofManager;

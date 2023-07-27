@@ -3,7 +3,7 @@ package nl.rug.proof.structure;
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
-import nl.rug.proof.helper.LineVerifier;
+import nl.rug.proof.checkingTools.LineVerifier;
 import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +11,12 @@ import java.io.FileNotFoundException;
 
 @Slf4j
 public class ParenthesesTest {
+
+    /* -----------------------------------------------------------------------------------------|
+     * ------------------------------------ Verify Correctness ---------------------------------|
+     * -----------------------------------------------------------------------------------------|
+     */
+
     @Test
     public void testReitNoParam() {
         try {
@@ -64,4 +70,9 @@ public class ParenthesesTest {
             log.error("File not found");
         }
     }
+
+    /* -----------------------------------------------------------------------------------------|
+     * ------------------------------------- Verify Mistakes -----------------------------------|
+     * -----------------------------------------------------------------------------------------|
+     */
 }

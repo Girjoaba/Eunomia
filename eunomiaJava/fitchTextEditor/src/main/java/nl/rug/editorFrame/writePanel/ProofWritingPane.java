@@ -120,33 +120,20 @@ public class ProofWritingPane extends JTextPane {
     /**
      * Mark the index of the lines in the original text editor as wrong.
      * @param index the index of the line to be marked as incorrect.
+     * TODO: Make this method paint only the specific line
      */
     public void markSyntaxError(int index) {
-        int lineNumber = 0;
-
         wrongLines.add(index);
 
-        StyledDocument doc = this.getStyledDocument();
-        ErrorStyle errorStyle = new ErrorStyle();
-
-        String[] lines = this.getText().split("\n");
+        String originalText = this.getText();
         this.setText("");
-        for (String line : lines) {
-
-            if (FitchProofDisplayUtils.removeFitchBars(line).isBlank()) {
-                writeLine(doc, line, null);
-                continue;
-            }
-            lineNumber++;
-
-            boolean inserted = false;
-            if (wrongLines.contains(lineNumber)) {
-                writeLine(doc, line, errorStyle);
-                inserted = true;
-            }
-            if (!inserted) {
-                writeLine(doc, line, null);
-            }
+        StyledDocument doc = this.getStyledDocument();
+        SimpleAttributeSet syntaxWrong = new SimpleAttributeSet();
+        StyleConstants.setForeground(syntaxWrong, EunomiaColors.ACCENT_MAIN);
+        try {
+            doc.insertString(doc.getLength(), originalText, syntaxWrong);
+        } catch (BadLocationException e) {
+            throw new RuntimeException(e);
         }
 
         this.setDocument(doc);

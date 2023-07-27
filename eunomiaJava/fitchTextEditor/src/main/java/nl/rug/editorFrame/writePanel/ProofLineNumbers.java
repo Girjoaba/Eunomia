@@ -2,6 +2,7 @@ package nl.rug.editorFrame.writePanel;
 
 import nl.rug.editorFrame.communication.EunomiaColors;
 import nl.rug.editorFrame.writePanel.proofStructure.FitchProofDisplayUtils;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -76,10 +77,8 @@ public class ProofLineNumbers extends JPanel
      *  @param minimumDisplayDigits  the number of digits used to calculate
      *                               the minimum width of the component
      */
-    public ProofLineNumbers(JTextComponent component, int minimumDisplayDigits) {
+    public ProofLineNumbers(@NotNull JTextComponent component, int minimumDisplayDigits) {
         this.component = component;
-
-//        setFont( new Font("Arial", Font.PLAIN, 16));
 
         setBorderGap( 5 );
         setCurrentLineForeground(EunomiaColors.ACCENT_MAIN);
@@ -318,7 +317,7 @@ public class ProofLineNumbers extends JPanel
     /*
      *  Determine the Y offset for the current row.
      */
-    private int getOffsetY(int rowStartOffset, FontMetrics fontMetrics)
+    private int getOffsetY(int rowStartOffset, @NotNull FontMetrics fontMetrics)
             throws BadLocationException {
         //  Get the bounding rectangle of the row
 
@@ -432,7 +431,7 @@ public class ProofLineNumbers extends JPanel
      *          and the property that has changed.
      */
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
+    public void propertyChange(@NotNull PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof Font) {
             if (updateFont) {
                 Font newFont = (Font) evt.getNewValue();

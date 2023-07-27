@@ -13,6 +13,13 @@ import java.util.List;
 
 @Slf4j
 public class IdentityTest {
+
+
+    /* -----------------------------------------------------------------------------------------|
+     * --------------------------------------- Correct Tests -----------------------------------|
+     * -----------------------------------------------------------------------------------------|
+     */
+
     @Test
     public void testIdentityIntro() {
         try {
@@ -54,6 +61,39 @@ public class IdentityTest {
             log.error("File not found");
         }
     }
+
+    @Test
+    public void testIdentityElimInFunction() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile(new InputPath("testProofs/binary/identity/correct/identity_elim_in_function.txt"));
+
+            LineVerifier.verifyAllLinesCorrect(manager);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+
+    @Test
+    public void testIdentityIntroFunction() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile(new InputPath("testProofs/binary/identity/correct/identity_intro_function.txt"));
+
+            LineVerifier.verifyAllLinesCorrect(manager);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+
+    /* -----------------------------------------------------------------------------------------|
+     * --------------------------------------- Wrong Tests -------------------------------------|
+     * -----------------------------------------------------------------------------------------|
+     */
 
     @Test
     public void testIdentityIntroWrong() {
@@ -121,6 +161,51 @@ public class IdentityTest {
             ProofManager manager = new ProofManager();
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
             compiler.compile(new InputPath("testProofs/binary/identity/wrong/identity_elim_binary_wrong.txt"));
+
+            List<Integer> wrongLines = new ArrayList<>(List.of(3));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+
+    @Test
+    public void testIdentityElimInFunctionWrong() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile(new InputPath("testProofs/binary/identity/wrong/identity_elim_in_function_wrong.txt"));
+
+            List<Integer> wrongLines = new ArrayList<>(List.of(3));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+
+    @Test
+    public void testIdentityElimInFunctionOrderWrong() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile(new InputPath("testProofs/binary/identity/wrong/identity_elim_in_function_order_wrong.txt"));
+
+            List<Integer> wrongLines = new ArrayList<>(List.of(3));
+            LineVerifier.verifyWrongLines(manager, wrongLines);
+
+        } catch (FileNotFoundException e) {
+            log.error("File not found");
+        }
+    }
+
+    @Test
+    public void testIdentityElimInFunctionReferenceWrong() {
+        try {
+            ProofManager manager = new ProofManager();
+            EunomiaCompiler compiler = new EunomiaCompiler(manager);
+            compiler.compile(new InputPath("testProofs/binary/identity/wrong/identity_elim_in_function_reference_wrong.txt"));
 
             List<Integer> wrongLines = new ArrayList<>(List.of(3));
             LineVerifier.verifyWrongLines(manager, wrongLines);

@@ -1,5 +1,6 @@
 package nl.rug.proof.fol.compiler.manager.components;
 
+import java.awt.desktop.SystemSleepEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -33,6 +34,7 @@ public class SyntaxErrors {
      * @param line the line at which the error occurred.
      */
     public void addError(Integer line, String info) {
+        System.err.println("Parsed text line: " + line + ":  " + info + "\n" + SYNTAX_ERROR_MESSAGE);
         syntaxErrors.put(line, "Parsed text line: " + line + ":  " + info + "\n" + SYNTAX_ERROR_MESSAGE);
     }
 

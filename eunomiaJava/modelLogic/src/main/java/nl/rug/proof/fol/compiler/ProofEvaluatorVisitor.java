@@ -520,7 +520,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitIdentityElim(ProofGrammarParser.IdentityElimContext ctx) {
+    public Object visitIdentityElim(ProofGrammarParser.@NotNull IdentityElimContext ctx) {
         Integer reference1 = (Integer) visit(ctx.singleReference(FIRST_REFERENCE));
         Integer reference2 = (Integer) visit(ctx.singleReference(SECOND_REFERENCE));
 
@@ -534,46 +534,21 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
             return null;
         }
 
-        ParseTree replaced = manager.getSentence(reference2).getChild(ATOM_LEVEL).getChild(LEFT_IDENTITY);
-        ParseTree replacer = manager.getSentence(reference2).getChild(ATOM_LEVEL).getChild(RIGHT_IDENTITY);
+        String leftIdentity = manager.getSentence(reference2).getChild(ATOM_LEVEL).getChild(LEFT_IDENTITY).getText();
+        String rightIdentity = manager.getSentence(reference2).getChild(ATOM_LEVEL).getChild(RIGHT_IDENTITY).getText();
 
-        // Check that the replaced is part of the referred line
-        if(!manager.isPartOfBinaryExpression(replaced, reference1) && !replaced.getText()
-            .equals(manager.getSentence(reference1).getText())) {
-            manager.setCurrentEvaluationWrong(ErrorMessage.REPLACED_NOT_IN_CORE);
-            return null;
-        }
+        int countInitialLeft = 0, countInitialRight = 0;
+        String initialSentence = manager.getSentence(reference1).getText();
+        countInitialLeft = countAppearancesOfAtom(leftIdentity, initialSentence);
+        countInitialRight = countAppearancesOfAtom(rightIdentity, initialSentence);
 
-        // Count the replacer and the replaced and calculate if the element was indeed replaced
-        int countReplacedInitial = 0;
-        for(int i = 0; i < manager.getSentence(reference1).getChildCount(); i++) {
-            if(manager.getSentence(reference1).getChild(i).getText().equals(replaced.getText())) {
-                countReplacedInitial++;
-            }
-        }
+        int countFinalLeft = 0, countFinalRight = 0;
+        String finalSentence = manager.getCurrentSentence().getText();
+        countFinalLeft = countAppearancesOfAtom(leftIdentity, finalSentence);
+        countFinalRight = countAppearancesOfAtom(rightIdentity, finalSentence);
 
-        int countReplacerInitial = 0;
-        for(int i = 0; i < manager.getSentence(reference1).getChildCount(); i++) {
-            if(manager.getSentence(reference1).getChild(i).getText().equals(replacer.getText())) {
-                countReplacerInitial++;
-            }
-        }
-
-        int countReplacedFinal = 0;
-        for(int i = 0; i < manager.getCurrentSentence().getChildCount(); i++) {
-            if(manager.getCurrentSentence().getChild(i).getText().equals(replaced.getText())) {
-                countReplacedFinal++;
-            }
-        }
-
-        int countReplacerFinal = 0;
-        for(int i = 0; i < manager.getCurrentSentence().getChildCount(); i++) {
-            if(manager.getCurrentSentence().getChild(i).getText().equals(replacer.getText())) {
-                countReplacerFinal++;
-            }
-        }
-
-        if(countReplacedInitial - countReplacedFinal != 1 || countReplacerFinal - countReplacerInitial != 1) {
+        if ((countInitialLeft - countFinalLeft != countFinalRight - countInitialRight) ||
+                countInitialRight - countFinalRight >= 0) {
             manager.setCurrentEvaluationWrong(ErrorMessage.INCORRECT_REPLACEMENT);
             return null;
         }
@@ -581,8 +556,20 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         return null;
     }
 
+    private int countAppearancesOfAtom(String identity, @NotNull String sentence) {
+        int count = 0;
+        for(int i = 0; i < sentence.length(); i++) {
+            if(sentence.charAt(i) == identity.charAt(0)) {
+                if(i == 0 || !Character.isLetterOrDigit(sentence.charAt(i - 1))) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     @Override
-    public Object visitImplicationIntro(ProofGrammarParser .ImplicationIntroContext ctx) {
+    public Object visitImplicationIntro(ProofGrammarParser .@NotNull ImplicationIntroContext ctx) {
         String range = (String) visit(ctx.rangeReference());
         Integer rangeStart = UsefulStrings.getRangeStart(range);
         Integer rangeEnd = UsefulStrings.getRangeEnd(range);
@@ -615,7 +602,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitImplicationElim(ProofGrammarParser .ImplicationElimContext ctx) {
+    public Object visitImplicationElim(ProofGrammarParser .@NotNull ImplicationElimContext ctx) {
         Integer reference1 = (Integer) visit(ctx.singleReference(FIRST_REFERENCE));
         Integer reference2 = (Integer) visit(ctx.singleReference(SECOND_REFERENCE));
 
@@ -645,7 +632,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitBiconditionalIntro(ProofGrammarParser .BiconditionalIntroContext ctx) {
+    public Object visitBiconditionalIntro(ProofGrammarParser .@NotNull BiconditionalIntroContext ctx) {
         String range1 = (String) visit(ctx.rangeReference(FIRST_REFERENCE));
         String range2 = (String) visit(ctx.rangeReference(SECOND_REFERENCE));
         Integer range1Start = UsefulStrings.getRangeStart(range1);
@@ -684,7 +671,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitBiconditionalElim(ProofGrammarParser .BiconditionalElimContext ctx) {
+    public Object visitBiconditionalElim(ProofGrammarParser .@NotNull BiconditionalElimContext ctx) {
         Integer reference1 = (Integer) visit(ctx.singleReference(FIRST_REFERENCE));
         Integer reference2 = (Integer) visit(ctx.singleReference(SECOND_REFERENCE));
 
@@ -721,7 +708,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitForallIntro(ProofGrammarParser.ForallIntroContext ctx) {
+    public Object visitForallIntro(ProofGrammarParser.@NotNull ForallIntroContext ctx) {
         String range = (String) visit(ctx.rangeReference());
         Integer rangeStart = UsefulStrings.getRangeStart(range);
         Integer rangeEnd = UsefulStrings.getRangeEnd(range);
@@ -750,7 +737,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitForallElim(ProofGrammarParser .ForallElimContext ctx) {
+    public Object visitForallElim(ProofGrammarParser .@NotNull ForallElimContext ctx) {
         Integer reference = (Integer) visit(ctx.singleReference());
 
         if(!manager.isValidSingleReference(reference)) {
@@ -778,7 +765,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitExistsIntro(ProofGrammarParser .ExistsIntroContext ctx) {
+    public Object visitExistsIntro(ProofGrammarParser .@NotNull ExistsIntroContext ctx) {
 
         Integer reference = (Integer) visit(ctx.singleReference());
 
@@ -806,7 +793,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
     }
 
     @Override
-    public Object visitExistsElim(ProofGrammarParser.ExistsElimContext ctx) {
+    public Object visitExistsElim(ProofGrammarParser.@NotNull ExistsElimContext ctx) {
         Integer reference = (Integer) visit(ctx.singleReference());
         String range = (String) visit(ctx.rangeReference());
         Integer rangeStart = UsefulStrings.getRangeStart(range);
@@ -848,7 +835,7 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @return the reference to the sentence as Integer.
      */
     @Override
-    public Integer visitSingleReference(ProofGrammarParser.SingleReferenceContext ctx) {
+    public Integer visitSingleReference(ProofGrammarParser.@NotNull SingleReferenceContext ctx) {
         return Integer.parseInt(ctx.INT().getText());
     }
 
@@ -860,17 +847,17 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
      * @return the range as a map as a String which contains the interval, because no tuples.
      */
     @Override
-    public String visitRangeReference(ProofGrammarParser.RangeReferenceContext ctx) {
+    public String visitRangeReference(ProofGrammarParser.@NotNull RangeReferenceContext ctx) {
         return ctx.getText();
     }
 
     @Override
-    public String visitFunction(ProofGrammarParser.FunctionContext ctx) {
+    public String visitFunction(ProofGrammarParser.@NotNull FunctionContext ctx) {
         return ctx.VARIABLE().getText();
     }
 
     @Override
-    public String visitBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx) {
+    public String visitBoxedConstant(ProofGrammarParser.@NotNull BoxedConstantContext ctx) {
         return ctx.CONSTANT().getText();
     }
 

@@ -545,18 +545,6 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIdentitifierAtom(ProofGrammarParser.IdentitifierAtomContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIdentitifierAtom(ProofGrammarParser.IdentitifierAtomContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterIdentifierAtom(ProofGrammarParser.IdentifierAtomContext ctx) { }
 	/**
 	 * {@inheritDoc}

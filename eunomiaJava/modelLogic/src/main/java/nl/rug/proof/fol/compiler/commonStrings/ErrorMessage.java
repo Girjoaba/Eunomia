@@ -48,9 +48,7 @@ public class ErrorMessage {
     public static final String NOT_EQUAL_LEFT_RIGH_SIDES
             = "The left and right side of the identity are not equal.";
     public static final String INCORRECT_REPLACEMENT
-            = "Replacement was not done correctly.";
-    public static final String REPLACED_NOT_IN_CORE
-            = "The replaced element is not part of the initial sentence.";
+            = "Replace one variable or constant with another at a time.";
     public static final String NOT_AN_IMPLICATION
             = "Inferred sentence is not an implication.";
     public static final String PREMISE_DOES_NOT_MATCH_IMPLICATION

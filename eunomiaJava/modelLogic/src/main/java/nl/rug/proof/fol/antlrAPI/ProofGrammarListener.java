@@ -506,18 +506,6 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 */
 	void exitIdentityAtom(ProofGrammarParser.IdentityAtomContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code IdentitifierAtom}
-	 * labeled alternative in {@link ProofGrammarParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentitifierAtom(ProofGrammarParser.IdentitifierAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code IdentitifierAtom}
-	 * labeled alternative in {@link ProofGrammarParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentitifierAtom(ProofGrammarParser.IdentitifierAtomContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#identifierAtom}.
 	 * @param ctx the parse tree
 	 */

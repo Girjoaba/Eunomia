@@ -304,13 +304,6 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIdentityAtom(ProofGrammarParser.IdentityAtomContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code IdentitifierAtom}
-	 * labeled alternative in {@link ProofGrammarParser#atom}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdentitifierAtom(ProofGrammarParser.IdentitifierAtomContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#identifierAtom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

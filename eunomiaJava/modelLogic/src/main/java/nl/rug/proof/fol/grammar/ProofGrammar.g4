@@ -101,10 +101,9 @@ boxedConstant : '|' CONSTANT '|' ;
 atom
     : PROPOSITION                                                   # PropositionAtom
     | identifierAtom IDENTITY identifierAtom                        # IdentityAtom
-    | identifierAtom                                                # IdentitifierAtom
     ;
 
-identifierAtom : CONSTANT | VARIABLE | function ;
+identifierAtom : CONSTANT | VARIABLE ;
 
 function: PROPOSITION '(' (VARIABLE | CONSTANT) ')' ;
 

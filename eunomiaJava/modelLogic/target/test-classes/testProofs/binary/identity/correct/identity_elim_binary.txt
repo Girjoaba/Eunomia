@@ -1,3 +1,0 @@
-1. a = b premise
-2. a ∧ c premise
-3. b ∧ c =Elim: 2, 1

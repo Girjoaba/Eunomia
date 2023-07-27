@@ -116,7 +116,7 @@ public class SentenceTraveler {
      * @param ctx the sentence as a tree.
      * @param manager the manager to set errors to.
      */
-    private static void checkAmbiguity(ProofGrammarParser.NormalSentenceContext ctx, ProofManager manager) {
+    private static void checkAmbiguity(ProofGrammarParser.@NotNull NormalSentenceContext ctx, ProofManager manager) {
         String sentence = ctx.getText();
         int numberOperators = 0;
         int segmentStart = 0;
@@ -158,7 +158,5 @@ public class SentenceTraveler {
         checkAmbiguity(ctx, manager);
         traverseSentence(ctx, manager, boundedVariables);
     }
-
-
 
 }

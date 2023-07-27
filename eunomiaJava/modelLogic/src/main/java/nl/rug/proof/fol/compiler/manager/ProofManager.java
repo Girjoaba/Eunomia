@@ -8,6 +8,7 @@ import nl.rug.proof.fol.compiler.manager.components.ProofLine;
 import nl.rug.proof.fol.compiler.manager.components.SyntaxErrors;
 import nl.rug.proof.fol.grammar.GrammarNotations;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.jetbrains.annotations.NotNull;
 
 import static nl.rug.proof.fol.grammar.TreeIndexes.*;
 
@@ -25,6 +26,10 @@ public class ProofManager {
     private Integer currentLevel;
     private final SyntaxErrors syntaxErrors;
 
+    /**
+     * Makes the ProofManager in a ready to use state.
+     * Initializes all the fields with either 0 or makes them empty objects.
+     */
     public ProofManager() {
         syntaxErrors = new SyntaxErrors();
         currentLevel = 0;
@@ -416,7 +421,7 @@ public class ProofManager {
      * @param introducedVariable the variable which replaces the constant.
      * @return the transformed string.
      */
-    private String replacesConstantsWithVariables(String initialSentence, String introducedConstant,
+    private String replacesConstantsWithVariables(@NotNull String initialSentence, String introducedConstant,
                                                   String introducedVariable) {
         for(int i = 0; i < initialSentence.length() - 2; i++) {
             if(initialSentence.charAt(i) == '(' && initialSentence.charAt(i + 1) == introducedConstant.charAt(0)
@@ -455,7 +460,7 @@ public class ProofManager {
         return initialConstants.size() - 1 == changedConstants.size();
     }
 
-    private Set<Character> createConstantSet(String changedSentence) {
+    private @NotNull Set<Character> createConstantSet(@NotNull String changedSentence) {
         Set<Character> changedConstants = new HashSet<>();
         for(int i = 0; i < changedSentence.length() - 2; i++) {
             if(changedSentence.charAt(i) == '('

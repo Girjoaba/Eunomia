@@ -14,6 +14,7 @@ import static nl.rug.proof.fol.grammar.TreeIndexes.*;
 
 /**
  * A visitor class responsible for compiling the proof and checking the validity of each proof line.
+ * See Documentation for in depth description of the compiler.
  */
 @Slf4j
 public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
@@ -190,9 +191,11 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         return null;
     }
 
-    /**
+    /*
      * --------------------------------------- SPECIAL SENTENCES ---------------------------------------------
-     *
+     */
+
+    /**
      * Visits a contradiction. It is separated from the other sentences because a contradiction can only be found
      * by itself (as in just the atomic symbol).
      * @param ctx the parse tree
@@ -236,8 +239,12 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         return ctx.sentence();
     }
 
+    /*
+     *   -------------------------------------- JUSTIFICATION STUFF ---------------------------------------------.
+     */
+
     /**
-     * -------------------------------------- JUSTIFICATION STUFF ---------------------------------------------.
+     *  Visits a premise.
      * @param ctx the parse tree.
      * @return null.
      */
@@ -687,8 +694,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(!manager.isPartOfBinaryExpression(reference2, reference1)) {
-            manager.setCurrentEvaluationWrong
-                    (ErrorMessage.errorMustBePartOfTheBiconditionalReference(String.valueOf(reference1)));
+            manager.setCurrentEvaluationWrong(
+                    ErrorMessage.errorMustBePartOfTheBiconditionalReference(String.valueOf(reference1)));
             return null;
         }
 
@@ -748,8 +755,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(manager.isNotUniversalQuantifier(reference)) {
-            manager.setCurrentEvaluationWrong
-                    (ErrorMessage.errorNotAUniversalQuantifierReference(String.valueOf(reference)));
+            manager.setCurrentEvaluationWrong(
+                    ErrorMessage.errorNotAUniversalQuantifierReference(String.valueOf(reference)));
             return null;
         }
 
@@ -808,8 +815,8 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
         }
 
         if(manager.isNotExistentialQuantifier(reference)) {
-            manager.setCurrentEvaluationWrong
-                    (ErrorMessage.errorNotAnExistentialQuantifierReference(String.valueOf(reference)));
+            manager.setCurrentEvaluationWrong(
+                    ErrorMessage.errorNotAnExistentialQuantifierReference(String.valueOf(reference)));
             return null;
         }
 

@@ -9,10 +9,18 @@ import org.antlr.v4.runtime.Recognizer;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Custom Syntax error listener made for the ANTLR technology.
+ * The main function of this class is to store the syntax errors in the ProofManager.
+ */
 public class SyntaxErrorListener extends BaseErrorListener {
 
     private ProofManager manager;
 
+    /**
+     * Initializes the SyntaxErrorListener with a ProofManager.
+     * @param manager The ProofManager where all the syntax errors will be stored.
+     */
     public SyntaxErrorListener(ProofManager manager) {
         this.manager = manager;
     }

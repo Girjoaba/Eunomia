@@ -1,5 +1,7 @@
 package nl.rug.proof.fol.compiler.commonStrings;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * A class for storing the most common and useful strings.
  */
@@ -14,7 +16,7 @@ public class UsefulStrings {
      * @param range the range reference as a string.
      * @return the number which points to the start of the range.
      */
-    public static Integer getRangeStart(String range) {
+    public static @NotNull Integer getRangeStart(@NotNull String range) {
         return Integer.parseInt(range.split(RANGE_SEPARATOR)[0]);
     }
 
@@ -23,7 +25,7 @@ public class UsefulStrings {
      * @param range the range reference as a string.
      * @return the number which points to the end of the range.
      */
-    public static Integer getRangeEnd(String range) {
+    public static @NotNull Integer getRangeEnd(@NotNull String range) {
         return Integer.parseInt(range.split(RANGE_SEPARATOR)[1]);
     }
 }

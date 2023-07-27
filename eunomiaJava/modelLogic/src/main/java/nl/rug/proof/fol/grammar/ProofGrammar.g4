@@ -1,5 +1,21 @@
 grammar ProofGrammar;
-import LexerProofRules;
+
+/*
+ *  The main structure of this grammar is based on the following:
+ *
+ *  There is a proof that has (0..n) premises and 1 conclusion line.
+ *  1. premisesLine
+ *  2. premiseLine
+ *  ...
+ *  n. proofLine
+ *  ...
+ *  m. conclusionLine
+ *
+ *  In between there are normal proofLines that can use the premises to prove the conclusion.
+ *  There are also subproofs. Each proofLine can be replaced by a subproof.
+ *  The subproofs contain only 1 premise, (0..n) proofLines and 1 conclusionLine.
+ */
+
 
 proof : premiseLine* (proofLine | subproof)* conclusionLine EOF ;   // The proof is the whole thing we evaluate
 subproof : assume (subproof | proofLine)* qed ;                     // It can contain different subproofs in order to prove different things

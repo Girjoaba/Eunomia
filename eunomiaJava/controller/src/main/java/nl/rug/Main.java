@@ -41,7 +41,7 @@ public class Main {
         actionInjector.addAction(ActionID.VERIFY_ACTION, new VerifyAction(frame, manager, compiler));
     }
 
-    static void addCommonActionListeners(@NotNull ActionInjector actionInjector, ProofTextEditor frame) {
+    private static void addCommonActionListeners(@NotNull ActionInjector actionInjector, ProofTextEditor frame) {
         actionInjector.addAction(ActionID.SAVE_ACTION, new SaveAction(frame));
         actionInjector.addAction(ActionID.LOAD_ACTION, new LoadAction(frame));
         actionInjector.addAction(ActionID.NEW_ACTION, new NewProofAction(frame));

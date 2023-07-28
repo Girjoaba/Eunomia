@@ -11,13 +11,20 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileStore;
 
+/**
+ * An action that saves a proof to a .eun file.
+ * It is meant to be passed to the View using the ActionInjector.
+ */
 @Slf4j
 public class SaveAction implements ActionListener {
 
-    ProofTextEditor frame;
+    private final ProofTextEditor frame;
 
+    /**
+     * Initializes the action with the frame where the action will be used.
+     * @param frame the reference to the frame that will use the action.
+     */
     public SaveAction(ProofTextEditor frame) {
         this.frame = frame;
     }

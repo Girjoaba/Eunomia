@@ -1,7 +1,6 @@
 package nl.rug;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -14,6 +13,8 @@ public class ProofTranslator {
     private static final String SUBPROOF_END = "qed";
     private static final String PREMISE_KEYWORD = "premise";
     private static final String SEPARATOR = "---";
+    private static final String FITCH_BAR = "|";
+    private static final String END_LINE = "\n";
 
     /**
      * Formats the proof provided by the View and makes it compilable by the Model.
@@ -36,7 +37,7 @@ public class ProofTranslator {
      * @return the proof with the premise keywords introduced where it is required.
      */
     private static @NotNull String addPremiseKeyword(@NotNull String proof) {
-        String[] lines = proof.split("\n");
+        String[] lines = proof.split(END_LINE);
         StringBuilder sb = new StringBuilder();
 
         boolean areInitialPremises = true;
@@ -52,7 +53,7 @@ public class ProofTranslator {
                     (i + 1 < lines.length && lines[i + 1].contains(SEPARATOR))) {
                 sb.append(" ").append(PREMISE_KEYWORD);
             }
-            sb.append("\n");
+            sb.append(END_LINE);
         }
         return sb.toString();
     }
@@ -66,7 +67,7 @@ public class ProofTranslator {
      * @return the proof without fitch bars.
      */
     private static @NotNull String removeFitchBars(@NotNull String proof) {
-        String[] lines = proof.split("\n");
+        String[] lines = proof.split(END_LINE);
         StringBuilder sb = new StringBuilder();
 
         boolean isFirstPremise = true;      // The initial premises are not seen as a subproof.
@@ -78,7 +79,7 @@ public class ProofTranslator {
             currentLevel = 0;
 
             line = line.trim();                         // Removes the pipes.
-            while (line.contains("|")) {
+            while (line.contains(FITCH_BAR)) {
                 line = line.substring(1);
                 line = line.trim();
                 currentLevel++;
@@ -93,17 +94,17 @@ public class ProofTranslator {
                 if (isFirstPremise) {
                     isFirstPremise = false;
                 } else {
-                    sb.append(SUBPROOF_START).append("\n");
+                    sb.append(SUBPROOF_START).append(END_LINE);
                 }
             }
 
             if (currentLevel < lastLevel) {             // Identifies the end of a subproof.
-                sb.append(SUBPROOF_END).append("\n");
+                sb.append(SUBPROOF_END).append(END_LINE);
             }
             lastLevel = currentLevel;
 
             if(!line.isBlank()) {
-                sb.append(line).append("\n");
+                sb.append(line).append(END_LINE);
             }
         }
 
@@ -117,14 +118,14 @@ public class ProofTranslator {
      */
     private static @NotNull String addLineNumbers(@NotNull String proof) {
         int lineNum = 1;
-        String[] lines = proof.split("\n");
+        String[] lines = proof.split(END_LINE);
         StringBuilder sb = new StringBuilder();
         for (String line : lines) {
             // Skips subproof syntax.
-            if (!line.contains("assume") && !line.contains("qed")) {
-                sb.append(lineNum++).append(". ").append(line).append("\n");
+            if (!line.contains(SUBPROOF_START) && !line.contains(SUBPROOF_END)) {
+                sb.append(lineNum++).append(". ").append(line).append(END_LINE);
             } else {
-                sb.append(line).append("\n");
+                sb.append(line).append(END_LINE);
             }
         }
         proof = sb.toString();

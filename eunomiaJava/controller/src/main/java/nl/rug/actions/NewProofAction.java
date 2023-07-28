@@ -6,13 +6,22 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * An action that creates a new proof.
+ * The action is meant to be passed to the View using the ActionInjector.
+ */
 public class NewProofAction implements ActionListener {
 
-    ProofTextEditor frame;
+    private final ProofTextEditor frame;
 
+    /**
+     * Initializes the action with the frame where the action will be used.
+     * @param frame the reference to the frame that will use the action.
+     */
     public NewProofAction(ProofTextEditor frame) {
         this.frame = frame;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String oldProof = frame.getProofText();

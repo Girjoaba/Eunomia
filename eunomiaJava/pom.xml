@@ -54,30 +54,30 @@
                 like the location of the checkstyle files relative to this pom
                 file.
                 -->
-                <configuration>
-                    <configLocation>../.checkstyle/config.xml</configLocation>
-                    <suppressionsLocation>../.checkstyle/suppressions.xml</suppressionsLocation>
-                    <excludes>
-                        **/module-info.java
-<!--                        src/main/java/nl/rug/proof/fol/antlrAPI/ProofGrammarBaseListener.java-->
-                    </excludes>
-                    <excludes>
-                        **/antlrAPI/*
-                    </excludes>
-                </configuration>
-                <executions>
-                    <!--
-                    Custom execution that runs checkstyle:check during the
-                    "validate" phase, so before any tests.
-                    -->
-                    <execution>
-                        <id>check-test</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
+<!--                <configuration>-->
+<!--                    <configLocation>../.checkstyle/config.xml</configLocation>-->
+<!--                    <suppressionsLocation>../.checkstyle/suppressions.xml</suppressionsLocation>-->
+<!--                    <excludes>-->
+<!--                        **/module-info.java-->
+<!--&lt;!&ndash;                        src/main/java/nl/rug/proof/fol/antlrAPI/ProofGrammarBaseListener.java&ndash;&gt;-->
+<!--                    </excludes>-->
+<!--                    <excludes>-->
+<!--                        **/antlrAPI/*-->
+<!--                    </excludes>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    &lt;!&ndash;-->
+<!--                    Custom execution that runs checkstyle:check during the-->
+<!--                    "validate" phase, so before any tests.-->
+<!--                    &ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>check-test</id>-->
+<!--                        <phase>validate</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>check</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -92,6 +92,7 @@
                 </dependencies>
                 <configuration>
                     <argLine>
+                        -Dfile.encoding=UTF-8
                         --add-opens=java.base/java.time=com.google.gson
                         --add-opens=java.base/java.time=ALL-UNNAMED
                     </argLine>

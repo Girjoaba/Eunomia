@@ -1,10 +1,24 @@
-#Sat Jul 01 16:32:11 CEST 2023
+#Fri Jul 28 11:09:43 EEST 2023
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\EditorFrame.java=1690531342487
 configuration*?=B44A49DACFE3F716292D7F5537BD8814549C0E96
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\errorPanel\\ErrorPanel.java=1687704552497
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\errorPanel\\ErrorText.java=1688054976603
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\communication\\ActionInjector.java=1688058090512
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\communication\\ActionPackage.java=1688058135598
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\menubar\\VerifyButton.java=1688054976711
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\errorPanel\\ErrorText.java=1690531342489
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\writePanel\\proofStructure\\FitchProofDisplayUtils.java=1690531342493
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\informationPanel\\tabs\\UserManual.java=1690531342491
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\writePanel\\WritePanel.java=1690531342493
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\communication\\ActionInjector.java=1690531342488
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\communication\\ActionPackage.java=1690531342488
 D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\informationPanel\\InformationText.java=1688054976653
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\writePanel\\KeyStrokeDispatcher.java=1688080198219
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\writePanel\\KeyStrokeDispatcher.java=1690531342492
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\communication\\EunomiaColors.java=1690531342488
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\ProofTextEditor.java=1690531342487
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\errorPanel\\ErrorPanel.java=1690531342488
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\informationPanel\\tabs\\ProofSelectionPanel.java=1690531342490
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\informationPanel\\InformationPanel.java=1690531342489
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\menubar\\VerifyButton.java=1690531342492
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\informationPanel\\tabs\\HelpPanel.java=1690531342490
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\menubar\\MenuBar.java=1690531342491
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\writePanel\\ErrorStyle.java=1690531342492
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\writePanel\\proofStructure\\actions\\ContinueFitchBarAction.java=1690531342494
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\communication\\ActionID.java=1690531342487
 D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\ProofEditorFrame.java=1688059862675
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\fitchTextEditor\\src\\main\\java\\nl\\rug\\editorFrame\\writePanel\\proofStructure\\actions\\CreateSubproofAction.java=1690531342494

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.1">
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\communication\ActionID.java">
+<error line="3" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\communication\ActionInjector.java">
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\communication\ActionPackage.java">
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\communication\EunomiaColors.java">
+<error line="9" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="10" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="11" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="12" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="13" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="14" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="15" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\communication\ProofSyntax.java">
+<error line="7" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="8" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="9" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="10" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="11" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="12" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="13" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="14" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="15" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="16" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="17" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\errorPanel\ErrorPanel.java">
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\errorPanel\ErrorText.java">
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\informationPanel\InformationPanel.java">
+<error line="40" column="5" severity="error" message="&apos;}&apos; has more than 1 empty lines after." source="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck"/>
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\informationPanel\InformationText.java">
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\menubar\MenuBar.java">
+<error line="32" column="84" severity="error" message="There is more than 1 empty line after this line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck"/>
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\menubar\VerifyButton.java">
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\ProofEditorFrame.java">
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\ProofTextEditor.java">
+<error line="37" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\writePanel\KeyStrokeDispatcher.java">
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\writePanel\ProofWritingPane.java">
+<error line="100" column="47" severity="error" message="The String &quot;\n&quot; appears 8 times in the file." source="com.puppycrawl.tools.checkstyle.checks.coding.MultipleStringLiteralsCheck"/>
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\writePanel\TextLineNumber.java">
+<error line="35" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="36" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="37" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="85" column="1" severity="error" message="Comment has incorrect indentation level 0, expected is 8, indentation should be the same level as line 87." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
+<error line="270" column="15" severity="error" message="Catching &apos;Exception&apos; is not allowed." source="com.puppycrawl.tools.checkstyle.checks.coding.IllegalCatchCheck"/>
+</file>
+<file name="D:\CompSci\JavaCode\Eunomia\eunomiaJava\fitchTextEditor\src\main\java\nl\rug\editorFrame\writePanel\WritePanel.java">
+<error line="57" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+</checkstyle>

@@ -2,3 +2,4 @@ assume
 1. A premise
 2. A Reit: 1
 qed
+3. a = a =Intro

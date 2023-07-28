@@ -1,4 +1,4 @@
-// Generated from java-escape by ANTLR 4.11.1
+// Generated from D:/CompSci/JavaCode/Eunomia/eunomiaJava/modelLogic/src/main/java/nl/rug/proof/fol/grammar\ProofGrammar.g4 by ANTLR 4.12.0
 package nl.rug.proof.fol.antlrAPI;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-@SuppressWarnings({"CheckReturnValue", "CheckStyle"})
+@SuppressWarnings("CheckReturnValue")
 public class ProofGrammarBaseListener implements ProofGrammarListener {
 	/**
 	 * {@inheritDoc}
@@ -516,6 +516,42 @@ public class ProofGrammarBaseListener implements ProofGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPropositionAtom(ProofGrammarParser.PropositionAtomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPropositionAtom(ProofGrammarParser.PropositionAtomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIdentityAtom(ProofGrammarParser.IdentityAtomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIdentityAtom(ProofGrammarParser.IdentityAtomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIdentifierAtom(ProofGrammarParser.IdentifierAtomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIdentifierAtom(ProofGrammarParser.IdentifierAtomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

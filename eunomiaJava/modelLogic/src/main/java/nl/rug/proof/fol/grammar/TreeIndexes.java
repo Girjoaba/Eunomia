@@ -12,7 +12,6 @@ public class TreeIndexes {
     public static final Integer BOUNDED_VARIABLE = 1;
     public static final Integer QUANTIFIED_SENTENCE = 2;
     public static final Integer FUNCTION_ARGUMENT = 2;
-    // Sometimes used when an index is required, but it does not make sense ??
     public static final Integer FIRST_ELEMENT = 0;
     public static final Integer BOXED_CONSTANT = 1;
     public static final Integer CONSTANT_WITHIN_BOX = 1;
@@ -23,10 +22,12 @@ public class TreeIndexes {
     public static final Integer LEFT_IDENTITY = 0;
     public static final Integer RIGHT_IDENTITY = 2;
     public static final Integer LEFT_IMPLICATION = 0;
-    public static final Integer RIGHT_IMPLICATION = 1;
+    public static final Integer RIGHT_IMPLICATION = 2;
     public static final Integer LEFT_BICONDITIONAL = 0;
     public static final Integer RIGHT_BICONDITIONAL = 2;
     public static final Integer BINARY_OPERATOR = 1;
     public static final Integer LEFT_SENTENCE = 0;
     public static final Integer RIGHT_SENTENCE = 2;
+
+    public static final Integer ATOM_LEVEL = 0;
 }

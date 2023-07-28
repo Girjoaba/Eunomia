@@ -1,2 +1,2 @@
-1. \forall x (P(x) && Q(x)) premise
-2. \forall x (P(x) && Q(x)) Reit: 1
+1. ∀ x (P(x) ∧ Q(x)) premise
+2. ∀ x (P(x) ∧ Q(x)) Reit: 1

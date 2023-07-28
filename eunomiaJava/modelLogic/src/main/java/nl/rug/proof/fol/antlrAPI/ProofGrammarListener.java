@@ -1,4 +1,4 @@
-// Generated from java-escape by ANTLR 4.11.1
+// Generated from D:/CompSci/JavaCode/Eunomia/eunomiaJava/modelLogic/src/main/java/nl/rug/proof/fol/grammar\ProofGrammar.g4 by ANTLR 4.12.0
 package nl.rug.proof.fol.antlrAPI;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -6,7 +6,6 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * This interface defines a complete listener for a parse tree produced by
  * {@link ProofGrammarParser}.
  */
-@SuppressWarnings("CheckStyle")
 public interface ProofGrammarListener extends ParseTreeListener {
 	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#proof}.
@@ -482,6 +481,40 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PropositionAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterPropositionAtom(ProofGrammarParser.PropositionAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PropositionAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitPropositionAtom(ProofGrammarParser.PropositionAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IdentityAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentityAtom(ProofGrammarParser.IdentityAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IdentityAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentityAtom(ProofGrammarParser.IdentityAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#identifierAtom}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifierAtom(ProofGrammarParser.IdentifierAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#identifierAtom}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifierAtom(ProofGrammarParser.IdentifierAtomContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProofGrammarParser#function}.
 	 * @param ctx the parse tree

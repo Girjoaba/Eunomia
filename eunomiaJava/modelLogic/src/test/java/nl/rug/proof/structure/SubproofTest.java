@@ -3,7 +3,7 @@ package nl.rug.proof.structure;
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.proof.fol.EunomiaCompiler;
 import nl.rug.proof.fol.compiler.manager.ProofManager;
-import nl.rug.proof.helper.LineVerifier;
+import nl.rug.proof.checkingTools.LineVerifier;
 import nl.rug.utility.InputPath;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +13,12 @@ import java.util.List;
 
 @Slf4j
 public class SubproofTest {
+
+    /* -----------------------------------------------------------------------------------------|
+     * ------------------------------------- Verify Mistakes -----------------------------------|
+     * -----------------------------------------------------------------------------------------|
+     */
+
     @Test
     public void testSubproofBasic() {
         try {

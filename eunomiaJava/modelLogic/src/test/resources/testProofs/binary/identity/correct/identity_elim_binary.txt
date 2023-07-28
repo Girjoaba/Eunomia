@@ -1,3 +1,0 @@
-1. A == B premise
-2. A && C premise
-3. B && C ==Elim: 2, 1

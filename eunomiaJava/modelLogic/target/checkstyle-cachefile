@@ -1,11 +1,11 @@
-#Mon May 08 22:17:32 CEST 2023
+#Sat Jul 01 16:32:07 CEST 2023
 configuration*?=52796491AFD85C9168F770E70BC070D69B0286ED
 D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\FOLProofEvaluator.java=1681839875188
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\manager\\ConstantScope.java=1683462329847
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\commonStrings\\UsefulStrings.java=1683462329847
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\manager\\Evaluation.java=1681839875195
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\manager\\ProofLine.java=1683462329848
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\manager\\ProofManager.java=1683462329848
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\EunomiaCompiler.java=1683462329846
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\ProofEvaluatorVisitor.java=1683576506552
-D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\SentenceTraveler.java=1683462329846
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\manager\\components\\ProofLine.java=1687856898907
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\commonStrings\\UsefulStrings.java=1684169688140
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\EunomiaCompiler.java=1687858115222
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\utility\\StringConverter.java=1687703386443
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\ProofEvaluatorVisitor.java=1688217566256
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\manager\\components\\Evaluation.java=1687856899030
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\utility\\InputPath.java=1687703309210
+D\:\\CompSci\\JavaCode\\Eunomia\\eunomiaJava\\modelLogic\\src\\main\\java\\nl\\rug\\proof\\fol\\compiler\\manager\\components\\ConstantScope.java=1687856898954

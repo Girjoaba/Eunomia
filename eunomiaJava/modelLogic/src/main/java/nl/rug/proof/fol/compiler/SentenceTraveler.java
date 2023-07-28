@@ -99,7 +99,7 @@ public class SentenceTraveler {
                 String argument = child.getChild(TreeIndexes.FUNCTION_ARGUMENT).getText();
 
                 if(GrammarNotations.VARIABLES.contains(argument) && !boundedVariables.contains(argument)) {
-                    manager.setCurrentEvaluationWrong(ErrorMessage.getErrorVariableNotBounded(argument));
+                    manager.setCurrentEvaluationWrong(ErrorMessage.errorVariableBounded(argument));
                 } else if(GrammarNotations.CONSTANTS.contains(argument)) {
                     manager.addConstantCurrentLevel(argument);
                 }
@@ -112,12 +112,50 @@ public class SentenceTraveler {
     }
 
     /**
+     * Checks if a sentence has any ambiguous order of operations.
+     * @param ctx the sentence as a tree.
+     * @param manager the manager to set errors to.
+     */
+    private static void checkAmbiguity(ProofGrammarParser.@NotNull NormalSentenceContext ctx, ProofManager manager) {
+        String sentence = ctx.getText();
+        int numberOperators = 0;
+        int segmentStart = 0;
+        for (int i = 0; i < sentence.length(); i++) {
+            if (sentence.charAt(i) == ')' || sentence.charAt(i) == '(') {
+                numberOperators = 0;
+                segmentStart = i + 1;
+            }
+            if (sentence.charAt(i) == GrammarNotations.DISJUNCTION_SYMBOL.charAt(0)
+                    || sentence.charAt(i) == GrammarNotations.CONJUNCTION_SYMBOL.charAt(0)
+                    || sentence.charAt(i) == GrammarNotations.IMPLICATION_SYMBOL.charAt(0)
+                    || sentence.charAt(i) == GrammarNotations.BICONDITIONAL_SYMBOL.charAt(0)) {
+                numberOperators++;
+            }
+            if (numberOperators > 1) {
+                int segmentEnd = i;
+                for (int j = segmentStart; j < sentence.length(); j++) {
+                    segmentEnd = j;
+                    if (sentence.charAt(j) == ')' || sentence.charAt(j) == '(') {
+                        break;
+                    }
+                }
+                manager.setCurrentEvaluationWrong(ErrorMessage
+                        .errorAmbiguous(sentence, segmentStart, segmentEnd + 1));
+                break;
+            }
+
+        }
+
+    }
+
+    /**
      * Calls the traversal which does the cleaning.
      * @param ctx the sentence as a tree.
      * @param manager the manager to set errors to.
      */
     public static void exploreSentence(ProofGrammarParser.NormalSentenceContext ctx, ProofManager manager) {
         Stack<String> boundedVariables = new Stack<>();
+        checkAmbiguity(ctx, manager);
         traverseSentence(ctx, manager, boundedVariables);
     }
 

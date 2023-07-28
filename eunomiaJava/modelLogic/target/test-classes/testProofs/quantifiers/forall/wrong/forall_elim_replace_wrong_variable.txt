@@ -1,2 +1,2 @@
-1. \forall x \forall y (P(y) && P(x)) premise
-2. \forall y (P(c) && P(c)) \forall Elim: 1
+1. ∀ x ∀ y (P(y) ∧ P(x)) premise
+2. ∀ y (P(c) ∧ P(c)) ∀ Elim: 1

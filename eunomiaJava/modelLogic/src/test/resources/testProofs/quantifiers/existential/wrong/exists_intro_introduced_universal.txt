@@ -1,2 +1,2 @@
 1. P(c) premise
-2. \forall x P(x) \exists Intro: 1
+2. ∀ x P(x) ∃ Intro: 1

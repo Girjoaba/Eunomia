@@ -5,18 +5,18 @@ import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.Scanner;
 
-    /**
-     * A utility class that helps with converting different formats to strings.
-     */
+/**
+ * A utility class that helps with converting different formats to strings.
+ */
 public class StringConverter {
 
-        /**
-         * Transforms the contents of a txt file to a string.
-         * @param fileName the file name located in the resource folder
-         * @return the string
-         * @throws FileNotFoundException if the file is not found in the resource folder
-         */
-    static public String getStringFromTXT(String fileName) throws FileNotFoundException {
+    /**
+     * Transforms the contents of a txt file to a string.
+     * @param fileName the file name located in the resource folder
+     * @return the string
+     * @throws FileNotFoundException if the file is not found in the resource folder
+     */
+    public static String getStringFromTXT(String fileName) throws FileNotFoundException {
         ClassLoader classLoader = StringConverter.class.getClassLoader();
         File file = new File(Objects.requireNonNull(classLoader.getResource(fileName)).getFile());
 

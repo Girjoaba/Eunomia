@@ -1,9 +1,14 @@
 package nl.rug.proof.fol.compiler.manager;
 
 import lombok.extern.slf4j.Slf4j;
+import nl.rug.proof.fol.antlrAPI.ProofGrammarParser;
 import nl.rug.proof.fol.compiler.commonStrings.ErrorMessage;
+import nl.rug.proof.fol.compiler.manager.components.ConstantScope;
+import nl.rug.proof.fol.compiler.manager.components.ProofLine;
+import nl.rug.proof.fol.compiler.manager.components.SyntaxErrors;
 import nl.rug.proof.fol.grammar.GrammarNotations;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.jetbrains.annotations.NotNull;
 
 import static nl.rug.proof.fol.grammar.TreeIndexes.*;
 
@@ -15,10 +20,23 @@ import java.util.*;
  */
 @Slf4j
 public class ProofManager {
-    private final Map<Integer, ProofLine> lineMap = new HashMap<>();
-    private final ConstantScope constantScope = new ConstantScope();
-    private Integer currentLine = 0;
-    private Integer currentLevel = 0;
+    private final Map<Integer, ProofLine> lineMap;
+    private final ConstantScope constantScope;
+    private Integer currentLine;
+    private Integer currentLevel;
+    private final SyntaxErrors syntaxErrors;
+
+    /**
+     * Makes the ProofManager in a ready to use state.
+     * Initializes all the fields with either 0 or makes them empty objects.
+     */
+    public ProofManager() {
+        syntaxErrors = new SyntaxErrors();
+        currentLevel = 0;
+        currentLine = 0;
+        lineMap = new HashMap<>();
+        constantScope =  new ConstantScope();
+    }
 
     public Integer getCurrentLine() {
         return currentLine;
@@ -38,6 +56,15 @@ public class ProofManager {
      */
     public void setCurrentEvaluationWrong(String message) {
         lineMap.get(currentLine).setWrongEvaluation(message);
+    }
+
+    /**
+     * Sets the provided line as being wrong.
+     * @param line the line number.
+     * @param message the error message explaining why the line is incorrect.
+     */
+    public void setEvaluationWrong(Integer line, String message) {
+        lineMap.get(line).setWrongEvaluation(message);
     }
 
     /**
@@ -255,7 +282,7 @@ public class ProofManager {
         try {
             constantScope.addConstant(name, currentLevel);
         } catch (IllegalArgumentException e) {
-            setCurrentEvaluationWrong(ErrorMessage.getErrorConstantDefinedWrong(name));
+            setCurrentEvaluationWrong(ErrorMessage.errorConstantDefinedWrong(name));
         }
     }
 
@@ -394,7 +421,7 @@ public class ProofManager {
      * @param introducedVariable the variable which replaces the constant.
      * @return the transformed string.
      */
-    private String replacesConstantsWithVariables(String initialSentence, String introducedConstant,
+    private String replacesConstantsWithVariables(@NotNull String initialSentence, String introducedConstant,
                                                   String introducedVariable) {
         for(int i = 0; i < initialSentence.length() - 2; i++) {
             if(initialSentence.charAt(i) == '(' && initialSentence.charAt(i + 1) == introducedConstant.charAt(0)
@@ -424,7 +451,8 @@ public class ProofManager {
      */
     public boolean isOnlyOneConstantReplaced(Integer initialReference, Integer changedReference) {
         String initialSentence = lineMap.get(initialReference).getSentenceTree().getText();
-        String changedSentence = lineMap.get(changedReference).getSentenceTree().getChild(QUANTIFIED_SENTENCE).getText();
+        String changedSentence = lineMap.get(changedReference).getSentenceTree()
+                .getChild(QUANTIFIED_SENTENCE).getText();
 
         Set<Character> initialConstants = createConstantSet(initialSentence);
         Set<Character> changedConstants = createConstantSet(changedSentence);
@@ -432,7 +460,7 @@ public class ProofManager {
         return initialConstants.size() - 1 == changedConstants.size();
     }
 
-    private Set<Character> createConstantSet(String changedSentence) {
+    private @NotNull Set<Character> createConstantSet(@NotNull String changedSentence) {
         Set<Character> changedConstants = new HashSet<>();
         for(int i = 0; i < changedSentence.length() - 2; i++) {
             if(changedSentence.charAt(i) == '('
@@ -482,6 +510,67 @@ public class ProofManager {
                     && finalSentence.charAt(i + 2) == ')') {
                 return false;
             }
+        }
+
+        return true;
+    }
+
+    /**
+     * Get the error messages associated with a line.
+     * @param line the line in the proof of the error message.
+     * @return the error message as a string.
+     */
+    public String getErrorMessage(Integer line) {
+        return lineMap.get(line).getErrorMessage();
+    }
+
+    public SyntaxErrors getSyntaxErorrs() {
+        return syntaxErrors;
+    }
+
+    /**
+     * Resets the proof to its initial state.
+     */
+    public void clear() {
+        lineMap.clear();
+        constantScope.clear();
+        currentLine = 0;
+        currentLevel = 0;
+        syntaxErrors.clear();
+    }
+
+    /**
+     * Checks if the current line is not an identity.
+     * @return if the current line is not an identity.
+     */
+    public boolean isCurrentNotIdentity() {
+
+        if(lineMap.get(currentLine).getSentenceTree().getChild(ATOM_LEVEL)
+                instanceof ProofGrammarParser.IdentityAtomContext identity) {
+
+            if(identity.getChildCount() != 3) {
+                return false;
+            }
+            return !identity.getChild(BINARY_OPERATOR).getText().equals(GrammarNotations.IDENTITY_SYMBOL);
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if the line is not an identity.
+     * @param line the line to check.
+     * @return if the line is not an identity.
+     */
+    public boolean isNotIdentity(Integer line) {
+
+        if(lineMap.get(line).getSentenceTree().getChild(ATOM_LEVEL)
+                instanceof ProofGrammarParser.IdentityAtomContext identity) {
+
+            if(identity.getChildCount() != 3) {
+                return false;
+            }
+            return !identity.getChild(BINARY_OPERATOR).getText().equals(GrammarNotations.IDENTITY_SYMBOL);
         }
 
         return true;

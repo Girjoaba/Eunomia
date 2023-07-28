@@ -1,11 +1,11 @@
-1. E && ((D && (B || C)) || D) premise
-2. ((D && (B || C)) || D) &&Elim: 1
+1. E ∧ ((D ∧ (B ∨ C)) ∨ D) premise
+2. ((D ∧ (B ∨ C)) ∨ D) ∧Elim: 1
 assume
 3. D premise
 4. D Reit: 3
 qed
 assume
-5. (D && (B || C)) premise
-6. D &&Elim: 5
+5. (D ∧ (B ∨ C)) premise
+6. D ∧Elim: 5
 qed
-7. D ||Elim: 2, 3-4, 5-6
+7. D ∨Elim: 2, 3-4, 5-6

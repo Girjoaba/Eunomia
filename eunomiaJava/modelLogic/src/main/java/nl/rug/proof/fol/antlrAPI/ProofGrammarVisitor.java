@@ -1,4 +1,4 @@
-// Generated from java-escape by ANTLR 4.11.1
+// Generated from D:/CompSci/JavaCode/Eunomia/eunomiaJava/modelLogic/src/main/java/nl/rug/proof/fol/grammar\ProofGrammar.g4 by ANTLR 4.12.0
 package nl.rug.proof.fol.antlrAPI;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -9,7 +9,6 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-@SuppressWarnings("CheckStyle")
 public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#proof}.
@@ -290,6 +289,26 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBoxedConstant(ProofGrammarParser.BoxedConstantContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PropositionAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPropositionAtom(ProofGrammarParser.PropositionAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IdentityAtom}
+	 * labeled alternative in {@link ProofGrammarParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentityAtom(ProofGrammarParser.IdentityAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProofGrammarParser#identifierAtom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifierAtom(ProofGrammarParser.IdentifierAtomContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ProofGrammarParser#function}.
 	 * @param ctx the parse tree

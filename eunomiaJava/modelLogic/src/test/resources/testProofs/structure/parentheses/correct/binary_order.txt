@@ -1,2 +1,2 @@
-1. A && (B || C) premise
-2. B || C &&Elim: 1
+1. A ∧ (B ∨ C) premise
+2. B ∨ C ∧Elim: 1

@@ -17,7 +17,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-
 /**
  * Adds all the keystrokes listeners and actions to the ProofWritingPane.
  */
@@ -31,7 +30,6 @@ public class KeyStrokeDispatcher {
     private static final String CONTRADICTION_TAG = "insertContradictionSymbol";
     private static final String EXISTENTIAL_TAG = "insertExistentialSymbol";
     private static final String UNIVERSAL_TAG = "insertUniversalSymbol";
-
     private static final String CREATE_SUBPROOF_TAG = "createSubProof";
     private static final String CONTINUE_FITCH_BAR_TAG = "continueFitchBar";
 
@@ -89,7 +87,6 @@ public class KeyStrokeDispatcher {
 
         undoRedoAction(proofWritingPane, undoManager);
     }
-
 
     private static void createSubProofAction(@NotNull ProofWritingPane proofWritingPane) {
 

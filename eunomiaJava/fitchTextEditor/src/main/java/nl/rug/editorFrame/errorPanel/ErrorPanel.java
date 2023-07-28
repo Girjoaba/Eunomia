@@ -46,7 +46,11 @@ public class ErrorPanel extends JPanel {
         errorText.clearErrorLines();
     }
 
-    public void setCorrect(String error) {
-        errorText.setCorrect(error);
+    /**
+     * Sets the text of the error panel as to be correct. A small reward for the user.
+     * @param message the message received from the Model as to be shown to the user. Can be ignored.
+     */
+    public void setCorrect(String message) {
+        errorText.setCorrect(message);
     }
 }

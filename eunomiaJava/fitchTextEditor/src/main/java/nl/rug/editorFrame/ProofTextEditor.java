@@ -34,5 +34,9 @@ public interface ProofTextEditor {
      */
     void importActionPackage(ActionInjector actionInjector);
 
+    /**
+     * Sets the proof text in the View.
+     * @param proofText the proof text to be set.
+     */
     void setProofText(String proofText);
 }

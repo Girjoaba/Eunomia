@@ -54,6 +54,10 @@ public class WritePanel extends JPanel {
         proofTextPane.clearErrors();
     }
 
+    /**
+     * Sets the text of the proof writing pane.
+     * @param proofText the text to be set.
+     */
     public void setProofText(String proofText) {
         proofTextPane.setText(proofText);
     }

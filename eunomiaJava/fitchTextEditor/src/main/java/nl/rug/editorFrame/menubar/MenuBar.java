@@ -30,7 +30,6 @@ public class MenuBar extends JMenuBar {
                 KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK));
         newMenuItem.addActionListener(actionPackage.getAction(ActionID.NEW_ACTION));
 
-
         JMenuItem openMenuItem = new JMenuItem("Load");
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke("control O"));
         openMenuItem.addActionListener(actionPackage.getAction(ActionID.LOAD_ACTION));

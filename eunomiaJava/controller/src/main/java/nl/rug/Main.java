@@ -13,13 +13,14 @@ import nl.rug.proof.fol.compiler.manager.ProofManager;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * The entry class of the application.
+ * The entry point of the application.
  */
 @Slf4j
 public class Main {
 
     /**
      * The main method of the application.
+     * It opens the frame and initializes the compiler and all the actions.
      * @param args arguments passed to the application.
      */
     public static void main(String[] args) {

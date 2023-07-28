@@ -4,7 +4,6 @@ import nl.rug.editorFrame.communication.EunomiaColors;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.charset.StandardCharsets;
 
 /**
  * The component containing the text of the information messages.
@@ -95,8 +94,11 @@ public class UserManual extends JPanel {
         this.add(Box.createRigidArea(new Dimension(0, 10)));
     }
 
+    /**
+     * A class that facilitates the creation of the labels which display the shortcuts.
+     */
     private static class ShortcutLabel extends JLabel {
-        public ShortcutLabel(String name, String symbol, String shortcut) {
+        protected ShortcutLabel(String name, String symbol, String shortcut) {
             super("<html>" + name + ": <b>" + symbol + "</b> &nbsp - &nbsp <b>" + shortcut + "</b> </html>");
             this.setFont(new Font("Arial", Font.PLAIN, 14));
             this.setForeground(EunomiaColors.FOREGROUND_MAIN);

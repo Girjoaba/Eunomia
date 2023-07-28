@@ -8,7 +8,6 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
-import java.awt.font.FontRenderContext;
 
 /**
  * The component containing the text of the error messages.
@@ -30,8 +29,6 @@ public class ErrorText extends JTextPane {
         setForeground(Color.WHITE);
 
         setEditable(false);
-//        setLineWrap(true);
-//        setWrapStyleWord(true);
     }
 
     /**
@@ -56,6 +53,10 @@ public class ErrorText extends JTextPane {
         this.setText("");
     }
 
+    /**
+     * Sets the text of the error panel as to be correct. A small reward for the user.
+     * @param message the message received from the Model as to be shown to the user. Can be ignored.
+     */
     public void setCorrect(String message) {
         StyledDocument doc = this.getStyledDocument();
         SimpleAttributeSet correct = new SimpleAttributeSet();

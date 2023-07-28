@@ -8,11 +8,19 @@ import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 
+/**
+ * An action that is mapped to some key combination, and it inserts the structure representing a subproof.
+ */
 @Slf4j
 public class CreateSubproofAction extends AbstractAction {
 
     private final ProofWritingPane proofWritingPane;
 
+    /**
+     * The action is initialized with the proof writing pane because it needs to know how many fitch bars to insert in
+     * deep.
+     * @param proofWritingPane the proof writing pane from where it takes the necessary information.
+     */
     public CreateSubproofAction(@NotNull ProofWritingPane proofWritingPane) {
         this.proofWritingPane = proofWritingPane;
     }

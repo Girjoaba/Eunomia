@@ -170,6 +170,10 @@ public class ProofWritingPane extends JTextPane {
         undoManager.discardAllEdits(); // When the proof is rewritten, avoid undoing the rewrite.
     }
 
+    /**
+     * Returns the indentation level which is represented by the number if Fitch Bars at the beginning of the line.
+     * @return the number of Fitch Bars at the beginning of the line.
+     */
     public int getIndentationLevel() {
         String line = getLineAtCarat();
         int count = 0;
@@ -181,6 +185,10 @@ public class ProofWritingPane extends JTextPane {
         return count;
     }
 
+    /**
+     * Returns the line at the current carat position.
+     * @return the line at the current carat position.
+     */
     public String getLineAtCarat() {
         String[] lines = this.getText().split("\n");
 

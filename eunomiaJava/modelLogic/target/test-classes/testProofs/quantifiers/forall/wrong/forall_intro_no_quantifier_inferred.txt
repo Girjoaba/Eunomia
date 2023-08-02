@@ -1,6 +1,0 @@
-1. ∀ x P(x) premise
-assume
-2. |c| premise
-3. P(c) ∀ Elim: 1
-qed
-4. P(y) ∀ Intro: 2-3

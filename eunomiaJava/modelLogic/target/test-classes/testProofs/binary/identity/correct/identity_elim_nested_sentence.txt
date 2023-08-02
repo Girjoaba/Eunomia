@@ -1,3 +1,0 @@
-1. a = b                premise
-2. (a = b) ∧ Q          premise
-3. (b = b) ∧ Q          =Elim: 2, 1

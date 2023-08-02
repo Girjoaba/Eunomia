@@ -1,2 +1,0 @@
-1. A premise
-2. A ⟂Elim: 1

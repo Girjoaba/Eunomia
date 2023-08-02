@@ -1,3 +1,0 @@
-1. A premise
-2. ¬A premise
-3. ⟂ ⟂Intro: 2, 1

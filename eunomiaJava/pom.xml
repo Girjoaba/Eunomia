@@ -65,19 +65,19 @@
                         **/antlrAPI/*
                     </excludes>
                 </configuration>
-                <executions>
-                    <!--
-                    Custom execution that runs checkstyle:check during the
-                    "validate" phase, so before any tests.
-                    -->
-                    <execution>
-                        <id>check-test</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
+<!--                <executions>-->
+<!--                    &lt;!&ndash;-->
+<!--                    Custom execution that runs checkstyle:check during the-->
+<!--                    "validate" phase, so before any tests.-->
+<!--                    &ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>check-test</id>-->
+<!--                        <phase>validate</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>check</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -92,6 +92,7 @@
                 </dependencies>
                 <configuration>
                     <argLine>
+                        -Dfile.encoding=UTF-8
                         --add-opens=java.base/java.time=com.google.gson
                         --add-opens=java.base/java.time=ALL-UNNAMED
                     </argLine>

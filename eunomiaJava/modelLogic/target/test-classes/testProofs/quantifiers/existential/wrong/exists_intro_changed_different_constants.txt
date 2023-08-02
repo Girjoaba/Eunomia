@@ -1,2 +1,0 @@
-1. P(c) ∧ Q(b) premise
-2. ∃ x (P(x) ∧ Q(x)) ∃ Intro: 1

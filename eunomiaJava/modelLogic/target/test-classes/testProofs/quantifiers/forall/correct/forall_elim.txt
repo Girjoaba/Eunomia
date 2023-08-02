@@ -1,2 +1,0 @@
-1. ∀ x P(x) premise
-2. P(a) ∀ Elim: 1

@@ -1,0 +1,5 @@
+*.iml
+**/target
+.idea
+eunomiaJava/modelLogic/gen
+*.eun

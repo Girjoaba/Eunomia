@@ -1,3 +1,0 @@
-1. a = b    premise
-2. P(b)     premise
-3. P(a)     =Elim: 2, 1

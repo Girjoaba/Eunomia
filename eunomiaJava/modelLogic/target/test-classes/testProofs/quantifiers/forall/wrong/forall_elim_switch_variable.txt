@@ -1,2 +1,0 @@
-1. ∀ x ∀ y (P(x) ∧ P(y)) premise
-2. ∀ y (P(y) ∧ P(y)) ∀ Elim: 1

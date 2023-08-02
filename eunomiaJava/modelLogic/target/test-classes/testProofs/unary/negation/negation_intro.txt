@@ -1,6 +1,0 @@
-1. A premise
-assume
-2. ¬A premise
-3. ⟂ ⟂Intro: 1, 2
-qed
-4. ¬¬A ¬Intro: 2-3

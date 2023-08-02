@@ -1,2 +1,0 @@
-1. ∀ x (P(x) ∧ Q(x)) premise
-2. P(a) ∧ Q(a) ∀ Elim: 1

@@ -1,3 +1,0 @@
-1. a = b                    premise
-2. (P(a) ∧ Q(a)) ∧ D        premise
-3. (P(b) ∧ Q(a)) ∧ D        =Elim: 2, 1

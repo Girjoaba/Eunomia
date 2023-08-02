@@ -1,6 +1,0 @@
-1. ∀ x P(x) premise
-assume
-2. |c| P(c) premise
-3. P(c) Reit: 2
-qed
-4. P(c) ∃ Elim: 1, 2-3

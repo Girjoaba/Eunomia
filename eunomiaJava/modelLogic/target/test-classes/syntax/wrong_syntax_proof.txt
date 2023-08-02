@@ -1,3 +1,0 @@
-1. A premise
-2. B premisee
-3. A ∧ B ∧Intro: 1, 2

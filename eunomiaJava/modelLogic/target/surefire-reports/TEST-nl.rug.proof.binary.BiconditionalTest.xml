@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="nl.rug.proof.binary.BiconditionalTest" time="0.021" tests="9" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="nl.rug.proof.binary.BiconditionalTest" time="0.023" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="17.0.3+8-LTS-111"/>
@@ -61,13 +61,13 @@
     <property name="sun.stdout.encoding" value="cp437"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testBiconditionalIntroWrongPremiseSub" classname="nl.rug.proof.binary.BiconditionalTest" time="0.001"/>
+  <testcase name="testBiconditionalIntroWrongPremiseSub" classname="nl.rug.proof.binary.BiconditionalTest" time="0.002"/>
   <testcase name="testBiconditionalIntro" classname="nl.rug.proof.binary.BiconditionalTest" time="0.003"/>
   <testcase name="testBiconditionalIntroWrongConclSub" classname="nl.rug.proof.binary.BiconditionalTest" time="0.003"/>
-  <testcase name="testBiconditionalElim" classname="nl.rug.proof.binary.BiconditionalTest" time="0.002"/>
+  <testcase name="testBiconditionalElim" classname="nl.rug.proof.binary.BiconditionalTest" time="0.003"/>
   <testcase name="testBiconditionalElimWrongInfer" classname="nl.rug.proof.binary.BiconditionalTest" time="0.002"/>
   <testcase name="testBiconditionalIntroWrongSameSub" classname="nl.rug.proof.binary.BiconditionalTest" time="0.003"/>
   <testcase name="testBiconditionalIntroReverse" classname="nl.rug.proof.binary.BiconditionalTest" time="0.003"/>
-  <testcase name="testBiconditionalIntroWrongInfer" classname="nl.rug.proof.binary.BiconditionalTest" time="0.002"/>
-  <testcase name="testBiconditionalElimReverse" classname="nl.rug.proof.binary.BiconditionalTest" time="0.002"/>
+  <testcase name="testBiconditionalIntroWrongInfer" classname="nl.rug.proof.binary.BiconditionalTest" time="0.003"/>
+  <testcase name="testBiconditionalElimReverse" classname="nl.rug.proof.binary.BiconditionalTest" time="0.001"/>
 </testsuite>

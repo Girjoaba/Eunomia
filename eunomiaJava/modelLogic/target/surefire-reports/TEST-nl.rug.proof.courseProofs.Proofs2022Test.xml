@@ -61,6 +61,6 @@
     <property name="sun.stdout.encoding" value="cp437"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testHw1Bonus2022" classname="nl.rug.proof.courseProofs.Proofs2022Test" time="0.006"/>
-  <testcase name="testExamBonus2022" classname="nl.rug.proof.courseProofs.Proofs2022Test" time="0.016"/>
+  <testcase name="testHw1Bonus2022" classname="nl.rug.proof.courseProofs.Proofs2022Test" time="0.009"/>
+  <testcase name="testExamBonus2022" classname="nl.rug.proof.courseProofs.Proofs2022Test" time="0.014"/>
 </testsuite>

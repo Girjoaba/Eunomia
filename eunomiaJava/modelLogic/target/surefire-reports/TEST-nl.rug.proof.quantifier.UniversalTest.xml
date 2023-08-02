@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="nl.rug.proof.quantifier.UniversalTest" time="0.033" tests="17" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="nl.rug.proof.quantifier.UniversalTest" time="0.034" tests="17" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="17.0.3+8-LTS-111"/>
@@ -61,19 +61,19 @@
     <property name="sun.stdout.encoding" value="cp437"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testForallElim" classname="nl.rug.proof.quantifier.UniversalTest" time="0.001"/>
-  <testcase name="ForallElimWrongToVariableTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
-  <testcase name="ForallIntroNotAllConstantsReplacedTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
+  <testcase name="testForallElim" classname="nl.rug.proof.quantifier.UniversalTest" time="0"/>
+  <testcase name="ForallElimWrongToVariableTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.001"/>
+  <testcase name="ForallIntroNotAllConstantsReplacedTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.003"/>
   <testcase name="forallElimWrongNotCompleteTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
   <testcase name="forallElimNotFunctionTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.001"/>
   <testcase name="forallIntroScopeInOut" classname="nl.rug.proof.quantifier.UniversalTest" time="0.003"/>
-  <testcase name="ForallIntroNoQuantifierInferredTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
-  <testcase name="ForallIntroSameVariableAsExistentTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
+  <testcase name="ForallIntroNoQuantifierInferredTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.001"/>
+  <testcase name="ForallIntroSameVariableAsExistentTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.003"/>
   <testcase name="ForallIntroChangedFunctionTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
   <testcase name="ForallIntroNotMatchingNotConstantTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
   <testcase name="ForallIntroMultipleConstantsReplacedTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
   <testcase name="forallIntroCorrectSimpleTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
-  <testcase name="forallElimSwitchVariableTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.001"/>
+  <testcase name="forallElimSwitchVariableTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
   <testcase name="forallElimReplaceWrongVariableTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
   <testcase name="ForallIntroExistentScopeTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>
   <testcase name="forallElimDifferentConstantsTest" classname="nl.rug.proof.quantifier.UniversalTest" time="0.002"/>

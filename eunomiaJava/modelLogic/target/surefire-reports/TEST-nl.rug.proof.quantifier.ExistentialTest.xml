@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="nl.rug.proof.quantifier.ExistentialTest" time="0.023" tests="12" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="nl.rug.proof.quantifier.ExistentialTest" time="0.025" tests="12" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="17.0.3+8-LTS-111"/>
@@ -62,15 +62,15 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase name="testExistsElimination" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.001"/>
-  <testcase name="testExistsElimIncorrectIntroductionSubproof" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.002"/>
+  <testcase name="testExistsElimIncorrectIntroductionSubproof" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.001"/>
   <testcase name="testExistsElimNotExistential" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.002"/>
-  <testcase name="testExistsElimConstantRestriction" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.004"/>
+  <testcase name="testExistsElimConstantRestriction" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.005"/>
   <testcase name="testExistsIntroIntroducedUniversal" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.001"/>
-  <testcase name="testExistsElimMissingIntroductionSubproof" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.001"/>
+  <testcase name="testExistsElimMissingIntroductionSubproof" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.002"/>
   <testcase name="testExistsIntroWrongInference" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.002"/>
   <testcase name="testExistsIntroChangedDifferentConstants" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.002"/>
   <testcase name="testExistsIntro" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.001"/>
-  <testcase name="testExistsElimNotMatchingConstants" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.002"/>
+  <testcase name="testExistsElimNotMatchingConstants" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.003"/>
   <testcase name="testExistsElimWrongInference" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.002"/>
   <testcase name="testExistsIntroNotMatchingVariable" classname="nl.rug.proof.quantifier.ExistentialTest" time="0.002"/>
 </testsuite>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="nl.rug.proof.atomic.ContradictionTest" time="0.172" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="nl.rug.proof.atomic.ContradictionTest" time="0.171" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="17.0.3+8-LTS-111"/>
@@ -61,7 +61,7 @@
     <property name="sun.stdout.encoding" value="cp437"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testContraElim" classname="nl.rug.proof.atomic.ContradictionTest" time="0.097"/>
+  <testcase name="testContraElim" classname="nl.rug.proof.atomic.ContradictionTest" time="0.091"/>
   <testcase name="testContraElimNotContra" classname="nl.rug.proof.atomic.ContradictionTest" time="0.005"/>
   <testcase name="testContraIntroJustificationOrderWrong" classname="nl.rug.proof.atomic.ContradictionTest" time="0.005"/>
   <testcase name="testContraIntro" classname="nl.rug.proof.atomic.ContradictionTest" time="0.002"/>

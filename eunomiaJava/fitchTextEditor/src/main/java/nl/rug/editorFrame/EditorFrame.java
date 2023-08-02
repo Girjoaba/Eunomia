@@ -9,6 +9,7 @@ import nl.rug.editorFrame.writePanel.WritePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * The main frame which represents a text editor for the user to write a proof in Fitch Style and get feedback on it.
@@ -37,6 +38,8 @@ public class EditorFrame extends javax.swing.JFrame implements ProofTextEditor {
 
     private void initFrame() {
         this.setTitle("Eunomia");
+        this.setIconImage(getIcon());
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
         this.setSize(1500, 1000);
@@ -61,6 +64,10 @@ public class EditorFrame extends javax.swing.JFrame implements ProofTextEditor {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         this.setResizable(true);
+    }
+
+    private Image getIcon() {
+        return new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/book_icon.png"))).getImage();
     }
 
     @Override

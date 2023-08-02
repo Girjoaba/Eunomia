@@ -62,9 +62,9 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase name="testImplicationIntro" classname="nl.rug.proof.binary.ImplicationTest" time="0.001"/>
-  <testcase name="testImplicationElim" classname="nl.rug.proof.binary.ImplicationTest" time="0.001"/>
-  <testcase name="testImplicationIntroWrongInfer" classname="nl.rug.proof.binary.ImplicationTest" time="0.003"/>
-  <testcase name="testImplicationIntroWrongInferOrder" classname="nl.rug.proof.binary.ImplicationTest" time="0.002"/>
+  <testcase name="testImplicationElim" classname="nl.rug.proof.binary.ImplicationTest" time="0.002"/>
+  <testcase name="testImplicationIntroWrongInfer" classname="nl.rug.proof.binary.ImplicationTest" time="0.002"/>
+  <testcase name="testImplicationIntroWrongInferOrder" classname="nl.rug.proof.binary.ImplicationTest" time="0.003"/>
   <testcase name="testImplicationElimWrongInferOrder" classname="nl.rug.proof.binary.ImplicationTest" time="0.002"/>
   <testcase name="testImplicationElimWrongInfer" classname="nl.rug.proof.binary.ImplicationTest" time="0.002"/>
   <testcase name="testImplicationElimWrongRefOrder" classname="nl.rug.proof.binary.ImplicationTest" time="0.002"/>

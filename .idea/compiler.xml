@@ -15,11 +15,15 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
         </processorPath>
+        <module name="fitchTextEditor" />
+        <module name="controller" />
         <module name="modelLogic" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="controller" target="17" />
       <module name="eunomiaJava" target="17" />
+      <module name="fitchTextEditor" target="17" />
       <module name="modelLogic" target="17" />
     </bytecodeTargetLevel>
   </component>

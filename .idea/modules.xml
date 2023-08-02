@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Eunomia.iml" filepath="$PROJECT_DIR$/.idea/Eunomia.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eunomiaJava/controller/controller.iml" filepath="$PROJECT_DIR$/eunomiaJava/controller/controller.iml" />
       <module fileurl="file://$PROJECT_DIR$/eunomiaJava/eunomiaJava.iml" filepath="$PROJECT_DIR$/eunomiaJava/eunomiaJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eunomiaJava/fitchTextEditor/fitchTextEditor.iml" filepath="$PROJECT_DIR$/eunomiaJava/fitchTextEditor/fitchTextEditor.iml" />
       <module fileurl="file://$PROJECT_DIR$/eunomiaJava/modelLogic/modelLogic.iml" filepath="$PROJECT_DIR$/eunomiaJava/modelLogic/modelLogic.iml" />
     </modules>
   </component>

@@ -54,17 +54,17 @@
                 like the location of the checkstyle files relative to this pom
                 file.
                 -->
-<!--                <configuration>-->
-<!--                    <configLocation>../.checkstyle/config.xml</configLocation>-->
-<!--                    <suppressionsLocation>../.checkstyle/suppressions.xml</suppressionsLocation>-->
-<!--                    <excludes>-->
-<!--                        **/module-info.java-->
-<!--&lt;!&ndash;                        src/main/java/nl/rug/proof/fol/antlrAPI/ProofGrammarBaseListener.java&ndash;&gt;-->
-<!--                    </excludes>-->
-<!--                    <excludes>-->
-<!--                        **/antlrAPI/*-->
-<!--                    </excludes>-->
-<!--                </configuration>-->
+                <configuration>
+                    <configLocation>../.checkstyle/config.xml</configLocation>
+                    <suppressionsLocation>../.checkstyle/suppressions.xml</suppressionsLocation>
+                    <excludes>
+                        **/module-info.java
+<!--                        src/main/java/nl/rug/proof/fol/antlrAPI/ProofGrammarBaseListener.java-->
+                    </excludes>
+                    <excludes>
+                        **/antlrAPI/*
+                    </excludes>
+                </configuration>
 <!--                <executions>-->
 <!--                    &lt;!&ndash;-->
 <!--                    Custom execution that runs checkstyle:check during the-->

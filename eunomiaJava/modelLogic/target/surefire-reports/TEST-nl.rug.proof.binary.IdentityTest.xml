@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="nl.rug.proof.binary.IdentityTest" time="0.037" tests="14" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="nl.rug.proof.binary.IdentityTest" time="0.031" tests="14" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="17.0.3+8-LTS-111"/>
@@ -63,16 +63,16 @@
   </properties>
   <testcase name="testIdentityElimInFunctionNestedSentence" classname="nl.rug.proof.binary.IdentityTest" time="0.002"/>
   <testcase name="testIdentityElimWrong" classname="nl.rug.proof.binary.IdentityTest" time="0.003"/>
-  <testcase name="testIdentityIntro" classname="nl.rug.proof.binary.IdentityTest" time="0.002"/>
-  <testcase name="testIdentityElimMultiple" classname="nl.rug.proof.binary.IdentityTest" time="0.004"/>
+  <testcase name="testIdentityIntro" classname="nl.rug.proof.binary.IdentityTest" time="0.001"/>
+  <testcase name="testIdentityElimMultiple" classname="nl.rug.proof.binary.IdentityTest" time="0.002"/>
   <testcase name="testIdentityElimInFunctionWrong" classname="nl.rug.proof.binary.IdentityTest" time="0.002"/>
-  <testcase name="testIdentityElimNestedSentence" classname="nl.rug.proof.binary.IdentityTest" time="0.003"/>
-  <testcase name="testIdentityIntroWrong" classname="nl.rug.proof.binary.IdentityTest" time="0.001"/>
+  <testcase name="testIdentityElimNestedSentence" classname="nl.rug.proof.binary.IdentityTest" time="0.002"/>
+  <testcase name="testIdentityIntroWrong" classname="nl.rug.proof.binary.IdentityTest" time="0.002"/>
   <testcase name="testIdentityElimOccurringInProposition" classname="nl.rug.proof.binary.IdentityTest" time="0.002"/>
   <testcase name="testIdentityElim" classname="nl.rug.proof.binary.IdentityTest" time="0.002"/>
   <testcase name="testIdentityElimInFunctionOrderWrong" classname="nl.rug.proof.binary.IdentityTest" time="0.002"/>
-  <testcase name="testIdentityElimOrderWrong" classname="nl.rug.proof.binary.IdentityTest" time="0.003"/>
-  <testcase name="testIdentityElimInFunctionReferenceWrong" classname="nl.rug.proof.binary.IdentityTest" time="0.003"/>
-  <testcase name="testIdentityElimInFunction" classname="nl.rug.proof.binary.IdentityTest" time="0.002"/>
+  <testcase name="testIdentityElimOrderWrong" classname="nl.rug.proof.binary.IdentityTest" time="0.002"/>
+  <testcase name="testIdentityElimInFunctionReferenceWrong" classname="nl.rug.proof.binary.IdentityTest" time="0.004"/>
+  <testcase name="testIdentityElimInFunction" classname="nl.rug.proof.binary.IdentityTest" time="0.001"/>
   <testcase name="testIdentityElimSideWrong" classname="nl.rug.proof.binary.IdentityTest" time="0.003"/>
 </testsuite>

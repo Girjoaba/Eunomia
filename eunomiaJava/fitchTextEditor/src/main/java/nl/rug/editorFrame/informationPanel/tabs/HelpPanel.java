@@ -42,6 +42,67 @@ public class HelpPanel extends JPanel {
         add(introElimPanel);
     }
 
+    @Contract(" -> new")
+    private @NotNull JScrollPane createIntroductionTutorial() {
+        List<ImageIcon> images = new ArrayList<>();
+        images.add(processImage("info_proofs/IdentityIntro.png"));
+        images.add(processImage("info_proofs/ContrIntro.png"));
+        images.add(processImage("info_proofs/NegIntro.png"));
+        images.add(processImage("info_proofs/ConjIntro.png"));
+        images.add(processImage("info_proofs/DisjIntro.png"));
+        images.add(processImage("info_proofs/ImplIntro.png"));
+        images.add(processImage("info_proofs/BiconIntro.png"));
+        addBlankMargin(images);
+
+        JList<ImageIcon> list = new JList<>(images.toArray(new ImageIcon[0]));
+        list.setBackground(EunomiaColors.BACKGROUND_SECOND);
+
+        return new JScrollPane(list);
+    }
+
+    @Contract(" -> new")
+    private @NotNull JScrollPane createEliminationTutorial() {
+        List<ImageIcon> images = new ArrayList<>();
+        images.add(processImage("info_proofs/IdentityElim.png"));
+        images.add(processImage("info_proofs/ContrElim.png"));
+        images.add(processImage("info_proofs/NegElim.png"));
+        images.add(processImage("info_proofs/ConjElim.png"));
+        images.add(processImage("info_proofs/DisjElim.png"));
+        images.add(processImage("info_proofs/ImpliElim.png"));
+        images.add(processImage("info_proofs/BicondElim.png"));
+        addBlankMargin(images);
+
+        JList<ImageIcon> list = new JList<>(images.toArray(new ImageIcon[0]));
+        list.setBackground(EunomiaColors.BACKGROUND_SECOND);
+
+        return new JScrollPane(list);
+    }
+
+    @Contract(" -> new")
+    private @NotNull JScrollPane createQuantifierTutorial() {
+        List<ImageIcon> images = new ArrayList<>();
+        images.add(processImage("info_proofs/UnivIntro.png"));
+        images.add(processImage("info_proofs/UnivElim.png"));
+        images.add(processImage("info_proofs/ExistIntro.png"));
+        images.add(processImage("info_proofs/ExistElim.png"));
+        addBlankMargin(images);
+
+        JList<ImageIcon> list = new JList<>(images.toArray(new ImageIcon[0]));
+        list.setBackground(EunomiaColors.BACKGROUND_SECOND);
+
+        return new JScrollPane(list);
+    }
+
+    /**
+     * Patch hack to make sure all the images can be displayed on any screen by concatenating blank images at the end
+     * to the list.
+     * @param images the list of images the concatenation is done on.
+     */
+    private void addBlankMargin(@NotNull List<ImageIcon> images) {
+        images.add(processImage("info_proofs/blank.png"));
+        images.add(processImage("info_proofs/blank.png"));
+    }
+
     /**
      * Prepares the images which contain the tutorials for the proof rules.
      * @param resourcePath the path to the image in the resource folder.
@@ -60,53 +121,5 @@ public class HelpPanel extends JPanel {
         proofIcon.setImage(newimg);
 
         return proofIcon;
-    }
-
-    @Contract(" -> new")
-    private @NotNull JScrollPane createIntroductionTutorial() {
-        List<ImageIcon> images = new ArrayList<>();
-        images.add(processImage("info_proofs/IdentityIntro.png"));
-        images.add(processImage("info_proofs/ContrIntro.png"));
-        images.add(processImage("info_proofs/NegIntro.png"));
-        images.add(processImage("info_proofs/ConjIntro.png"));
-        images.add(processImage("info_proofs/DisjIntro.png"));
-        images.add(processImage("info_proofs/ImplIntro.png"));
-        images.add(processImage("info_proofs/BiconIntro.png"));
-
-        JList<ImageIcon> list = new JList<>(images.toArray(new ImageIcon[0]));
-        list.setBackground(EunomiaColors.BACKGROUND_SECOND);
-
-        return new JScrollPane(list);
-    }
-
-    @Contract(" -> new")
-    private @NotNull JScrollPane createEliminationTutorial() {
-        List<ImageIcon> images = new ArrayList<>();
-        images.add(processImage("info_proofs/IdentityElim.png"));
-        images.add(processImage("info_proofs/ContrElim.png"));
-        images.add(processImage("info_proofs/NegElim.png"));
-        images.add(processImage("info_proofs/ConjElim.png"));
-        images.add(processImage("info_proofs/DisjElim.png"));
-        images.add(processImage("info_proofs/ImpliElim.png"));
-        images.add(processImage("info_proofs/BicondElim.png"));
-
-        JList<ImageIcon> list = new JList<>(images.toArray(new ImageIcon[0]));
-        list.setBackground(EunomiaColors.BACKGROUND_SECOND);
-
-        return new JScrollPane(list);
-    }
-
-    @Contract(" -> new")
-    private @NotNull JScrollPane createQuantifierTutorial() {
-        List<ImageIcon> images = new ArrayList<>();
-        images.add(processImage("info_proofs/UnivIntro.png"));
-        images.add(processImage("info_proofs/UnivElim.png"));
-        images.add(processImage("info_proofs/ExistIntro.png"));
-        images.add(processImage("info_proofs/ExistElim.png"));
-
-        JList<ImageIcon> list = new JList<>(images.toArray(new ImageIcon[0]));
-        list.setBackground(EunomiaColors.BACKGROUND_SECOND);
-
-        return new JScrollPane(list);
     }
 }

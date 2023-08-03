@@ -1,7 +1,7 @@
 package nl.rug.editorFrame.informationPanel;
 
 import nl.rug.editorFrame.communication.EunomiaColors;
-import nl.rug.editorFrame.informationPanel.tabs.HelpPanel;
+import nl.rug.editorFrame.informationPanel.tabs.ProofTutorialPanel;
 import nl.rug.editorFrame.informationPanel.tabs.UserManual;
 import nl.rug.editorFrame.informationPanel.tabs.ProofSelectionPanel;
 import nl.rug.editorFrame.informationPanel.ui.InformationTabbedUI;
@@ -60,7 +60,7 @@ public class InformationPanel extends JPanel {
         UserManual userManual = new UserManual();
 
         tabbedPane.addTab("", userManual);
-        tabbedPane.addTab("", new HelpPanel());
+        tabbedPane.addTab("", new ProofTutorialPanel());
         tabbedPane.addTab("", new ProofSelectionPanel());
 
         addIconAtIndex(tabbedPane, "icons/keyboard2_icon.png", 0);

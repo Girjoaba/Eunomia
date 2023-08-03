@@ -13,14 +13,14 @@ import java.util.List;
 /**
  * A panel containing the description of all the proof rules.
  */
-public class HelpPanel extends JPanel {
+public class ProofTutorialPanel extends JPanel {
 
     private static final double SCALING_FACTOR = 0.35;
 
     /**
      * Initializes the help panel.
      */
-    public HelpPanel() {
+    public ProofTutorialPanel() {
         initHelpPanel();
     }
 
@@ -113,8 +113,8 @@ public class HelpPanel extends JPanel {
         URL proofURL = this.getClass().getResource("/" + resourcePath);
         assert proofURL != null;
         ImageIcon proofIcon = new ImageIcon(proofURL);
-        int newWidth = (int) (proofIcon.getIconWidth() * HelpPanel.SCALING_FACTOR);
-        int newHeight = (int) (proofIcon.getIconHeight() * HelpPanel.SCALING_FACTOR);
+        int newWidth = (int) (proofIcon.getIconWidth() * ProofTutorialPanel.SCALING_FACTOR);
+        int newHeight = (int) (proofIcon.getIconHeight() * ProofTutorialPanel.SCALING_FACTOR);
 
         Image image = proofIcon.getImage(); // transform it
         Image newimg = image.getScaledInstance(newWidth, newHeight,  java.awt.Image.SCALE_SMOOTH);

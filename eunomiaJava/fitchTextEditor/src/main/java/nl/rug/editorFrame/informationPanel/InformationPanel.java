@@ -57,7 +57,10 @@ public class InformationPanel extends JPanel {
         tabbedPane.setForeground(Color.BLACK);
         tabbedPane.setUI(new InformationTabbedUI());
 
-        tabbedPane.addTab("", new UserManual());
+        UserManual userManual = new UserManual();
+//        userManual.setMaximumSize(new Dimension(200, 200));
+
+        tabbedPane.addTab("", userManual);
         tabbedPane.addTab("", new HelpPanel());
         tabbedPane.addTab("", new ProofSelectionPanel());
 

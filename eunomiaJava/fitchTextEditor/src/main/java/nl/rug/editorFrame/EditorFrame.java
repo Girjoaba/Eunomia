@@ -33,6 +33,7 @@ public class EditorFrame extends javax.swing.JFrame implements ProofTextEditor {
         errorPanel = new ErrorPanel();
         menuBar = new MenuBar();
         initFrame();
+        setLocationRelativeTo(null);
         this.setVisible(true);
     }
 

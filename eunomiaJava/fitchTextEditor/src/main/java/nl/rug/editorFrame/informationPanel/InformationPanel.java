@@ -58,7 +58,6 @@ public class InformationPanel extends JPanel {
         tabbedPane.setUI(new InformationTabbedUI());
 
         UserManual userManual = new UserManual();
-//        userManual.setMaximumSize(new Dimension(200, 200));
 
         tabbedPane.addTab("", userManual);
         tabbedPane.addTab("", new HelpPanel());

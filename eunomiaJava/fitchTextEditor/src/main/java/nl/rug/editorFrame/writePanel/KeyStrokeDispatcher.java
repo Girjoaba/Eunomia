@@ -64,9 +64,13 @@ public class KeyStrokeDispatcher {
         im.put(KeyStroke.getKeyStroke("control N"), NEGATION_TAG);
         am.put(NEGATION_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.NEGATION_SYMBOL));
 
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_7, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
+                CONJUNCTION_TAG);
         im.put(KeyStroke.getKeyStroke("control Q"), CONJUNCTION_TAG);
         am.put(CONJUNCTION_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.CONJUNCTION_SYMBOL));
 
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
+                DISJUNCTION_TAG);
         im.put(KeyStroke.getKeyStroke("control W"), DISJUNCTION_TAG);
         am.put(DISJUNCTION_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.DISJUNCTION_SYMBOL));
 

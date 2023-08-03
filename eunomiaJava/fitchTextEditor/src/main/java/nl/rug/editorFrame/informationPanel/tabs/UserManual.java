@@ -57,7 +57,11 @@ public class UserManual extends JPanel {
                 If the structure gets broken delete the extraneous parts. <br> <br>
                 
                 To add a subproof press: <b>ctrl + P</b>. <br>
-                To finish a subproof just delete the Fitch bar at the last level.\s
+                To finish a subproof just delete the Fitch bar at the last level. <br> <br>
+                
+                <b>Note:</b> Each proof line is constructed from the main sentence + justification.<br>
+                The premises do not require any justification. <br>
+                <i>See the tab for proof explanations for examples.</i>
                 </html>""");
         this.add(proofIndications);
         this.addEmptySpace();
@@ -75,9 +79,9 @@ public class UserManual extends JPanel {
 
         this.add(new ShortcutLabel("Negation", "¬", "ctrl + N"));
         this.addEmptySpace();
-        this.add(new ShortcutLabel("Conjunction", "∧", "ctrl + Q"));
+        this.add(new ShortcutLabel("Conjunction", "∧", "ctrl + 7 &nbsp|&nbsp ctrl + Q"));
         this.addEmptySpace();
-        this.add(new ShortcutLabel("Disjunction", "∨", "ctrl + W"));
+        this.add(new ShortcutLabel("Disjunction", "∨", "ctrl + \\ &nbsp|&nbsp ctrl + W"));
         this.addEmptySpace();
         this.add(new ShortcutLabel("Implication", "→", "ctrl + I"));
         this.addEmptySpace();

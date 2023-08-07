@@ -3,6 +3,7 @@ package nl.rug.editorFrame;
 import nl.rug.editorFrame.communication.ActionInjector;
 import nl.rug.editorFrame.communication.ActionPackage;
 import nl.rug.editorFrame.errorPanel.ErrorPanel;
+import nl.rug.editorFrame.factories.ProofSelectionFactory;
 import nl.rug.editorFrame.informationPanel.InformationPanel;
 import nl.rug.editorFrame.menubar.MenuBar;
 import nl.rug.editorFrame.writePanel.WritePanel;
@@ -67,10 +68,6 @@ public class EditorFrame extends javax.swing.JFrame implements ProofTextEditor {
         this.setResizable(true);
     }
 
-    private Image getIcon() {
-        return new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/book_icon.png"))).getImage();
-    }
-
     @Override
     public String getProofText() {
         return writePanel.getProofText();
@@ -102,4 +99,7 @@ public class EditorFrame extends javax.swing.JFrame implements ProofTextEditor {
         writePanel.setProofText(proofText);
     }
 
+    private Image getIcon() {
+        return new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/book_icon.png"))).getImage();
+    }
 }

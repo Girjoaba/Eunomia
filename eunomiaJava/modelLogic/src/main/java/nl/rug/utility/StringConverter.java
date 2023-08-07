@@ -1,5 +1,7 @@
 package nl.rug.utility;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Objects;
@@ -16,7 +18,7 @@ public class StringConverter {
      * @return the string
      * @throws FileNotFoundException if the file is not found in the resource folder
      */
-    public static String getStringFromTXT(String fileName) throws FileNotFoundException {
+    public static @NotNull String getStringFromTXT(String fileName) throws FileNotFoundException {
         ClassLoader classLoader = StringConverter.class.getClassLoader();
         File file = new File(Objects.requireNonNull(classLoader.getResource(fileName)).getFile());
 

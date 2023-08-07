@@ -31,6 +31,12 @@ public class EunomiaColors {
     public static final Color ACCENT_MAIN = Color.decode("#fccd7c");
 
     /**
+     * It is a light yellow color. Use it to highlight elements or bring a bit of contrast to some elements
+     * Less bright than ACCENT_MAIN.
+     */
+    public static final Color ACCENT_SECOND = Color.decode("#c9a463");
+
+    /**
      * The color to display errors or wrong text. It is used to draw attention to mistakes.
      */
     public static final Color ERROR = Color.decode("#F44747");

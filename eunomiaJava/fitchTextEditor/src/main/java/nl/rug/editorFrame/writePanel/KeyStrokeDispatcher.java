@@ -32,6 +32,7 @@ public class KeyStrokeDispatcher {
     private static final String UNIVERSAL_TAG = "insertUniversalSymbol";
     private static final String CREATE_SUBPROOF_TAG = "createSubProof";
     private static final String CONTINUE_FITCH_BAR_TAG = "continueFitchBar";
+    private static final String CONSTANT_BOX_TAG = "constantBox";
 
     @Contract(value = "_, _ -> new", pure = true)
     private static @NotNull Action insertSymbolAction(ProofWritingPane proofWritingPane, String symbol) {
@@ -88,6 +89,12 @@ public class KeyStrokeDispatcher {
 
         im.put(KeyStroke.getKeyStroke("control U"), UNIVERSAL_TAG);
         am.put(UNIVERSAL_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.UNIVERSAL_QUANTIFIER));
+
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_OPEN_BRACKET, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
+                CONSTANT_BOX_TAG);
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_CLOSE_BRACKET,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), CONSTANT_BOX_TAG);
+        am.put(CONSTANT_BOX_TAG, insertSymbolAction(proofWritingPane, FitchProofDisplayUtils.CONSTANT_BOX));
 
         undoRedoAction(proofWritingPane, undoManager);
     }

@@ -69,6 +69,11 @@ public class FitchProofDisplayUtils {
     public static final String PREMISE_SEPARATOR = "---";
 
     /**
+     * A default string for displaying a boxed constant.
+     */
+    public static final String CONSTANT_BOX = "[a] ";
+
+    /**
      * Removes all the fitch bars from a string.
      * @param line the string from which the fitch bars are removed.
      * @return the string without fitch bars.

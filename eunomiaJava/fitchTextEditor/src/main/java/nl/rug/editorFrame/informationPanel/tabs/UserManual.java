@@ -27,6 +27,7 @@ public class UserManual extends JPanel {
 
         addTitle();
         addProofGuide();
+        addBoxedConstantExplanation();
         addKeyboardShortcuts();
     }
 
@@ -61,9 +62,30 @@ public class UserManual extends JPanel {
                 
                 <b>Note:</b> Each proof line is constructed from the main sentence + justification.<br>
                 The premises do not require any justification. <br>
-                <i>See the tab for proof explanations for examples.</i>
                 </html>""");
         this.add(proofIndications);
+        this.addEmptySpace();
+        this.addEmptySpace();
+    }
+
+    private void addBoxedConstantExplanation() {
+        JLabel boxedConstantTitle = new JLabel("Boxed Constants");
+        boxedConstantTitle.setFont(new Font("Arial", Font.BOLD, 16));
+        boxedConstantTitle.setForeground(EunomiaColors.FOREGROUND_MAIN);
+
+        this.add(boxedConstantTitle);
+        this.addEmptySpace();
+
+        JLabel boxedConstantExplanation = new JLabel();
+        boxedConstantExplanation.setFont(new Font("Arial", Font.PLAIN, 14));
+        boxedConstantExplanation.setForeground(EunomiaColors.FOREGROUND_MAIN);
+        boxedConstantExplanation.setText("""
+                <html>
+                The boxed constants are written as: <b>[a]</b>. <br>
+                Constants are from <i> a </i> to <i> t</i>. <br>
+                Variables are from <i> u </i> to <i> z</i>. <br>
+                </html>""");
+        this.add(boxedConstantExplanation);
         this.addEmptySpace();
         this.addEmptySpace();
         this.addEmptySpace();
@@ -92,6 +114,8 @@ public class UserManual extends JPanel {
         this.add(new ShortcutLabel("Universal Quantifier", "∀", "ctrl + U"));
         this.addEmptySpace();
         this.add(new ShortcutLabel("Existential Quantifier", "∃", "ctrl + E"));
+        this.addEmptySpace();
+        this.add(new ShortcutLabel("Boxed Constant", "[a]", "ctrl + [ &nbsp|&nbsp ctrl + ]"));
     }
 
     private void addEmptySpace() {

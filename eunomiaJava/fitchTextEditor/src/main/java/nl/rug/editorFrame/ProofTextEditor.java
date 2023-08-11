@@ -32,7 +32,7 @@ public interface ProofTextEditor {
      * @param actionInjector the action injector containing all the actions required by the View and created in the
      *                       Controller.
      */
-    void importActionPackage(ActionInjector actionInjector);
+    void importControllerActions(ActionInjector actionInjector);
 
     /**
      * Sets the proof text in the View.

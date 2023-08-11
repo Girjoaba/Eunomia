@@ -28,8 +28,8 @@ public class ProofWritingPane extends JTextPane {
             |----
             |\t|\tA
             |\t|----
-            |\t|\tB Reit: 1
-            |\tA→B →Intro: 2-3
+            |\t|\tB \t\t\tReit: 1
+            |\tA→B \t\t→Intro: 2-3
             """;
 
     private final List<Integer> wrongLines;

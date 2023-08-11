@@ -33,8 +33,9 @@ public class Main {
 
         addMainVerifyActionListener(actionInjector, frame, manager, compiler);
         addCommonActionListeners(actionInjector, frame);
+        addPracticeProofActionListeners(actionInjector, frame);
 
-        frame.importActionPackage(actionInjector);
+        frame.importControllerActions(actionInjector);
     }
 
     private static void addMainVerifyActionListener(@NotNull ActionInjector actionInjector, ProofTextEditor frame,
@@ -46,5 +47,12 @@ public class Main {
         actionInjector.addAction(ActionID.SAVE_ACTION, new SaveAction(frame));
         actionInjector.addAction(ActionID.LOAD_ACTION, new LoadAction(frame));
         actionInjector.addAction(ActionID.NEW_ACTION, new NewProofAction(frame));
+    }
+
+    private static void addPracticeProofActionListeners(@NotNull ActionInjector actionInjector, ProofTextEditor frame) {
+        actionInjector.addAction(ActionID.LOAD_EXAMPLE_PROOF,
+                new LoadPracticeProof(frame, "/selection_proofs/example_proof.txt"));
+        actionInjector.addAction(ActionID.LOAD_EXAMPLE_QUANTIFIER_PROOF,
+                new LoadPracticeProof(frame, "/selection_proofs/example_quantifier_proof.txt"));
     }
 }

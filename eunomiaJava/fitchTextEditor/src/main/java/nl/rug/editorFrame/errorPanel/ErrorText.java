@@ -1,6 +1,6 @@
 package nl.rug.editorFrame.errorPanel;
 
-import nl.rug.editorFrame.communication.EunomiaColors;
+import nl.rug.editorFrame.controllerCommunication.EunomiaColors;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;

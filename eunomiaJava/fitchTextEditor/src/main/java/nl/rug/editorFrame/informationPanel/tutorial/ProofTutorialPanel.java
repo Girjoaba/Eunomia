@@ -1,6 +1,6 @@
 package nl.rug.editorFrame.informationPanel.tutorial;
 
-import nl.rug.editorFrame.communication.EunomiaColors;
+import nl.rug.editorFrame.controllerCommunication.EunomiaColors;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

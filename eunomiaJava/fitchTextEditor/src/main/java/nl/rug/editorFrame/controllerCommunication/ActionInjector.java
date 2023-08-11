@@ -1,4 +1,4 @@
-package nl.rug.editorFrame.communication;
+package nl.rug.editorFrame.controllerCommunication;
 
 import java.awt.event.ActionListener;
 

@@ -1,7 +1,7 @@
 package nl.rug.editorFrame;
 
-import nl.rug.editorFrame.communication.ActionInjector;
-import nl.rug.editorFrame.communication.ActionPackage;
+import nl.rug.editorFrame.controllerCommunication.ActionInjector;
+import nl.rug.editorFrame.controllerCommunication.ActionPackage;
 import nl.rug.editorFrame.errorPanel.ErrorPanel;
 import nl.rug.editorFrame.informationPanel.InformationPanel;
 import nl.rug.editorFrame.menubar.MenuBar;

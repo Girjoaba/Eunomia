@@ -1,7 +1,8 @@
 package nl.rug.editorFrame.informationPanel;
 
-import nl.rug.editorFrame.communication.ActionInjector;
-import nl.rug.editorFrame.communication.EunomiaColors;
+import nl.rug.editorFrame.ActionReceiver;
+import nl.rug.editorFrame.controllerCommunication.ActionInjector;
+import nl.rug.editorFrame.controllerCommunication.EunomiaColors;
 import nl.rug.editorFrame.informationPanel.tutorial.ProofTutorialPanel;
 import nl.rug.editorFrame.informationPanel.manual.UserManual;
 import nl.rug.editorFrame.informationPanel.selection.ProofSelectionPanel;
@@ -15,7 +16,7 @@ import java.net.URL;
 /**
  * The main panel component for the displaying information to the user.
  */
-public class InformationPanel extends JPanel {
+public class InformationPanel extends JPanel implements ActionReceiver {
 
     private UserManual userManual;
     private ProofTutorialPanel tutorialPanel;
@@ -36,6 +37,7 @@ public class InformationPanel extends JPanel {
         addTabbedPane();
     }
 
+    @Override
     public void setActions(ActionInjector actionInjector) {
         this.proofSelectionPanel.setActions(actionInjector);
     }

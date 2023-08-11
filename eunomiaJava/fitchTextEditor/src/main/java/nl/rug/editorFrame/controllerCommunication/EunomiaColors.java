@@ -1,4 +1,4 @@
-package nl.rug.editorFrame.communication;
+package nl.rug.editorFrame.controllerCommunication;
 
 import java.awt.*;
 
@@ -45,4 +45,9 @@ public class EunomiaColors {
      * The color used to display a correct solution. Green used as a landmark reward for the user.
      */
     public static final Color CORRECT = Color.decode("#89d185");
+
+    /**
+     * The main font which is used throughout the application.
+     */
+    public static final String MAIN_FONT = "Arial";
 }

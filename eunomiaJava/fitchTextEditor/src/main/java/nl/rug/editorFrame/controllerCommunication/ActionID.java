@@ -1,4 +1,4 @@
-package nl.rug.editorFrame.communication;
+package nl.rug.editorFrame.controllerCommunication;
 
 /**
  * An enum that labels all the actions passed to the View from the Controller.

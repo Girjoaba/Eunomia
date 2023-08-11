@@ -1,7 +1,9 @@
 package nl.rug.editorFrame.menubar;
 
-import nl.rug.editorFrame.communication.ActionID;
-import nl.rug.editorFrame.communication.ActionPackage;
+import nl.rug.editorFrame.ActionReceiver;
+import nl.rug.editorFrame.controllerCommunication.ActionID;
+import nl.rug.editorFrame.controllerCommunication.ActionInjector;
+import nl.rug.editorFrame.controllerCommunication.ActionPackage;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -10,7 +12,7 @@ import java.awt.event.KeyEvent;
 /**
  * Menu bar component for the main editor frame.
  */
-public class MenuBar extends JMenuBar {
+public class MenuBar extends JMenuBar implements ActionReceiver {
 
     private final JButton verifyButton;
 
@@ -20,6 +22,14 @@ public class MenuBar extends JMenuBar {
     public MenuBar() {
         verifyButton = new VerifyButton();
         this.add(verifyButton);
+    }
+
+    @Override
+    public void setActions(@NotNull ActionInjector actionInjector) {
+        verifyButton.addActionListener(actionInjector.getAction(ActionID.VERIFY_ACTION));
+        createMenuItems((ActionPackage) actionInjector);
+        revalidate();
+        repaint();
     }
 
     private void createMenuItems(@NotNull ActionPackage actionPackage) {
@@ -46,7 +56,7 @@ public class MenuBar extends JMenuBar {
 
         fileMenu.add(newMenuItem);
         fileMenu.add(openMenuItem);
-//        fileMenu.add(saveMenuItem); //TODO: Implement normal save
+        //fileMenu.add(saveMenuItem); //TODO: Implement normal save
         fileMenu.add(saveAsMenuItem);
         fileMenu.add(verifyMenuItem);
 
@@ -55,16 +65,4 @@ public class MenuBar extends JMenuBar {
         this.add(Box.createHorizontalGlue());
         this.add(verifyButton);
     }
-
-    /**
-     * Sets the actions for the menu bar.
-     * @param actionPackage the action package delivered by the Controller.
-     */
-    public void setActions(@NotNull ActionPackage actionPackage) {
-        verifyButton.addActionListener(actionPackage.getAction(ActionID.VERIFY_ACTION));
-        createMenuItems(actionPackage);
-        revalidate();
-        repaint();
-    }
-
 }

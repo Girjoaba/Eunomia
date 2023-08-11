@@ -1,7 +1,7 @@
 package nl.rug.editorFrame.writePanel;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.rug.editorFrame.communication.EunomiaColors;
+import nl.rug.editorFrame.controllerCommunication.EunomiaColors;
 import nl.rug.editorFrame.writePanel.proofStructure.FitchProofDisplayUtils;
 import org.jetbrains.annotations.NotNull;
 

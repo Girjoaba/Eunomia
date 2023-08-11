@@ -1,6 +1,6 @@
 package nl.rug.editorFrame;
 
-import nl.rug.editorFrame.communication.ActionInjector;
+import nl.rug.editorFrame.controllerCommunication.ActionInjector;
 
 /**
  * Main Interface to make the View-Controller Connection.

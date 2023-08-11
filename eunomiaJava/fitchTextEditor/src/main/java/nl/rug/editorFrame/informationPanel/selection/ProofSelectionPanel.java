@@ -1,8 +1,9 @@
 package nl.rug.editorFrame.informationPanel.selection;
 
-import nl.rug.editorFrame.communication.ActionInjector;
-import nl.rug.editorFrame.communication.ActionPackage;
-import nl.rug.editorFrame.communication.EunomiaColors;
+import nl.rug.editorFrame.ActionReceiver;
+import nl.rug.editorFrame.controllerCommunication.ActionInjector;
+import nl.rug.editorFrame.controllerCommunication.ActionPackage;
+import nl.rug.editorFrame.controllerCommunication.EunomiaColors;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +11,7 @@ import java.awt.*;
 /**
  * A panel containing exercise proofs that can be selected.
  */
-public class ProofSelectionPanel extends JPanel {
-
-    private ActionInjector actionInjector;
+public class ProofSelectionPanel extends JPanel implements ActionReceiver {
 
     /**
      * Initializes the proof selection panel.
@@ -21,9 +20,9 @@ public class ProofSelectionPanel extends JPanel {
         initProofSelectionPanel();
     }
 
+    @Override
     public void setActions(ActionInjector actionInjector) {
-        this.actionInjector = actionInjector;
-        useFactory();
+        useFactory(actionInjector);
     }
 
     private void initProofSelectionPanel() {
@@ -35,7 +34,7 @@ public class ProofSelectionPanel extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(20, 25, 20, 20));
     }
 
-    private void useFactory() {
+    private void useFactory(ActionInjector actionInjector) {
         ProofSelectionFactory factory = new ProofSelectionFactory(this, (ActionPackage) actionInjector);
         factory.createJComponent(ProofSelectionFactory.TITLE);
         factory.createJComponent(ProofSelectionFactory.EXAMPLE_PROOF);

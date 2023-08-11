@@ -40,19 +40,20 @@ public class MenuBar extends JMenuBar {
         saveAsMenuItem.setAccelerator(KeyStroke.getKeyStroke("control S"));
         saveAsMenuItem.addActionListener(actionPackage.getAction(ActionID.SAVE_ACTION));
 
+        JMenuItem verifyMenuItem = new JMenuItem("Verify");
+        verifyMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.CTRL_DOWN_MASK));
+        verifyMenuItem.addActionListener(actionPackage.getAction(ActionID.VERIFY_ACTION));
+
         fileMenu.add(newMenuItem);
         fileMenu.add(openMenuItem);
-        fileMenu.add(saveMenuItem);
+//        fileMenu.add(saveMenuItem); //TODO: Implement normal save
         fileMenu.add(saveAsMenuItem);
+        fileMenu.add(verifyMenuItem);
 
         this.add(fileMenu);
 
         this.add(Box.createHorizontalGlue());
         this.add(verifyButton);
-
-        // Set shortcut Shift + Enter for verify button TODO: make this work
-        verifyButton.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
-                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK), "verify");
     }
 
     /**

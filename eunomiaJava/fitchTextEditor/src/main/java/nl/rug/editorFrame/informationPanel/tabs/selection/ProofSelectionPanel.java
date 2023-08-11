@@ -1,4 +1,4 @@
-package nl.rug.editorFrame.informationPanel.tabs;
+package nl.rug.editorFrame.informationPanel.tabs.selection;
 
 import nl.rug.editorFrame.communication.ActionInjector;
 import nl.rug.editorFrame.communication.ActionPackage;
@@ -16,7 +16,6 @@ public class ProofSelectionPanel extends JPanel {
 
     /**
      * Initializes the proof selection panel.
-     * TODO: Replace the layout to a GridBagConstraints layout.
      */
     public ProofSelectionPanel() {
         initProofSelectionPanel();

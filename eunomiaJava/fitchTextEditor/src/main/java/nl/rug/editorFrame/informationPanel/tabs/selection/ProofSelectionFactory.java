@@ -1,4 +1,4 @@
-package nl.rug.editorFrame.informationPanel.tabs;
+package nl.rug.editorFrame.informationPanel.tabs.selection;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.editorFrame.communication.ActionID;
@@ -25,13 +25,14 @@ public class ProofSelectionFactory {
     public void createJComponent(int FACTORY_TOKEN) {
         switch (FACTORY_TOKEN) {
             case TITLE -> createTitle();
-            case EXAMPLE_PROOF -> addSelect("Example Completed Proof", ActionID.LOAD_EXAMPLE_PROOF);
+            case EXAMPLE_PROOF -> addSelect("<html><b><i>Example</i></b> Completed Proof</html>",
+                    ActionID.LOAD_EXAMPLE_PROOF);
             default -> throw new IllegalArgumentException("Invalid factory token: " + FACTORY_TOKEN);
         }
     }
 
     private void createTitle() {
-        JLabel title = new JLabel("Select an exercise proof:");
+        JLabel title = new JLabel("Practice Proofs:");
         title.setFont(new Font("Arial", Font.BOLD, 16));
         title.setForeground(EunomiaColors.FOREGROUND_MAIN);
 

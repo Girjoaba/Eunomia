@@ -1,6 +1,7 @@
-package nl.rug.editorFrame.informationPanel.tabs.selection;
+package nl.rug.editorFrame.informationPanel.selection;
 
 import lombok.extern.slf4j.Slf4j;
+import nl.rug.editorFrame.ComponentFactory;
 import nl.rug.editorFrame.communication.ActionID;
 import nl.rug.editorFrame.communication.ActionPackage;
 import nl.rug.editorFrame.communication.EunomiaColors;
@@ -10,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 @Slf4j
-public class ProofSelectionFactory {
+public class ProofSelectionFactory implements ComponentFactory {
 
     private final JPanel panel;
     private final ActionPackage actionPackage;
@@ -22,12 +23,13 @@ public class ProofSelectionFactory {
         this.actionPackage = actionPackage;
     }
 
-    public void createJComponent(int FACTORY_TOKEN) {
-        switch (FACTORY_TOKEN) {
+    @Override
+    public void createJComponent(int token) {
+        switch (token) {
             case TITLE -> createTitle();
             case EXAMPLE_PROOF -> addSelect("<html><b><i>Example</i></b> Completed Proof</html>",
                     ActionID.LOAD_EXAMPLE_PROOF);
-            default -> throw new IllegalArgumentException("Invalid factory token: " + FACTORY_TOKEN);
+            default -> throw new IllegalArgumentException("Invalid factory token: " + token);
         }
     }
 

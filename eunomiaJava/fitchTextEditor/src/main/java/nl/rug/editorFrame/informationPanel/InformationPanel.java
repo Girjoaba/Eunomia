@@ -2,9 +2,9 @@ package nl.rug.editorFrame.informationPanel;
 
 import nl.rug.editorFrame.communication.ActionInjector;
 import nl.rug.editorFrame.communication.EunomiaColors;
-import nl.rug.editorFrame.informationPanel.tabs.ProofTutorialPanel;
-import nl.rug.editorFrame.informationPanel.tabs.UserManual;
-import nl.rug.editorFrame.informationPanel.tabs.selection.ProofSelectionPanel;
+import nl.rug.editorFrame.informationPanel.tutorial.ProofTutorialPanel;
+import nl.rug.editorFrame.informationPanel.manual.UserManual;
+import nl.rug.editorFrame.informationPanel.selection.ProofSelectionPanel;
 import nl.rug.editorFrame.informationPanel.ui.InformationTabbedUI;
 import org.jetbrains.annotations.NotNull;
 

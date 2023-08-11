@@ -1,4 +1,4 @@
-package nl.rug.editorFrame.informationPanel.tabs.selection;
+package nl.rug.editorFrame.informationPanel.selection;
 
 import nl.rug.editorFrame.communication.ActionInjector;
 import nl.rug.editorFrame.communication.ActionPackage;

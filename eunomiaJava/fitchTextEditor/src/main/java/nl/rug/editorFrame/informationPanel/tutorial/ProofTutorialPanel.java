@@ -1,4 +1,4 @@
-package nl.rug.editorFrame.informationPanel.tabs;
+package nl.rug.editorFrame.informationPanel.tutorial;
 
 import nl.rug.editorFrame.communication.EunomiaColors;
 import org.jetbrains.annotations.Contract;

@@ -54,5 +54,29 @@ public class Main {
                 new LoadPracticeProof(frame, "/selection_proofs/example_proof.txt"));
         actionInjector.addAction(ActionID.LOAD_EXAMPLE_QUANTIFIER_PROOF,
                 new LoadPracticeProof(frame, "/selection_proofs/example_quantifier_proof.txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_MIDTERM_1,
+                new LoadPracticeProof(frame, "/selection_proofs/midterm2022/4.a).txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_MIDTERM_2,
+                new LoadPracticeProof(frame, "/selection_proofs/midterm2022/4.b).txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_MIDTERM_3,
+                new LoadPracticeProof(frame, "/selection_proofs/midterm2022/4.c).txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_MIDTERM_4,
+                new LoadPracticeProof(frame, "/selection_proofs/midterm2022/7bonus.txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_FINAL_1,
+                new LoadPracticeProof(frame, "/selection_proofs/final2022/3.a).txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_FINAL_2,
+                new LoadPracticeProof(frame, "/selection_proofs/final2022/3.b).txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_FINAL_3,
+                new LoadPracticeProof(frame, "/selection_proofs/final2022/3.c).txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_FINAL_4,
+                new LoadPracticeProof(frame, "/selection_proofs/final2022/7bonus.txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_RESIT_1,
+                new LoadPracticeProof(frame, "/selection_proofs/resit2022/3.a).txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_RESIT_2,
+                new LoadPracticeProof(frame, "/selection_proofs/resit2022/3.b).txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_RESIT_3,
+                new LoadPracticeProof(frame, "/selection_proofs/resit2022/3.c).txt"));
+        actionInjector.addAction(ActionID.LOAD_2022_RESIT_4,
+                new LoadPracticeProof(frame, "/selection_proofs/resit2022/7bonus.txt"));
     }
 }

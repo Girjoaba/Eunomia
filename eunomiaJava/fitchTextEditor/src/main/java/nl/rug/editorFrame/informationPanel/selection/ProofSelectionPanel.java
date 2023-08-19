@@ -38,5 +38,17 @@ public class ProofSelectionPanel extends JPanel implements ActionReceiver {
         ProofSelectionFactory factory = new ProofSelectionFactory(this, (ActionPackage) actionInjector);
         factory.createJComponent(ProofSelectionFactory.TITLE);
         factory.createJComponent(ProofSelectionFactory.EXAMPLE_PROOF);
+        factory.createJComponent(ProofSelectionFactory.MIDTERM_2022_1);
+        factory.createJComponent(ProofSelectionFactory.MIDTERM_2022_2);
+        factory.createJComponent(ProofSelectionFactory.MIDTERM_2022_3);
+        factory.createJComponent(ProofSelectionFactory.MIDTERM_2022_4);
+        factory.createJComponent(ProofSelectionFactory.FINAL_2022_1);
+        factory.createJComponent(ProofSelectionFactory.FINAL_2022_2);
+        factory.createJComponent(ProofSelectionFactory.FINAL_2022_3);
+        factory.createJComponent(ProofSelectionFactory.FINAL_2022_4);
+        factory.createJComponent(ProofSelectionFactory.RESIT_2022_1);
+        factory.createJComponent(ProofSelectionFactory.RESIT_2022_2);
+        factory.createJComponent(ProofSelectionFactory.RESIT_2022_3);
+        factory.createJComponent(ProofSelectionFactory.RESIT_2022_4);
     }
 }

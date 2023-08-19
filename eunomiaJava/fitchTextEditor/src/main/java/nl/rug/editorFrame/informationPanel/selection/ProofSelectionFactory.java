@@ -29,6 +29,18 @@ public class ProofSelectionFactory implements ComponentFactory {
      * The token to add the example proof selection component.
      */
     public static final int EXAMPLE_PROOF = 1;
+    public static final int MIDTERM_2022_1 = 2;
+    public static final int MIDTERM_2022_2 = 3;
+    public static final int MIDTERM_2022_3 = 4;
+    public static final int MIDTERM_2022_4 = 5;
+    public static final int FINAL_2022_1 = 6;
+    public static final int FINAL_2022_2 = 7;
+    public static final int FINAL_2022_3 = 8;
+    public static final int FINAL_2022_4 = 9;
+    public static final int RESIT_2022_1 = 10;
+    public static final int RESIT_2022_2 = 11;
+    public static final int RESIT_2022_3 = 12;
+    public static final int RESIT_2022_4 = 13;
 
     /**
      * The proof selection factory will create components and add them to the given panel.
@@ -47,6 +59,30 @@ public class ProofSelectionFactory implements ComponentFactory {
             case TITLE -> createTitle();
             case EXAMPLE_PROOF -> addSelect("<html><b><i>Example</i></b> Completed Proof</html>",
                     ActionID.LOAD_EXAMPLE_PROOF);
+            case MIDTERM_2022_1 -> addSelect("<html><b><i>Midterm 2022</i></b> Question 4.a)</html>",
+                    ActionID.LOAD_2022_MIDTERM_1);
+            case MIDTERM_2022_2 -> addSelect("<html><b><i>Midterm 2022</i></b> Question 4.b)</html>",
+                    ActionID.LOAD_2022_MIDTERM_2);
+            case MIDTERM_2022_3 -> addSelect("<html><b><i>Midterm 2022</i></b> Question 4.c)</html>",
+                    ActionID.LOAD_2022_MIDTERM_3);
+            case MIDTERM_2022_4 -> addSelect("<html><b><i>Midterm 2022</i></b> Question 7 Bonus</html>",
+                    ActionID.LOAD_2022_MIDTERM_4);
+            case FINAL_2022_1 -> addSelect("<html><b><i>Final 2022</i></b> Question 3.a)</html>",
+                    ActionID.LOAD_2022_FINAL_1);
+            case FINAL_2022_2 -> addSelect("<html><b><i>Final 2022</i></b> Question 3.b)</html>",
+                    ActionID.LOAD_2022_FINAL_2);
+            case FINAL_2022_3 -> addSelect("<html><b><i>Final 2022</i></b> Question 3.c)</html>",
+                    ActionID.LOAD_2022_FINAL_3);
+            case FINAL_2022_4 -> addSelect("<html><b><i>Final 2022</i></b> Question 7 Bonus</html>",
+                    ActionID.LOAD_2022_FINAL_4);
+            case RESIT_2022_1 -> addSelect("<html><b><i>Resit 2022</i></b> Question 3.a)</html>",
+                    ActionID.LOAD_2022_RESIT_1);
+            case RESIT_2022_2 -> addSelect("<html><b><i>Resit 2022</i></b> Question 3.b)</html>",
+                    ActionID.LOAD_2022_RESIT_2);
+            case RESIT_2022_3 -> addSelect("<html><b><i>Resit 2022</i></b> Question 3.c)</html>",
+                    ActionID.LOAD_2022_RESIT_3);
+            case RESIT_2022_4 -> addSelect("<html><b><i>Resit 2022</i></b> Question 7 Bonus</html>",
+                    ActionID.LOAD_2022_RESIT_4);
             default -> throw new IllegalArgumentException("Invalid factory token: " + token);
         }
     }

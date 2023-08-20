@@ -29,18 +29,71 @@ public class ProofSelectionFactory implements ComponentFactory {
      * The token to add the example proof selection component.
      */
     public static final int EXAMPLE_PROOF = 1;
+
+    /**
+     * Token for the first exercise of the midterm 2022.
+     */
     public static final int MIDTERM_2022_1 = 2;
+
+    /**
+     * Token for the second exercise of the midterm 2022.
+     */
     public static final int MIDTERM_2022_2 = 3;
+
+    /**
+     * Token for the third exercise of the midterm 2022.
+     */
     public static final int MIDTERM_2022_3 = 4;
+
+    /**
+     * Token for the bonus exercise of the midterm 2022.
+     */
     public static final int MIDTERM_2022_4 = 5;
+
+    /**
+     * Token for the first exercise of the final 2022.
+     */
     public static final int FINAL_2022_1 = 6;
+
+    /**
+     * Token for the second exercise of the final 2022.
+     */
     public static final int FINAL_2022_2 = 7;
+
+    /**
+     * Token for the third exercise of the final 2022.
+     */
     public static final int FINAL_2022_3 = 8;
+
+    /**
+     * Token for the bonus exercise of the final 2022.
+     */
     public static final int FINAL_2022_4 = 9;
+
+    /**
+     * Token for the first exercise of the resit 2022.
+     */
     public static final int RESIT_2022_1 = 10;
+
+    /**
+     * Token for the second exercise of the resit 2022.
+     */
     public static final int RESIT_2022_2 = 11;
+
+    /**
+     * Token for the third exercise of the resit 2022.
+     */
     public static final int RESIT_2022_3 = 12;
+
+    /**
+     * Token for the bonus exercise of the resit 2022.
+     */
     public static final int RESIT_2022_4 = 13;
+
+    /**
+     * Token for an empty separator.
+     */
+    public static final int EMPTY_SEPARATOR = 14;
 
     /**
      * The proof selection factory will create components and add them to the given panel.
@@ -83,6 +136,7 @@ public class ProofSelectionFactory implements ComponentFactory {
                     ActionID.LOAD_2022_RESIT_3);
             case RESIT_2022_4 -> addSelect("<html><b><i>Resit 2022</i></b> Question 7 Bonus</html>",
                     ActionID.LOAD_2022_RESIT_4);
+            case EMPTY_SEPARATOR -> addEmptySeparator();
             default -> throw new IllegalArgumentException("Invalid factory token: " + token);
         }
     }
@@ -109,6 +163,12 @@ public class ProofSelectionFactory implements ComponentFactory {
         JLabel label = new JLabel(proofName);
         label.setFont(new Font("Arial", Font.PLAIN, 14));
         panel.add(label);
+        panel.add(newline());
+    }
+
+    private void addEmptySeparator() {
+        panel.add(newline());
+        panel.add(new JLabel(" "));
         panel.add(newline());
     }
 

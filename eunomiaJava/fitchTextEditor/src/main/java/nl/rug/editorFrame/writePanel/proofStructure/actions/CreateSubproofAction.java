@@ -38,14 +38,14 @@ public class CreateSubproofAction extends AbstractAction {
     private @NotNull String createSubproof() {
         int indentationLevel = proofWritingPane.getIndentationLevel();
 
-        return "|\t\n" +
+        return "|\t\n" +  // Put one where caret at
 
-                "|\t".repeat(Math.max(0, indentationLevel)) + // Separation part
-                "|----\n" +
+                "|\t".repeat(Math.max(0, indentationLevel)) +
+                "|----\n" +     // Separation bar
 
                 "|\t".repeat(Math.max(0, indentationLevel)) + // Conclusion part
                 "|\t\n" +
-                "|\t".repeat(Math.max(0, indentationLevel)) +
-                "|\t".repeat(Math.max(0, indentationLevel - 1));
+
+                "|\t".repeat(Math.max(0, indentationLevel)); // Breathing space
     }
 }

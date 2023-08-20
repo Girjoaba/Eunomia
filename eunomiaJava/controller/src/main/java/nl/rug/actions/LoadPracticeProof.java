@@ -1,17 +1,19 @@
 package nl.rug.actions;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.rug.editorFrame.ProofTextEditor;
 import nl.rug.utility.StringConverter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Scanner;
 
+@Slf4j
 public class LoadPracticeProof implements ActionListener {
 
     private final ProofTextEditor frame;
@@ -33,19 +35,21 @@ public class LoadPracticeProof implements ActionListener {
             return;
         }
 
-        File file = new File(Objects.requireNonNull(this.getClass().getResource(resourcePath)).getFile());
-        StringBuilder proof = new StringBuilder((int)file.length());
-        Scanner scanner = null;
+//        File file = new File(Objects.requireNonNull(this.getClass().getResourceAsStream(resourcePath)));
+        InputStream is = this.getClass().getResourceAsStream(resourcePath);
+        StringBuilder proof = new StringBuilder();
         try {
-            scanner = new Scanner(file);
-        } catch (FileNotFoundException ex) {
+            assert is != null;
+            try (Reader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                int c = 0;
+                while ((c = reader.read()) != -1) {
+                    proof.append((char) c);
+                }
+            }
+        } catch (IOException ex) {
             frame.setProofText("Something went wrong with loading!");
             return;
         }
-        while(scanner.hasNextLine()) {
-            proof.append(scanner.nextLine()).append(System.lineSeparator());
-        }
-        scanner.close();
 
         frame.setProofText(proof.toString());
     }

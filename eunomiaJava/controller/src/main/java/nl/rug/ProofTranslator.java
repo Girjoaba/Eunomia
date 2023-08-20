@@ -26,6 +26,7 @@ public class ProofTranslator {
         proof = addPremiseKeyword(proof);
         proof = removeFitchBars(proof);
         proof = addLineNumbers(proof);
+        proof = createBoxedConstants(proof);
         log.warn(proof);
         return proof;
     }
@@ -132,4 +133,18 @@ public class ProofTranslator {
         return proof;
     }
 
+    private static @NotNull String createBoxedConstants(@NotNull String proof) {
+        String[] lines = proof.split(END_LINE);
+        StringBuilder sb = new StringBuilder();
+        for (String line : lines) {
+            if (line.contains("[")) {
+                line = line.replace("[", "|");
+            }
+            if (line.contains("]")) {
+                line = line.replace("]", "|");
+            }
+            sb.append(line).append(END_LINE);
+        }
+        return sb.toString();
+    }
 }

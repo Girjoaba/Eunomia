@@ -1,6 +1,6 @@
 package nl.rug.editorFrame.writePanel;
 
-import nl.rug.editorFrame.communication.EunomiaColors;
+import nl.rug.editorFrame.controllerCommunication.EunomiaColors;
 
 import javax.swing.*;
 import java.awt.*;

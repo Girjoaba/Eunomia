@@ -159,7 +159,9 @@ public class ProofManager {
      * @return validity of the reference.
      */
     public Boolean isValidSingleReference(Integer reference) {
-        return lineMap.containsKey(reference) && (lineMap.get(reference).getLevel() <= currentLevel);
+        return lineMap.containsKey(reference)
+                && (lineMap.get(reference).getLevel() <= currentLevel)
+                && (reference < currentLine);
     }
 
     /**
@@ -171,7 +173,9 @@ public class ProofManager {
     public Boolean isValidRangeReference(Integer startReference, Integer endReference) {
         return  lineMap.containsKey(startReference) && lineMap.containsKey(endReference)
                 && (lineMap.get(startReference).getLevel().equals(lineMap.get(endReference).getLevel()))
-                && (lineMap.get(startReference).getLevel() - 1 == currentLevel);
+                && (lineMap.get(startReference).getLevel() - 1 == currentLevel)
+                && (startReference < endReference)
+                && (endReference < currentLine);
     }
 
     /**

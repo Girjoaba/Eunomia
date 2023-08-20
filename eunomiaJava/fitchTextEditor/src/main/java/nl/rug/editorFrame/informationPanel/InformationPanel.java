@@ -1,9 +1,11 @@
 package nl.rug.editorFrame.informationPanel;
 
-import nl.rug.editorFrame.communication.EunomiaColors;
-import nl.rug.editorFrame.informationPanel.tabs.HelpPanel;
-import nl.rug.editorFrame.informationPanel.tabs.UserManual;
-import nl.rug.editorFrame.informationPanel.tabs.ProofSelectionPanel;
+import nl.rug.editorFrame.ActionReceiver;
+import nl.rug.editorFrame.controllerCommunication.ActionInjector;
+import nl.rug.editorFrame.controllerCommunication.EunomiaColors;
+import nl.rug.editorFrame.informationPanel.tutorial.ProofTutorialPanel;
+import nl.rug.editorFrame.informationPanel.manual.UserManual;
+import nl.rug.editorFrame.informationPanel.selection.ProofSelectionPanel;
 import nl.rug.editorFrame.informationPanel.ui.InformationTabbedUI;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +16,11 @@ import java.net.URL;
 /**
  * The main panel component for the displaying information to the user.
  */
-public class InformationPanel extends JPanel {
+public class InformationPanel extends JPanel implements ActionReceiver {
+
+    private UserManual userManual;
+    private ProofTutorialPanel tutorialPanel;
+    private ProofSelectionPanel proofSelectionPanel;
 
     /**
      * Initializes the information panel.
@@ -29,6 +35,45 @@ public class InformationPanel extends JPanel {
         setMinimumSize(new Dimension(0, 0));
         setBackground(EunomiaColors.BACKGROUND_SECOND);
         addTabbedPane();
+    }
+
+    @Override
+    public void setActions(ActionInjector actionInjector) {
+        this.proofSelectionPanel.setActions(actionInjector);
+    }
+
+    private void addTabbedPane() {
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
+
+        tabbedPane.setPreferredSize(new Dimension(2000, 1000));
+        tabbedPane.setBackground(EunomiaColors.ACCENT_MAIN);
+        tabbedPane.setForeground(Color.BLACK);
+        tabbedPane.setUI(new InformationTabbedUI());
+
+        addUserManualTab(tabbedPane);
+        addTutorialTab(tabbedPane);
+        addSelectionTab(tabbedPane);
+
+        add(tabbedPane);
+        tabbedPane.setSelectedIndex(0);
+    }
+
+    private void addUserManualTab(@NotNull JTabbedPane tabbedPane) {
+        userManual = new UserManual();
+        tabbedPane.addTab("", userManual);
+        addIconAtIndex(tabbedPane, "icons/keyboard2_icon.png", 0);
+    }
+
+    private void addTutorialTab(@NotNull JTabbedPane tabbedPane) {
+        tutorialPanel = new ProofTutorialPanel();
+        tabbedPane.addTab("", tutorialPanel);
+        addIconAtIndex(tabbedPane, "icons/book_icon.png", 1);
+    }
+
+    private void addSelectionTab(@NotNull JTabbedPane tabbedPane) {
+        proofSelectionPanel = new ProofSelectionPanel();
+        tabbedPane.addTab("", proofSelectionPanel);
+        addIconAtIndex(tabbedPane, "icons/pencil_icon.png", 2);
     }
 
     private void addIconAtIndex(@NotNull JTabbedPane tabbedPane, String resourcePath, int index) {
@@ -48,26 +93,4 @@ public class InformationPanel extends JPanel {
 
         tabbedPane.setTabComponentAt(index, iconLabel);  // tab index, jLabel
     }
-
-    private void addTabbedPane() {
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
-
-        tabbedPane.setPreferredSize(new Dimension(2000, 1000));
-        tabbedPane.setBackground(EunomiaColors.ACCENT_MAIN);
-        tabbedPane.setForeground(Color.BLACK);
-        tabbedPane.setUI(new InformationTabbedUI());
-
-        tabbedPane.addTab("", new UserManual());
-        tabbedPane.addTab("", new HelpPanel());
-        tabbedPane.addTab("", new ProofSelectionPanel());
-
-        addIconAtIndex(tabbedPane, "icons/keyboard2_icon.png", 0);
-        addIconAtIndex(tabbedPane, "icons/book_icon.png", 1);
-        addIconAtIndex(tabbedPane, "icons/pencil_icon.png", 2);
-
-        add(tabbedPane);
-
-        tabbedPane.setSelectedIndex(0);
-    }
-
 }

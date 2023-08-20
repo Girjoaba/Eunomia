@@ -1,6 +1,6 @@
 package nl.rug.editorFrame;
 
-import nl.rug.editorFrame.communication.ActionInjector;
+import nl.rug.editorFrame.controllerCommunication.ActionInjector;
 
 /**
  * Main Interface to make the View-Controller Connection.
@@ -32,7 +32,7 @@ public interface ProofTextEditor {
      * @param actionInjector the action injector containing all the actions required by the View and created in the
      *                       Controller.
      */
-    void importActionPackage(ActionInjector actionInjector);
+    void importControllerActions(ActionInjector actionInjector);
 
     /**
      * Sets the proof text in the View.

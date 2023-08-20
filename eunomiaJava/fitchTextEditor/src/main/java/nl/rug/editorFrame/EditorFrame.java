@@ -100,6 +100,6 @@ public class EditorFrame extends javax.swing.JFrame implements ProofTextEditor {
     }
 
     private Image getIcon() {
-        return new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/book_icon.png"))).getImage();
+        return new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/eunomia_logo.png"))).getImage();
     }
 }

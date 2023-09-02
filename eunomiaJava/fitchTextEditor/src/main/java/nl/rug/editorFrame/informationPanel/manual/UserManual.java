@@ -34,5 +34,6 @@ public class UserManual extends JPanel {
         factory.createJComponent(ManualFactory.GUIDE);
         factory.createJComponent(ManualFactory.BOXED_CONSTANT);
         factory.createJComponent(ManualFactory.KEYBOARD_SHORTCUTS);
+        factory.createJComponent(ManualFactory.WARNING);
     }
 }

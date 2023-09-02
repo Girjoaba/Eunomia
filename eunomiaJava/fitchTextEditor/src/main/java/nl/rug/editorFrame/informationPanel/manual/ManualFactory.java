@@ -37,6 +37,11 @@ public class ManualFactory implements ComponentFactory {
     public static final int KEYBOARD_SHORTCUTS = 3;
 
     /**
+     * The token for the warning component.
+     */
+    public static final int WARNING = 4;
+
+    /**
      * The manual factory will create components and add them to the given panel.
      * @param panel the panel to which the components will be added.
      */
@@ -51,6 +56,7 @@ public class ManualFactory implements ComponentFactory {
             case GUIDE -> addProofGuide();
             case BOXED_CONSTANT -> addBoxedConstantExplanation();
             case KEYBOARD_SHORTCUTS -> addKeyboardShortcuts();
+            case WARNING -> addWarning();
             default -> throw new IllegalArgumentException("Invalid factory token: " + token);
         }
     }
@@ -68,16 +74,15 @@ public class ManualFactory implements ComponentFactory {
         proofIndications.setForeground(EunomiaColors.FOREGROUND_MAIN);
         proofIndications.setText("""
                 <html>
-                The Fitch bars will generate automatically. <br>
-                If the structure gets broken delete the extraneous parts. <br> <br>
+                The Fitch bars generate automatically. <br> <br>
                 
-                To add a subproof press: <b>ctrl + P</b>. <br>
-                To finish a subproof just delete the Fitch bar at the last level. <br> <br>
+                Press <i><b>ctrl + P</b></i> to add a subproof. <br> <br>
                 
-                <b>Note:</b> Each proof line is constructed from the main sentence + justification.<br>
-                The premises do not require any justification. <br>
+                Make sure you write both the sentence and the justification! <br>
+                Premises do not require any justification. <br>
                 </html>""");
         panel.add(proofIndications);
+        panel.add(emptySpace());
         panel.add(emptySpace());
         panel.add(emptySpace());
     }
@@ -133,6 +138,9 @@ public class ManualFactory implements ComponentFactory {
         panel.add(emptySpace());
         panel.add(new ManualFactory.ShortcutLabel("Boxed Constant", "[a]",
                 "ctrl + [ &nbsp|&nbsp ctrl + ]"));
+        panel.add(emptySpace());
+        panel.add(emptySpace());
+        panel.add(emptySpace());
     }
 
     private void addTitle() {
@@ -159,5 +167,28 @@ public class ManualFactory implements ComponentFactory {
             this.setFont(new Font(EunomiaColors.MAIN_FONT, Font.PLAIN, 14));
             this.setForeground(EunomiaColors.FOREGROUND_MAIN);
         }
+    }
+
+    private void addWarning() {
+        JLabel warning = new JLabel("Warning");
+        warning.setFont(new Font(EunomiaColors.MAIN_FONT, Font.BOLD, 16));
+        warning.setForeground(EunomiaColors.FOREGROUND_MAIN);
+
+        panel.add(warning);
+        panel.add(emptySpace());
+
+        JLabel warningExplanation = new JLabel();
+        warningExplanation.setFont(new Font(EunomiaColors.MAIN_FONT, Font.PLAIN, 14));
+        warningExplanation.setForeground(EunomiaColors.FOREGROUND_MAIN);
+        warningExplanation.setText("""
+                <html>
+                While the application was thoroughly tested, <br>
+                a few error messages still might be misrepresentative. <br> <br>
+                Keep an analytic mind when solving proofs. Good luck! <br>
+                </html>""");
+        panel.add(warningExplanation);
+        panel.add(emptySpace());
+        panel.add(emptySpace());
+        panel.add(emptySpace());
     }
 }

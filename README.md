@@ -14,6 +14,7 @@ The proof must be written in Fitch Style and the application returns relevant er
 - A tab which describes how to correctly line each logical rule
 - A tab providing a few practice proofs
 - A saving/loading system
+- A design document describing the technical aspects of the application in the "Documentation" folder
 
 ---
 

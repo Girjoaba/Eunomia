@@ -1,20 +1,20 @@
-# Eunomia (Beta 0.2)
+# Eunomia 1.0
 
 ## Project Description
 Eunomia is an educational tool for analyzing the correctness of First Order Logic (FOL) proofs. 
 
-The proof must be written in Fitch Style and returns error messages relevant to the mistake that was made.
+The proof must be written in Fitch Style and the application returns relevant error messages.
 
 ---
 
-## Full Release Roadmap
+## List of Features
 
-- [ ] User Acceptance Test (UAT)
-- [ ] Upload Design Document
-- [x] Feature: Add sample practice proofs
-- [x] Add App Icon
-- [ ] Finesse UI: Shortcut for compile, better saving, any serious things coming up during (UAT)
-- [ ] Improve Accuracy of Error Messages (UAT dependent)
+- A proof editor that auto generates proof bars
+- A compiler that identifies the line where a mistake was made and provides an error message
+- A tab which describes how to correctly line each logical rule
+- A tab providing a few practice proofs
+- A saving/loading system
+- A design document describing the technical aspects of the application in the "Documentation" folder
 
 ---
 

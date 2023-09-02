@@ -7,6 +7,12 @@ The proof must be written in Fitch Style and the application returns relevant er
 
 ---
 
+## Installation Instructions
+- Make sure you have [jdk 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) installed.
+- Download the _Eunomia.jar_ file and run the application. <br> **Note:** Your operating system might not trust the unverified author (aka me), in that case you need to bypass the warning.
+
+---
+
 ## List of Features
 
 - A proof editor that auto generates proof bars

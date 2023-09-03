@@ -10,8 +10,8 @@ import java.util.Set;
 public class SyntaxErrors {
 
     private static final String SYNTAX_ERROR_MESSAGE = """
-            
             The proof is not complete!
+            
             Make sure all formulas are well written and all the justifications are inserted correctly.""";
 
     private final Map<Integer, String> syntaxErrors;
@@ -37,8 +37,8 @@ public class SyntaxErrors {
      * @param info the information about the error.
      */
     public void addError(Integer line, String info) {
-        System.err.println("Parsed text line: " + line + ":  " + info + "\n" + SYNTAX_ERROR_MESSAGE);
-        syntaxErrors.put(line, "Parsed text line: " + line + "\n" + SYNTAX_ERROR_MESSAGE);
+        System.err.println("Parsed text line: " + line + ":  " + info + "\n");
+        syntaxErrors.put(line, SYNTAX_ERROR_MESSAGE);
     }
 
     /**

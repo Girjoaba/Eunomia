@@ -1,20 +1,26 @@
-# Eunomia (Beta 0.2)
+# Eunomia 1.0.1
 
 ## Project Description
 Eunomia is an educational tool for analyzing the correctness of First Order Logic (FOL) proofs. 
 
-The proof must be written in Fitch Style and returns error messages relevant to the mistake that was made.
+The proof must be written in Fitch Style and the application returns relevant error messages.
 
 ---
 
-## Full Release Roadmap
+## Installation Instructions
+- Make sure you have [jdk 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) installed.
+- Download the _Eunomia.jar_ file and run the application. <br> **Note:** Your operating system might not trust the unverified author (aka me), in that case you need to bypass the warning.
 
-- [ ] User Acceptance Test (UAT)
-- [ ] Upload Design Document
-- [x] Feature: Add sample practice proofs
-- [x] Add App Icon
-- [ ] Finesse UI: Shortcut for compile, better saving, any serious things coming up during (UAT)
-- [ ] Improve Accuracy of Error Messages (UAT dependent)
+---
+
+## List of Features
+
+- A proof editor that auto generates proof bars
+- A compiler that identifies the line where a mistake was made and provides an error message
+- A tab which describes how to correctly line each logical rule
+- A tab providing a few practice proofs
+- A saving/loading system
+- A design document describing the technical aspects of the application in the "Documentation" folder
 
 ---
 

@@ -118,26 +118,32 @@ public class ManualFactory implements ComponentFactory {
         panel.add(shortcutsTitle);
         panel.add(emptySpace());
 
-        panel.add(new ManualFactory.ShortcutLabel("Negation", "¬", "ctrl + N"));
+        panel.add(new ManualFactory.ShortcutLabel("Negation", "¬",
+                "ctrl + N"));
         panel.add(emptySpace());
         panel.add(new ManualFactory.ShortcutLabel("Conjunction", "∧",
-                "ctrl + 7 &nbsp|&nbsp ctrl + Q"));
+                "ctrl + 7", "ctrl + Q"));
         panel.add(emptySpace());
         panel.add(new ManualFactory.ShortcutLabel("Disjunction", "∨",
-                "ctrl + \\ &nbsp|&nbsp ctrl + W"));
+                "ctrl + \\", "ctrl + W"));
         panel.add(emptySpace());
-        panel.add(new ManualFactory.ShortcutLabel("Implication", "→", "ctrl + I"));
+        panel.add(new ManualFactory.ShortcutLabel("Implication", "→",
+                "ctrl + I"));
         panel.add(emptySpace());
-        panel.add(new ManualFactory.ShortcutLabel("Biconditional", "↔", "ctrl + B"));
+        panel.add(new ManualFactory.ShortcutLabel("Biconditional", "↔",
+                "ctrl + B"));
         panel.add(emptySpace());
-        panel.add(new ManualFactory.ShortcutLabel("Contradiction", "⟂", "ctrl + T"));
+        panel.add(new ManualFactory.ShortcutLabel("Contradiction", "⟂",
+                "ctrl + T"));
         panel.add(emptySpace());
-        panel.add(new ManualFactory.ShortcutLabel("Universal Quantifier", "∀", "ctrl + U"));
+        panel.add(new ManualFactory.ShortcutLabel("Universal Quantifier", "∀",
+                "ctrl + U"));
         panel.add(emptySpace());
-        panel.add(new ManualFactory.ShortcutLabel("Existential Quantifier", "∃", "ctrl + E"));
+        panel.add(new ManualFactory.ShortcutLabel("Existential Quantifier", "∃",
+                "ctrl + E"));
         panel.add(emptySpace());
         panel.add(new ManualFactory.ShortcutLabel("Boxed Constant", "[a]",
-                "ctrl + [ &nbsp|&nbsp ctrl + ]"));
+                "ctrl + [", "cmd/apple + ["));
         panel.add(emptySpace());
         panel.add(emptySpace());
         panel.add(emptySpace());
@@ -163,7 +169,27 @@ public class ManualFactory implements ComponentFactory {
      */
     private static class ShortcutLabel extends JLabel {
         protected ShortcutLabel(String name, String symbol, String shortcut) {
-            super("<html>" + name + ": <b>" + symbol + "</b> &nbsp - &nbsp <b>" + shortcut + "</b> </html>");
+            super();
+            String shortcutText = "<html>" + name + " " + symbol + ": " +
+                    "&nbsp&nbsp" +
+                    "<b>" + shortcut + "</b> </html>";
+
+            this.setText(shortcutText);
+            this.setFont(new Font(EunomiaColors.MAIN_FONT, Font.PLAIN, 14));
+            this.setForeground(EunomiaColors.FOREGROUND_MAIN);
+        }
+
+        protected ShortcutLabel(String name, String symbol, String shortcut, String additionalShortcut) {
+            super();
+            StringBuilder shortcutText = new StringBuilder();
+            shortcutText.append("<html>" + name + " " + symbol + ": ");
+
+            shortcutText.append("&nbsp&nbsp");
+            shortcutText.append("<b>" + shortcut + "</b> (on Windows) or ");
+            shortcutText.append("<b>" + additionalShortcut + "</b> (on Mac)</html>");
+
+
+            this.setText(shortcutText.toString());
             this.setFont(new Font(EunomiaColors.MAIN_FONT, Font.PLAIN, 14));
             this.setForeground(EunomiaColors.FOREGROUND_MAIN);
         }

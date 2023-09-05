@@ -41,6 +41,11 @@ public class SaveAction implements ActionListener {
 
         int result = fileChooser.showSaveDialog(null);
 
+        // Make sure .eun is concatenated to the file name
+        if (!fileChooser.getSelectedFile().getName().endsWith(".eun")) {
+            fileChooser.setSelectedFile(new File(fileChooser.getSelectedFile() + ".eun"));
+        }
+
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
 

@@ -864,7 +864,17 @@ public class ProofEvaluatorVisitor extends ProofGrammarBaseVisitor {
 
     @Override
     public String visitFunction(ProofGrammarParser.@NotNull FunctionContext ctx) {
-        return ctx.VARIABLE().getText();
+        return (String) visit(ctx.arguments());
+    }
+
+    @Override
+    public String visitArguments(ProofGrammarParser.@NotNull ArgumentsContext ctx) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ctx.getChild(0).getText());
+        for(int i = 0; i < ctx.getChildCount(); i++) {
+            sb.append(ctx.getChild(i).getText());
+        }
+        return sb.toString();
     }
 
     @Override

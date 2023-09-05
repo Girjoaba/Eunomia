@@ -315,4 +315,10 @@ public interface ProofGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunction(ProofGrammarParser.FunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProofGrammarParser#arguments}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArguments(ProofGrammarParser.ArgumentsContext ctx);
 }

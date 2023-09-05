@@ -121,7 +121,8 @@ atom
 
 identifierAtom : CONSTANT | VARIABLE ;
 
-function: PROPOSITION '(' (VARIABLE | CONSTANT) ')' ;
+function: PROPOSITION '(' arguments ')' ;
+arguments : (VARIABLE | CONSTANT) (',' (VARIABLE | CONSTANT))* ;
 
 NEGATION    : '¬' ;
 CONTRADICTION : '⟂' ;

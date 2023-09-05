@@ -525,4 +525,14 @@ public interface ProofGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunction(ProofGrammarParser.FunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProofGrammarParser#arguments}.
+	 * @param ctx the parse tree
+	 */
+	void enterArguments(ProofGrammarParser.ArgumentsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProofGrammarParser#arguments}.
+	 * @param ctx the parse tree
+	 */
+	void exitArguments(ProofGrammarParser.ArgumentsContext ctx);
 }

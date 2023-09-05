@@ -44,10 +44,9 @@ public class ProofGrammarParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'.'", "'('", "')'", "'Reit: '", "'Intro: '", "','", "'Intro'", 
-			"'Elim: '", "'-'", "'|'", null, null, null, "'\\u00C2\\u00AC'", "'\\u00E2\\u0178\\u201A'", 
-			"'\\u00E2\\u02C6\\u00A7'", "'\\u00E2\\u02C6\\u00A8'", "'='", "'\\u00E2\\u2020\\u2019'", 
-			"'\\u00E2\\u2020\\u201D'", "'\\u00E2\\u02C6\\u20AC'", "'\\u00E2\\u02C6\\u0192'", 
-			"'premise'", "'assume'", "'qed'"
+			"'Elim: '", "'-'", "'|'", null, null, null, "'\\u00AC'", "'\\u27C2'", 
+			"'\\u2227'", "'\\u2228'", "'='", "'\\u2192'", "'\\u2194'", "'\\u2200'", 
+			"'\\u2203'", "'premise'", "'assume'", "'qed'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();

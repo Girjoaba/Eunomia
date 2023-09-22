@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
@@ -21,6 +22,9 @@ public class EmptyPremiseTest {
         EunomiaCompiler compiler = new EunomiaCompiler(manager);
 
         testInput = ProofTranslator.translate(testInput);
+
+        assertEquals(StringConverter.getStringFromTXT("empty_premise.txt"), testInput);
+
         compiler.compile(testInput);
         assertTrue(manager.referenceSet().stream().allMatch(manager::isCorrect));
         assertTrue(manager.getSyntaxErorrs().isEmpty());

@@ -142,6 +142,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitProof(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitProof(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ProofContext proof() throws RecognitionException {
@@ -243,6 +248,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitSubproof(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitSubproof(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final SubproofContext subproof() throws RecognitionException {
@@ -321,6 +331,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitAssume(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitAssume(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AssumeContext assume() throws RecognitionException {
@@ -381,6 +396,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitQed(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitQed(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final QedContext qed() throws RecognitionException {
@@ -428,6 +448,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitPremiseLine(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitPremiseLine(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -477,6 +502,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitProofLine(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitProofLine(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ProofLineContext proofLine() throws RecognitionException {
@@ -524,6 +554,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitConclusionLine(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitConclusionLine(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -579,6 +614,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitConstantIntroLine(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitConstantIntroLine(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ConstantIntroLineContext constantIntroLine() throws RecognitionException {
@@ -633,6 +673,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitProofLineNum(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitProofLineNum(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -691,6 +736,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitPremiseSentenceInfer(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitPremiseSentenceInfer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class PremiseContradictionInferContext extends PremiseInferenceContext {
@@ -711,6 +761,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitPremiseContradictionInfer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitPremiseContradictionInfer(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -819,6 +874,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitContradictionInfer(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitContradictionInfer(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class SentenceInferContext extends InferenceContext {
@@ -839,6 +899,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitSentenceInfer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitSentenceInfer(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -942,6 +1007,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitContradiction(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitContradiction(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ContradictionContext contradiction() throws RecognitionException {
@@ -1008,6 +1078,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitNormalSentence(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitNormalSentence(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ParenthesesSentenceContext extends SentenceContext {
@@ -1022,6 +1097,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitParenthesesSentence(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitParenthesesSentence(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1208,6 +1288,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitPremise(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitPremise(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final PremiseContext premise() throws RecognitionException {
@@ -1257,6 +1342,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitReitJust(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitReitJust(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ElimJustContext extends JustificationContext {
@@ -1272,6 +1362,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitElimJust(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitElimJust(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IntroJustContext extends JustificationContext {
@@ -1286,6 +1381,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitIntroJust(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitIntroJust(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1350,6 +1450,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitReiteration(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitReiteration(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ReiterationContext reiteration() throws RecognitionException {
@@ -1402,6 +1507,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitDisjunctionIntro(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitDisjunctionIntro(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExistsIntroContext extends IntroductionContext {
@@ -1418,6 +1528,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitExistsIntro(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitExistsIntro(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IdentityIntroContext extends IntroductionContext {
@@ -1430,6 +1545,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitIdentityIntro(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitIdentityIntro(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1450,6 +1570,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitContradictionIntro(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitContradictionIntro(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ImplicationIntroContext extends IntroductionContext {
@@ -1466,6 +1591,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitImplicationIntro(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitImplicationIntro(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ForallIntroContext extends IntroductionContext {
@@ -1481,6 +1611,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitForallIntro(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitForallIntro(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1501,6 +1636,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitBiconditionalIntro(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitBiconditionalIntro(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ConjunctionIntroContext extends IntroductionContext {
@@ -1520,6 +1660,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitConjunctionIntro(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitConjunctionIntro(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class NegationIntroContext extends IntroductionContext {
@@ -1535,6 +1680,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitNegationIntro(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitNegationIntro(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1708,6 +1858,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitImplicationElim(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitImplicationElim(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ForallElimContext extends EliminationContext {
@@ -1723,6 +1878,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitForallElim(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitForallElim(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1740,6 +1900,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitContradictionElim(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitContradictionElim(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class NegationElimContext extends EliminationContext {
@@ -1755,6 +1920,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitNegationElim(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitNegationElim(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1778,6 +1948,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitDisjunctionElim(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitDisjunctionElim(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExistsElimContext extends EliminationContext {
@@ -1796,6 +1971,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitExistsElim(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitExistsElim(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1816,6 +1996,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitIdentityElim(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitIdentityElim(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ConjunctionElimContext extends EliminationContext {
@@ -1831,6 +2016,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitConjunctionElim(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitConjunctionElim(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1850,6 +2040,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitBiconditionalElim(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitBiconditionalElim(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2022,6 +2217,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitSingleReference(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitSingleReference(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final SingleReferenceContext singleReference() throws RecognitionException {
@@ -2062,6 +2262,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitRangeReference(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitRangeReference(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2104,6 +2309,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitBoxedConstant(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitBoxedConstant(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2156,6 +2366,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitPropositionAtom(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitPropositionAtom(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IdentityAtomContext extends AtomContext {
@@ -2174,6 +2389,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitIdentityAtom(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitIdentityAtom(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2236,6 +2456,11 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitIdentifierAtom(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitIdentifierAtom(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final IdentifierAtomContext identifierAtom() throws RecognitionException {
@@ -2284,6 +2509,11 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitFunction(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitFunction(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 

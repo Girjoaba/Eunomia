@@ -21,7 +21,7 @@ public class ProofGrammarParser extends Parser {
 		T__9=10, VARIABLE=11, CONSTANT=12, PROPOSITION=13, NEGATION=14, CONTRADICTION=15, 
 		CONJUNCTION=16, DISJUNCTION=17, IDENTITY=18, IMPLICATION=19, BICONDITIONAL=20, 
 		FORALL=21, EXISTS=22, PREMISE=23, ASSUME=24, QED=25, INT=26, NEWLINE=27, 
-		WS=28, ATOM=29;
+		WS=28;
 	public static final int
 		RULE_proof = 0, RULE_subproof = 1, RULE_assume = 2, RULE_qed = 3, RULE_premiseLine = 4, 
 		RULE_proofLine = 5, RULE_conclusionLine = 6, RULE_constantIntroLine = 7, 
@@ -55,7 +55,7 @@ public class ProofGrammarParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, "VARIABLE", 
 			"CONSTANT", "PROPOSITION", "NEGATION", "CONTRADICTION", "CONJUNCTION", 
 			"DISJUNCTION", "IDENTITY", "IMPLICATION", "BICONDITIONAL", "FORALL", 
-			"EXISTS", "PREMISE", "ASSUME", "QED", "INT", "NEWLINE", "WS", "ATOM"
+			"EXISTS", "PREMISE", "ASSUME", "QED", "INT", "NEWLINE", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -111,9 +111,6 @@ public class ProofGrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProofContext extends ParserRuleContext {
-		public ConclusionLineContext conclusionLine() {
-			return getRuleContext(ConclusionLineContext.class,0);
-		}
 		public TerminalNode EOF() { return getToken(ProofGrammarParser.EOF, 0); }
 		public List<PremiseLineContext> premiseLine() {
 			return getRuleContexts(PremiseLineContext.class);
@@ -145,16 +142,12 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitProof(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitProof(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ProofContext proof() throws RecognitionException {
 		ProofContext _localctx = new ProofContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_proof);
+		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
@@ -177,37 +170,33 @@ public class ProofGrammarParser extends Parser {
 			}
 			setState(58);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
+			_la = _input.LA(1);
+			while (_la==ASSUME || _la==INT) {
+				{
+				setState(56);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case INT:
 					{
-					setState(56);
-					_errHandler.sync(this);
-					switch (_input.LA(1)) {
-					case INT:
-						{
-						setState(54);
-						proofLine();
-						}
-						break;
-					case ASSUME:
-						{
-						setState(55);
-						subproof();
-						}
-						break;
-					default:
-						throw new NoViableAltException(this);
+					setState(54);
+					proofLine();
 					}
-					} 
+					break;
+				case ASSUME:
+					{
+					setState(55);
+					subproof();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
 				}
 				setState(60);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
+				_la = _input.LA(1);
 			}
 			setState(61);
-			conclusionLine();
-			setState(62);
 			match(EOF);
 			}
 		}
@@ -254,11 +243,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitSubproof(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitSubproof(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final SubproofContext subproof() throws RecognitionException {
@@ -268,26 +252,26 @@ public class ProofGrammarParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(64);
+			setState(63);
 			assume();
-			setState(69);
+			setState(68);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
-					setState(67);
+					setState(66);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
 					case ASSUME:
 						{
-						setState(65);
+						setState(64);
 						subproof();
 						}
 						break;
 					case INT:
 						{
-						setState(66);
+						setState(65);
 						proofLine();
 						}
 						break;
@@ -296,11 +280,11 @@ public class ProofGrammarParser extends Parser {
 					}
 					} 
 				}
-				setState(71);
+				setState(70);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			}
-			setState(72);
+			setState(71);
 			qed();
 			}
 		}
@@ -337,11 +321,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitAssume(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitAssume(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AssumeContext assume() throws RecognitionException {
@@ -350,22 +329,22 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(74);
+			setState(73);
 			match(ASSUME);
-			setState(75);
+			setState(74);
 			match(NEWLINE);
-			setState(78);
+			setState(77);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				{
-				setState(76);
+				setState(75);
 				premiseLine();
 				}
 				break;
 			case 2:
 				{
-				setState(77);
+				setState(76);
 				constantIntroLine();
 				}
 				break;
@@ -402,11 +381,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitQed(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitQed(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final QedContext qed() throws RecognitionException {
@@ -415,11 +389,11 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(80);
+			setState(79);
 			conclusionLine();
-			setState(81);
+			setState(80);
 			match(QED);
-			setState(82);
+			setState(81);
 			match(NEWLINE);
 			}
 		}
@@ -455,11 +429,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitPremiseLine(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitPremiseLine(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final PremiseLineContext premiseLine() throws RecognitionException {
@@ -468,11 +437,11 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(84);
+			setState(83);
 			proofLineNum();
-			setState(85);
+			setState(84);
 			premiseInference();
-			setState(86);
+			setState(85);
 			match(NEWLINE);
 			}
 		}
@@ -508,11 +477,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitProofLine(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitProofLine(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ProofLineContext proofLine() throws RecognitionException {
@@ -521,11 +485,11 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(88);
+			setState(87);
 			proofLineNum();
-			setState(89);
+			setState(88);
 			inference();
-			setState(90);
+			setState(89);
 			match(NEWLINE);
 			}
 		}
@@ -561,11 +525,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitConclusionLine(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitConclusionLine(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ConclusionLineContext conclusionLine() throws RecognitionException {
@@ -574,11 +533,11 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(92);
+			setState(91);
 			proofLineNum();
-			setState(93);
+			setState(92);
 			inference();
-			setState(94);
+			setState(93);
 			match(NEWLINE);
 			}
 		}
@@ -620,11 +579,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitConstantIntroLine(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitConstantIntroLine(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ConstantIntroLineContext constantIntroLine() throws RecognitionException {
@@ -634,23 +588,23 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(96);
+			setState(95);
 			proofLineNum();
-			setState(97);
+			setState(96);
 			boxedConstant();
-			setState(99);
+			setState(98);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 6322180L) != 0)) {
 				{
-				setState(98);
+				setState(97);
 				sentence(0);
 				}
 			}
 
-			setState(101);
+			setState(100);
 			premise();
-			setState(102);
+			setState(101);
 			match(NEWLINE);
 			}
 		}
@@ -680,11 +634,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitProofLineNum(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitProofLineNum(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ProofLineNumContext proofLineNum() throws RecognitionException {
@@ -693,9 +642,9 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(104);
+			setState(103);
 			match(INT);
-			setState(105);
+			setState(104);
 			match(T__0);
 			}
 		}
@@ -742,11 +691,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitPremiseSentenceInfer(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitPremiseSentenceInfer(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class PremiseContradictionInferContext extends PremiseInferenceContext {
@@ -768,11 +712,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitPremiseContradictionInfer(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitPremiseContradictionInfer(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final PremiseInferenceContext premiseInference() throws RecognitionException {
@@ -780,28 +719,28 @@ public class ProofGrammarParser extends Parser {
 		enterRule(_localctx, 18, RULE_premiseInference);
 		int _la;
 		try {
-			setState(121);
+			setState(120);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case CONTRADICTION:
 				_localctx = new PremiseContradictionInferContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(108); 
+				setState(107); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(107);
+					setState(106);
 					contradiction();
 					}
 					}
-					setState(110); 
+					setState(109); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==CONTRADICTION );
-				setState(112);
+				setState(111);
 				premise();
 				}
 				break;
@@ -815,21 +754,21 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new PremiseSentenceInferContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(115); 
+				setState(114); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(114);
+					setState(113);
 					sentence(0);
 					}
 					}
-					setState(117); 
+					setState(116); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 6322180L) != 0) );
-				setState(119);
+				setState(118);
 				premise();
 				}
 				break;
@@ -880,11 +819,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitContradictionInfer(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitContradictionInfer(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class SentenceInferContext extends InferenceContext {
@@ -906,11 +840,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitSentenceInfer(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitSentenceInfer(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final InferenceContext inference() throws RecognitionException {
@@ -918,14 +847,14 @@ public class ProofGrammarParser extends Parser {
 		enterRule(_localctx, 20, RULE_inference);
 		try {
 			int _alt;
-			setState(137);
+			setState(136);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case CONTRADICTION:
 				_localctx = new ContradictionInferContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(124); 
+				setState(123); 
 				_errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -933,7 +862,7 @@ public class ProofGrammarParser extends Parser {
 					case 1:
 						{
 						{
-						setState(123);
+						setState(122);
 						contradiction();
 						}
 						}
@@ -941,11 +870,11 @@ public class ProofGrammarParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					setState(126); 
+					setState(125); 
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
 				} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-				setState(128);
+				setState(127);
 				justification();
 				}
 				break;
@@ -959,7 +888,7 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new SentenceInferContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(131); 
+				setState(130); 
 				_errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -967,7 +896,7 @@ public class ProofGrammarParser extends Parser {
 					case 1:
 						{
 						{
-						setState(130);
+						setState(129);
 						sentence(0);
 						}
 						}
@@ -975,11 +904,11 @@ public class ProofGrammarParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					setState(133); 
+					setState(132); 
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
 				} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-				setState(135);
+				setState(134);
 				justification();
 				}
 				break;
@@ -1013,11 +942,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitContradiction(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitContradiction(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ContradictionContext contradiction() throws RecognitionException {
@@ -1026,7 +950,7 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(139);
+			setState(138);
 			match(CONTRADICTION);
 			}
 		}
@@ -1084,11 +1008,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitNormalSentence(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitNormalSentence(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ParenthesesSentenceContext extends SentenceContext {
@@ -1103,11 +1022,6 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitParenthesesSentence(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitParenthesesSentence(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1126,7 +1040,7 @@ public class ProofGrammarParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(156);
+			setState(155);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
@@ -1135,11 +1049,11 @@ public class ProofGrammarParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(142);
+				setState(141);
 				match(FORALL);
-				setState(143);
+				setState(142);
 				match(VARIABLE);
-				setState(144);
+				setState(143);
 				sentence(10);
 				}
 				break;
@@ -1148,11 +1062,11 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new NormalSentenceContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(145);
+				setState(144);
 				match(EXISTS);
-				setState(146);
+				setState(145);
 				match(VARIABLE);
-				setState(147);
+				setState(146);
 				sentence(9);
 				}
 				break;
@@ -1161,9 +1075,9 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new NormalSentenceContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(148);
+				setState(147);
 				match(NEGATION);
-				setState(149);
+				setState(148);
 				sentence(8);
 				}
 				break;
@@ -1172,7 +1086,7 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new NormalSentenceContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(150);
+				setState(149);
 				function();
 				}
 				break;
@@ -1181,11 +1095,11 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ParenthesesSentenceContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(151);
+				setState(150);
 				match(T__1);
-				setState(152);
+				setState(151);
 				sentence(0);
-				setState(153);
+				setState(152);
 				match(T__2);
 				}
 				break;
@@ -1194,13 +1108,13 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new NormalSentenceContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(155);
+				setState(154);
 				atom();
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(172);
+			setState(171);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -1208,18 +1122,18 @@ public class ProofGrammarParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(170);
+					setState(169);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
 					case 1:
 						{
 						_localctx = new NormalSentenceContext(new SentenceContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_sentence);
-						setState(158);
+						setState(157);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(159);
+						setState(158);
 						match(CONJUNCTION);
-						setState(160);
+						setState(159);
 						sentence(6);
 						}
 						break;
@@ -1227,11 +1141,11 @@ public class ProofGrammarParser extends Parser {
 						{
 						_localctx = new NormalSentenceContext(new SentenceContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_sentence);
-						setState(161);
+						setState(160);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(162);
+						setState(161);
 						match(DISJUNCTION);
-						setState(163);
+						setState(162);
 						sentence(5);
 						}
 						break;
@@ -1239,11 +1153,11 @@ public class ProofGrammarParser extends Parser {
 						{
 						_localctx = new NormalSentenceContext(new SentenceContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_sentence);
-						setState(164);
+						setState(163);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(165);
+						setState(164);
 						match(IMPLICATION);
-						setState(166);
+						setState(165);
 						sentence(4);
 						}
 						break;
@@ -1251,18 +1165,18 @@ public class ProofGrammarParser extends Parser {
 						{
 						_localctx = new NormalSentenceContext(new SentenceContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_sentence);
-						setState(167);
+						setState(166);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(168);
+						setState(167);
 						match(BICONDITIONAL);
-						setState(169);
+						setState(168);
 						sentence(3);
 						}
 						break;
 					}
 					} 
 				}
-				setState(174);
+				setState(173);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 			}
@@ -1294,11 +1208,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitPremise(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitPremise(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final PremiseContext premise() throws RecognitionException {
@@ -1307,7 +1216,7 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(175);
+			setState(174);
 			match(PREMISE);
 			}
 		}
@@ -1348,11 +1257,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitReitJust(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitReitJust(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ElimJustContext extends JustificationContext {
@@ -1367,11 +1271,6 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitElimJust(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitElimJust(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1388,25 +1287,20 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitIntroJust(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitIntroJust(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final JustificationContext justification() throws RecognitionException {
 		JustificationContext _localctx = new JustificationContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_justification);
 		try {
-			setState(180);
+			setState(179);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
 			case 1:
 				_localctx = new ReitJustContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(177);
+				setState(176);
 				reiteration();
 				}
 				break;
@@ -1414,7 +1308,7 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ElimJustContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(178);
+				setState(177);
 				elimination();
 				}
 				break;
@@ -1422,7 +1316,7 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new IntroJustContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(179);
+				setState(178);
 				introduction();
 				}
 				break;
@@ -1456,11 +1350,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitReiteration(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitReiteration(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ReiterationContext reiteration() throws RecognitionException {
@@ -1469,9 +1358,9 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(182);
+			setState(181);
 			match(T__3);
-			setState(183);
+			setState(182);
 			singleReference();
 			}
 		}
@@ -1513,11 +1402,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitDisjunctionIntro(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitDisjunctionIntro(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExistsIntroContext extends IntroductionContext {
@@ -1534,11 +1418,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitExistsIntro(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitExistsIntro(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IdentityIntroContext extends IntroductionContext {
@@ -1551,11 +1430,6 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitIdentityIntro(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitIdentityIntro(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1576,11 +1450,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitContradictionIntro(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitContradictionIntro(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ImplicationIntroContext extends IntroductionContext {
@@ -1597,11 +1466,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitImplicationIntro(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitImplicationIntro(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ForallIntroContext extends IntroductionContext {
@@ -1617,11 +1481,6 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitForallIntro(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitForallIntro(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1642,11 +1501,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitBiconditionalIntro(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitBiconditionalIntro(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ConjunctionIntroContext extends IntroductionContext {
@@ -1666,11 +1520,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitConjunctionIntro(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitConjunctionIntro(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class NegationIntroContext extends IntroductionContext {
@@ -1687,29 +1536,24 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitNegationIntro(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitNegationIntro(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final IntroductionContext introduction() throws RecognitionException {
 		IntroductionContext _localctx = new IntroductionContext(_ctx, getState());
 		enterRule(_localctx, 32, RULE_introduction);
 		try {
-			setState(220);
+			setState(219);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NEGATION:
 				_localctx = new NegationIntroContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(185);
+				setState(184);
 				match(NEGATION);
-				setState(186);
+				setState(185);
 				match(T__4);
-				setState(187);
+				setState(186);
 				rangeReference();
 				}
 				break;
@@ -1717,15 +1561,15 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ContradictionIntroContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(188);
+				setState(187);
 				match(CONTRADICTION);
-				setState(189);
+				setState(188);
 				match(T__4);
-				setState(190);
+				setState(189);
 				singleReference();
-				setState(191);
+				setState(190);
 				match(T__5);
-				setState(192);
+				setState(191);
 				singleReference();
 				}
 				break;
@@ -1733,15 +1577,15 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ConjunctionIntroContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(194);
+				setState(193);
 				match(CONJUNCTION);
-				setState(195);
+				setState(194);
 				match(T__4);
-				setState(196);
+				setState(195);
 				singleReference();
-				setState(197);
+				setState(196);
 				match(T__5);
-				setState(198);
+				setState(197);
 				singleReference();
 				}
 				break;
@@ -1749,11 +1593,11 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new DisjunctionIntroContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(200);
+				setState(199);
 				match(DISJUNCTION);
-				setState(201);
+				setState(200);
 				match(T__4);
-				setState(202);
+				setState(201);
 				singleReference();
 				}
 				break;
@@ -1761,9 +1605,9 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new IdentityIntroContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(203);
+				setState(202);
 				match(IDENTITY);
-				setState(204);
+				setState(203);
 				match(T__6);
 				}
 				break;
@@ -1771,11 +1615,11 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ImplicationIntroContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(205);
+				setState(204);
 				match(IMPLICATION);
-				setState(206);
+				setState(205);
 				match(T__4);
-				setState(207);
+				setState(206);
 				rangeReference();
 				}
 				break;
@@ -1783,15 +1627,15 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new BiconditionalIntroContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(208);
+				setState(207);
 				match(BICONDITIONAL);
-				setState(209);
+				setState(208);
 				match(T__4);
-				setState(210);
+				setState(209);
 				rangeReference();
-				setState(211);
+				setState(210);
 				match(T__5);
-				setState(212);
+				setState(211);
 				rangeReference();
 				}
 				break;
@@ -1799,11 +1643,11 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ForallIntroContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(214);
+				setState(213);
 				match(FORALL);
-				setState(215);
+				setState(214);
 				match(T__4);
-				setState(216);
+				setState(215);
 				rangeReference();
 				}
 				break;
@@ -1811,11 +1655,11 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ExistsIntroContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(217);
+				setState(216);
 				match(EXISTS);
-				setState(218);
+				setState(217);
 				match(T__4);
-				setState(219);
+				setState(218);
 				singleReference();
 				}
 				break;
@@ -1864,11 +1708,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitImplicationElim(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitImplicationElim(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ForallElimContext extends EliminationContext {
@@ -1884,11 +1723,6 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitForallElim(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitForallElim(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1906,11 +1740,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitContradictionElim(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitContradictionElim(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class NegationElimContext extends EliminationContext {
@@ -1926,11 +1755,6 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitNegationElim(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitNegationElim(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -1954,11 +1778,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitDisjunctionElim(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitDisjunctionElim(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExistsElimContext extends EliminationContext {
@@ -1977,11 +1796,6 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitExistsElim(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitExistsElim(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -2002,11 +1816,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitIdentityElim(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitIdentityElim(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ConjunctionElimContext extends EliminationContext {
@@ -2022,11 +1831,6 @@ public class ProofGrammarParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitConjunctionElim(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitConjunctionElim(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -2047,29 +1851,24 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitBiconditionalElim(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitBiconditionalElim(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final EliminationContext elimination() throws RecognitionException {
 		EliminationContext _localctx = new EliminationContext(_ctx, getState());
 		enterRule(_localctx, 34, RULE_elimination);
 		try {
-			setState(266);
+			setState(265);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NEGATION:
 				_localctx = new NegationElimContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(222);
+				setState(221);
 				match(NEGATION);
-				setState(223);
+				setState(222);
 				match(T__7);
-				setState(224);
+				setState(223);
 				singleReference();
 				}
 				break;
@@ -2077,11 +1876,11 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ContradictionElimContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(225);
+				setState(224);
 				match(CONTRADICTION);
-				setState(226);
+				setState(225);
 				match(T__7);
-				setState(227);
+				setState(226);
 				singleReference();
 				}
 				break;
@@ -2089,11 +1888,11 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ConjunctionElimContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(228);
+				setState(227);
 				match(CONJUNCTION);
-				setState(229);
+				setState(228);
 				match(T__7);
-				setState(230);
+				setState(229);
 				singleReference();
 				}
 				break;
@@ -2101,19 +1900,19 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new DisjunctionElimContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(231);
+				setState(230);
 				match(DISJUNCTION);
-				setState(232);
+				setState(231);
 				match(T__7);
-				setState(233);
+				setState(232);
 				singleReference();
+				setState(233);
+				match(T__5);
 				setState(234);
-				match(T__5);
-				setState(235);
 				rangeReference();
-				setState(236);
+				setState(235);
 				match(T__5);
-				setState(237);
+				setState(236);
 				rangeReference();
 				}
 				break;
@@ -2121,15 +1920,15 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new IdentityElimContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(239);
+				setState(238);
 				match(IDENTITY);
-				setState(240);
+				setState(239);
 				match(T__7);
-				setState(241);
+				setState(240);
 				singleReference();
-				setState(242);
+				setState(241);
 				match(T__5);
-				setState(243);
+				setState(242);
 				singleReference();
 				}
 				break;
@@ -2137,15 +1936,15 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ImplicationElimContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(245);
+				setState(244);
 				match(IMPLICATION);
-				setState(246);
+				setState(245);
 				match(T__7);
-				setState(247);
+				setState(246);
 				singleReference();
-				setState(248);
+				setState(247);
 				match(T__5);
-				setState(249);
+				setState(248);
 				singleReference();
 				}
 				break;
@@ -2153,15 +1952,15 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new BiconditionalElimContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(251);
+				setState(250);
 				match(BICONDITIONAL);
-				setState(252);
+				setState(251);
 				match(T__7);
-				setState(253);
+				setState(252);
 				singleReference();
-				setState(254);
+				setState(253);
 				match(T__5);
-				setState(255);
+				setState(254);
 				singleReference();
 				}
 				break;
@@ -2169,11 +1968,11 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ForallElimContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(257);
+				setState(256);
 				match(FORALL);
-				setState(258);
+				setState(257);
 				match(T__7);
-				setState(259);
+				setState(258);
 				singleReference();
 				}
 				break;
@@ -2181,15 +1980,15 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new ExistsElimContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(260);
+				setState(259);
 				match(EXISTS);
-				setState(261);
+				setState(260);
 				match(T__7);
-				setState(262);
+				setState(261);
 				singleReference();
-				setState(263);
+				setState(262);
 				match(T__5);
-				setState(264);
+				setState(263);
 				rangeReference();
 				}
 				break;
@@ -2223,11 +2022,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitSingleReference(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitSingleReference(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final SingleReferenceContext singleReference() throws RecognitionException {
@@ -2236,7 +2030,7 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(268);
+			setState(267);
 			match(INT);
 			}
 		}
@@ -2269,11 +2063,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitRangeReference(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitRangeReference(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final RangeReferenceContext rangeReference() throws RecognitionException {
@@ -2282,11 +2071,11 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(270);
+			setState(269);
 			match(INT);
-			setState(271);
+			setState(270);
 			match(T__8);
-			setState(272);
+			setState(271);
 			match(INT);
 			}
 		}
@@ -2316,11 +2105,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitBoxedConstant(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitBoxedConstant(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BoxedConstantContext boxedConstant() throws RecognitionException {
@@ -2329,11 +2113,11 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(274);
+			setState(273);
 			match(T__9);
-			setState(275);
+			setState(274);
 			match(CONSTANT);
-			setState(276);
+			setState(275);
 			match(T__9);
 			}
 		}
@@ -2372,11 +2156,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitPropositionAtom(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitPropositionAtom(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IdentityAtomContext extends AtomContext {
@@ -2396,25 +2175,20 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitIdentityAtom(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitIdentityAtom(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AtomContext atom() throws RecognitionException {
 		AtomContext _localctx = new AtomContext(_ctx, getState());
 		enterRule(_localctx, 42, RULE_atom);
 		try {
-			setState(283);
+			setState(282);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case PROPOSITION:
 				_localctx = new PropositionAtomContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(278);
+				setState(277);
 				match(PROPOSITION);
 				}
 				break;
@@ -2423,11 +2197,11 @@ public class ProofGrammarParser extends Parser {
 				_localctx = new IdentityAtomContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(279);
+				setState(278);
 				identifierAtom();
-				setState(280);
+				setState(279);
 				match(IDENTITY);
-				setState(281);
+				setState(280);
 				identifierAtom();
 				}
 				break;
@@ -2462,11 +2236,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitIdentifierAtom(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitIdentifierAtom(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final IdentifierAtomContext identifierAtom() throws RecognitionException {
@@ -2476,7 +2245,7 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(285);
+			setState(284);
 			_la = _input.LA(1);
 			if ( !(_la==VARIABLE || _la==CONSTANT) ) {
 			_errHandler.recoverInline(this);
@@ -2516,11 +2285,6 @@ public class ProofGrammarParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ProofGrammarListener ) ((ProofGrammarListener)listener).exitFunction(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProofGrammarVisitor ) return ((ProofGrammarVisitor<? extends T>)visitor).visitFunction(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FunctionContext function() throws RecognitionException {
@@ -2530,11 +2294,11 @@ public class ProofGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(287);
+			setState(286);
 			match(PROPOSITION);
-			setState(288);
+			setState(287);
 			match(T__1);
-			setState(289);
+			setState(288);
 			_la = _input.LA(1);
 			if ( !(_la==VARIABLE || _la==CONSTANT) ) {
 			_errHandler.recoverInline(this);
@@ -2544,7 +2308,7 @@ public class ProofGrammarParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(290);
+			setState(289);
 			match(T__2);
 			}
 		}
@@ -2581,7 +2345,7 @@ public class ProofGrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u001d\u0125\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
+		"\u0004\u0001\u001c\u0124\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
 		"\u0002\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004"+
 		"\u0002\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007"+
 		"\u0002\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b"+
@@ -2591,179 +2355,179 @@ public class ProofGrammarParser extends Parser {
 		"\u0015\u0002\u0016\u0007\u0016\u0002\u0017\u0007\u0017\u0001\u0000\u0005"+
 		"\u00002\b\u0000\n\u0000\f\u00005\t\u0000\u0001\u0000\u0001\u0000\u0005"+
 		"\u00009\b\u0000\n\u0000\f\u0000<\t\u0000\u0001\u0000\u0001\u0000\u0001"+
-		"\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0005\u0001D\b\u0001\n\u0001"+
-		"\f\u0001G\t\u0001\u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002\u0001"+
-		"\u0002\u0001\u0002\u0003\u0002O\b\u0002\u0001\u0003\u0001\u0003\u0001"+
-		"\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
-		"\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001"+
-		"\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0003\u0007d\b"+
-		"\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\b\u0001\b\u0001\b\u0001"+
-		"\t\u0004\tm\b\t\u000b\t\f\tn\u0001\t\u0001\t\u0001\t\u0004\tt\b\t\u000b"+
-		"\t\f\tu\u0001\t\u0001\t\u0003\tz\b\t\u0001\n\u0004\n}\b\n\u000b\n\f\n"+
-		"~\u0001\n\u0001\n\u0001\n\u0004\n\u0084\b\n\u000b\n\f\n\u0085\u0001\n"+
-		"\u0001\n\u0003\n\u008a\b\n\u0001\u000b\u0001\u000b\u0001\f\u0001\f\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0005\u0001C\b\u0001\n\u0001\f\u0001F\t"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0001"+
+		"\u0002\u0003\u0002N\b\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001"+
+		"\u0003\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0005\u0001"+
+		"\u0005\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0001"+
+		"\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0003\u0007c\b\u0007\u0001"+
+		"\u0007\u0001\u0007\u0001\u0007\u0001\b\u0001\b\u0001\b\u0001\t\u0004\t"+
+		"l\b\t\u000b\t\f\tm\u0001\t\u0001\t\u0001\t\u0004\ts\b\t\u000b\t\f\tt\u0001"+
+		"\t\u0001\t\u0003\ty\b\t\u0001\n\u0004\n|\b\n\u000b\n\f\n}\u0001\n\u0001"+
+		"\n\u0001\n\u0004\n\u0083\b\n\u000b\n\f\n\u0084\u0001\n\u0001\n\u0003\n"+
+		"\u0089\b\n\u0001\u000b\u0001\u000b\u0001\f\u0001\f\u0001\f\u0001\f\u0001"+
 		"\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001"+
-		"\f\u0001\f\u0001\f\u0001\f\u0003\f\u009d\b\f\u0001\f\u0001\f\u0001\f\u0001"+
-		"\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0005"+
-		"\f\u00ab\b\f\n\f\f\f\u00ae\t\f\u0001\r\u0001\r\u0001\u000e\u0001\u000e"+
-		"\u0001\u000e\u0003\u000e\u00b5\b\u000e\u0001\u000f\u0001\u000f\u0001\u000f"+
-		"\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010"+
-		"\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010"+
-		"\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010"+
-		"\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010"+
-		"\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010"+
-		"\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0003\u0010"+
-		"\u00dd\b\u0010\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011"+
-		"\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011"+
-		"\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011"+
-		"\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011"+
-		"\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011"+
-		"\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011"+
-		"\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011"+
-		"\u0001\u0011\u0001\u0011\u0001\u0011\u0003\u0011\u010b\b\u0011\u0001\u0012"+
-		"\u0001\u0012\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0014"+
-		"\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0015\u0001\u0015\u0001\u0015"+
-		"\u0001\u0015\u0001\u0015\u0003\u0015\u011c\b\u0015\u0001\u0016\u0001\u0016"+
-		"\u0001\u0017\u0001\u0017\u0001\u0017\u0001\u0017\u0001\u0017\u0001\u0017"+
-		"\u0000\u0001\u0018\u0018\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012"+
-		"\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*,.\u0000\u0001\u0001\u0000"+
-		"\u000b\f\u0135\u00003\u0001\u0000\u0000\u0000\u0002@\u0001\u0000\u0000"+
-		"\u0000\u0004J\u0001\u0000\u0000\u0000\u0006P\u0001\u0000\u0000\u0000\b"+
-		"T\u0001\u0000\u0000\u0000\nX\u0001\u0000\u0000\u0000\f\\\u0001\u0000\u0000"+
-		"\u0000\u000e`\u0001\u0000\u0000\u0000\u0010h\u0001\u0000\u0000\u0000\u0012"+
-		"y\u0001\u0000\u0000\u0000\u0014\u0089\u0001\u0000\u0000\u0000\u0016\u008b"+
-		"\u0001\u0000\u0000\u0000\u0018\u009c\u0001\u0000\u0000\u0000\u001a\u00af"+
-		"\u0001\u0000\u0000\u0000\u001c\u00b4\u0001\u0000\u0000\u0000\u001e\u00b6"+
-		"\u0001\u0000\u0000\u0000 \u00dc\u0001\u0000\u0000\u0000\"\u010a\u0001"+
-		"\u0000\u0000\u0000$\u010c\u0001\u0000\u0000\u0000&\u010e\u0001\u0000\u0000"+
-		"\u0000(\u0112\u0001\u0000\u0000\u0000*\u011b\u0001\u0000\u0000\u0000,"+
-		"\u011d\u0001\u0000\u0000\u0000.\u011f\u0001\u0000\u0000\u000002\u0003"+
-		"\b\u0004\u000010\u0001\u0000\u0000\u000025\u0001\u0000\u0000\u000031\u0001"+
-		"\u0000\u0000\u000034\u0001\u0000\u0000\u00004:\u0001\u0000\u0000\u0000"+
-		"53\u0001\u0000\u0000\u000069\u0003\n\u0005\u000079\u0003\u0002\u0001\u0000"+
-		"86\u0001\u0000\u0000\u000087\u0001\u0000\u0000\u00009<\u0001\u0000\u0000"+
-		"\u0000:8\u0001\u0000\u0000\u0000:;\u0001\u0000\u0000\u0000;=\u0001\u0000"+
-		"\u0000\u0000<:\u0001\u0000\u0000\u0000=>\u0003\f\u0006\u0000>?\u0005\u0000"+
-		"\u0000\u0001?\u0001\u0001\u0000\u0000\u0000@E\u0003\u0004\u0002\u0000"+
-		"AD\u0003\u0002\u0001\u0000BD\u0003\n\u0005\u0000CA\u0001\u0000\u0000\u0000"+
-		"CB\u0001\u0000\u0000\u0000DG\u0001\u0000\u0000\u0000EC\u0001\u0000\u0000"+
-		"\u0000EF\u0001\u0000\u0000\u0000FH\u0001\u0000\u0000\u0000GE\u0001\u0000"+
-		"\u0000\u0000HI\u0003\u0006\u0003\u0000I\u0003\u0001\u0000\u0000\u0000"+
-		"JK\u0005\u0018\u0000\u0000KN\u0005\u001b\u0000\u0000LO\u0003\b\u0004\u0000"+
-		"MO\u0003\u000e\u0007\u0000NL\u0001\u0000\u0000\u0000NM\u0001\u0000\u0000"+
-		"\u0000O\u0005\u0001\u0000\u0000\u0000PQ\u0003\f\u0006\u0000QR\u0005\u0019"+
-		"\u0000\u0000RS\u0005\u001b\u0000\u0000S\u0007\u0001\u0000\u0000\u0000"+
-		"TU\u0003\u0010\b\u0000UV\u0003\u0012\t\u0000VW\u0005\u001b\u0000\u0000"+
-		"W\t\u0001\u0000\u0000\u0000XY\u0003\u0010\b\u0000YZ\u0003\u0014\n\u0000"+
-		"Z[\u0005\u001b\u0000\u0000[\u000b\u0001\u0000\u0000\u0000\\]\u0003\u0010"+
-		"\b\u0000]^\u0003\u0014\n\u0000^_\u0005\u001b\u0000\u0000_\r\u0001\u0000"+
-		"\u0000\u0000`a\u0003\u0010\b\u0000ac\u0003(\u0014\u0000bd\u0003\u0018"+
-		"\f\u0000cb\u0001\u0000\u0000\u0000cd\u0001\u0000\u0000\u0000de\u0001\u0000"+
-		"\u0000\u0000ef\u0003\u001a\r\u0000fg\u0005\u001b\u0000\u0000g\u000f\u0001"+
-		"\u0000\u0000\u0000hi\u0005\u001a\u0000\u0000ij\u0005\u0001\u0000\u0000"+
-		"j\u0011\u0001\u0000\u0000\u0000km\u0003\u0016\u000b\u0000lk\u0001\u0000"+
-		"\u0000\u0000mn\u0001\u0000\u0000\u0000nl\u0001\u0000\u0000\u0000no\u0001"+
-		"\u0000\u0000\u0000op\u0001\u0000\u0000\u0000pq\u0003\u001a\r\u0000qz\u0001"+
-		"\u0000\u0000\u0000rt\u0003\u0018\f\u0000sr\u0001\u0000\u0000\u0000tu\u0001"+
-		"\u0000\u0000\u0000us\u0001\u0000\u0000\u0000uv\u0001\u0000\u0000\u0000"+
-		"vw\u0001\u0000\u0000\u0000wx\u0003\u001a\r\u0000xz\u0001\u0000\u0000\u0000"+
-		"yl\u0001\u0000\u0000\u0000ys\u0001\u0000\u0000\u0000z\u0013\u0001\u0000"+
-		"\u0000\u0000{}\u0003\u0016\u000b\u0000|{\u0001\u0000\u0000\u0000}~\u0001"+
-		"\u0000\u0000\u0000~|\u0001\u0000\u0000\u0000~\u007f\u0001\u0000\u0000"+
-		"\u0000\u007f\u0080\u0001\u0000\u0000\u0000\u0080\u0081\u0003\u001c\u000e"+
-		"\u0000\u0081\u008a\u0001\u0000\u0000\u0000\u0082\u0084\u0003\u0018\f\u0000"+
-		"\u0083\u0082\u0001\u0000\u0000\u0000\u0084\u0085\u0001\u0000\u0000\u0000"+
-		"\u0085\u0083\u0001\u0000\u0000\u0000\u0085\u0086\u0001\u0000\u0000\u0000"+
-		"\u0086\u0087\u0001\u0000\u0000\u0000\u0087\u0088\u0003\u001c\u000e\u0000"+
-		"\u0088\u008a\u0001\u0000\u0000\u0000\u0089|\u0001\u0000\u0000\u0000\u0089"+
-		"\u0083\u0001\u0000\u0000\u0000\u008a\u0015\u0001\u0000\u0000\u0000\u008b"+
-		"\u008c\u0005\u000f\u0000\u0000\u008c\u0017\u0001\u0000\u0000\u0000\u008d"+
-		"\u008e\u0006\f\uffff\uffff\u0000\u008e\u008f\u0005\u0015\u0000\u0000\u008f"+
-		"\u0090\u0005\u000b\u0000\u0000\u0090\u009d\u0003\u0018\f\n\u0091\u0092"+
-		"\u0005\u0016\u0000\u0000\u0092\u0093\u0005\u000b\u0000\u0000\u0093\u009d"+
-		"\u0003\u0018\f\t\u0094\u0095\u0005\u000e\u0000\u0000\u0095\u009d\u0003"+
-		"\u0018\f\b\u0096\u009d\u0003.\u0017\u0000\u0097\u0098\u0005\u0002\u0000"+
-		"\u0000\u0098\u0099\u0003\u0018\f\u0000\u0099\u009a\u0005\u0003\u0000\u0000"+
-		"\u009a\u009d\u0001\u0000\u0000\u0000\u009b\u009d\u0003*\u0015\u0000\u009c"+
-		"\u008d\u0001\u0000\u0000\u0000\u009c\u0091\u0001\u0000\u0000\u0000\u009c"+
-		"\u0094\u0001\u0000\u0000\u0000\u009c\u0096\u0001\u0000\u0000\u0000\u009c"+
-		"\u0097\u0001\u0000\u0000\u0000\u009c\u009b\u0001\u0000\u0000\u0000\u009d"+
-		"\u00ac\u0001\u0000\u0000\u0000\u009e\u009f\n\u0005\u0000\u0000\u009f\u00a0"+
-		"\u0005\u0010\u0000\u0000\u00a0\u00ab\u0003\u0018\f\u0006\u00a1\u00a2\n"+
-		"\u0004\u0000\u0000\u00a2\u00a3\u0005\u0011\u0000\u0000\u00a3\u00ab\u0003"+
-		"\u0018\f\u0005\u00a4\u00a5\n\u0003\u0000\u0000\u00a5\u00a6\u0005\u0013"+
-		"\u0000\u0000\u00a6\u00ab\u0003\u0018\f\u0004\u00a7\u00a8\n\u0002\u0000"+
-		"\u0000\u00a8\u00a9\u0005\u0014\u0000\u0000\u00a9\u00ab\u0003\u0018\f\u0003"+
-		"\u00aa\u009e\u0001\u0000\u0000\u0000\u00aa\u00a1\u0001\u0000\u0000\u0000"+
-		"\u00aa\u00a4\u0001\u0000\u0000\u0000\u00aa\u00a7\u0001\u0000\u0000\u0000"+
-		"\u00ab\u00ae\u0001\u0000\u0000\u0000\u00ac\u00aa\u0001\u0000\u0000\u0000"+
-		"\u00ac\u00ad\u0001\u0000\u0000\u0000\u00ad\u0019\u0001\u0000\u0000\u0000"+
-		"\u00ae\u00ac\u0001\u0000\u0000\u0000\u00af\u00b0\u0005\u0017\u0000\u0000"+
-		"\u00b0\u001b\u0001\u0000\u0000\u0000\u00b1\u00b5\u0003\u001e\u000f\u0000"+
-		"\u00b2\u00b5\u0003\"\u0011\u0000\u00b3\u00b5\u0003 \u0010\u0000\u00b4"+
-		"\u00b1\u0001\u0000\u0000\u0000\u00b4\u00b2\u0001\u0000\u0000\u0000\u00b4"+
-		"\u00b3\u0001\u0000\u0000\u0000\u00b5\u001d\u0001\u0000\u0000\u0000\u00b6"+
-		"\u00b7\u0005\u0004\u0000\u0000\u00b7\u00b8\u0003$\u0012\u0000\u00b8\u001f"+
-		"\u0001\u0000\u0000\u0000\u00b9\u00ba\u0005\u000e\u0000\u0000\u00ba\u00bb"+
-		"\u0005\u0005\u0000\u0000\u00bb\u00dd\u0003&\u0013\u0000\u00bc\u00bd\u0005"+
-		"\u000f\u0000\u0000\u00bd\u00be\u0005\u0005\u0000\u0000\u00be\u00bf\u0003"+
-		"$\u0012\u0000\u00bf\u00c0\u0005\u0006\u0000\u0000\u00c0\u00c1\u0003$\u0012"+
-		"\u0000\u00c1\u00dd\u0001\u0000\u0000\u0000\u00c2\u00c3\u0005\u0010\u0000"+
-		"\u0000\u00c3\u00c4\u0005\u0005\u0000\u0000\u00c4\u00c5\u0003$\u0012\u0000"+
-		"\u00c5\u00c6\u0005\u0006\u0000\u0000\u00c6\u00c7\u0003$\u0012\u0000\u00c7"+
-		"\u00dd\u0001\u0000\u0000\u0000\u00c8\u00c9\u0005\u0011\u0000\u0000\u00c9"+
-		"\u00ca\u0005\u0005\u0000\u0000\u00ca\u00dd\u0003$\u0012\u0000\u00cb\u00cc"+
-		"\u0005\u0012\u0000\u0000\u00cc\u00dd\u0005\u0007\u0000\u0000\u00cd\u00ce"+
-		"\u0005\u0013\u0000\u0000\u00ce\u00cf\u0005\u0005\u0000\u0000\u00cf\u00dd"+
-		"\u0003&\u0013\u0000\u00d0\u00d1\u0005\u0014\u0000\u0000\u00d1\u00d2\u0005"+
-		"\u0005\u0000\u0000\u00d2\u00d3\u0003&\u0013\u0000\u00d3\u00d4\u0005\u0006"+
-		"\u0000\u0000\u00d4\u00d5\u0003&\u0013\u0000\u00d5\u00dd\u0001\u0000\u0000"+
-		"\u0000\u00d6\u00d7\u0005\u0015\u0000\u0000\u00d7\u00d8\u0005\u0005\u0000"+
-		"\u0000\u00d8\u00dd\u0003&\u0013\u0000\u00d9\u00da\u0005\u0016\u0000\u0000"+
-		"\u00da\u00db\u0005\u0005\u0000\u0000\u00db\u00dd\u0003$\u0012\u0000\u00dc"+
-		"\u00b9\u0001\u0000\u0000\u0000\u00dc\u00bc\u0001\u0000\u0000\u0000\u00dc"+
-		"\u00c2\u0001\u0000\u0000\u0000\u00dc\u00c8\u0001\u0000\u0000\u0000\u00dc"+
-		"\u00cb\u0001\u0000\u0000\u0000\u00dc\u00cd\u0001\u0000\u0000\u0000\u00dc"+
-		"\u00d0\u0001\u0000\u0000\u0000\u00dc\u00d6\u0001\u0000\u0000\u0000\u00dc"+
-		"\u00d9\u0001\u0000\u0000\u0000\u00dd!\u0001\u0000\u0000\u0000\u00de\u00df"+
-		"\u0005\u000e\u0000\u0000\u00df\u00e0\u0005\b\u0000\u0000\u00e0\u010b\u0003"+
-		"$\u0012\u0000\u00e1\u00e2\u0005\u000f\u0000\u0000\u00e2\u00e3\u0005\b"+
-		"\u0000\u0000\u00e3\u010b\u0003$\u0012\u0000\u00e4\u00e5\u0005\u0010\u0000"+
-		"\u0000\u00e5\u00e6\u0005\b\u0000\u0000\u00e6\u010b\u0003$\u0012\u0000"+
-		"\u00e7\u00e8\u0005\u0011\u0000\u0000\u00e8\u00e9\u0005\b\u0000\u0000\u00e9"+
-		"\u00ea\u0003$\u0012\u0000\u00ea\u00eb\u0005\u0006\u0000\u0000\u00eb\u00ec"+
-		"\u0003&\u0013\u0000\u00ec\u00ed\u0005\u0006\u0000\u0000\u00ed\u00ee\u0003"+
-		"&\u0013\u0000\u00ee\u010b\u0001\u0000\u0000\u0000\u00ef\u00f0\u0005\u0012"+
-		"\u0000\u0000\u00f0\u00f1\u0005\b\u0000\u0000\u00f1\u00f2\u0003$\u0012"+
-		"\u0000\u00f2\u00f3\u0005\u0006\u0000\u0000\u00f3\u00f4\u0003$\u0012\u0000"+
-		"\u00f4\u010b\u0001\u0000\u0000\u0000\u00f5\u00f6\u0005\u0013\u0000\u0000"+
-		"\u00f6\u00f7\u0005\b\u0000\u0000\u00f7\u00f8\u0003$\u0012\u0000\u00f8"+
-		"\u00f9\u0005\u0006\u0000\u0000\u00f9\u00fa\u0003$\u0012\u0000\u00fa\u010b"+
-		"\u0001\u0000\u0000\u0000\u00fb\u00fc\u0005\u0014\u0000\u0000\u00fc\u00fd"+
-		"\u0005\b\u0000\u0000\u00fd\u00fe\u0003$\u0012\u0000\u00fe\u00ff\u0005"+
-		"\u0006\u0000\u0000\u00ff\u0100\u0003$\u0012\u0000\u0100\u010b\u0001\u0000"+
-		"\u0000\u0000\u0101\u0102\u0005\u0015\u0000\u0000\u0102\u0103\u0005\b\u0000"+
-		"\u0000\u0103\u010b\u0003$\u0012\u0000\u0104\u0105\u0005\u0016\u0000\u0000"+
-		"\u0105\u0106\u0005\b\u0000\u0000\u0106\u0107\u0003$\u0012\u0000\u0107"+
-		"\u0108\u0005\u0006\u0000\u0000\u0108\u0109\u0003&\u0013\u0000\u0109\u010b"+
-		"\u0001\u0000\u0000\u0000\u010a\u00de\u0001\u0000\u0000\u0000\u010a\u00e1"+
-		"\u0001\u0000\u0000\u0000\u010a\u00e4\u0001\u0000\u0000\u0000\u010a\u00e7"+
-		"\u0001\u0000\u0000\u0000\u010a\u00ef\u0001\u0000\u0000\u0000\u010a\u00f5"+
-		"\u0001\u0000\u0000\u0000\u010a\u00fb\u0001\u0000\u0000\u0000\u010a\u0101"+
-		"\u0001\u0000\u0000\u0000\u010a\u0104\u0001\u0000\u0000\u0000\u010b#\u0001"+
-		"\u0000\u0000\u0000\u010c\u010d\u0005\u001a\u0000\u0000\u010d%\u0001\u0000"+
-		"\u0000\u0000\u010e\u010f\u0005\u001a\u0000\u0000\u010f\u0110\u0005\t\u0000"+
-		"\u0000\u0110\u0111\u0005\u001a\u0000\u0000\u0111\'\u0001\u0000\u0000\u0000"+
-		"\u0112\u0113\u0005\n\u0000\u0000\u0113\u0114\u0005\f\u0000\u0000\u0114"+
-		"\u0115\u0005\n\u0000\u0000\u0115)\u0001\u0000\u0000\u0000\u0116\u011c"+
-		"\u0005\r\u0000\u0000\u0117\u0118\u0003,\u0016\u0000\u0118\u0119\u0005"+
-		"\u0012\u0000\u0000\u0119\u011a\u0003,\u0016\u0000\u011a\u011c\u0001\u0000"+
-		"\u0000\u0000\u011b\u0116\u0001\u0000\u0000\u0000\u011b\u0117\u0001\u0000"+
-		"\u0000\u0000\u011c+\u0001\u0000\u0000\u0000\u011d\u011e\u0007\u0000\u0000"+
-		"\u0000\u011e-\u0001\u0000\u0000\u0000\u011f\u0120\u0005\r\u0000\u0000"+
-		"\u0120\u0121\u0005\u0002\u0000\u0000\u0121\u0122\u0007\u0000\u0000\u0000"+
-		"\u0122\u0123\u0005\u0003\u0000\u0000\u0123/\u0001\u0000\u0000\u0000\u0014"+
-		"38:CENcnuy~\u0085\u0089\u009c\u00aa\u00ac\u00b4\u00dc\u010a\u011b";
+		"\f\u0001\f\u0003\f\u009c\b\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001"+
+		"\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0005\f\u00aa\b\f\n"+
+		"\f\f\f\u00ad\t\f\u0001\r\u0001\r\u0001\u000e\u0001\u000e\u0001\u000e\u0003"+
+		"\u000e\u00b4\b\u000e\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u0010\u0001"+
+		"\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001"+
+		"\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001"+
+		"\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001"+
+		"\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001"+
+		"\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001"+
+		"\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0003\u0010\u00dc\b\u0010\u0001"+
+		"\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001"+
+		"\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001"+
+		"\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001"+
+		"\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001"+
+		"\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001"+
+		"\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001"+
+		"\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001"+
+		"\u0011\u0001\u0011\u0003\u0011\u010a\b\u0011\u0001\u0012\u0001\u0012\u0001"+
+		"\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0014\u0001\u0014\u0001"+
+		"\u0014\u0001\u0014\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0001"+
+		"\u0015\u0003\u0015\u011b\b\u0015\u0001\u0016\u0001\u0016\u0001\u0017\u0001"+
+		"\u0017\u0001\u0017\u0001\u0017\u0001\u0017\u0001\u0017\u0000\u0001\u0018"+
+		"\u0018\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018"+
+		"\u001a\u001c\u001e \"$&(*,.\u0000\u0001\u0001\u0000\u000b\f\u0134\u0000"+
+		"3\u0001\u0000\u0000\u0000\u0002?\u0001\u0000\u0000\u0000\u0004I\u0001"+
+		"\u0000\u0000\u0000\u0006O\u0001\u0000\u0000\u0000\bS\u0001\u0000\u0000"+
+		"\u0000\nW\u0001\u0000\u0000\u0000\f[\u0001\u0000\u0000\u0000\u000e_\u0001"+
+		"\u0000\u0000\u0000\u0010g\u0001\u0000\u0000\u0000\u0012x\u0001\u0000\u0000"+
+		"\u0000\u0014\u0088\u0001\u0000\u0000\u0000\u0016\u008a\u0001\u0000\u0000"+
+		"\u0000\u0018\u009b\u0001\u0000\u0000\u0000\u001a\u00ae\u0001\u0000\u0000"+
+		"\u0000\u001c\u00b3\u0001\u0000\u0000\u0000\u001e\u00b5\u0001\u0000\u0000"+
+		"\u0000 \u00db\u0001\u0000\u0000\u0000\"\u0109\u0001\u0000\u0000\u0000"+
+		"$\u010b\u0001\u0000\u0000\u0000&\u010d\u0001\u0000\u0000\u0000(\u0111"+
+		"\u0001\u0000\u0000\u0000*\u011a\u0001\u0000\u0000\u0000,\u011c\u0001\u0000"+
+		"\u0000\u0000.\u011e\u0001\u0000\u0000\u000002\u0003\b\u0004\u000010\u0001"+
+		"\u0000\u0000\u000025\u0001\u0000\u0000\u000031\u0001\u0000\u0000\u0000"+
+		"34\u0001\u0000\u0000\u00004:\u0001\u0000\u0000\u000053\u0001\u0000\u0000"+
+		"\u000069\u0003\n\u0005\u000079\u0003\u0002\u0001\u000086\u0001\u0000\u0000"+
+		"\u000087\u0001\u0000\u0000\u00009<\u0001\u0000\u0000\u0000:8\u0001\u0000"+
+		"\u0000\u0000:;\u0001\u0000\u0000\u0000;=\u0001\u0000\u0000\u0000<:\u0001"+
+		"\u0000\u0000\u0000=>\u0005\u0000\u0000\u0001>\u0001\u0001\u0000\u0000"+
+		"\u0000?D\u0003\u0004\u0002\u0000@C\u0003\u0002\u0001\u0000AC\u0003\n\u0005"+
+		"\u0000B@\u0001\u0000\u0000\u0000BA\u0001\u0000\u0000\u0000CF\u0001\u0000"+
+		"\u0000\u0000DB\u0001\u0000\u0000\u0000DE\u0001\u0000\u0000\u0000EG\u0001"+
+		"\u0000\u0000\u0000FD\u0001\u0000\u0000\u0000GH\u0003\u0006\u0003\u0000"+
+		"H\u0003\u0001\u0000\u0000\u0000IJ\u0005\u0018\u0000\u0000JM\u0005\u001b"+
+		"\u0000\u0000KN\u0003\b\u0004\u0000LN\u0003\u000e\u0007\u0000MK\u0001\u0000"+
+		"\u0000\u0000ML\u0001\u0000\u0000\u0000N\u0005\u0001\u0000\u0000\u0000"+
+		"OP\u0003\f\u0006\u0000PQ\u0005\u0019\u0000\u0000QR\u0005\u001b\u0000\u0000"+
+		"R\u0007\u0001\u0000\u0000\u0000ST\u0003\u0010\b\u0000TU\u0003\u0012\t"+
+		"\u0000UV\u0005\u001b\u0000\u0000V\t\u0001\u0000\u0000\u0000WX\u0003\u0010"+
+		"\b\u0000XY\u0003\u0014\n\u0000YZ\u0005\u001b\u0000\u0000Z\u000b\u0001"+
+		"\u0000\u0000\u0000[\\\u0003\u0010\b\u0000\\]\u0003\u0014\n\u0000]^\u0005"+
+		"\u001b\u0000\u0000^\r\u0001\u0000\u0000\u0000_`\u0003\u0010\b\u0000`b"+
+		"\u0003(\u0014\u0000ac\u0003\u0018\f\u0000ba\u0001\u0000\u0000\u0000bc"+
+		"\u0001\u0000\u0000\u0000cd\u0001\u0000\u0000\u0000de\u0003\u001a\r\u0000"+
+		"ef\u0005\u001b\u0000\u0000f\u000f\u0001\u0000\u0000\u0000gh\u0005\u001a"+
+		"\u0000\u0000hi\u0005\u0001\u0000\u0000i\u0011\u0001\u0000\u0000\u0000"+
+		"jl\u0003\u0016\u000b\u0000kj\u0001\u0000\u0000\u0000lm\u0001\u0000\u0000"+
+		"\u0000mk\u0001\u0000\u0000\u0000mn\u0001\u0000\u0000\u0000no\u0001\u0000"+
+		"\u0000\u0000op\u0003\u001a\r\u0000py\u0001\u0000\u0000\u0000qs\u0003\u0018"+
+		"\f\u0000rq\u0001\u0000\u0000\u0000st\u0001\u0000\u0000\u0000tr\u0001\u0000"+
+		"\u0000\u0000tu\u0001\u0000\u0000\u0000uv\u0001\u0000\u0000\u0000vw\u0003"+
+		"\u001a\r\u0000wy\u0001\u0000\u0000\u0000xk\u0001\u0000\u0000\u0000xr\u0001"+
+		"\u0000\u0000\u0000y\u0013\u0001\u0000\u0000\u0000z|\u0003\u0016\u000b"+
+		"\u0000{z\u0001\u0000\u0000\u0000|}\u0001\u0000\u0000\u0000}{\u0001\u0000"+
+		"\u0000\u0000}~\u0001\u0000\u0000\u0000~\u007f\u0001\u0000\u0000\u0000"+
+		"\u007f\u0080\u0003\u001c\u000e\u0000\u0080\u0089\u0001\u0000\u0000\u0000"+
+		"\u0081\u0083\u0003\u0018\f\u0000\u0082\u0081\u0001\u0000\u0000\u0000\u0083"+
+		"\u0084\u0001\u0000\u0000\u0000\u0084\u0082\u0001\u0000\u0000\u0000\u0084"+
+		"\u0085\u0001\u0000\u0000\u0000\u0085\u0086\u0001\u0000\u0000\u0000\u0086"+
+		"\u0087\u0003\u001c\u000e\u0000\u0087\u0089\u0001\u0000\u0000\u0000\u0088"+
+		"{\u0001\u0000\u0000\u0000\u0088\u0082\u0001\u0000\u0000\u0000\u0089\u0015"+
+		"\u0001\u0000\u0000\u0000\u008a\u008b\u0005\u000f\u0000\u0000\u008b\u0017"+
+		"\u0001\u0000\u0000\u0000\u008c\u008d\u0006\f\uffff\uffff\u0000\u008d\u008e"+
+		"\u0005\u0015\u0000\u0000\u008e\u008f\u0005\u000b\u0000\u0000\u008f\u009c"+
+		"\u0003\u0018\f\n\u0090\u0091\u0005\u0016\u0000\u0000\u0091\u0092\u0005"+
+		"\u000b\u0000\u0000\u0092\u009c\u0003\u0018\f\t\u0093\u0094\u0005\u000e"+
+		"\u0000\u0000\u0094\u009c\u0003\u0018\f\b\u0095\u009c\u0003.\u0017\u0000"+
+		"\u0096\u0097\u0005\u0002\u0000\u0000\u0097\u0098\u0003\u0018\f\u0000\u0098"+
+		"\u0099\u0005\u0003\u0000\u0000\u0099\u009c\u0001\u0000\u0000\u0000\u009a"+
+		"\u009c\u0003*\u0015\u0000\u009b\u008c\u0001\u0000\u0000\u0000\u009b\u0090"+
+		"\u0001\u0000\u0000\u0000\u009b\u0093\u0001\u0000\u0000\u0000\u009b\u0095"+
+		"\u0001\u0000\u0000\u0000\u009b\u0096\u0001\u0000\u0000\u0000\u009b\u009a"+
+		"\u0001\u0000\u0000\u0000\u009c\u00ab\u0001\u0000\u0000\u0000\u009d\u009e"+
+		"\n\u0005\u0000\u0000\u009e\u009f\u0005\u0010\u0000\u0000\u009f\u00aa\u0003"+
+		"\u0018\f\u0006\u00a0\u00a1\n\u0004\u0000\u0000\u00a1\u00a2\u0005\u0011"+
+		"\u0000\u0000\u00a2\u00aa\u0003\u0018\f\u0005\u00a3\u00a4\n\u0003\u0000"+
+		"\u0000\u00a4\u00a5\u0005\u0013\u0000\u0000\u00a5\u00aa\u0003\u0018\f\u0004"+
+		"\u00a6\u00a7\n\u0002\u0000\u0000\u00a7\u00a8\u0005\u0014\u0000\u0000\u00a8"+
+		"\u00aa\u0003\u0018\f\u0003\u00a9\u009d\u0001\u0000\u0000\u0000\u00a9\u00a0"+
+		"\u0001\u0000\u0000\u0000\u00a9\u00a3\u0001\u0000\u0000\u0000\u00a9\u00a6"+
+		"\u0001\u0000\u0000\u0000\u00aa\u00ad\u0001\u0000\u0000\u0000\u00ab\u00a9"+
+		"\u0001\u0000\u0000\u0000\u00ab\u00ac\u0001\u0000\u0000\u0000\u00ac\u0019"+
+		"\u0001\u0000\u0000\u0000\u00ad\u00ab\u0001\u0000\u0000\u0000\u00ae\u00af"+
+		"\u0005\u0017\u0000\u0000\u00af\u001b\u0001\u0000\u0000\u0000\u00b0\u00b4"+
+		"\u0003\u001e\u000f\u0000\u00b1\u00b4\u0003\"\u0011\u0000\u00b2\u00b4\u0003"+
+		" \u0010\u0000\u00b3\u00b0\u0001\u0000\u0000\u0000\u00b3\u00b1\u0001\u0000"+
+		"\u0000\u0000\u00b3\u00b2\u0001\u0000\u0000\u0000\u00b4\u001d\u0001\u0000"+
+		"\u0000\u0000\u00b5\u00b6\u0005\u0004\u0000\u0000\u00b6\u00b7\u0003$\u0012"+
+		"\u0000\u00b7\u001f\u0001\u0000\u0000\u0000\u00b8\u00b9\u0005\u000e\u0000"+
+		"\u0000\u00b9\u00ba\u0005\u0005\u0000\u0000\u00ba\u00dc\u0003&\u0013\u0000"+
+		"\u00bb\u00bc\u0005\u000f\u0000\u0000\u00bc\u00bd\u0005\u0005\u0000\u0000"+
+		"\u00bd\u00be\u0003$\u0012\u0000\u00be\u00bf\u0005\u0006\u0000\u0000\u00bf"+
+		"\u00c0\u0003$\u0012\u0000\u00c0\u00dc\u0001\u0000\u0000\u0000\u00c1\u00c2"+
+		"\u0005\u0010\u0000\u0000\u00c2\u00c3\u0005\u0005\u0000\u0000\u00c3\u00c4"+
+		"\u0003$\u0012\u0000\u00c4\u00c5\u0005\u0006\u0000\u0000\u00c5\u00c6\u0003"+
+		"$\u0012\u0000\u00c6\u00dc\u0001\u0000\u0000\u0000\u00c7\u00c8\u0005\u0011"+
+		"\u0000\u0000\u00c8\u00c9\u0005\u0005\u0000\u0000\u00c9\u00dc\u0003$\u0012"+
+		"\u0000\u00ca\u00cb\u0005\u0012\u0000\u0000\u00cb\u00dc\u0005\u0007\u0000"+
+		"\u0000\u00cc\u00cd\u0005\u0013\u0000\u0000\u00cd\u00ce\u0005\u0005\u0000"+
+		"\u0000\u00ce\u00dc\u0003&\u0013\u0000\u00cf\u00d0\u0005\u0014\u0000\u0000"+
+		"\u00d0\u00d1\u0005\u0005\u0000\u0000\u00d1\u00d2\u0003&\u0013\u0000\u00d2"+
+		"\u00d3\u0005\u0006\u0000\u0000\u00d3\u00d4\u0003&\u0013\u0000\u00d4\u00dc"+
+		"\u0001\u0000\u0000\u0000\u00d5\u00d6\u0005\u0015\u0000\u0000\u00d6\u00d7"+
+		"\u0005\u0005\u0000\u0000\u00d7\u00dc\u0003&\u0013\u0000\u00d8\u00d9\u0005"+
+		"\u0016\u0000\u0000\u00d9\u00da\u0005\u0005\u0000\u0000\u00da\u00dc\u0003"+
+		"$\u0012\u0000\u00db\u00b8\u0001\u0000\u0000\u0000\u00db\u00bb\u0001\u0000"+
+		"\u0000\u0000\u00db\u00c1\u0001\u0000\u0000\u0000\u00db\u00c7\u0001\u0000"+
+		"\u0000\u0000\u00db\u00ca\u0001\u0000\u0000\u0000\u00db\u00cc\u0001\u0000"+
+		"\u0000\u0000\u00db\u00cf\u0001\u0000\u0000\u0000\u00db\u00d5\u0001\u0000"+
+		"\u0000\u0000\u00db\u00d8\u0001\u0000\u0000\u0000\u00dc!\u0001\u0000\u0000"+
+		"\u0000\u00dd\u00de\u0005\u000e\u0000\u0000\u00de\u00df\u0005\b\u0000\u0000"+
+		"\u00df\u010a\u0003$\u0012\u0000\u00e0\u00e1\u0005\u000f\u0000\u0000\u00e1"+
+		"\u00e2\u0005\b\u0000\u0000\u00e2\u010a\u0003$\u0012\u0000\u00e3\u00e4"+
+		"\u0005\u0010\u0000\u0000\u00e4\u00e5\u0005\b\u0000\u0000\u00e5\u010a\u0003"+
+		"$\u0012\u0000\u00e6\u00e7\u0005\u0011\u0000\u0000\u00e7\u00e8\u0005\b"+
+		"\u0000\u0000\u00e8\u00e9\u0003$\u0012\u0000\u00e9\u00ea\u0005\u0006\u0000"+
+		"\u0000\u00ea\u00eb\u0003&\u0013\u0000\u00eb\u00ec\u0005\u0006\u0000\u0000"+
+		"\u00ec\u00ed\u0003&\u0013\u0000\u00ed\u010a\u0001\u0000\u0000\u0000\u00ee"+
+		"\u00ef\u0005\u0012\u0000\u0000\u00ef\u00f0\u0005\b\u0000\u0000\u00f0\u00f1"+
+		"\u0003$\u0012\u0000\u00f1\u00f2\u0005\u0006\u0000\u0000\u00f2\u00f3\u0003"+
+		"$\u0012\u0000\u00f3\u010a\u0001\u0000\u0000\u0000\u00f4\u00f5\u0005\u0013"+
+		"\u0000\u0000\u00f5\u00f6\u0005\b\u0000\u0000\u00f6\u00f7\u0003$\u0012"+
+		"\u0000\u00f7\u00f8\u0005\u0006\u0000\u0000\u00f8\u00f9\u0003$\u0012\u0000"+
+		"\u00f9\u010a\u0001\u0000\u0000\u0000\u00fa\u00fb\u0005\u0014\u0000\u0000"+
+		"\u00fb\u00fc\u0005\b\u0000\u0000\u00fc\u00fd\u0003$\u0012\u0000\u00fd"+
+		"\u00fe\u0005\u0006\u0000\u0000\u00fe\u00ff\u0003$\u0012\u0000\u00ff\u010a"+
+		"\u0001\u0000\u0000\u0000\u0100\u0101\u0005\u0015\u0000\u0000\u0101\u0102"+
+		"\u0005\b\u0000\u0000\u0102\u010a\u0003$\u0012\u0000\u0103\u0104\u0005"+
+		"\u0016\u0000\u0000\u0104\u0105\u0005\b\u0000\u0000\u0105\u0106\u0003$"+
+		"\u0012\u0000\u0106\u0107\u0005\u0006\u0000\u0000\u0107\u0108\u0003&\u0013"+
+		"\u0000\u0108\u010a\u0001\u0000\u0000\u0000\u0109\u00dd\u0001\u0000\u0000"+
+		"\u0000\u0109\u00e0\u0001\u0000\u0000\u0000\u0109\u00e3\u0001\u0000\u0000"+
+		"\u0000\u0109\u00e6\u0001\u0000\u0000\u0000\u0109\u00ee\u0001\u0000\u0000"+
+		"\u0000\u0109\u00f4\u0001\u0000\u0000\u0000\u0109\u00fa\u0001\u0000\u0000"+
+		"\u0000\u0109\u0100\u0001\u0000\u0000\u0000\u0109\u0103\u0001\u0000\u0000"+
+		"\u0000\u010a#\u0001\u0000\u0000\u0000\u010b\u010c\u0005\u001a\u0000\u0000"+
+		"\u010c%\u0001\u0000\u0000\u0000\u010d\u010e\u0005\u001a\u0000\u0000\u010e"+
+		"\u010f\u0005\t\u0000\u0000\u010f\u0110\u0005\u001a\u0000\u0000\u0110\'"+
+		"\u0001\u0000\u0000\u0000\u0111\u0112\u0005\n\u0000\u0000\u0112\u0113\u0005"+
+		"\f\u0000\u0000\u0113\u0114\u0005\n\u0000\u0000\u0114)\u0001\u0000\u0000"+
+		"\u0000\u0115\u011b\u0005\r\u0000\u0000\u0116\u0117\u0003,\u0016\u0000"+
+		"\u0117\u0118\u0005\u0012\u0000\u0000\u0118\u0119\u0003,\u0016\u0000\u0119"+
+		"\u011b\u0001\u0000\u0000\u0000\u011a\u0115\u0001\u0000\u0000\u0000\u011a"+
+		"\u0116\u0001\u0000\u0000\u0000\u011b+\u0001\u0000\u0000\u0000\u011c\u011d"+
+		"\u0007\u0000\u0000\u0000\u011d-\u0001\u0000\u0000\u0000\u011e\u011f\u0005"+
+		"\r\u0000\u0000\u011f\u0120\u0005\u0002\u0000\u0000\u0120\u0121\u0007\u0000"+
+		"\u0000\u0000\u0121\u0122\u0005\u0003\u0000\u0000\u0122/\u0001\u0000\u0000"+
+		"\u0000\u001438:BDMbmtx}\u0084\u0088\u009b\u00a9\u00ab\u00b3\u00db\u0109"+
+		"\u011a";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

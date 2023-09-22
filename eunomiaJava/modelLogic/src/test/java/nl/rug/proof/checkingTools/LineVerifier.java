@@ -6,13 +6,13 @@ import nl.rug.proof.fol.compiler.manager.components.SyntaxErrors;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 public class LineVerifier {
 
     static public void verifyAllLinesCorrect(ProofManager manager) {
+        assertNotEquals(0, manager.referenceSet().size(), "There are no lines to check");
         assertTrue(manager.referenceSet().stream().allMatch(manager::isCorrect));
     }
 

@@ -23,7 +23,8 @@ public class EmptyPremiseTest {
 
         testInput = ProofTranslator.translate(testInput);
 
-        assertEquals(StringConverter.getStringFromTXT("empty_premise.txt"), testInput);
+        assertEquals(StringConverter.getStringFromTXT("empty_premise.txt").replaceAll("\r", ""),
+                testInput.replaceAll("\r", ""));
 
         compiler.compile(testInput);
         assertTrue(manager.referenceSet().stream().allMatch(manager::isCorrect));

@@ -38,6 +38,7 @@ public class ProofTranslator {
      * @return the proof with the premise keywords introduced where it is required.
      */
     private static @NotNull String addPremiseKeyword(@NotNull String proof) {
+        proof = proof.replaceAll("\r", "");
         String[] lines = proof.split(END_LINE);
         StringBuilder sb = new StringBuilder();
 
@@ -158,6 +159,6 @@ public class ProofTranslator {
      * Checks if a line is empty before the fitch bars are removes
      */
     private static boolean isLineEmpty(String line) {
-        return line.trim().equals(FITCH_BAR);
+        return line.trim().endsWith(FITCH_BAR);
     }
 }

@@ -21,7 +21,6 @@ public class MenuBar extends JMenuBar implements ActionReceiver {
      */
     public MenuBar() {
         verifyButton = new VerifyButton();
-        this.add(verifyButton);
     }
 
     @Override

@@ -70,7 +70,7 @@ public class EditorFrame extends javax.swing.JFrame implements ProofTextEditor {
     }
 
     private void initFrame() {
-        this.setTitle("Eunomia 1.0.2");
+        this.setTitle("Eunomia 1.0.3");
         this.setIconImage(getIcon());
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

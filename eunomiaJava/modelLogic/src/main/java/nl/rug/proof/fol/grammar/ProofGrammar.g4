@@ -17,7 +17,7 @@ grammar ProofGrammar;
  */
 
 
-proof : premiseLine* (proofLine | subproof)* conclusionLine EOF ;   // The proof is the whole thing we evaluate
+proof : premiseLine* (proofLine | subproof)* EOF ;   // The proof is the whole thing we evaluate
 subproof : assume (subproof | proofLine)* qed ;                     // It can contain different subproofs in order to prove different things
 
 assume : ASSUME NEWLINE (premiseLine | constantIntroLine) ;       // Each subproof starts with an assumption

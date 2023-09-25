@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
 public class ProofGrammarLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.12.0", RuntimeMetaData.VERSION); }
 

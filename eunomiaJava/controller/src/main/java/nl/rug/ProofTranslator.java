@@ -50,6 +50,12 @@ public class ProofTranslator {
             }
 
             sb.append(lines[i]);
+
+            if (areInitialPremises && isLineEmpty(lines[i])) {
+                // It is valid to have empty initial premises
+                sb.append(END_LINE);
+                continue;
+            }
             if (areInitialPremises ||
                     (i + 1 < lines.length && lines[i + 1].contains(SEPARATOR))) {
                 sb.append(" ").append(PREMISE_KEYWORD);
@@ -146,5 +152,12 @@ public class ProofTranslator {
             sb.append(line).append(END_LINE);
         }
         return sb.toString();
+    }
+
+    /**
+     * Checks if a line is empty before the fitch bars are removes
+     */
+    private static boolean isLineEmpty(String line) {
+        return line.trim().equals(FITCH_BAR);
     }
 }

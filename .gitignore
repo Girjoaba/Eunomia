@@ -3,3 +3,4 @@
 .idea
 eunomiaJava/modelLogic/gen
 *.eun
+!**/test/**/*.eun

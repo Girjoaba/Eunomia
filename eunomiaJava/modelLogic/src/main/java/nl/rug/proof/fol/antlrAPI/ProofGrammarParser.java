@@ -111,9 +111,6 @@ public class ProofGrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProofContext extends ParserRuleContext {
-		public ConclusionLineContext conclusionLine() {
-			return getRuleContext(ConclusionLineContext.class,0);
-		}
 		public TerminalNode EOF() { return getToken(ProofGrammarParser.EOF, 0); }
 		public List<PremiseLineContext> premiseLine() {
 			return getRuleContexts(PremiseLineContext.class);
@@ -155,6 +152,7 @@ public class ProofGrammarParser extends Parser {
 	public final ProofContext proof() throws RecognitionException {
 		ProofContext _localctx = new ProofContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_proof);
+		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
@@ -177,9 +175,13 @@ public class ProofGrammarParser extends Parser {
 			}
 			setState(60);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
+			_la = _input.LA(1);
+			while (_la==ASSUME || _la==INT) {
+				{
+				setState(56);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case INT:
 					{
 					setState(58);
 					_errHandler.sync(this);
@@ -199,11 +201,20 @@ public class ProofGrammarParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					} 
+					break;
+				case ASSUME:
+					{
+					setState(55);
+					subproof();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
 				}
 				setState(62);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
+				_la = _input.LA(1);
 			}
 			setState(63);
 			conclusionLine();
@@ -2109,7 +2120,7 @@ public class ProofGrammarParser extends Parser {
 				singleReference();
 				setState(236);
 				match(T__5);
-				setState(237);
+				setState(236);
 				rangeReference();
 				setState(238);
 				match(T__5);

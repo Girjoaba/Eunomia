@@ -73,8 +73,8 @@ public class PremiseTest {
             EunomiaCompiler compiler = new EunomiaCompiler(manager);
             compiler.compile(new InputPath("testProofs/structure/premise/multiple_subproof_premises_wrong.txt"));
 
-            List<Integer> wrongLines = new ArrayList<>(List.of(3));
-            LineVerifier.verifyWrongLines(manager, wrongLines);
+            List<Integer> wrongLines = new ArrayList<>(List.of(4, 6));
+            LineVerifier.verifyWrongSyntaxLines(manager.getSyntaxErorrs(), wrongLines);
 
         } catch (FileNotFoundException e) {
             log.error("File not found");

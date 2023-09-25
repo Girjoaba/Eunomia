@@ -1,4 +1,4 @@
-# Eunomia 1.0.1
+# Eunomia 1.0.3
 
 ## Project Description
 Eunomia is an educational tool for analyzing the correctness of First Order Logic (FOL) proofs. 
